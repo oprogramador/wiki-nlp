@@ -1,0 +1,28 @@
+{
+  "name": "wiki-nlp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oprogramador/wiki-nlp.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oprogramador/wiki-nlp/issues"
+  },
+  "homepage": "https://github.com/oprogramador/wiki-nlp#readme",
+  "dependencies": {
+    "html-to-text": "^9.0.5",
+    "superagent": "^9.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-improved": "^5.0.3"
+  }
+}
