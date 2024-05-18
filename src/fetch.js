@@ -1,7 +1,21 @@
+const _ = require('lodash');
 const request = require('superagent');
 const { convert } = require('html-to-text');
 
 const url = 'https://en.wikipedia.org/wiki/European_Union';
+
+const articles = [
+  'a',
+  'an',
+  'the',
+];
+
+const groupArticles = phrase => phrase.reduce(
+  (accumulator, current) => (articles.includes(_.last(accumulator))
+    ? [...accumulator.slice(0, -1), [_.last(accumulator), current]]
+    : [...accumulator, current]),
+  [],
+);
 
 (async () => {
   const data = await request(url);
@@ -9,5 +23,6 @@ const url = 'https://en.wikipedia.org/wiki/European_Union';
   const phrases = text.split('.');
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
   const realWordsPhrases = words.filter(phrase => /[A-Z]/.test(phrase[0] && phrase[0].charAt(0)));
-  console.log(JSON.stringify(realWordsPhrases));
+  const groups = realWordsPhrases.map(groupArticles);
+  console.log(JSON.stringify(groups));
 })();

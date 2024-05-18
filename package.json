@@ -19,6 +19,7 @@
   "homepage": "https://github.com/oprogramador/wiki-nlp#readme",
   "dependencies": {
     "html-to-text": "^9.0.5",
+    "lodash": "^4.17.21",
     "superagent": "^9.0.2"
   },
   "devDependencies": {
