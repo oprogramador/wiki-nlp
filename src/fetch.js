@@ -1,7 +1,8 @@
 const _ = require('lodash');
-const fs = require('fs');
 const request = require('superagent');
 const { convert } = require('html-to-text');
+const groupPrepositions = require('./groupPrepositions');
+const toLowerCase = require('./toLowerCase');
 
 const url = 'https://en.wikipedia.org/wiki/European_Union';
 
@@ -11,31 +12,10 @@ const articles = [
   'the',
 ];
 
-const prepositions = fs
-  .readFileSync(`${__dirname}/resources/prepositions.txt`)
-  .toString()
-  .split('\n')
-  .filter(x => x);
-
-const toLowerCase = (item) => {
-  if (!item || !item.toLowerCase) {
-    return item;
-  }
-
-  return item.toLowerCase();
-};
-
 const groupArticles = phrase => phrase.reduce(
   (accumulator, current) => (articles.includes(toLowerCase(_.last(accumulator)))
     ? [...accumulator.slice(0, -1), [_.last(accumulator), current]]
     : [...accumulator, current]),
-  [],
-);
-
-const groupPrepositions = phrase => phrase.reduce(
-  (accumulator, current) => (prepositions.includes(toLowerCase(current))
-    ? [accumulator, current, []]
-    : [...accumulator.slice(0, -1), [...(_.last(accumulator) || []), current]]),
   [],
 );
 
