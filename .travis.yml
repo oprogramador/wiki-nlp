@@ -3,8 +3,6 @@ language: node_js
 node_js:
   - 14
   - 16
-  - 18
-  - 20
 script:
   - yarn install --non-interactive
   - yarn lint
