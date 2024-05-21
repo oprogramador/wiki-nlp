@@ -19,9 +19,8 @@
   },
   "homepage": "https://github.com/oprogramador/wiki-nlp#readme",
   "dependencies": {
-    "html-to-text": "^9.0.5",
     "lodash": "^4.17.21",
-    "superagent": "^9.0.2"
+    "wikijs": "^6.4.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
