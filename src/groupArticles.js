@@ -8,6 +8,11 @@ const articles = [
   'the',
 ];
 
+const allowedPrepositions = [
+  'for',
+  'of',
+];
+
 const groupArticles = phrase => phrase.reduce(
   (accumulator, current) => {
     if (articles.includes(toLowerCase(current))) {
@@ -17,7 +22,7 @@ const groupArticles = phrase => phrase.reduce(
     if (last.groupType !== 'article') {
       return [...accumulator, current];
     }
-    if (last.words.length < 2 || isUpperCase(current)) {
+    if (last.words.length < 2 || isUpperCase(current) || allowedPrepositions.includes(current)) {
       return [
         ...accumulator.slice(0, -1),
         {

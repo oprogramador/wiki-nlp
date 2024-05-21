@@ -38,4 +38,28 @@ describe('groupArticles', () => {
       { groupType: 'article', words: ['the', 'European', 'Central', 'Bank'] },
     ]);
   });
+
+  it('groups with a preposition inside', () => {
+    const words = ['I', 'signed', 'the', 'Treaty', 'of', 'Lisbon'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      'I',
+      'signed',
+      { groupType: 'article', words: ['the', 'Treaty', 'of', 'Lisbon'] },
+    ]);
+  });
+
+  it('groups with two prepositions inside', () => {
+    const words = ['The', 'Nomenclature', 'of', 'Territorial', 'Units', 'for', 'Statistics', 'is', 'a', 'standard'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['The', 'Nomenclature', 'of', 'Territorial', 'Units', 'for', 'Statistics'] },
+      'is',
+      { groupType: 'article', words: ['a', 'standard'] },
+    ]);
+  });
 });
