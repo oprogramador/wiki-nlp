@@ -62,4 +62,28 @@ describe('groupArticles', () => {
       { groupType: 'article', words: ['a', 'standard'] },
     ]);
   });
+
+  it('does not allow for a preposition after lowercase', () => {
+    const words = ['the', 'spread', 'of', 'democracy'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['the', 'spread'] },
+      'of',
+      'democracy',
+    ]);
+  });
+
+  it('does not allow for a preposition after lowercase, then another article', () => {
+    const words = ['the', 'collapse', 'of', 'the', 'USSR'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['the', 'collapse'] },
+      'of',
+      { groupType: 'article', words: ['the', 'USSR'] },
+    ]);
+  });
 });

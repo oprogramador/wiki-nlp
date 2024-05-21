@@ -22,7 +22,10 @@ const groupArticles = phrase => phrase.reduce(
     if (last.groupType !== 'article') {
       return [...accumulator, current];
     }
-    if (last.words.length < 2 || isUpperCase(current) || allowedPrepositions.includes(current)) {
+    if (last.words.length < 2
+      || isUpperCase(current)
+      || (allowedPrepositions.includes(current) && isUpperCase(_.last(last.words)))
+    ) {
       return [
         ...accumulator.slice(0, -1),
         {
