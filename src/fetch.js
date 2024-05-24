@@ -9,8 +9,7 @@ const removeMeaningless = require('./removeMeaningless');
   const text = await data.rawContent();
   const phrases = text.split('.');
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
-  const realWordsPhrases = words.filter(phrase => /[A-Z]/.test(phrase[0] && phrase[0].charAt(0)));
-  const groups = realWordsPhrases.map(phrase => groupVerbs(
+  const groups = words.map(phrase => groupVerbs(
     groupPrepositions(
       groupArticles(
         removeMeaningless(
