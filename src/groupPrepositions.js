@@ -1,6 +1,5 @@
-const _ = require('lodash');
 const fs = require('fs');
-const toLowerCase = require('./toLowerCase');
+const groupVerbs = require('./groupVerbs');
 
 const prepositions = fs
   .readFileSync(`${__dirname}/resources/prepositions.txt`)
@@ -8,16 +7,12 @@ const prepositions = fs
   .split('\n')
   .filter(x => x);
 
-const groupPrepositions = phrase => phrase.reduce(
-  (accumulator, current) => (
-    prepositions.includes(toLowerCase(current))
-      ? [...accumulator, current, []]
-      : [
-        ...accumulator.slice(0, -1),
-        [...(_.last(accumulator) || []), current],
-      ]
-  ),
-  [],
+const groupPrepositions = phrase => groupVerbs(
+  phrase,
+  {
+    groupType: 'preposition',
+    list: prepositions,
+  },
 );
 
 module.exports = groupPrepositions;

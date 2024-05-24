@@ -8,9 +8,14 @@ describe('groupPrepositions', () => {
     const result = groupPrepositions(words);
 
     expect(result).to.deep.equal([
-      ['a', 'b'],
-      'of',
-      ['c', 'd'],
+      'a',
+      {
+        groupType: 'preposition',
+        object: 'c',
+        subject: 'b',
+        verb: 'of',
+      },
+      'd',
     ]);
   });
 
@@ -20,7 +25,7 @@ describe('groupPrepositions', () => {
     const result = groupPrepositions(words);
 
     expect(result).to.deep.equal([
-      ['a', 'b', 'c', 'd'],
+      'a', 'b', 'c', 'd',
     ]);
   });
 });
