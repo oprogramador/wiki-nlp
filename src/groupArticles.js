@@ -37,6 +37,18 @@ const groupArticles = phrase => phrase.reduce(
         },
       ];
     }
+    if (current.startsWith('(')
+      && current.endsWith(')')
+      && current.toUpperCase() === current
+    ) {
+      return [
+        ...accumulator.slice(0, -1),
+        {
+          ...last,
+          abbreviation: current.replace(/^\(/, '').replace(/\)$/, ''),
+        },
+      ];
+    }
 
     return [...accumulator, current];
   },

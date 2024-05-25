@@ -26,6 +26,43 @@ describe('groupArticles', () => {
     ]);
   });
 
+  it('groups with an abbreviation', () => {
+    const words = ['The', 'European', 'Union', '(EU)', 'is', 'large'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { abbreviation: 'EU', groupType: 'article', words: ['The', 'European', 'Union'] },
+      'is',
+      'large',
+    ]);
+  });
+
+  it('groups with an abbreviation, with a dash', () => {
+    const words = ['The', 'Trans-European', 'Transport', 'Network', '(TEN-T)', 'is', 'large'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { abbreviation: 'TEN-T', groupType: 'article', words: ['The', 'Trans-European', 'Transport', 'Network'] },
+      'is',
+      'large',
+    ]);
+  });
+
+  it('skips words in brackets other than an abbreviation', () => {
+    const words = ['The', 'European', 'Union', '(surely)', 'is', 'large'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['The', 'European', 'Union'] },
+      '(surely)',
+      'is',
+      'large',
+    ]);
+  });
+
   it('groups with an article followed by three-words proper name', () => {
     const words = ['You', 'work', 'in', 'the', 'European', 'Central', 'Bank'];
 
