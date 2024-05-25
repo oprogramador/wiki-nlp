@@ -3,6 +3,7 @@ const groupPrepositions = require('./groupPrepositions');
 const groupArticles = require('./groupArticles');
 const groupVerbs = require('./groupVerbs');
 const removeMeaningless = require('./removeMeaningless');
+const convertPunctuation = require('./convertPunctuation');
 
 (async () => {
   const data = await wiki().page('European Union');
@@ -13,7 +14,9 @@ const removeMeaningless = require('./removeMeaningless');
     groupPrepositions(
       groupArticles(
         removeMeaningless(
-          phrase,
+          convertPunctuation(
+            phrase,
+          ),
         ),
       ),
     ),
