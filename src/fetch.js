@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const wiki = require('wikijs').default;
 const groupPrepositions = require('./groupPrepositions');
 const groupArticles = require('./groupArticles');
@@ -10,16 +11,12 @@ const convertPunctuation = require('./convertPunctuation');
   const text = await data.rawContent();
   const phrases = text.split('.');
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
-  const groups = words.map(phrase => groupVerbs(
-    groupPrepositions(
-      groupArticles(
-        removeMeaningless(
-          convertPunctuation(
-            phrase,
-          ),
-        ),
-      ),
-    ),
-  ));
+  const groups = words.map(phrase => _.flow(
+    convertPunctuation,
+    removeMeaningless,
+    groupArticles,
+    groupPrepositions,
+    groupVerbs,
+  )(phrase));
   console.log(JSON.stringify(groups));
 })();
