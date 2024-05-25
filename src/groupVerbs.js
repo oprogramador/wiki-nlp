@@ -7,6 +7,11 @@ const auxiliary = fs
   .split('\n')
   .filter(x => x);
 
+const negations = [
+  'no',
+  'not',
+];
+
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator) || {};
@@ -20,14 +25,25 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => ph
         },
       ];
     }
-    if (last.groupType === groupType && !last.object) {
-      return [
-        ...accumulator.slice(0, -1),
-        {
-          ...last,
-          object: current,
-        },
-      ];
+    if (last.groupType === groupType) {
+      if (negations.includes(current)) {
+        return [
+          ...accumulator.slice(0, -1),
+          {
+            ...last,
+            isNegated: true,
+          },
+        ];
+      }
+      if (!last.object) {
+        return [
+          ...accumulator.slice(0, -1),
+          {
+            ...last,
+            object: current,
+          },
+        ];
+      }
     }
 
     return [...accumulator, current];
