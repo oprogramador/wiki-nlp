@@ -2,6 +2,7 @@ const _ = require('lodash');
 const wiki = require('wikijs').default;
 const groupPrepositions = require('./groupPrepositions');
 const groupArticles = require('./groupArticles');
+const groupAnd = require('./groupAnd');
 const groupVerbs = require('./groupVerbs');
 const removeMeaningless = require('./removeMeaningless');
 const convertPunctuation = require('./convertPunctuation');
@@ -17,6 +18,7 @@ const groupDates = require('./groupDates');
     removeMeaningless,
     groupArticles,
     groupDates,
+    groupAnd,
     groupPrepositions,
     groupVerbs,
   )(phrase));
