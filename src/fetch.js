@@ -6,6 +6,7 @@ const groupAnd = require('./groupAnd');
 const groupVerbs = require('./groupVerbs');
 const removeMeaningless = require('./removeMeaningless');
 const convertPunctuation = require('./convertPunctuation');
+const convertNumbers = require('./convertNumbers');
 const groupDates = require('./groupDates');
 
 (async () => {
@@ -17,6 +18,7 @@ const groupDates = require('./groupDates');
     convertPunctuation,
     removeMeaningless,
     groupArticles,
+    convertNumbers,
     groupDates,
     groupAnd,
     groupPrepositions,
