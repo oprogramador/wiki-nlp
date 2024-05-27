@@ -13,7 +13,7 @@ const negations = [
 ];
 
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => phrase.reduce(
-  (accumulator, current) => {
+  (accumulator, current, index) => {
     const last = _.last(accumulator) || {};
     if (list.includes(current)) {
       return [
@@ -44,6 +44,16 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => ph
           },
         ];
       }
+    }
+    if (groupType === 'verb' && index === phrase.length - 1 && current.charAt && /[a-z]/.test(current.charAt(0))) {
+      return [
+        ...accumulator.slice(0, -1),
+        {
+          groupType,
+          subject: last,
+          verb: current,
+        },
+      ];
     }
 
     return [...accumulator, current];

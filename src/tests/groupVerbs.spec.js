@@ -15,6 +15,51 @@ describe('groupVerbs', () => {
     }]);
   });
 
+  it('groups with a verb at the end', () => {
+    const words = ['Alan', 'ate'];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([{
+      groupType: 'verb',
+      subject: 'Alan',
+      verb: 'ate',
+    }]);
+  });
+
+  it('does not group with uppercase at the end', () => {
+    const words = ['Alan', 'Smith'];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'Smith',
+    ]);
+  });
+
+  it('does not group with a punctuation at the end', () => {
+    const words = ['Alan', '$'];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      '$',
+    ]);
+  });
+
+  it('does not group with a number at the end', () => {
+    const words = ['Alan', '123'];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      '123',
+    ]);
+  });
+
   it('groups with a negation (not)', () => {
     const words = ['Alan', 'is', 'not', 'smart'];
 
