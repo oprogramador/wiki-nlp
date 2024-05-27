@@ -20,6 +20,16 @@ const groupArticles = phrase => phrase.reduce(
     }
     const last = _.last(accumulator) || {};
     if (last.groupType !== 'article') {
+      if (isUpperCase(current) && isUpperCase(last)) {
+        return [
+          ...accumulator.slice(0, -1),
+          {
+            groupType: 'article',
+            words: [last, current],
+          },
+        ];
+      }
+
       return [...accumulator, current];
     }
     if (last.words.length < 2

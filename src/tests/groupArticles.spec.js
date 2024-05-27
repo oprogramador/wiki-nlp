@@ -26,6 +26,22 @@ describe('groupArticles', () => {
     ]);
   });
 
+  it('groups with no article but uppercase', () => {
+    const words = ['Microstates', 'are', 'Monaco', ',', 'San', 'Marino', ',', 'Vatican', 'City'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      'Microstates',
+      'are',
+      'Monaco',
+      ',',
+      { groupType: 'article', words: ['San', 'Marino'] },
+      ',',
+      { groupType: 'article', words: ['Vatican', 'City'] },
+    ]);
+  });
+
   it('groups with an abbreviation', () => {
     const words = ['The', 'European', 'Union', '(EU)', 'is', 'large'];
 
