@@ -69,4 +69,20 @@ describe('convertNumbers', () => {
       'apples',
     ]);
   });
+
+  it('converts with per cent', () => {
+    const words = ['Alan', 'has', '7', 'per', 'cent', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'share',
+        value: 0.07,
+      },
+      'apples',
+    ]);
+  });
 });

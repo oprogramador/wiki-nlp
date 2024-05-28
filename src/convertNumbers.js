@@ -32,12 +32,22 @@ const convertWithDigits = (word) => {
 
 const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
+    const last = _.last(accumulator);
     if (current === '%') {
       return [
         ...accumulator.slice(0, -1),
         {
           groupType: 'share',
           value: _.last(accumulator) / 100,
+        },
+      ];
+    }
+    if (last === 'per' && current === 'cent') {
+      return [
+        ...accumulator.slice(0, -2),
+        {
+          groupType: 'share',
+          value: accumulator.slice(-2, -1) / 100,
         },
       ];
     }
