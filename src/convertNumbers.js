@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 /* eslint-disable sort-keys */
 const map = {
   zero: 0,
@@ -29,8 +31,22 @@ const convertWithDigits = (word) => {
 };
 
 const convertNumbers = phrase => phrase
-  .map(
-    word => (map[word] || convertWithDigits(word) || word),
-  );
+  .reduce((accumulator, current) => {
+    if (current === '%') {
+      return [
+        ...accumulator.slice(0, -1),
+        {
+          groupType: 'share',
+          value: _.last(accumulator) / 100,
+        },
+      ];
+    }
+
+    return [
+      ...accumulator,
+      map[current] || convertWithDigits(current) || current,
+    ];
+  },
+  []);
 
 module.exports = convertNumbers;

@@ -53,4 +53,20 @@ describe('convertNumbers', () => {
       'apples',
     ]);
   });
+
+  it('converts with %', () => {
+    const words = ['Alan', 'has', '5', '%', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'share',
+        value: 0.05,
+      },
+      'apples',
+    ]);
+  });
 });
