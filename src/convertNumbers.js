@@ -15,9 +15,22 @@ const map = {
   twelve: 12,
 };
 
+const convertWithDigits = (word) => {
+  if (!word.replace) {
+    return word;
+  }
+  const replaced = word.replace(/,/g, '');
+  const number = Number(replaced);
+  if (Number.isNaN(number)) {
+    return word;
+  }
+
+  return number;
+};
+
 const convertNumbers = phrase => phrase
   .map(
-    word => (map[word] || word),
+    word => (map[word] || convertWithDigits(word) || word),
   );
 
 module.exports = convertNumbers;
