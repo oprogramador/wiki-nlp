@@ -34,7 +34,7 @@ const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
     const beforeLast = accumulator.slice(-2, -1)[0];
-    if (current === '%') {
+    if (['%', 'percent'].includes(current)) {
       return [
         ...accumulator.slice(0, -1),
         {
