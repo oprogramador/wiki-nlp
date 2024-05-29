@@ -17,6 +17,12 @@ const map = {
   twelve: 12,
 };
 
+const largeNumbers = {
+  million: 1e6,
+  billion: 1e9,
+  trillion: 1e12,
+};
+
 const convertWithDigits = (word) => {
   if (!word.replace) {
     return word;
@@ -34,6 +40,12 @@ const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
     const beforeLast = accumulator.slice(-2, -1)[0];
+    if (largeNumbers[current]) {
+      return [
+        ...accumulator.slice(0, -1),
+        Number(last) * largeNumbers[current],
+      ];
+    }
     if (['%', 'percent'].includes(current)) {
       return [
         ...accumulator.slice(0, -1),

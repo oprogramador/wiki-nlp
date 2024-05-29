@@ -114,4 +114,43 @@ describe('convertNumbers', () => {
       'apples',
     ]);
   });
+
+  it('converts with million', () => {
+    const words = ['Alan', 'has', '3', 'million', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      3e6,
+      'apples',
+    ]);
+  });
+
+  it('converts with billion', () => {
+    const words = ['Alan', 'has', '3.5', 'billion', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      3.5e9,
+      'apples',
+    ]);
+  });
+
+  it('converts with trillion', () => {
+    const words = ['Alan', 'has', '3.45', 'trillion', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      3.45e12,
+      'apples',
+    ]);
+  });
 });
