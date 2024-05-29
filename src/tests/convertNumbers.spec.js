@@ -28,6 +28,19 @@ describe('convertNumbers', () => {
     ]);
   });
 
+  it('converts with a dot', () => {
+    const words = ['Alan', 'has', '1.234', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      1.234,
+      'apples',
+    ]);
+  });
+
   it('converts with a comma', () => {
     const words = ['Alan', 'has', '1,234', 'apples'];
 

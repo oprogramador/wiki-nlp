@@ -12,7 +12,7 @@ const groupDates = require('./groupDates');
 (async () => {
   const data = await wiki().page('European Union');
   const text = await data.rawContent();
-  const phrases = text.split('.');
+  const phrases = text.split('. ');
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
   const groups = words.map(phrase => _.flow(
     convertPunctuation,

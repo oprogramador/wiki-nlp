@@ -1,6 +1,7 @@
 const list = [
   ',',
   ':',
+  '%',
 ];
 
 const convertPunctuation = phrase => phrase
