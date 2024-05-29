@@ -33,12 +33,13 @@ const convertWithDigits = (word) => {
 const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
+    const beforeLast = accumulator.slice(-2, -1)[0];
     if (current === '%') {
       return [
         ...accumulator.slice(0, -1),
         {
           groupType: 'share',
-          value: _.last(accumulator) / 100,
+          value: Number(last) / 100,
         },
       ];
     }
@@ -47,7 +48,7 @@ const convertNumbers = phrase => phrase
         ...accumulator.slice(0, -2),
         {
           groupType: 'share',
-          value: accumulator.slice(-2, -1) / 100,
+          value: Number(beforeLast) / 100,
         },
       ];
     }
