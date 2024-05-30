@@ -23,6 +23,10 @@ const largeNumbers = {
   trillion: 1e12,
 };
 
+const currencies = {
+  '€': 'EUR',
+};
+
 const convertWithDigits = (word) => {
   if (!word.replace) {
     return word;
@@ -36,15 +40,41 @@ const convertWithDigits = (word) => {
   return number;
 };
 
+const handleCurrency = (accumulator) => {
+  const currency = currencies[accumulator.slice(-2, -1)];
+  if (currency) {
+    return [
+      ...accumulator.slice(0, -2),
+      {
+        groupType: 'currency',
+        currency,
+        value: _.last(accumulator),
+      },
+    ];
+  }
+
+  return accumulator;
+};
+
+const multiply = (base, multiplier) => {
+  const value = base.value || Number(base);
+  const result = value * multiplier;
+  const resultObject = base.value
+    ? { ...base, value: result }
+    : result;
+
+  return resultObject;
+};
+
 const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
     const beforeLast = accumulator.slice(-2, -1)[0];
     if (largeNumbers[current]) {
-      return [
+      return handleCurrency([
         ...accumulator.slice(0, -1),
-        Number(last) * largeNumbers[current],
-      ];
+        multiply(last, largeNumbers[current]),
+      ]);
     }
     if (['%', 'percent'].includes(current)) {
       return [
@@ -65,10 +95,10 @@ const convertNumbers = phrase => phrase
       ];
     }
 
-    return [
+    return handleCurrency([
       ...accumulator,
       map[current] || convertWithDigits(current) || current,
-    ];
+    ]);
   },
   []);
 

@@ -153,4 +153,36 @@ describe('convertNumbers', () => {
       'apples',
     ]);
   });
+
+  it('converts with euro', () => {
+    const words = ['Alan', 'has', '€', '12.34'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        currency: 'EUR',
+        groupType: 'currency',
+        value: 12.34,
+      },
+    ]);
+  });
+
+  it('converts with euro and million', () => {
+    const words = ['Alan', 'has', '€', '12.34', 'million'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        currency: 'EUR',
+        groupType: 'currency',
+        value: 1.234e7,
+      },
+    ]);
+  });
 });
