@@ -6,6 +6,7 @@ const groupAnd = require('./groupAnd');
 const groupVerbs = require('./groupVerbs');
 const removeMeaningless = require('./removeMeaningless');
 const convertPunctuation = require('./convertPunctuation');
+const addCommas = require('./addCommas');
 const convertNumbers = require('./convertNumbers');
 const groupDates = require('./groupDates');
 
@@ -23,6 +24,7 @@ const groupDates = require('./groupDates');
     groupArticles,
     convertNumbers,
     groupDates,
+    addCommas,
     groupAnd,
     groupPrepositions,
     groupVerbs,
