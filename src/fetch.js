@@ -3,6 +3,7 @@ const wiki = require('wikijs').default;
 const groupPrepositions = require('./groupPrepositions');
 const groupArticles = require('./groupArticles');
 const groupAnd = require('./groupAnd');
+const groupOr = require('./groupOr');
 const groupVerbs = require('./groupVerbs');
 const removeMeaningless = require('./removeMeaningless');
 const convertPunctuation = require('./convertPunctuation');
@@ -26,6 +27,7 @@ const groupDates = require('./groupDates');
     groupDates,
     addCommas,
     groupAnd,
+    groupOr,
     groupPrepositions,
     groupVerbs,
   )(phrase));

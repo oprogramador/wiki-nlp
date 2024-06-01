@@ -1,9 +1,14 @@
 const _ = require('lodash');
 
+const separators = [
+  'and',
+  'or',
+];
+
 const addCommas = phrase => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator) || {};
-    if (last !== ',' && current === 'and') {
+    if (last !== ',' && separators.includes(current)) {
       return [...accumulator, ',', current];
     }
 
