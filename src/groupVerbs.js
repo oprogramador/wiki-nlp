@@ -12,53 +12,39 @@ const negations = [
   'not',
 ];
 
-const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => phrase.reduce(
-  (accumulator, current, index) => {
-    const last = _.last(accumulator) || {};
-    if (list.includes(current)) {
-      return [
-        ...accumulator.slice(0, -1),
-        {
-          groupType,
-          subject: last,
-          verb: current,
-        },
-      ];
-    }
-    if (last.groupType === groupType) {
-      if (negations.includes(current)) {
-        return [
-          ...accumulator.slice(0, -1),
-          {
-            ...last,
-            isNegated: true,
-          },
-        ];
-      }
-      if (!last.object) {
-        return [
-          ...accumulator.slice(0, -1),
-          {
-            ...last,
-            object: current,
-          },
-        ];
-      }
-    }
-    if (groupType === 'verb' && index === phrase.length - 1 && current.charAt && /[a-z]/.test(current.charAt(0))) {
-      return [
-        ...accumulator.slice(0, -1),
-        {
-          groupType,
-          subject: last,
-          verb: current,
-        },
-      ];
+const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
+  if (phrase && phrase.length === 1 && phrase[0].groupType === 'verb') {
+    const group = phrase[0];
+    const { object, subject } = group;
+
+    return [{
+      ...group,
+      ...(object ? { object: groupVerbs(object, { groupType, list }) } : {}),
+      ...(subject ? { subject: groupVerbs(subject, { groupType, list }) } : {}),
+    }];
+  }
+  const verbPlace = phrase.findIndex(item => list.includes(item));
+  if (verbPlace < 0) {
+    const last = _.last(phrase);
+    if (groupType === 'verb' && last && last.charAt && /[a-z]/.test(last.charAt(0))) {
+      return [{
+        groupType,
+        subject: phrase.slice(0, -1),
+        verb: last,
+      }];
     }
 
-    return [...accumulator, current];
-  },
-  [],
-);
+    return phrase;
+  }
+  const isNegated = negations.includes(phrase[verbPlace + 1]);
+
+  return [{
+    groupType,
+    ...(isNegated ? { isNegated } : {}),
+    object: phrase.slice(verbPlace + (isNegated ? 2 : 1)),
+    subject: phrase.slice(0, verbPlace),
+    verb: phrase[verbPlace],
+  }];
+};
 
 module.exports = groupVerbs;

@@ -9,8 +9,8 @@ describe('groupVerbs', () => {
 
     expect(result).to.deep.equal([{
       groupType: 'verb',
-      object: 'smart',
-      subject: 'Alan',
+      object: ['smart'],
+      subject: ['Alan'],
       verb: 'is',
     }]);
   });
@@ -22,7 +22,7 @@ describe('groupVerbs', () => {
 
     expect(result).to.deep.equal([{
       groupType: 'verb',
-      subject: 'Alan',
+      subject: ['Alan'],
       verb: 'ate',
     }]);
   });
@@ -68,8 +68,8 @@ describe('groupVerbs', () => {
     expect(result).to.deep.equal([{
       groupType: 'verb',
       isNegated: true,
-      object: 'smart',
-      subject: 'Alan',
+      object: ['smart'],
+      subject: ['Alan'],
       verb: 'is',
     }]);
   });
@@ -82,9 +82,22 @@ describe('groupVerbs', () => {
     expect(result).to.deep.equal([{
       groupType: 'verb',
       isNegated: true,
-      object: 'money',
-      subject: 'Alan',
+      object: ['money'],
+      subject: ['Alan'],
       verb: 'has',
+    }]);
+  });
+
+  it('splits a long phrase', () => {
+    const words = ['The', 'executive', 'branch', 'is', 'organised', 'as', 'a', 'simple', 'system'];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([{
+      groupType: 'verb',
+      object: ['organised', 'as', 'a', 'simple', 'system'],
+      subject: ['The', 'executive', 'branch'],
+      verb: 'is',
     }]);
   });
 });

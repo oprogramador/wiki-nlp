@@ -8,15 +8,51 @@ describe('groupPrepositions', () => {
     const result = groupPrepositions(words);
 
     expect(result).to.deep.equal([
-      'a',
       {
         groupType: 'preposition',
-        object: 'c',
-        subject: 'b',
+        object: ['c', 'd'],
+        subject: ['a', 'b'],
         verb: 'of',
       },
-      'd',
     ]);
+  });
+
+  it('groups inside groups', () => {
+    const words = [{
+      groupType: 'verb',
+      object: ['a', 'of', 'b'],
+      subject: ['c', 'of', 'd'],
+    }];
+
+    const result = groupPrepositions(words);
+
+    expect(result).to.deep.equal([{
+      groupType: 'verb',
+      object: [{
+        groupType: 'preposition',
+        object: ['b'],
+        subject: ['a'],
+        verb: 'of',
+      }],
+      subject: [{
+        groupType: 'preposition',
+        object: ['d'],
+        subject: ['c'],
+        verb: 'of',
+      }],
+    }]);
+  });
+
+  it('groups inside missing groups', () => {
+    const words = [{
+      groupType: 'verb',
+    }];
+
+    const result = groupPrepositions(words);
+
+    expect(result).to.deep.equal([{
+      groupType: 'verb',
+    }]);
   });
 
   it('groups without any preposition', () => {

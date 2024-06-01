@@ -28,8 +28,8 @@ const groupDates = require('./groupDates');
     addCommas,
     groupAnd,
     groupOr,
-    groupPrepositions,
     groupVerbs,
+    groupPrepositions,
   )(phrase));
   console.log(JSON.stringify(groups));
 })();
