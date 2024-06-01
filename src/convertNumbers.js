@@ -57,7 +57,7 @@ const handleCurrency = (accumulator) => {
 };
 
 const multiply = (base, multiplier) => {
-  const value = base.value || Number(base);
+  const value = base.value || Number(base === 'a' ? 1 : base);
   const result = value * multiplier;
   const resultObject = base.value
     ? { ...base, value: result }

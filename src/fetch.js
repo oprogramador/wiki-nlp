@@ -22,8 +22,8 @@ const groupDates = require('./groupDates');
   const groups = words.map(phrase => _.flow(
     convertPunctuation,
     removeMeaningless,
-    groupArticles,
     convertNumbers,
+    groupArticles,
     groupDates,
     addCommas,
     groupAnd,

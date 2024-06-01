@@ -47,7 +47,8 @@ const groupArticles = phrase => phrase.reduce(
         },
       ];
     }
-    if (current.startsWith('(')
+    if (current.startsWith
+      && current.startsWith('(')
       && current.endsWith(')')
       && current.toUpperCase() === current
     ) {

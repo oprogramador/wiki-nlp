@@ -128,6 +128,19 @@ describe('convertNumbers', () => {
     ]);
   });
 
+  it('converts with a million', () => {
+    const words = ['Alan', 'has', 'a', 'million', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      1e6,
+      'apples',
+    ]);
+  });
+
   it('converts with billion', () => {
     const words = ['Alan', 'has', '3.5', 'billion', 'apples'];
 
