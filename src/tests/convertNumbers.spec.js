@@ -159,7 +159,7 @@ describe('convertNumbers', () => {
     ]);
   });
 
-  it.skip('converts with a million', () => {
+  it('converts with a million', () => {
     const words = ['Alan', 'has', 'a', 'million', 'apples'];
 
     const result = convertNumbers(words);

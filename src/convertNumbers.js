@@ -60,7 +60,9 @@ const multiply = (base, multiplier) => {
   const value = base.value || Number(base === 'a' ? 1 : base);
   const result = value * multiplier;
 
-  return { ...base, value: result };
+  return base.groupType
+    ? { ...base, value: result }
+    : { groupType: 'quantity', value: result };
 };
 
 const convertNumbers = phrase => phrase
