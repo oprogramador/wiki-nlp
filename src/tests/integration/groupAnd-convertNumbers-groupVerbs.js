@@ -6,7 +6,7 @@ const expect = require('../expect');
 
 describe('groupAnd & convertNumbers & groupVerbs', () => {
   it('converts', () => {
-    const words = ['Alan', 'has', 'ten', 'apples', ',', 'banabas', ',', 'and', 'oranges'];
+    const words = ['Alan', 'has', 'ten', 'apples', ',', 'bananas', ',', 'and', 'oranges'];
 
     const result = _.flow(
       groupAnd,
