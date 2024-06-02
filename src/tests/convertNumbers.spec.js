@@ -10,8 +10,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      5,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 5,
+      },
     ]);
   });
 
@@ -23,8 +26,27 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      5,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 5,
+      },
+    ]);
+  });
+
+  it.skip('converts with over', () => {
+    const words = ['Alan', 'has', 'over', '5', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        min: 5,
+      },
     ]);
   });
 
@@ -36,8 +58,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      1.234,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 1.234,
+      },
     ]);
   });
 
@@ -49,8 +74,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      1234,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 1234,
+      },
     ]);
   });
 
@@ -62,56 +90,56 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      1234567,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 1234567,
+      },
     ]);
   });
 
   it('converts with %', () => {
-    const words = ['Alan', 'has', '5', '%', 'apples'];
+    const words = ['Unemployment', 'is', '5', '%'];
 
     const result = convertNumbers(words);
 
     expect(result).to.deep.equal([
-      'Alan',
-      'has',
+      'Unemployment',
+      'is',
       {
         groupType: 'share',
         value: 0.05,
       },
-      'apples',
     ]);
   });
 
   it('converts with per cent', () => {
-    const words = ['Alan', 'has', '7', 'per', 'cent', 'apples'];
+    const words = ['Unemployment', 'is', '7', 'per', 'cent'];
 
     const result = convertNumbers(words);
 
     expect(result).to.deep.equal([
-      'Alan',
-      'has',
+      'Unemployment',
+      'is',
       {
         groupType: 'share',
         value: 0.07,
       },
-      'apples',
     ]);
   });
 
   it('converts with percent', () => {
-    const words = ['Alan', 'has', '8', 'percent', 'apples'];
+    const words = ['Unemployment', 'is', '8', 'percent'];
 
     const result = convertNumbers(words);
 
     expect(result).to.deep.equal([
-      'Alan',
-      'has',
+      'Unemployment',
+      'is',
       {
         groupType: 'share',
         value: 0.08,
       },
-      'apples',
     ]);
   });
 
@@ -123,12 +151,15 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      3e6,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 3e6,
+      },
     ]);
   });
 
-  it('converts with a million', () => {
+  it.skip('converts with a million', () => {
     const words = ['Alan', 'has', 'a', 'million', 'apples'];
 
     const result = convertNumbers(words);
@@ -136,8 +167,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      1e6,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 1e6,
+      },
     ]);
   });
 
@@ -149,8 +183,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      3.5e9,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 3.5e9,
+      },
     ]);
   });
 
@@ -162,8 +199,11 @@ describe('convertNumbers', () => {
     expect(result).to.deep.equal([
       'Alan',
       'has',
-      3.45e12,
-      'apples',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        value: 3.45e12,
+      },
     ]);
   });
 

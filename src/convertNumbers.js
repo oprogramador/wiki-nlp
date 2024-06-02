@@ -48,7 +48,7 @@ const handleCurrency = (accumulator) => {
       {
         groupType: 'currency',
         currency,
-        value: _.last(accumulator),
+        value: _.last(accumulator).value,
       },
     ];
   }
@@ -59,11 +59,8 @@ const handleCurrency = (accumulator) => {
 const multiply = (base, multiplier) => {
   const value = base.value || Number(base === 'a' ? 1 : base);
   const result = value * multiplier;
-  const resultObject = base.value
-    ? { ...base, value: result }
-    : result;
 
-  return resultObject;
+  return { ...base, value: result };
 };
 
 const convertNumbers = phrase => phrase
@@ -81,7 +78,7 @@ const convertNumbers = phrase => phrase
         ...accumulator.slice(0, -1),
         {
           groupType: 'share',
-          value: Number(last) / 100,
+          value: last.value / 100,
         },
       ];
     }
@@ -90,15 +87,36 @@ const convertNumbers = phrase => phrase
         ...accumulator.slice(0, -2),
         {
           groupType: 'share',
-          value: Number(beforeLast) / 100,
+          value: beforeLast.value / 100,
+        },
+      ];
+    }
+    if (last && last.groupType === 'quantity' && !last.item && current !== 'per') {
+      return [
+        ...accumulator.slice(0, -1),
+        {
+          ...last,
+          item: current,
         },
       ];
     }
 
-    return handleCurrency([
+    const value = map[current] || convertWithDigits(current) || current;
+
+    if (typeof value === 'number') {
+      return handleCurrency([
+        ...accumulator,
+        {
+          groupType: 'quantity',
+          value,
+        },
+      ]);
+    }
+
+    return [
       ...accumulator,
-      map[current] || convertWithDigits(current) || current,
-    ]);
+      current,
+    ];
   },
   []);
 
