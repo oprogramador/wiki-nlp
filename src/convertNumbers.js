@@ -23,6 +23,16 @@ const largeNumbers = {
   trillion: 1e12,
 };
 
+const aroundWords = [
+  'around',
+  'about',
+];
+
+const aboveWords = [
+  'above',
+  'over',
+];
+
 const currencies = {
   '€': 'EUR',
 };
@@ -107,10 +117,15 @@ const convertNumbers = phrase => phrase
 
     if (typeof value === 'number') {
       return handleCurrency([
-        ...accumulator,
+        ...(
+          [...aroundWords, ...aboveWords].includes(last)
+            ? accumulator.slice(0, -1)
+            : accumulator
+        ),
         {
           groupType: 'quantity',
-          value,
+          ...(aboveWords.includes(last) ? { min: value } : { value }),
+          ...(aroundWords.includes(last) ? { isExact: false } : {}),
         },
       ]);
     }

@@ -34,8 +34,8 @@ describe('convertNumbers', () => {
     ]);
   });
 
-  it.skip('converts with over', () => {
-    const words = ['Alan', 'has', 'over', '5', 'apples'];
+  it('converts with over', () => {
+    const words = ['Alan', 'has', 'over', '50', 'apples'];
 
     const result = convertNumbers(words);
 
@@ -45,7 +45,57 @@ describe('convertNumbers', () => {
       {
         groupType: 'quantity',
         item: 'apples',
-        min: 5,
+        min: 50,
+      },
+    ]);
+  });
+
+  it('converts with above', () => {
+    const words = ['Alan', 'has', 'above', '50', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity',
+        item: 'apples',
+        min: 50,
+      },
+    ]);
+  });
+
+  it('converts with around', () => {
+    const words = ['Alan', 'has', 'around', '50', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity',
+        isExact: false,
+        item: 'apples',
+        value: 50,
+      },
+    ]);
+  });
+
+  it('converts with about', () => {
+    const words = ['Alan', 'has', 'about', '50', 'apples'];
+
+    const result = convertNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity',
+        isExact: false,
+        item: 'apples',
+        value: 50,
       },
     ]);
   });
