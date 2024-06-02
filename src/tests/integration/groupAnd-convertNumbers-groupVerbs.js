@@ -24,7 +24,7 @@ describe('groupAnd & convertNumbers & groupVerbs', () => {
               groupType: 'and',
               members: [
                 'apples',
-                'banabas',
+                'bananas',
                 'oranges',
               ],
             },
