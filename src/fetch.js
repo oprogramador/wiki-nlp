@@ -19,8 +19,7 @@ const groupDates = require('./groupDates');
     .map(line => line.replace(/\.$/, '. ').split('. '))
     .flat()
     .filter(phrase => phrase.length)
-    .filter(phrase => !phrase.startsWith('=='))
-  ;
+    .filter(phrase => !phrase.startsWith('=='));
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
   const groups = words.map(phrase => _.flow(
     convertPunctuation,
