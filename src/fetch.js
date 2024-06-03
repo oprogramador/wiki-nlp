@@ -17,16 +17,19 @@ const groupDates = require('./groupDates');
   const phrases = text
     .split('\n')
     .map(line => line.replace(/\.$/, '. ').split('. '))
-    .flat();
+    .flat()
+    .filter(phrase => phrase.length)
+    .filter(phrase => !phrase.startsWith('=='))
+  ;
   const words = phrases.map(phrase => phrase.split(/\s/).filter(word => word));
   const groups = words.map(phrase => _.flow(
     convertPunctuation,
     removeMeaningless,
     addCommas,
     groupAnd,
+    groupDates,
     convertNumbers,
     groupArticles,
-    groupDates,
     groupOr,
     groupVerbs,
     groupPrepositions,
