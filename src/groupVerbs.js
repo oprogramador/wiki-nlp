@@ -38,11 +38,15 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   }
   const isNegated = negations.includes(phrase[verbPlace + 1]);
 
+  const doRecursion = groupType === 'verb'
+    ? x => x
+    : x => groupVerbs(x, { groupType, list });
+
   return [{
     groupType,
     ...(isNegated ? { isNegated } : {}),
-    object: groupVerbs(phrase.slice(verbPlace + (isNegated ? 2 : 1)), { list, groupType }),
-    subject: groupVerbs(phrase.slice(0, verbPlace), { list, groupType }),
+    object: doRecursion(phrase.slice(verbPlace + (isNegated ? 2 : 1))),
+    subject: doRecursion(phrase.slice(0, verbPlace)),
     verb: phrase[verbPlace],
   }];
 };
