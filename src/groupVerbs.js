@@ -41,8 +41,8 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   return [{
     groupType,
     ...(isNegated ? { isNegated } : {}),
-    object: phrase.slice(verbPlace + (isNegated ? 2 : 1)),
-    subject: phrase.slice(0, verbPlace),
+    object: groupVerbs(phrase.slice(verbPlace + (isNegated ? 2 : 1)), { list, groupType }),
+    subject: groupVerbs(phrase.slice(0, verbPlace), { list, groupType }),
     verb: phrase[verbPlace],
   }];
 };
