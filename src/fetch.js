@@ -10,6 +10,7 @@ const convertPunctuation = require('./convertPunctuation');
 const addCommas = require('./addCommas');
 const convertNumbers = require('./convertNumbers');
 const groupDates = require('./groupDates');
+const includeDates = require('./includeDates');
 
 (async () => {
   const data = await wiki().page('European Union');
@@ -33,6 +34,7 @@ const groupDates = require('./groupDates');
     groupArticles,
     groupOr,
     groupVerbs,
+    includeDates,
     groupPrepositions,
   )(phrase));
   console.log(JSON.stringify(groups));
