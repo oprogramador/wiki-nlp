@@ -23,7 +23,10 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       ...(subject ? { subject: groupVerbs(subject, { groupType, list }) } : {}),
     }];
   }
-  const verbPlace = phrase.findIndex(item => list.includes(item));
+  const auxiliaryPlace = phrase.findIndex(item => list.includes(item));
+  const verbPlace = auxiliaryPlace >= 0
+    ? auxiliaryPlace
+    : phrase.findIndex((item, i) => i > 0 && item.groupType === 'article') - 1;
   if (verbPlace < 0) {
     const last = _.last(phrase);
     if (groupType === 'verb' && last && last.charAt && /[a-z]/.test(last.charAt(0))) {

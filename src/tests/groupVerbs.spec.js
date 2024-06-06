@@ -15,6 +15,29 @@ describe('groupVerbs', () => {
     }]);
   });
 
+  it('groups with a verb before article', () => {
+    const words = [
+      'Alan',
+      'became',
+      {
+        groupType: 'article',
+        words: ['the', 'best'],
+      },
+    ];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([{
+      groupType: 'verb',
+      object: [{
+        groupType: 'article',
+        words: ['the', 'best'],
+      }],
+      subject: ['Alan'],
+      verb: 'became',
+    }]);
+  });
+
   it('groups with a verb at the end', () => {
     const words = ['Alan', 'ate'];
 
