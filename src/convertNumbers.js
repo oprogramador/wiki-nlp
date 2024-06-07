@@ -1,4 +1,7 @@
 const _ = require('lodash');
+const auxiliary = require('./auxiliaryList');
+const prepositions = require('./prepositionList');
+const isLettersOnly = require('./isLettersOnly');
 
 /* eslint-disable sort-keys */
 const map = {
@@ -103,12 +106,39 @@ const convertNumbers = phrase => phrase
         },
       ];
     }
-    if (last && last.groupType === 'quantity' && !last.item && current !== 'per') {
+    if (
+      last
+        && last.groupType === 'quantity'
+        && current !== 'per'
+        && ![...auxiliary, ...prepositions].includes(current)
+          && (isLettersOnly(current) || current.groupType)
+    ) {
+      if (!last.item) {
+        return [
+          ...accumulator.slice(0, -1),
+          {
+            ...last,
+            item: current,
+          },
+        ];
+      }
+
       return [
         ...accumulator.slice(0, -1),
         {
           ...last,
-          item: current,
+          item: last.item.groupType === 'article'
+            ? {
+              ...last.item,
+              words: [
+                ...last.item.words,
+                current,
+              ],
+            }
+            : {
+              groupType: 'article',
+              words: [last.item, current],
+            },
         },
       ];
     }

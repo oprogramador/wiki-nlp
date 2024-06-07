@@ -4,21 +4,23 @@ const convertNumbers = require('../../convertNumbers');
 const groupArticles = require('../../groupArticles');
 const groupVerbs = require('../../groupVerbs');
 const includeDates = require('../../includeDates');
+const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & includeDates', () => {
   it('converts', () => {
-    const words = ['In', '2001', ',', 'Kofi', 'Annan', 'was', 'awarded', 'the', 'Nobel', 'Peace', 'Prize'];
+    const text = 'In 2001, Kofi Annan was awarded the Nobel Peace Prize';
+    const words = splitText(text);
 
-    const result = _.flow(
+    const result = words.map(phrase => _.flow(
       convertPunctuation,
       convertNumbers,
       groupArticles,
       groupVerbs,
       includeDates,
-    )(words);
+    )(phrase));
 
-    expect(result).to.deep.equal([
+    expect(result).to.deep.equal([[
       {
         groupType: 'verb',
         object: [
@@ -49,6 +51,6 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
           year: 2001,
         },
       },
-    ]);
+    ]]);
   });
 });

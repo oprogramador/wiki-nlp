@@ -46,10 +46,15 @@ describe('convertNumbers & groupArticles & groupVerbs & groupPrepositions', () =
                   subject: [
                     {
                       groupType: 'quantity',
-                      item: 'member',
+                      item: {
+                        groupType: 'article',
+                        words: [
+                          'member',
+                          'states',
+                        ],
+                      },
                       value: 7,
                     },
-                    'states',
                   ],
                   verb: 'of',
                 },
