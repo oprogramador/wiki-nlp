@@ -43,7 +43,7 @@ describe('groupArticles', () => {
   });
 
   it('groups with an abbreviation', () => {
-    const words = ['The', 'European', 'Union', '(EU)', 'is', 'large'];
+    const words = ['The', 'European', 'Union', '(', 'EU', ')', 'is', 'large'];
 
     const result = groupArticles(words);
 
@@ -55,7 +55,7 @@ describe('groupArticles', () => {
   });
 
   it('groups with an abbreviation, with a dash', () => {
-    const words = ['The', 'Trans-European', 'Transport', 'Network', '(TEN-T)', 'is', 'large'];
+    const words = ['The', 'Trans-European', 'Transport', 'Network', '(', 'TEN-T', ')', 'is', 'large'];
 
     const result = groupArticles(words);
 
@@ -67,13 +67,15 @@ describe('groupArticles', () => {
   });
 
   it('skips words in brackets other than an abbreviation', () => {
-    const words = ['The', 'European', 'Union', '(surely)', 'is', 'large'];
+    const words = ['The', 'European', 'Union', '(', 'surely', ')', 'is', 'large'];
 
     const result = groupArticles(words);
 
     expect(result).to.deep.equal([
       { groupType: 'article', words: ['The', 'European', 'Union'] },
-      '(surely)',
+      '(',
+      'surely',
+      ')',
       'is',
       'large',
     ]);

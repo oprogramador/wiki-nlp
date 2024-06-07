@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const convertPunctuation = require('../../convertPunctuation');
 const convertNumbers = require('../../convertNumbers');
 const groupArticles = require('../../groupArticles');
 const groupVerbs = require('../../groupVerbs');
@@ -6,13 +7,14 @@ const groupPrepositions = require('../../groupPrepositions');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe('convertNumbers & groupArticles & groupVerbs & groupPrepositions', () => {
+describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & groupPrepositions', () => {
   it('converts', () => {
     // eslint-disable-next-line max-len
     const text = 'The Eastern Caribbean dollar is the official currency in 7 member states of the Organisation of Eastern Caribbean States (OECS).';
     const words = splitText(text);
 
     const result = words.map(phrase => _.flow(
+      convertPunctuation,
       convertNumbers,
       groupArticles,
       groupVerbs,

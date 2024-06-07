@@ -22,6 +22,23 @@ const groupArticles = phrase => phrase.reduce(
       return [...accumulator, { groupType: 'article', words: [current] }];
     }
     const last = _.last(accumulator) || {};
+    const beforeBeforeLast = accumulator.slice(-3, -2)[0] || {};
+    const beforeLast = accumulator.slice(-2, -1)[0] || {};
+
+    if (
+      beforeBeforeLast.groupType === 'article'
+        && beforeLast === '('
+        && isUpperCase(last)
+        && current === ')'
+    ) {
+      return [
+        ...accumulator.slice(0, -3),
+        {
+          ...beforeBeforeLast,
+          abbreviation: last,
+        },
+      ];
+    }
     if (last.groupType !== 'article') {
       if (isUpperCase(current) && isUpperCase(last)) {
         return [
@@ -48,19 +65,6 @@ const groupArticles = phrase => phrase.reduce(
             ...last.words,
             current,
           ],
-        },
-      ];
-    }
-    if (current.startsWith
-      && current.startsWith('(')
-      && current.endsWith(')')
-      && current.toUpperCase() === current
-    ) {
-      return [
-        ...accumulator.slice(0, -1),
-        {
-          ...last,
-          abbreviation: current.replace(/^\(/, '').replace(/\)$/, ''),
         },
       ];
     }
