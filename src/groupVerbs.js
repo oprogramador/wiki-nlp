@@ -1,11 +1,5 @@
 const _ = require('lodash');
-const fs = require('fs');
-
-const auxiliary = fs
-  .readFileSync(`${__dirname}/resources/auxiliary.txt`)
-  .toString()
-  .split('\n')
-  .filter(x => x);
+const auxiliary = require('./auxiliaryList');
 
 const negations = [
   'no',
