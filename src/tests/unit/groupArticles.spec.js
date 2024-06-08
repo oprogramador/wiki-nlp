@@ -1,5 +1,5 @@
-const groupArticles = require('../groupArticles');
-const expect = require('./expect');
+const groupArticles = require('../../groupArticles');
+const expect = require('../expect');
 
 describe('groupArticles', () => {
   it('groups with an article followed by one word', () => {

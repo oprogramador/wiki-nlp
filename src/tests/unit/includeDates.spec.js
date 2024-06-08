@@ -1,5 +1,5 @@
-const includeDates = require('../includeDates');
-const expect = require('./expect');
+const includeDates = require('../../includeDates');
+const expect = require('../expect');
 
 describe('includeDates', () => {
   it('includes a year from the beginning', () => {

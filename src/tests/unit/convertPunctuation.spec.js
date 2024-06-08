@@ -1,5 +1,5 @@
-const convertPunctuation = require('../convertPunctuation');
-const expect = require('./expect');
+const convertPunctuation = require('../../convertPunctuation');
+const expect = require('../expect');
 
 describe('convertPunctuation', () => {
   it('groups with a comma', () => {

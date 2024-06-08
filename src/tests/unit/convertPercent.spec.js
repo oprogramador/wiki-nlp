@@ -1,5 +1,5 @@
-const convertPercent = require('../convertPercent');
-const expect = require('./expect');
+const convertPercent = require('../../convertPercent');
+const expect = require('../expect');
 
 describe('convertPercent', () => {
   it('does not convert with %', () => {

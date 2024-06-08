@@ -1,5 +1,5 @@
-const groupVerbs = require('../groupVerbs');
-const expect = require('./expect');
+const groupVerbs = require('../../groupVerbs');
+const expect = require('../expect');
 
 describe('groupVerbs', () => {
   it('groups with a verb in the middle', () => {

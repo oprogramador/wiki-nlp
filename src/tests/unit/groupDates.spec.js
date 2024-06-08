@@ -1,5 +1,5 @@
-const groupDates = require('../groupDates');
-const expect = require('./expect');
+const groupDates = require('../../groupDates');
+const expect = require('../expect');
 
 describe('groupDates', () => {
   it('groups with a day, and month', () => {

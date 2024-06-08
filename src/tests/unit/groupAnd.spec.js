@@ -1,5 +1,5 @@
-const groupAnd = require('../groupAnd');
-const expect = require('./expect');
+const groupAnd = require('../../groupAnd');
+const expect = require('../expect');
 
 describe('groupAnd', () => {
   it('groups 2 elements', () => {

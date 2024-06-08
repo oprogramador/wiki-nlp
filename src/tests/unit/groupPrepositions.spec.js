@@ -1,5 +1,5 @@
-const groupPrepositions = require('../groupPrepositions');
-const expect = require('./expect');
+const groupPrepositions = require('../../groupPrepositions');
+const expect = require('../expect');
 
 describe('groupPrepositions', () => {
   it('groups with a preposition in the middle', () => {

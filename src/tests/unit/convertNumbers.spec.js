@@ -1,5 +1,5 @@
-const convertNumbers = require('../convertNumbers');
-const expect = require('./expect');
+const convertNumbers = require('../../convertNumbers');
+const expect = require('../expect');
 
 describe('convertNumbers', () => {
   it('converts from a word', () => {
