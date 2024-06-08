@@ -29,6 +29,7 @@ const largeNumbers = {
 const aroundWords = [
   'around',
   'about',
+  'approximately',
 ];
 
 const aboveWords = [

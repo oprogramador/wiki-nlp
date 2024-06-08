@@ -8,8 +8,8 @@ const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & includeDates', () => {
-  it('converts', () => {
-    const text = 'In 2001, Kofi Annan was awarded the Nobel Peace Prize';
+  it('converts with year at the beginning', () => {
+    const text = 'In 2001, Kofi Annan was awarded the Nobel Peace Prize.';
     const words = splitText(text);
 
     const result = words.map(phrase => _.flow(
@@ -50,6 +50,111 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
           groupType: 'date',
           year: 2001,
         },
+      },
+    ]]);
+  });
+
+  it('converts with year at the end', () => {
+    const text = 'The treaty was signed in 1958.';
+    const words = splitText(text);
+
+    const result = words.map(phrase => _.flow(
+      convertPunctuation,
+      convertNumbers,
+      groupArticles,
+      groupVerbs,
+      includeDates,
+    )(phrase));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'signed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'treaty',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1958,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with year at the end, with an extra word', () => {
+    const text = 'The treaty was quickly signed in 1958.';
+    const words = splitText(text);
+
+    const result = words.map(phrase => _.flow(
+      convertPunctuation,
+      convertNumbers,
+      groupArticles,
+      groupVerbs,
+      includeDates,
+    )(phrase));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'quickly',
+          'signed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'treaty',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1958,
+        },
+      },
+    ]]);
+  });
+
+  it('converts without a year', () => {
+    const text = 'The treaty was signed.';
+    const words = splitText(text);
+
+    const result = words.map(phrase => _.flow(
+      convertPunctuation,
+      convertNumbers,
+      groupArticles,
+      groupVerbs,
+      includeDates,
+    )(phrase));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'signed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'treaty',
+            ],
+          },
+        ],
+        verb: 'was',
       },
     ]]);
   });
