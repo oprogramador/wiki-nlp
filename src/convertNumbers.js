@@ -2,44 +2,13 @@ const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const isLettersOnly = require('./isLettersOnly');
-
-/* eslint-disable sort-keys */
-const map = {
-  zero: 0,
-  one: 1,
-  two: 2,
-  three: 3,
-  four: 4,
-  five: 5,
-  six: 6,
-  seven: 7,
-  eight: 8,
-  nine: 9,
-  ten: 10,
-  eleven: 11,
-  twelve: 12,
-};
-
-const largeNumbers = {
-  million: 1e6,
-  billion: 1e9,
-  trillion: 1e12,
-};
-
-const aroundWords = [
-  'around',
-  'about',
-  'approximately',
-];
-
-const aboveWords = [
-  'above',
-  'over',
-];
-
-const currencies = {
-  '€': 'EUR',
-};
+const {
+  wordsToNumbers,
+  largeNumbers,
+  aroundWords,
+  aboveWords,
+  currencies,
+} = require('./numberResources');
 
 const convertWithDigits = (word) => {
   if (!word.replace) {
@@ -60,8 +29,8 @@ const handleCurrency = (accumulator) => {
     return [
       ...accumulator.slice(0, -2),
       {
-        groupType: 'currency',
         currency,
+        groupType: 'currency',
         value: _.last(accumulator).value,
       },
     ];
@@ -134,7 +103,7 @@ const convertNumbers = phrase => phrase
       ];
     }
 
-    const value = map[current] || convertWithDigits(current) || current;
+    const value = wordsToNumbers[current] || convertWithDigits(current) || current;
 
     if (typeof value === 'number') {
       return handleCurrency([
