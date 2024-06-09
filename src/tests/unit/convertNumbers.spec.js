@@ -163,36 +163,6 @@ describe('convertNumbers', () => {
     ]);
   });
 
-  it('converts with per cent', () => {
-    const words = ['Unemployment', 'is', '7', 'per', 'cent'];
-
-    const result = convertNumbers(words);
-
-    expect(result).to.deep.equal([
-      'Unemployment',
-      'is',
-      {
-        groupType: 'share',
-        value: 0.07,
-      },
-    ]);
-  });
-
-  it('converts with percent', () => {
-    const words = ['Unemployment', 'is', '8', 'percent'];
-
-    const result = convertNumbers(words);
-
-    expect(result).to.deep.equal([
-      'Unemployment',
-      'is',
-      {
-        groupType: 'share',
-        value: 0.08,
-      },
-    ]);
-  });
-
   it('converts with million', () => {
     const words = ['Alan', 'has', '3', 'million', 'apples'];
 
