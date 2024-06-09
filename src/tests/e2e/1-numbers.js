@@ -509,4 +509,63 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts with and', () => {
+    const words = 'Alan has over 200 apples, and oranges';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'apples',
+                'oranges',
+              ],
+            },
+            min: 200,
+          },
+        ],
+        subject: [
+          'Alan',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
+  it('converts with an adjective', () => {
+    const words = 'Alan has about 10 red apples';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'red',
+                'apples',
+              ],
+            },
+            value: 10,
+          },
+        ],
+        subject: [
+          'Alan',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });
