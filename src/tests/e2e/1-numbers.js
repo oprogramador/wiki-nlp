@@ -166,7 +166,7 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts with %', () => {
-    const words = 'Unemployment is 5 %';
+    const words = 'Unemployment is 5%';
 
     const result = flow(splitText(words));
 
@@ -176,7 +176,7 @@ describe('numbers (e2e)', () => {
         object: [
           {
             groupType: 'share',
-            value: 0.0005,
+            value: 0.05,
           },
         ],
         subject: [
