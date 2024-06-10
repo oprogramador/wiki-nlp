@@ -1,128 +1,65 @@
-const _ = require('lodash');
-const auxiliary = require('./auxiliaryList');
-const prepositions = require('./prepositionList');
-const isLettersOnly = require('./isLettersOnly');
 const {
   wordsToNumbers,
   largeNumbers,
   aroundWords,
   aboveWords,
   currencies,
+  convertWithDigits,
 } = require('./numberResources');
-
-const convertWithDigits = (word) => {
-  if (!word.replace) {
-    return word;
-  }
-  const replaced = word.replace(/,/g, '');
-  const number = Number(replaced);
-  if (Number.isNaN(number)) {
-    return word;
-  }
-
-  return number;
-};
-
-const handleCurrency = (accumulator) => {
-  const currency = currencies[accumulator.slice(-2, -1)];
-  if (currency) {
-    return [
-      ...accumulator.slice(0, -2),
-      {
-        currency,
-        groupType: 'currency',
-        value: _.last(accumulator).value,
-      },
-    ];
-  }
-
-  return accumulator;
-};
-
-const multiply = (base, multiplier) => {
-  const value = base.value || Number(base === 'a' ? 1 : base);
-  const result = value * multiplier;
-
-  return base.groupType
-    ? { ...base, value: result }
-    : { groupType: 'quantity', value: result };
-};
 
 const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
-    const last = _.last(accumulator);
-    if (largeNumbers[current]) {
-      return handleCurrency([
-        ...accumulator.slice(0, -1),
-        multiply(last, largeNumbers[current]),
-      ]);
-    }
-    if (current === '%') {
+    if (current.groupType !== 'quantity-raw') {
       return [
-        ...accumulator.slice(0, -1),
-        {
-          groupType: 'share',
-          value: last.value / 100,
-        },
+        ...accumulator,
+        current,
       ];
     }
-    if (
-      last
-        && last.groupType === 'quantity'
-        && current !== 'per'
-        && ![...auxiliary, ...prepositions].includes(current)
-          && (isLettersOnly(current) || current.groupType)
-    ) {
-      if (!last.item) {
-        return [
-          ...accumulator.slice(0, -1),
-          {
-            ...last,
-            item: current,
-          },
-        ];
+    let groupType = 'quantity';
+    let { words } = current;
+    let isExact = true;
+    let isMin = false;
+    let currency = null;
+    if ([...aroundWords, ...aboveWords].includes(words[0])) {
+      if (aroundWords.includes(words[0])) {
+        isExact = false;
       }
-
-      return [
-        ...accumulator.slice(0, -1),
-        {
-          ...last,
-          item: last.item.groupType === 'article'
-            ? {
-              ...last.item,
-              words: [
-                ...last.item.words,
-                current,
-              ],
-            }
-            : {
-              groupType: 'article',
-              words: [last.item, current],
-            },
-        },
-      ];
+      if (aboveWords.includes(words[0])) {
+        isMin = true;
+      }
+      words = words.slice(1);
     }
-
-    const value = wordsToNumbers[current] || convertWithDigits(current) || current;
-
-    if (typeof value === 'number') {
-      return handleCurrency([
-        ...(
-          [...aroundWords, ...aboveWords].includes(last)
-            ? accumulator.slice(0, -1)
-            : accumulator
-        ),
-        {
-          groupType: 'quantity',
-          ...(aboveWords.includes(last) ? { min: value } : { value }),
-          ...(aroundWords.includes(last) ? { isExact: false } : {}),
-        },
-      ]);
+    if (currencies[words[0]]) {
+      groupType = 'currency';
+      currency = currencies[words[0]];
+      words = words.slice(1);
+    }
+    const valueWord = words[0];
+    let value = wordsToNumbers[valueWord] || convertWithDigits(valueWord);
+    let item = words[1];
+    if (item === '%') {
+      groupType = 'share';
+      value *= 0.01;
+      item = null;
+    }
+    if (largeNumbers[item]) {
+      if (valueWord === 'a') {
+        value = 1;
+      }
+      value *= largeNumbers[item];
+      // eslint-disable-next-line prefer-destructuring
+      item = words[2];
     }
 
     return [
       ...accumulator,
-      current,
+      {
+        groupType,
+        ...(!isExact ? { isExact } : {}),
+        [isMin ? 'min' : 'value']: value,
+        ...(item ? { item } : {}),
+        ...(currency ? { currency } : {}),
+      },
     ];
   },
   []);

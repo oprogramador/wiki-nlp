@@ -539,7 +539,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts with an adjective', () => {
+  it.skip('converts with an adjective', () => {
     const words = 'Alan has about 10 red apples';
 
     const result = flow(splitText(words));

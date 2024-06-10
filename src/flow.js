@@ -6,6 +6,7 @@ const convertPunctuation = require('./convertPunctuation');
 const groupAnd = require('./groupAnd');
 const groupArticles = require('./groupArticles');
 const groupDates = require('./groupDates');
+const groupNumbers = require('./groupNumbers');
 const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
 const groupVerbs = require('./groupVerbs');
@@ -20,6 +21,7 @@ const flow = (phrases) => {
     groupAnd,
     groupDates,
     convertPercent,
+    groupNumbers,
     convertNumbers,
     groupArticles,
     groupOr,

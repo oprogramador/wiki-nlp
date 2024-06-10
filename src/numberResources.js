@@ -36,7 +36,20 @@ const currencies = {
   '€': 'EUR',
 };
 
-const isNumeric = word => wordsToNumbers[word] || !Number.isNaN(Number(word.replace(/,/g, '')));
+const convertWithDigits = (word) => {
+  if (!word.replace) {
+    return word;
+  }
+  const replaced = word.replace(/,/g, '');
+  const number = Number(replaced);
+  if (Number.isNaN(number)) {
+    return word;
+  }
+
+  return number;
+};
+
+const isNumeric = word => wordsToNumbers[word] || typeof convertWithDigits(word) === 'number';
 
 module.exports = {
   wordsToNumbers,
@@ -44,5 +57,6 @@ module.exports = {
   aroundWords,
   aboveWords,
   currencies,
+  convertWithDigits,
   isNumeric,
 };

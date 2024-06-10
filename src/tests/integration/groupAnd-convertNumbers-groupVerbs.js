@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const groupAnd = require('../../groupAnd');
 const convertNumbers = require('../../convertNumbers');
+const groupNumbers = require('../../groupNumbers');
 const groupVerbs = require('../../groupVerbs');
 const expect = require('../expect');
 
@@ -10,6 +11,7 @@ describe('groupAnd & convertNumbers & groupVerbs', () => {
 
     const result = _.flow(
       groupAnd,
+      groupNumbers,
       convertNumbers,
       groupVerbs,
     )(words);

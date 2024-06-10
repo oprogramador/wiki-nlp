@@ -3,7 +3,7 @@ const expect = require('../expect');
 
 describe('convertNumbers', () => {
   it('converts from a word', () => {
-    const words = ['Alan', 'has', 'five', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['five', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -19,7 +19,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts from digits', () => {
-    const words = ['Alan', 'has', '5', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['5', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -35,7 +35,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with over', () => {
-    const words = ['Alan', 'has', 'over', '50', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['over', '50', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -51,7 +51,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with above', () => {
-    const words = ['Alan', 'has', 'above', '50', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['above', '50', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -67,7 +67,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with around', () => {
-    const words = ['Alan', 'has', 'around', '50', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['around', '50', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -84,7 +84,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with about', () => {
-    const words = ['Alan', 'has', 'about', '50', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['about', '50', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -101,7 +101,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with a dot', () => {
-    const words = ['Alan', 'has', '1.234', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['1.234', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -117,7 +117,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with a comma', () => {
-    const words = ['Alan', 'has', '1,234', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['1,234', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -133,7 +133,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with two commas', () => {
-    const words = ['Alan', 'has', '1,234,567', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['1,234,567', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -149,7 +149,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with %', () => {
-    const words = ['Unemployment', 'is', '5', '%'];
+    const words = ['Unemployment', 'is', { groupType: 'quantity-raw', words: ['5', '%'] }];
 
     const result = convertNumbers(words);
 
@@ -164,7 +164,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with million', () => {
-    const words = ['Alan', 'has', '3', 'million', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['3', 'million', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -180,7 +180,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with a million', () => {
-    const words = ['Alan', 'has', 'a', 'million', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['a', 'million', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -196,7 +196,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with billion', () => {
-    const words = ['Alan', 'has', '3.5', 'billion', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['3.5', 'billion', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -212,7 +212,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with trillion', () => {
-    const words = ['Alan', 'has', '3.45', 'trillion', 'apples'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['3.45', 'trillion', 'apples'] }];
 
     const result = convertNumbers(words);
 
@@ -228,7 +228,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with euro', () => {
-    const words = ['Alan', 'has', '€', '12.34'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['€', '12.34'] }];
 
     const result = convertNumbers(words);
 
@@ -244,7 +244,7 @@ describe('convertNumbers', () => {
   });
 
   it('converts with euro and million', () => {
-    const words = ['Alan', 'has', '€', '12.34', 'million'];
+    const words = ['Alan', 'has', { groupType: 'quantity-raw', words: ['€', '12.34', 'million'] }];
 
     const result = convertNumbers(words);
 
