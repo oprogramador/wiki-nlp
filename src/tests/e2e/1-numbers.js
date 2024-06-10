@@ -346,7 +346,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro and about', () => {
+  it('converts with euro and about', () => {
     const words = 'Alan has about €12.34';
 
     const result = flow(splitText(words));
@@ -370,7 +370,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro and above', () => {
+  it('converts with euro and above', () => {
     const words = 'Alan has above €12.34';
 
     const result = flow(splitText(words));
@@ -416,7 +416,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro, about, and billion', () => {
+  it('converts with euro, about, and billion', () => {
     const words = 'Alan has about €12 billion';
 
     const result = flow(splitText(words));
@@ -487,7 +487,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro, above, and trillion', () => {
+  it('converts with euro, above, and trillion', () => {
     const words = 'Alan has above €12 trillion';
 
     const result = flow(splitText(words));

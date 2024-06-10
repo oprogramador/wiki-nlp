@@ -10,7 +10,18 @@ const {
 const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
+    const beforeLast = accumulator.slice(-2, -1)[0] || {};
     if (isNumeric(current)) {
+      if ([...aroundWords, ...aboveWords].includes(beforeLast) && Object.keys(currencies).includes(last)) {
+        return [
+          ...accumulator.slice(0, -2),
+          {
+            groupType: 'quantity-raw',
+            words: [beforeLast, last, current],
+          },
+        ];
+      }
+
       if ([...aroundWords, ...aboveWords, ...Object.keys(currencies)].includes(last)) {
         return [
           ...accumulator.slice(0, -1),

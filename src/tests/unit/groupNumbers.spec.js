@@ -245,6 +245,21 @@ describe('groupNumbers', () => {
     ]);
   });
 
+  it('groups with about & euro', () => {
+    const words = ['Alan', 'has', 'about', '€', '12.34'];
+
+    const result = groupNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity-raw',
+        words: ['about', '€', '12.34'],
+      },
+    ]);
+  });
+
   it('groups with euro and million', () => {
     const words = ['Alan', 'has', '€', '12.34', 'million'];
 
@@ -256,6 +271,21 @@ describe('groupNumbers', () => {
       {
         groupType: 'quantity-raw',
         words: ['€', '12.34', 'million'],
+      },
+    ]);
+  });
+
+  it('groups with over, euro and million', () => {
+    const words = ['Alan', 'has', 'over', '€', '12', 'million'];
+
+    const result = groupNumbers(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      'has',
+      {
+        groupType: 'quantity-raw',
+        words: ['over', '€', '12', 'million'],
       },
     ]);
   });
