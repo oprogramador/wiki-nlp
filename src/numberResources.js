@@ -41,6 +41,9 @@ const convertWithDigits = (word) => {
     return word;
   }
   const replaced = word.replace(/,/g, '');
+  if (replaced === '') {
+    return word;
+  }
   const number = Number(replaced);
   if (Number.isNaN(number)) {
     return word;

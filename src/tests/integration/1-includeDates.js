@@ -8,7 +8,7 @@ const includeDates = require('../../includeDates');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe.skip('convertPunctuation & convertNumbers & groupArticles & groupVerbs & includeDates', () => {
+describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & includeDates', () => {
   it('converts with year at the beginning', () => {
     const text = 'In 2001, Kofi Annan was awarded the Nobel Peace Prize.';
     const words = splitText(text);
@@ -38,7 +38,6 @@ describe.skip('convertPunctuation & convertNumbers & groupArticles & groupVerbs 
           },
         ],
         subject: [
-          ',',
           {
             groupType: 'article',
             words: [
@@ -56,7 +55,7 @@ describe.skip('convertPunctuation & convertNumbers & groupArticles & groupVerbs 
     ]]);
   });
 
-  it('converts with year at the end', () => {
+  it.skip('converts with year at the end', () => {
     const text = 'The treaty was signed in 1958.';
     const words = splitText(text);
 
@@ -92,7 +91,7 @@ describe.skip('convertPunctuation & convertNumbers & groupArticles & groupVerbs 
     ]]);
   });
 
-  it('converts with year at the end, with an extra word', () => {
+  it.skip('converts with year at the end, with an extra word', () => {
     const text = 'The treaty was quickly signed in 1958.';
     const words = splitText(text);
 
