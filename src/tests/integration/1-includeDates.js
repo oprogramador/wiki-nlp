@@ -55,12 +55,13 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
     ]]);
   });
 
-  it.skip('converts with year at the end', () => {
+  it('converts with year at the end', () => {
     const text = 'The treaty was signed in 1958.';
     const words = splitText(text);
 
     const result = words.map(phrase => _.flow(
       convertPunctuation,
+      groupNumbers,
       convertNumbers,
       groupArticles,
       groupVerbs,
@@ -91,12 +92,13 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
     ]]);
   });
 
-  it.skip('converts with year at the end, with an extra word', () => {
+  it('converts with year at the end, with an extra word', () => {
     const text = 'The treaty was quickly signed in 1958.';
     const words = splitText(text);
 
     const result = words.map(phrase => _.flow(
       convertPunctuation,
+      groupNumbers,
       convertNumbers,
       groupArticles,
       groupVerbs,
