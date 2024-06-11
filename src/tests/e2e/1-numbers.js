@@ -440,7 +440,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro, about, and bn', () => {
+  it('converts with euro, about, and bn', () => {
     const words = 'Alan has about €12bn';
 
     const result = flow(splitText(words));
@@ -464,7 +464,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with euro, and bn', () => {
+  it('converts with euro, and bn', () => {
     const words = 'Alan has €14bn';
 
     const result = flow(splitText(words));
