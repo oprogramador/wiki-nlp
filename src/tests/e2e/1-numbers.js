@@ -539,7 +539,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with an adjective', () => {
+  it('converts with an adjective', () => {
     const words = 'Alan has about 10 red apples';
 
     const result = flow(splitText(words));
@@ -565,6 +565,35 @@ describe('numbers (e2e)', () => {
           'Alan',
         ],
         verb: 'has',
+      },
+    ]]);
+  });
+
+  it('converts with an adjective after uppercase', () => {
+    const words = 'There are 123 million EU citizens';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'EU',
+                'citizens',
+              ],
+            },
+            value: 123e6,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
       },
     ]]);
   });

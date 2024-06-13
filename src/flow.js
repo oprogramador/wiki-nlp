@@ -12,6 +12,7 @@ const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
 const groupVerbs = require('./groupVerbs');
 const includeDates = require('./includeDates');
+const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
 
 const flow = (phrases) => {
@@ -19,14 +20,15 @@ const flow = (phrases) => {
     convertPunctuation,
     removeMeaningless,
     addCommas,
-    groupAnd,
     groupDates,
     convertPercent,
     convertBn,
     groupNumbers,
     convertNumbers,
     groupArticles,
+    groupAnd,
     groupOr,
+    itemize,
     groupVerbs,
     includeDates,
     groupPrepositions,

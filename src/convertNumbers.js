@@ -36,19 +36,16 @@ const convertNumbers = phrase => phrase
     }
     const valueWord = words[0];
     let value = wordsToNumbers[valueWord] || convertWithDigits(valueWord);
-    let item = words[1];
+    const item = words[1];
     if (item === '%') {
       groupType = 'share';
       value *= 0.01;
-      item = null;
     }
     if (largeNumbers[item]) {
       if (valueWord === 'a') {
         value = 1;
       }
       value *= largeNumbers[item];
-      // eslint-disable-next-line prefer-destructuring
-      item = words[2];
     }
 
     return [
@@ -57,7 +54,6 @@ const convertNumbers = phrase => phrase
         groupType,
         ...(!isExact ? { isExact } : {}),
         [isMin ? 'min' : 'value']: value,
-        ...(item ? { item } : {}),
         ...(currency ? { currency } : {}),
       },
     ];

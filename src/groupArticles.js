@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
+const pronouns = require('./pronounsList');
+const isAdverb = require('./isAdverb');
 const isLettersOnly = require('./isLettersOnly');
 const toLowerCase = require('./toLowerCase');
 const isUpperCase = require('./isUpperCase');
@@ -39,30 +41,29 @@ const groupArticles = phrase => phrase.reduce(
         },
       ];
     }
-    if (last.groupType !== 'article') {
-      if (isUpperCase(current) && isUpperCase(last)) {
-        return [
-          ...accumulator.slice(0, -1),
-          {
-            groupType: 'article',
-            words: [last, current],
-          },
-        ];
-      }
-
-      return [...accumulator, current];
-    }
     if (
-      ![...auxiliary, ...prepositions].includes(current) && isLettersOnly(current)
-      || isUpperCase(current)
-      || (allowedPrepositions.includes(current) && isUpperCase(_.last(last.words)))
+      (
+        last.groupType === 'article'
+          || (
+            !last.groupType
+            && last.toLowerCase
+            && !isAdverb(last)
+            && ![...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(last.toLowerCase())
+            && isLettersOnly(last)
+          )
+      )
+      && (
+        ![...auxiliary, ...prepositions].includes(current) && isLettersOnly(current)
+          || isUpperCase(current)
+          || (allowedPrepositions.includes(current) && isUpperCase(_.last(last.words)))
+      )
     ) {
       return [
         ...accumulator.slice(0, -1),
         {
-          ...last,
+          ...(last.groupType ? last : { groupType: 'article' }),
           words: [
-            ...last.words,
+            ...(last.words || [last]),
             current,
           ],
         },

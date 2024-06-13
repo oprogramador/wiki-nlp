@@ -49,14 +49,13 @@ const groupNumbers = phrase => phrase
         },
       ];
     }
-    const lastWord = _.last(last.words);
-    if (last.groupType === 'quantity-raw' && (isNumeric(lastWord) || largeNumbers[lastWord])) {
+    if (largeNumbers[current] || current === '%') {
       return [
         ...accumulator.slice(0, -1),
         {
           ...last,
           words: [
-            ...last.words,
+            ...(last.words || []),
             current,
           ],
         },

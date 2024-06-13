@@ -3,13 +3,14 @@ const convertPunctuation = require('../../convertPunctuation');
 const convertNumbers = require('../../convertNumbers');
 const groupArticles = require('../../groupArticles');
 const groupNumbers = require('../../groupNumbers');
+const itemize = require('../../itemize');
 const groupVerbs = require('../../groupVerbs');
 const groupPrepositions = require('../../groupPrepositions');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('convertPunctuation & groupNumbers && convertNumbers & groupArticles & groupVerbs & groupPrepositions', () => {
-  it.skip('converts', () => {
+  it('converts', () => {
     // eslint-disable-next-line max-len
     const text = 'The Eastern Caribbean dollar is the official currency in 7 member states of the Organisation of Eastern Caribbean States (OECS).';
     const words = splitText(text);
@@ -19,6 +20,7 @@ describe('convertPunctuation & groupNumbers && convertNumbers & groupArticles & 
       groupNumbers,
       convertNumbers,
       groupArticles,
+      itemize,
       groupVerbs,
       groupPrepositions,
     )(phrase));

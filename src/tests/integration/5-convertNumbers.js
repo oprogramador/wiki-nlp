@@ -2,17 +2,19 @@ const _ = require('lodash');
 const groupAnd = require('../../groupAnd');
 const convertNumbers = require('../../convertNumbers');
 const groupNumbers = require('../../groupNumbers');
+const itemize = require('../../itemize');
 const groupVerbs = require('../../groupVerbs');
 const expect = require('../expect');
 
-describe('groupAnd & convertNumbers & groupVerbs', () => {
+describe('groupAnd & convertNumbers & itemize & groupVerbs', () => {
   it('converts', () => {
     const words = ['Alan', 'has', 'ten', 'apples', ',', 'bananas', ',', 'and', 'oranges'];
 
     const result = _.flow(
-      groupAnd,
       groupNumbers,
       convertNumbers,
+      groupAnd,
+      itemize,
       groupVerbs,
     )(words);
 

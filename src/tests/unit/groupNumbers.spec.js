@@ -3,16 +3,16 @@ const expect = require('../expect');
 
 describe('groupNumbers', () => {
   it('groups from a word', () => {
-    const words = ['Alan', 'has', 'five', 'apples'];
+    const words = ['Alan', 'is', 'five'];
 
     const result = groupNumbers(words);
 
     expect(result).to.deep.equal([
       'Alan',
-      'has',
+      'is',
       {
         groupType: 'quantity-raw',
-        words: ['five', 'apples'],
+        words: ['five'],
       },
     ]);
   });
@@ -27,8 +27,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['five', 'apples'],
+        words: ['five'],
       },
+      'apples',
       'but',
       'no',
       'oranges',
@@ -45,8 +46,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['5', 'apples'],
+        words: ['5'],
       },
+      'apples',
     ]);
   });
 
@@ -60,8 +62,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['over', '50', 'apples'],
+        words: ['over', '50'],
       },
+      'apples',
     ]);
   });
 
@@ -75,8 +78,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['above', '50', 'apples'],
+        words: ['above', '50'],
       },
+      'apples',
     ]);
   });
 
@@ -90,8 +94,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['around', '50', 'apples'],
+        words: ['around', '50'],
       },
+      'apples',
     ]);
   });
 
@@ -105,8 +110,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['about', '50', 'apples'],
+        words: ['about', '50'],
       },
+      'apples',
     ]);
   });
 
@@ -120,8 +126,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['1.234', 'apples'],
+        words: ['1.234'],
       },
+      'apples',
     ]);
   });
 
@@ -135,8 +142,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['1,234', 'apples'],
+        words: ['1,234'],
       },
+      'apples',
     ]);
   });
 
@@ -150,8 +158,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['1,234,567', 'apples'],
+        words: ['1,234,567'],
       },
+      'apples',
     ]);
   });
 
@@ -180,8 +189,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['3', 'million', 'apples'],
+        words: ['3', 'million'],
       },
+      'apples',
     ]);
   });
 
@@ -195,8 +205,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['a', 'million', 'apples'],
+        words: ['a', 'million'],
       },
+      'apples',
     ]);
   });
 
@@ -210,8 +221,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['3.5', 'billion', 'apples'],
+        words: ['3.5', 'billion'],
       },
+      'apples',
     ]);
   });
 
@@ -225,8 +237,9 @@ describe('groupNumbers', () => {
       'has',
       {
         groupType: 'quantity-raw',
-        words: ['3.45', 'trillion', 'apples'],
+        words: ['3.45', 'trillion'],
       },
+      'apples',
     ]);
   });
 

@@ -6,7 +6,7 @@ const isLettersOnly = (item) => {
     return false;
   }
 
-  return /^[a-z]+$/.test(item);
+  return /^[a-zA-Z]+$/.test(item);
 };
 
 module.exports = isLettersOnly;

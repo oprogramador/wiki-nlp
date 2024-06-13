@@ -44,8 +44,13 @@ describe('convertPunctuation & groupAnd & groupArticles & groupVerbs & groupPrep
             },
           ],
           subject: [
-            'American',
-            'athletes',
+            {
+              groupType: 'article',
+              words: [
+                'American',
+                'athletes',
+              ],
+            },
           ],
           verb: 'are',
         },

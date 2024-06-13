@@ -26,8 +26,13 @@ describe('convertPunctuation & groupArticles & groupVerbs & groupPrepositions', 
             {
               groupType: 'preposition',
               object: [
-                'economic',
-                'success',
+                {
+                  groupType: 'article',
+                  words: [
+                    'economic',
+                    'success',
+                  ],
+                },
               ],
               subject: [
                 {
