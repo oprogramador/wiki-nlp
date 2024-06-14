@@ -44,6 +44,7 @@ const aboveWords = [
 
 const currencies = {
   '€': 'EUR',
+  $: 'USD',
 };
 
 const convertWithDigits = (word) => {
