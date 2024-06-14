@@ -18,6 +18,8 @@ const allowedPrepositions = [
   'of',
 ];
 
+const isDissalowed = word => [...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(word.toLowerCase());
+
 const groupArticles = phrase => phrase.reduce(
   (accumulator, current) => {
     if (articles.includes(toLowerCase(current))) {
@@ -48,12 +50,12 @@ const groupArticles = phrase => phrase.reduce(
             !last.groupType
             && last.toLowerCase
             && !isAdverb(last)
-            && ![...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(last.toLowerCase())
+            && !isDissalowed(last)
             && isLettersOnly(last)
           )
       )
       && (
-        ![...auxiliary, ...prepositions].includes(current) && isLettersOnly(current)
+        !isDissalowed(current) && isLettersOnly(current)
           || isUpperCase(current)
           || (allowedPrepositions.includes(current) && isUpperCase(_.last(last.words)))
       )
