@@ -7,17 +7,18 @@ const {
   currencies,
   isNumeric,
 } = require('./numberResources');
+const toLowerCase = require('./toLowerCase');
 
 const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
     const beforeLast = accumulator.slice(-2, -1)[0] || {};
-    if (fuzzy[current]) {
+    if (fuzzy[toLowerCase(current)]) {
       return [
         ...accumulator,
         {
           groupType: 'quantity-raw',
-          words: [current],
+          words: [toLowerCase(current)],
         },
       ];
     }

@@ -569,6 +569,29 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts with many, uppercase', () => {
+    const words = 'Many apples are red';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'red',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'apples',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts with an adjective after uppercase', () => {
     const words = 'There are 123 million EU citizens';
 
