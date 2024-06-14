@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const {
   largeNumbers,
+  fuzzy,
   aroundWords,
   aboveWords,
   currencies,
@@ -11,6 +12,15 @@ const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
     const beforeLast = accumulator.slice(-2, -1)[0] || {};
+    if (fuzzy[current]) {
+      return [
+        ...accumulator,
+        {
+          groupType: 'quantity-raw',
+          words: [current],
+        },
+      ];
+    }
     if (isNumeric(current)) {
       if ([...aroundWords, ...aboveWords].includes(beforeLast) && Object.keys(currencies).includes(last)) {
         return [

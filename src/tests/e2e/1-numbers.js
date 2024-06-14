@@ -539,8 +539,8 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts with an adjective', () => {
-    const words = 'Alan has about 10 red apples';
+  it('converts with several', () => {
+    const words = 'Alan has several red apples';
 
     const result = flow(splitText(words));
 
@@ -550,7 +550,6 @@ describe('numbers (e2e)', () => {
         object: [
           {
             groupType: 'quantity',
-            isExact: false,
             item: {
               groupType: 'article',
               words: [
@@ -558,7 +557,8 @@ describe('numbers (e2e)', () => {
                 'apples',
               ],
             },
-            value: 10,
+            max: 99,
+            min: 3,
           },
         ],
         subject: [

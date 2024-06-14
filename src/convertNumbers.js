@@ -1,6 +1,7 @@
 const {
   wordsToNumbers,
   largeNumbers,
+  fuzzy,
   aroundWords,
   aboveWords,
   currencies,
@@ -13,6 +14,15 @@ const convertNumbers = phrase => phrase
       return [
         ...accumulator,
         current,
+      ];
+    }
+    if (fuzzy[current.words[0]]) {
+      return [
+        ...accumulator,
+        {
+          groupType: 'quantity',
+          ...fuzzy[current.words[0]],
+        },
       ];
     }
     let groupType = 'quantity';

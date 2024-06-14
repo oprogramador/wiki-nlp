@@ -21,6 +21,16 @@ const largeNumbers = {
   trillion: 1e12,
 };
 
+const fuzzy = {
+  several: {
+    min: 3,
+    max: 99,
+  },
+  many: {
+    min: 3,
+  },
+};
+
 const aroundWords = [
   'around',
   'about',
@@ -57,6 +67,7 @@ const isNumeric = word => wordsToNumbers[word] || typeof convertWithDigits(word)
 module.exports = {
   wordsToNumbers,
   largeNumbers,
+  fuzzy,
   aroundWords,
   aboveWords,
   currencies,
