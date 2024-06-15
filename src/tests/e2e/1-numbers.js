@@ -620,4 +620,46 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts for % followed by "of"', () => {
+    const words = 'It has 7% of the world population in 2020';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'world',
+                  'population',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'share',
+                value: 0.07,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          year: 2020,
+        },
+      },
+    ]]);
+  });
 });

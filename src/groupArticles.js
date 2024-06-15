@@ -18,7 +18,7 @@ const allowedPrepositions = [
   'of',
 ];
 
-const isDissalowed = word => [...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(word.toLowerCase());
+const isDissalowed = word => [...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(toLowerCase(word));
 
 const groupArticles = phrase => phrase.reduce(
   (accumulator, current) => {
