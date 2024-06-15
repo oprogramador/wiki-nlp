@@ -118,6 +118,18 @@ describe('groupArticles', () => {
     ]);
   });
 
+  it('finishes when followed by a group', () => {
+    const words = ['The', 'Nomenclature', 'of', { groupType: 'date' }];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['The', 'Nomenclature'] },
+      'of',
+      { groupType: 'date' },
+    ]);
+  });
+
   it('does not allow for a preposition after lowercase', () => {
     const words = ['the', 'spread', 'of', 'democracy'];
 

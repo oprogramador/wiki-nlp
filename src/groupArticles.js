@@ -57,7 +57,6 @@ const groupArticles = phrase => phrase.reduce(
       && (
         !isDissalowed(current) && isLettersOnly(current)
           || isUpperCase(current)
-          || (allowedPrepositions.includes(current) && isUpperCase(_.last(last.words)))
       )
     ) {
       return [
@@ -66,6 +65,24 @@ const groupArticles = phrase => phrase.reduce(
           ...(last.groupType ? last : { groupType: 'article' }),
           words: [
             ...(last.words || [last]),
+            current,
+          ],
+        },
+      ];
+    }
+    if (
+      beforeLast.groupType === 'article'
+        && isUpperCase(_.last(beforeLast.words))
+        && allowedPrepositions.includes(last)
+        && isUpperCase(current)
+    ) {
+      return [
+        ...accumulator.slice(0, -2),
+        {
+          ...beforeLast,
+          words: [
+            ...beforeLast.words,
+            last,
             current,
           ],
         },
