@@ -3,7 +3,7 @@ const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('articles (e2e)', () => {
-  it('converts', () => {
+  it('converts a date range', () => {
     const words = 'Ursula von der Leyen was elected for 2019–2024';
 
     const result = flow(splitText(words));
