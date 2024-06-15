@@ -14,6 +14,22 @@ describe('convertPunctuation', () => {
     ]);
   });
 
+  it('groups with brackets, and a comma', () => {
+    const words = ['("Alan"),', 'Bob'];
+
+    const result = convertPunctuation(words);
+
+    expect(result).to.deep.equal([
+      '(',
+      '"',
+      'Alan',
+      '"',
+      ')',
+      ',',
+      'Bob',
+    ]);
+  });
+
   it('groups without a comma', () => {
     const words = ['Alan', 'Bob'];
 
