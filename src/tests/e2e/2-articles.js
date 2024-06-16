@@ -2,7 +2,38 @@ const flow = require('../../flow');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe('articles (e2e)', () => {
+describe('articles, dates (e2e)', () => {
+  it('converts a day range', () => {
+    const words = 'The period is 1–5 June 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'date',
+            maxDay: 5,
+            minDay: 1,
+            month: 6,
+            year: 2000,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'period',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it('converts a date range', () => {
     const words = 'Ursula von der Leyen was elected for 2019–2024';
 
