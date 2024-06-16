@@ -662,4 +662,42 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts ranges', () => {
+    const words = 'They have 30,000–40,000 applications with 1,500–1,700 candidates';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: 'candidates',
+                max: 1700,
+                min: 1500,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'quantity',
+                item: 'applications',
+                max: 40000,
+                min: 30000,
+              },
+            ],
+            verb: 'with',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
 });

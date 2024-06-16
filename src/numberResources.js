@@ -63,7 +63,23 @@ const convertWithDigits = (word) => {
   return number;
 };
 
-const isNumeric = word => wordsToNumbers[word] || typeof convertWithDigits(word) === 'number';
+const isNumeric = (word) => {
+  if (wordsToNumbers[word]) {
+    return true;
+  }
+  if (typeof convertWithDigits(word) === 'number') {
+    return true;
+  }
+  if (!word.split) {
+    return false;
+  }
+  const split = word.split('–');
+  if (typeof convertWithDigits(split[0]) === 'number') {
+    return true;
+  }
+
+  return false;
+};
 
 module.exports = {
   wordsToNumbers,

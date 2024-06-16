@@ -48,8 +48,8 @@ describe('articles, dates (e2e)', () => {
             object: [
               {
                 groupType: 'date',
-                maxYear: '2024',
-                minYear: '2019',
+                maxYear: 2024,
+                minYear: 2019,
               },
             ],
             subject: [
@@ -88,8 +88,8 @@ describe('articles, dates (e2e)', () => {
             object: [
               {
                 groupType: 'date',
-                maxYear: '2024',
-                minYear: '2019',
+                maxYear: 2024,
+                minYear: 2019,
               },
             ],
             subject: [

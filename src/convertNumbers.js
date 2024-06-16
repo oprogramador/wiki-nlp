@@ -45,7 +45,16 @@ const convertNumbers = phrase => phrase
       words = words.slice(1);
     }
     const valueWord = words[0];
-    let value = wordsToNumbers[valueWord] || convertWithDigits(valueWord);
+    let minValue = null;
+    let maxValue = null;
+    let value = null;
+    if (/–/.test(valueWord)) {
+      const split = valueWord.split(/–/);
+      minValue = convertWithDigits(split[0]);
+      value = convertWithDigits(split[1]);
+    } else {
+      value = wordsToNumbers[valueWord] || convertWithDigits(valueWord);
+    }
     const item = words[1];
     if (item === '%') {
       groupType = 'share';
@@ -57,13 +66,23 @@ const convertNumbers = phrase => phrase
       }
       value *= largeNumbers[item];
     }
+    if (minValue) {
+      maxValue = value;
+      value = null;
+    }
+    if (isMin && !minValue) {
+      minValue = value;
+      value = null;
+    }
 
     return [
       ...accumulator,
       {
         groupType,
         ...(!isExact ? { isExact } : {}),
-        [isMin ? 'min' : 'value']: value,
+        ...(minValue ? { min: minValue } : {}),
+        ...(maxValue ? { max: maxValue } : {}),
+        ...(value ? { value } : {}),
         ...(currency ? { currency } : {}),
       },
     ];
