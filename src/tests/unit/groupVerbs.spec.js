@@ -50,6 +50,17 @@ describe('groupVerbs', () => {
     }]);
   });
 
+  it('does not group with a group at the end', () => {
+    const words = ['Alan', { groupType: 'article' }];
+
+    const result = groupVerbs(words);
+
+    expect(result).to.deep.equal([
+      'Alan',
+      { groupType: 'article' },
+    ]);
+  });
+
   it('does not group with uppercase at the end', () => {
     const words = ['Alan', 'Smith'];
 

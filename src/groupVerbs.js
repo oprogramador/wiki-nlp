@@ -21,6 +21,9 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   const verbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0 && item.groupType === 'article') - 1;
+  if (verbPlace === 0) {
+    return phrase;
+  }
   if (verbPlace < 0) {
     const last = _.last(phrase);
     if (groupType === 'verb' && last && last.charAt && /[a-z]/.test(last.charAt(0))) {
