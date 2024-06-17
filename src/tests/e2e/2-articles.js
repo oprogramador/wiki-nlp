@@ -2,7 +2,68 @@ const flow = require('../../flow');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe('articles, dates (e2e)', () => {
+describe('articles, dates, verbs (e2e)', () => {
+  it('converts a phrase with past simple tense, and an article object', () => {
+    const words = 'Bob received a cat';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'cat',
+            ],
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'received',
+      },
+    ]]);
+  });
+
+  it.skip('converts a phrase with past simple tense, and a currency object', () => {
+    const words = 'Bob received €12,345';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts a phrase with a past date, and a currency object', () => {
+    const words = 'In 2020, Bob received €123,456';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts a phrase with a past date, subject wiht a pronoun, and a currency object', () => {
+    const words = 'In 2021, its budget exceeded €123 billion';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts a phrase with a past date, subject wiht an article, and a currency object', () => {
+    const words = 'In 2022, the budget exceeded €874 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts a day range', () => {
     const words = 'The period is 1–5 June 2000';
 

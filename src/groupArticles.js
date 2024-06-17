@@ -19,6 +19,8 @@ const allowedPrepositions = [
 ];
 
 const isDissalowed = word => [...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(toLowerCase(word));
+const looksStronglyLikeVerb = word => /ed$/.test(word);
+const looksLikeVerb = word => /s$/.test(word) || looksStronglyLikeVerb(word);
 
 const groupArticles = phrase => phrase.reduce(
   (accumulator, current) => {
@@ -57,6 +59,15 @@ const groupArticles = phrase => phrase.reduce(
       && (
         !isDissalowed(current) && isLettersOnly(current)
           || isUpperCase(current)
+      )
+      && !(
+        (
+          isUpperCase(_.last(last.words))
+          || (looksStronglyLikeVerb(current) && isUpperCase(last))
+        )
+        && !articles.includes(toLowerCase(_.last(last.words)))
+        && !isUpperCase(current)
+        && looksLikeVerb(current)
       )
     ) {
       return [

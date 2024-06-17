@@ -153,4 +153,40 @@ describe('groupArticles', () => {
       { groupType: 'article', words: ['the', 'USSR'] },
     ]);
   });
+
+  it('groups an adjective with a noun', () => {
+    const words = ['red', 'wine', 'is', 'tasty'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['red', 'wine'] },
+      'is',
+      'tasty',
+    ]);
+  });
+
+  it('does not group followed by a verb', () => {
+    const words = ['Bob', 'Boo', 'eats', 'a', 'banana'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      { groupType: 'article', words: ['Bob', 'Boo'] },
+      'eats',
+      { groupType: 'article', words: ['a', 'banana'] },
+    ]);
+  });
+
+  it.skip('does not group followed by a verb after one word uppercase object', () => {
+    const words = ['Bob', 'eats', 'a', 'banana'];
+
+    const result = groupArticles(words);
+
+    expect(result).to.deep.equal([
+      'Bob',
+      'eats',
+      { groupType: 'article', words: ['a', 'banana'] },
+    ]);
+  });
 });
