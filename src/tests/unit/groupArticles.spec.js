@@ -178,7 +178,7 @@ describe('groupArticles', () => {
     ]);
   });
 
-  it.skip('does not group followed by a verb after one word uppercase object', () => {
+  it.skip('does not group followed by a verb after one word uppercase subject', () => {
     const words = ['Bob', 'eats', 'a', 'banana'];
 
     const result = groupArticles(words);
