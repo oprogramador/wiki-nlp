@@ -28,12 +28,49 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with past simple tense, and a currency object', () => {
+  it('converts a phrase with past simple tense, and quantity', () => {
+    const words = 'Bob received 5 cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'cats',
+            value: 5,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'received',
+      },
+    ]]);
+  });
+
+  it('converts a phrase with past simple tense, and a currency object', () => {
     const words = 'Bob received €12,345';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 12345,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'received',
+      },
     ]]);
   });
 
@@ -57,6 +94,15 @@ describe('articles, dates, verbs (e2e)', () => {
 
   it.skip('converts a phrase with a past date, subject wiht an article, and a currency object', () => {
     const words = 'In 2022, the budget exceeded €874 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts a phrase with a verb after comma', () => {
+    const words = 'the EU is reluctant, gives authoritarian.';
 
     const result = flow(splitText(words));
 
