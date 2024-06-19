@@ -3,6 +3,47 @@ const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('articles, dates, verbs (e2e)', () => {
+  it('handles a negation', () => {
+    const words = 'They have no strong connection with any institution';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'any',
+                  'institution',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'strong',
+                  'connection',
+                ],
+              },
+            ],
+            verb: 'with',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
   it('converts a phrase with past simple tense, and an article object', () => {
     const words = 'Bob received a cat';
 

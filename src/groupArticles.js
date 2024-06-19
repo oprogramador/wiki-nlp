@@ -18,7 +18,17 @@ const allowedPrepositions = [
   'of',
 ];
 
-const isDissalowed = word => [...auxiliary, ...prepositions, ...pronouns, 'and', 'or'].includes(toLowerCase(word));
+const isDissalowed = word => [
+  ...auxiliary,
+  ...prepositions,
+  ...pronouns,
+  'and',
+  'or',
+  'no',
+  'not',
+]
+  .includes(toLowerCase(word));
+
 const looksStronglyLikeVerb = word => /ed$/.test(word);
 const looksLikeVerb = word => /s$/.test(word) || looksStronglyLikeVerb(word);
 
