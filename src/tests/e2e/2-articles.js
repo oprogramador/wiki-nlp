@@ -115,12 +115,39 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with a past date, and a currency object', () => {
+  it.skip('converts a phrase with a decade', () => {
+    const words = 'In 1990s, Bob received about €2 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts a phrase with a past date, and a currency object', () => {
     const words = 'In 2020, Bob received €123,456';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 123456,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'received',
+        when: {
+          groupType: 'date',
+          year: 2020,
+        },
+      },
     ]]);
   });
 
