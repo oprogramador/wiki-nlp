@@ -325,4 +325,52 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a phrase with an introduction', () => {
+    const words = 'With a population of over 4 million, Milan is the largest metropolitan area';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'largest',
+              'metropolitan',
+              'area',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                min: 4e6,
+              },
+              ',',
+              'Milan',
+            ],
+            subject: [
+              'With',
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'population',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
