@@ -115,12 +115,65 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with a decade', () => {
-    const words = 'In 1990s, Bob received about €2 million';
+  it('converts a phrase with a decade', () => {
+    const words = 'In the 1990s, Bob received about €2 million';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            isExact: false,
+            value: 2e6,
+          },
+        ],
+        subject: [
+          'In',
+          {
+            groupType: 'date',
+            maxYear: 1999,
+            minYear: 1990,
+          },
+          ',',
+          'Bob',
+        ],
+        verb: 'received',
+      },
+    ]]);
+  });
+
+  it('converts a phrase with a decade, and early', () => {
+    const words = 'In the early 1990s, Bob received about €2 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            isExact: false,
+            value: 2e6,
+          },
+        ],
+        subject: [
+          'In',
+          {
+            groupType: 'date',
+            maxYear: 1994,
+            minYear: 1990,
+          },
+          ',',
+          'Bob',
+        ],
+        verb: 'received',
+      },
     ]]);
   });
 
