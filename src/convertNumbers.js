@@ -7,6 +7,7 @@ const {
   currencies,
   convertWithDigits,
 } = require('./numberResources');
+const toLowerCase = require('./toLowerCase');
 
 const convertNumbers = phrase => phrase
   .reduce((accumulator, current) => {
@@ -30,11 +31,11 @@ const convertNumbers = phrase => phrase
     let isExact = true;
     let isMin = false;
     let currency = null;
-    if ([...aroundWords, ...aboveWords].includes(words[0])) {
-      if (aroundWords.includes(words[0])) {
+    if ([...aroundWords, ...aboveWords].includes(toLowerCase(words[0]))) {
+      if (aroundWords.includes(toLowerCase(words[0]))) {
         isExact = false;
       }
-      if (aboveWords.includes(words[0])) {
+      if (aboveWords.includes(toLowerCase(words[0]))) {
         isMin = true;
       }
       words = words.slice(1);

@@ -96,6 +96,31 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts with "Approximately" (uppercase)', () => {
+    const words = 'Approximately three apples are from imports';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'from',
+          'imports',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'apples',
+            value: 3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts with a dot', () => {
     const words = 'Alan has 1.234 apples';
 

@@ -23,7 +23,7 @@ const groupNumbers = phrase => phrase
       ];
     }
     if (isNumeric(current)) {
-      if ([...aroundWords, ...aboveWords].includes(beforeLast) && Object.keys(currencies).includes(last)) {
+      if ([...aroundWords, ...aboveWords].includes(toLowerCase(beforeLast)) && Object.keys(currencies).includes(last)) {
         return [
           ...accumulator.slice(0, -2),
           {
@@ -33,7 +33,7 @@ const groupNumbers = phrase => phrase
         ];
       }
 
-      if ([...aroundWords, ...aboveWords, ...Object.keys(currencies)].includes(last)) {
+      if ([...aroundWords, ...aboveWords, ...Object.keys(currencies)].includes(toLowerCase(last))) {
         return [
           ...accumulator.slice(0, -1),
           {
