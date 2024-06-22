@@ -18,7 +18,7 @@ const stripComa = (subject) => {
   return subject;
 };
 
-const objectGroups = ['article', 'currency', 'quantity'];
+const objectGroupTypes = ['article', 'currency', 'quantity'];
 
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   if (phrase && phrase.length === 1 && phrase[0].groupType === 'verb') {
@@ -35,7 +35,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   const verbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0
-        && objectGroups.includes(item.groupType)
+        && objectGroupTypes.includes(item.groupType)
         && isLettersOnly(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   if (verbPlace === 0) {
@@ -51,8 +51,8 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           verb: last,
         }];
       }
-      const insideIndex = phrase.findIndex((item, i) => objectGroups.includes(item.groupType)
-          && objectGroups.includes((phrase[i + 1] || {}).groupType));
+      const insideIndex = phrase.findIndex((item, i) => objectGroupTypes.includes(item.groupType)
+          && objectGroupTypes.includes((phrase[i + 1] || {}).groupType));
       const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
         return [{
