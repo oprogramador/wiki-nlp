@@ -1,10 +1,23 @@
 const _ = require('lodash');
 const toLowerCase = require('./toLowerCase');
 
+const createDate = {
+  in: object => ({
+    groupType: 'date',
+    year: object.value,
+  }),
+  since: object => ({
+    groupType: 'date',
+    maxYear: new Date().getFullYear(),
+    minYear: object.value,
+  }),
+};
+
 const includeDates = phrase => phrase.reduce(
   (accumulator, current) => {
+    const initialPreposition = toLowerCase(_.get(current, 'subject.0'));
     if (
-      toLowerCase(_.get(current, 'subject.0')) === 'in'
+      createDate[initialPreposition]
         && _.get(current, 'subject.1.groupType') === 'quantity'
     ) {
       return [
@@ -12,17 +25,14 @@ const includeDates = phrase => phrase.reduce(
         {
           ...current,
           subject: current.subject.slice(2),
-          when: {
-            groupType: 'date',
-            year: _.get(current, 'subject.1').value,
-          },
+          when: createDate[initialPreposition](_.get(current, 'subject.1')),
         },
       ];
     }
     const last = _.last(current.object) || {};
     const beforeLast = (current.object || []).slice(-2, -1)[0];
     if (
-      beforeLast === 'in'
+      createDate[beforeLast]
       && last.groupType === 'quantity'
     ) {
       return [
@@ -30,10 +40,7 @@ const includeDates = phrase => phrase.reduce(
         {
           ...current,
           object: current.object.slice(0, -2),
-          when: {
-            groupType: 'date',
-            year: last.value,
-          },
+          when: createDate[beforeLast](last),
         },
       ];
     }

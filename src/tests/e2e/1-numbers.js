@@ -725,4 +725,118 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts with "since" at the beginning', () => {
+    const words = 'Since 2019, Ursula von der Leyen has been the president of the European Commission.';
+
+    const result = flow(splitText(words));
+    const { maxYear } = result[0][0].when;
+
+    expect(maxYear).to.be.a('number');
+    expect(maxYear).to.equal(new Date().getFullYear());
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'European',
+                  'Commission',
+                ],
+              },
+            ],
+            subject: [
+              'been',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'president',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Ursula',
+              'von',
+              'der',
+              'Leyen',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear,
+          minYear: 2019,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "since" at the end', () => {
+    const words = 'Charles Michel has been the president of the European Council since 2019.';
+
+    const result = flow(splitText(words));
+    const { maxYear } = result[0][0].when;
+
+    expect(maxYear).to.be.a('number');
+    expect(maxYear).to.equal(new Date().getFullYear());
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'European',
+                  'Council',
+                ],
+              },
+            ],
+            subject: [
+              'been',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'president',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Charles',
+              'Michel',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear,
+          minYear: 2019,
+        },
+      },
+    ]]);
+  });
 });
