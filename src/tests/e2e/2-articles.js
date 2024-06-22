@@ -225,7 +225,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             currency: 'EUR',
             groupType: 'currency',
-            value: 874000000,
+            value: 874e6,
           },
         ],
         subject: [
