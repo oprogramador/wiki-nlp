@@ -2,6 +2,7 @@ const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
+const irregularVerbsPast = require('./irregularVerbsPastList');
 const isAdverb = require('./isAdverb');
 const isLettersOnly = require('./isLettersOnly');
 const toLowerCase = require('./toLowerCase');
@@ -35,7 +36,7 @@ const isDissalowed = word => [
 ]
   .includes(toLowerCase(word));
 
-const looksStronglyLikeVerb = word => /ed$/.test(word);
+const looksStronglyLikeVerb = word => /ed$/.test(word) || irregularVerbsPast.includes(word);
 const looksLikeVerb = word => /s$/.test(word) || looksStronglyLikeVerb(word);
 
 const groupArticles = phrase => phrase.reduce(

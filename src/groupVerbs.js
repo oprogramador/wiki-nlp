@@ -7,6 +7,7 @@ const {
   withoutLastOne,
 } = require('./listUtils');
 const isLettersOnly = require('./isLettersOnly');
+const isUpperCase = require('./isUpperCase');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
 const toLowerCase = require('./toLowerCase');
@@ -61,18 +62,35 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           && objectGroupTypes.includes((phrase[i + 1] || {}).groupType));
       const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
-        return [{
-          groupType,
-          object: withoutFirst(phrase, insideIndex + 1),
-          subject: [
-            ...getFirst(phrase, insideIndex),
-            {
-              ...foundSubject,
-              ...(foundSubject.words ? { words: withoutLastOne(foundSubject.words) } : {}),
-            },
-          ],
-          verb: _.last(phrase[insideIndex].words),
-        }];
+        let verb = _.last(phrase[insideIndex].words);
+        if (!isUpperCase(verb)) {
+          return [{
+            groupType,
+            object: withoutFirst(phrase, insideIndex + 1),
+            subject: [
+              ...getFirst(phrase, insideIndex),
+              {
+                ...foundSubject,
+                ...(foundSubject.words ? { words: withoutLastOne(foundSubject.words) } : {}),
+              },
+            ],
+            verb,
+          }];
+        }
+        verb = _.get(phrase[insideIndex + 1], 'words.0');
+        if (verb) {
+          const foundObject = withoutFirst(phrase, insideIndex + 1)[0];
+
+          return [{
+            groupType,
+            object: [{
+              ...foundObject,
+              words: withoutFirstOne(foundObject.words),
+            }],
+            subject: [foundSubject],
+            verb,
+          }];
+        }
       }
     }
 

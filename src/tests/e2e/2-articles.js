@@ -275,6 +275,70 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with a regular verb in the past', () => {
+    const words = 'the Lisbon Treaty created legal effect';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'legal',
+              'effect',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Lisbon',
+              'Treaty',
+            ],
+          },
+        ],
+        verb: 'created',
+      },
+    ]]);
+  });
+
+  it('converts a phrase with an irregular verb in the past', () => {
+    const words = 'the Lisbon Treaty made legal effect';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'legal',
+              'effect',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Lisbon',
+              'Treaty',
+            ],
+          },
+        ],
+        verb: 'made',
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 
