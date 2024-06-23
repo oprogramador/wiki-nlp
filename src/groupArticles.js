@@ -6,6 +6,12 @@ const isAdverb = require('./isAdverb');
 const isLettersOnly = require('./isLettersOnly');
 const toLowerCase = require('./toLowerCase');
 const isUpperCase = require('./isUpperCase');
+const {
+  getBeforeLast,
+  getBeforeBeforeLast,
+  withoutLast,
+  withoutLastOne,
+} = require('./listUtils');
 
 const articles = [
   'a',
@@ -38,8 +44,8 @@ const groupArticles = phrase => phrase.reduce(
       return [...accumulator, { groupType: 'article', words: [current] }];
     }
     const last = _.last(accumulator) || {};
-    const beforeBeforeLast = accumulator.slice(-3, -2)[0] || {};
-    const beforeLast = accumulator.slice(-2, -1)[0] || {};
+    const beforeBeforeLast = getBeforeBeforeLast(accumulator);
+    const beforeLast = getBeforeLast(accumulator);
 
     if (
       beforeBeforeLast.groupType === 'article'
@@ -48,7 +54,7 @@ const groupArticles = phrase => phrase.reduce(
         && current === ')'
     ) {
       return [
-        ...accumulator.slice(0, -3),
+        ...withoutLast(accumulator, 3),
         {
           ...beforeBeforeLast,
           abbreviation: last,
@@ -81,7 +87,7 @@ const groupArticles = phrase => phrase.reduce(
       )
     ) {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           ...(last.groupType ? last : { groupType: 'article' }),
           words: [
@@ -98,7 +104,7 @@ const groupArticles = phrase => phrase.reduce(
         && isUpperCase(current)
     ) {
       return [
-        ...accumulator.slice(0, -2),
+        ...withoutLast(accumulator, 2),
         {
           ...beforeLast,
           words: [

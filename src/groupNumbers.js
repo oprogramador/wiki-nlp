@@ -8,11 +8,12 @@ const {
   isNumeric,
 } = require('./numberResources');
 const toLowerCase = require('./toLowerCase');
+const { getBeforeLast, withoutLastOne, withoutLast } = require('./listUtils');
 
 const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
-    const beforeLast = accumulator.slice(-2, -1)[0] || {};
+    const beforeLast = getBeforeLast(accumulator);
     if (fuzzy[toLowerCase(current)]) {
       return [
         ...accumulator,
@@ -25,7 +26,7 @@ const groupNumbers = phrase => phrase
     if (isNumeric(current)) {
       if ([...aroundWords, ...aboveWords].includes(toLowerCase(beforeLast)) && Object.keys(currencies).includes(last)) {
         return [
-          ...accumulator.slice(0, -2),
+          ...withoutLast(accumulator, 2),
           {
             groupType: 'quantity-raw',
             words: [beforeLast, last, current],
@@ -35,7 +36,7 @@ const groupNumbers = phrase => phrase
 
       if ([...aroundWords, ...aboveWords, ...Object.keys(currencies)].includes(toLowerCase(last))) {
         return [
-          ...accumulator.slice(0, -1),
+          ...withoutLastOne(accumulator),
           {
             groupType: 'quantity-raw',
             words: [last, current],
@@ -53,7 +54,7 @@ const groupNumbers = phrase => phrase
     }
     if (largeNumbers[current] && last === 'a') {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           groupType: 'quantity-raw',
           words: [last, current],
@@ -62,7 +63,7 @@ const groupNumbers = phrase => phrase
     }
     if (largeNumbers[current] || current === '%') {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           ...last,
           words: [

@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { withoutLastOne } = require('./listUtils');
 
 const convertDateRanges = phrase => phrase.reduce(
   (accumulator, current) => {
@@ -7,7 +8,7 @@ const convertDateRanges = phrase => phrase.reduce(
       const isPeriodMentioned = last.groupType === 'article' && JSON.stringify(last.words) === '["the","period"]';
 
       return [
-        ...(isPeriodMentioned ? accumulator.slice(0, -1) : accumulator),
+        ...(isPeriodMentioned ? withoutLastOne(accumulator) : accumulator),
         {
           groupType: 'date',
           maxYear: current.max,

@@ -1,5 +1,12 @@
 const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
+const {
+  getFirst,
+  withoutFirstOne,
+  withoutFirst,
+  withoutLastOne,
+  withoutLast,
+} = require('./listUtils');
 const isLettersOnly = require('./isLettersOnly');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
@@ -12,7 +19,7 @@ const negations = [
 
 const stripComa = (subject) => {
   if (subject[0] === ',') {
-    return subject.slice(1);
+    return withoutFirstOne(subject);
   }
 
   return subject;
@@ -47,7 +54,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       if (last && last.charAt && /[a-z]/.test(last.charAt(0))) {
         return [{
           groupType,
-          subject: stripComa(phrase.slice(0, -1)),
+          subject: stripComa(withoutLastOne(phrase)),
           verb: last,
         }];
       }
@@ -57,12 +64,12 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       if (insideIndex >= 0) {
         return [{
           groupType,
-          object: phrase.slice(insideIndex + 1),
+          object: withoutFirst(phrase, insideIndex + 1),
           subject: [
-            ...phrase.slice(0, insideIndex - 1),
+            ...withoutLast(phrase, insideIndex - 1),
             {
               ...foundSubject,
-              ...(foundSubject.words ? { words: foundSubject.words.slice(0, -1) } : {}),
+              ...(foundSubject.words ? { words: withoutLastOne(foundSubject.words) } : {}),
             },
           ],
           verb: _.last(phrase[insideIndex].words),
@@ -81,8 +88,8 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   return [{
     groupType,
     ...(isNegated ? { isNegated } : {}),
-    object: doRecursion(phrase.slice(verbPlace + (isNegated ? 2 : 1))),
-    subject: doRecursion(stripComa(phrase.slice(0, verbPlace))),
+    object: doRecursion(withoutFirst(phrase, verbPlace + (isNegated ? 2 : 1))),
+    subject: doRecursion(stripComa(getFirst(phrase, verbPlace))),
     verb: phrase[verbPlace],
   }];
 };

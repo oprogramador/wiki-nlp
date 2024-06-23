@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
+const { withoutLastOne } = require('./listUtils');
 
 const isPlural = word => word.groupType
   || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
@@ -17,7 +18,7 @@ const itemize = phrase => phrase
     }
 
     return [
-      ...accumulator.slice(0, -1),
+      ...withoutLastOne(accumulator),
       {
         ...last,
         item: current,

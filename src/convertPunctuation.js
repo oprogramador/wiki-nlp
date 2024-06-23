@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { withoutFirstOne, withoutLastOne } = require('./listUtils');
 
 const list = [
   ',',
@@ -19,12 +20,12 @@ const convertPunctuationRecursive = (word) => {
   const first = _.first(word);
   const last = _.last(word);
   if (list.includes(last)) {
-    middle = middle.slice(0, -1);
+    middle = withoutLastOne(middle);
     end = last;
   }
   if (list.includes(first)) {
     start = first;
-    middle = middle.slice(1);
+    middle = withoutFirstOne(middle);
   }
   const middleGroup = middle === word
     ? [middle]

@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { withoutLastOne } = require('./listUtils');
 
 const months = [
   'January',
@@ -41,7 +42,7 @@ const groupDates = phrase => phrase.reduce(
       const dayObject = createDayObject(last);
       if (dayObject) {
         return [
-          ...accumulator.slice(0, -1),
+          ...withoutLastOne(accumulator),
           {
             ...dayObject,
             groupType: 'date',
@@ -60,7 +61,7 @@ const groupDates = phrase => phrase.reduce(
     }
     if (last.groupType === 'date' && !Number.isNaN(Number(current))) {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           ...last,
           year: Number(current),

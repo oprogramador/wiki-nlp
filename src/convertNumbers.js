@@ -7,6 +7,7 @@ const {
   currencies,
   convertWithDigits,
 } = require('./numberResources');
+const { withoutFirstOne } = require('./listUtils');
 const toLowerCase = require('./toLowerCase');
 
 const convertNumbers = phrase => phrase
@@ -38,12 +39,12 @@ const convertNumbers = phrase => phrase
       if (aboveWords.includes(toLowerCase(words[0]))) {
         isMin = true;
       }
-      words = words.slice(1);
+      words = withoutFirstOne(words);
     }
     if (currencies[words[0]]) {
       groupType = 'currency';
       currency = currencies[words[0]];
-      words = words.slice(1);
+      words = withoutFirstOne(words);
     }
     const valueWord = words[0];
     let minValue = null;

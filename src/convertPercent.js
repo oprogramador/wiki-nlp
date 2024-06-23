@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { withoutLastOne } = require('./listUtils');
 
 const convertPercent = phrase => phrase
   .reduce((accumulator, current) => {
@@ -12,7 +13,7 @@ const convertPercent = phrase => phrase
     }
     if (last === 'per' && current === 'cent') {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         '%',
       ];
     }

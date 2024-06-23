@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { withoutLastOne } = require('./listUtils');
 
 const convertDecades = phrase => phrase.reduce(
   (accumulator, current) => {
@@ -13,7 +14,7 @@ const convertDecades = phrase => phrase.reduce(
 
     if (JSON.stringify(last.words) === '["the"]') {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           groupType: 'date',
           maxYear: potentialNumber + 9,
@@ -23,7 +24,7 @@ const convertDecades = phrase => phrase.reduce(
     }
     if (JSON.stringify(last.words) === '["the","early"]') {
       return [
-        ...accumulator.slice(0, -1),
+        ...withoutLastOne(accumulator),
         {
           groupType: 'date',
           maxYear: potentialNumber + 4,

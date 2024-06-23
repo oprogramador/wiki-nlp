@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { getLast, withoutLast } = require('./listUtils');
 
 const groupAnd = (phrase, separator = 'and') => phrase.reduce(
   (accumulator, current) => {
@@ -11,11 +12,11 @@ const groupAnd = (phrase, separator = 'and') => phrase.reduce(
       const count = accumulator.length - index - 1;
 
       return [
-        ...accumulator.slice(0, -count),
+        ...withoutLast(accumulator, count),
         {
           groupType: separator,
           members: [
-            ...accumulator.slice(-count).filter(word => ![',', separator].includes(word)),
+            ...getLast(accumulator, count).filter(word => ![',', separator].includes(word)),
             current,
           ],
         },

@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const toLowerCase = require('./toLowerCase');
+const { getBeforeLast, withoutFirst, withoutLast } = require('./listUtils');
 
 const createDate = {
   in: object => ({
@@ -24,13 +25,13 @@ const includeDates = phrase => phrase.reduce(
         ...accumulator,
         {
           ...current,
-          subject: current.subject.slice(2),
+          subject: withoutFirst(current.subject, 2),
           when: createDate[initialPreposition](_.get(current, 'subject.1')),
         },
       ];
     }
     const last = _.last(current.object) || {};
-    const beforeLast = (current.object || []).slice(-2, -1)[0];
+    const beforeLast = getBeforeLast(current.object);
     if (
       createDate[beforeLast]
       && last.groupType === 'quantity'
@@ -39,7 +40,7 @@ const includeDates = phrase => phrase.reduce(
         ...accumulator,
         {
           ...current,
-          object: current.object.slice(0, -2),
+          object: withoutLast(current.object, 2),
           when: createDate[beforeLast](last),
         },
       ];
