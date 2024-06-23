@@ -246,6 +246,35 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase without a date', () => {
+    const words = 'The budget exceeded €123 billion';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 123e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'exceeded',
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 

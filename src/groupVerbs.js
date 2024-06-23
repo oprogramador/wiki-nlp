@@ -5,7 +5,6 @@ const {
   withoutFirstOne,
   withoutFirst,
   withoutLastOne,
-  withoutLast,
 } = require('./listUtils');
 const isLettersOnly = require('./isLettersOnly');
 const prepositions = require('./prepositionList');
@@ -66,7 +65,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           groupType,
           object: withoutFirst(phrase, insideIndex + 1),
           subject: [
-            ...withoutLast(phrase, insideIndex - 1),
+            ...getFirst(phrase, insideIndex),
             {
               ...foundSubject,
               ...(foundSubject.words ? { words: withoutLastOne(foundSubject.words) } : {}),
