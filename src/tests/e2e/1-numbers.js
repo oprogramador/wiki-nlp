@@ -256,6 +256,35 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts with percent of', () => {
+    const words = 'The spending is 28 percent of GDP';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: 'GDP',
+            value: 0.28,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'spending',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it('converts with million', () => {
     const words = 'Alan has 3 million apples';
 
@@ -656,24 +685,16 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'article',
-                words: [
-                  'the',
-                  'world',
-                  'population',
-                ],
-              },
-            ],
-            subject: [
-              {
-                groupType: 'share',
-                value: 0.07,
-              },
-            ],
-            verb: 'of',
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'world',
+                'population',
+              ],
+            },
+            value: 0.07,
           },
         ],
         subject: [

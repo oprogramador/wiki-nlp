@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
-const { withoutLastOne } = require('./listUtils');
+const { withoutLastOne, withoutLast, getBeforeLast } = require('./listUtils');
 
 const isPlural = word => word.groupType
   || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
@@ -10,6 +10,16 @@ const isPlural = word => word.groupType
 const itemize = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
+    const beforeLast = getBeforeLast(accumulator);
+    if (beforeLast.groupType === 'share' && last === 'of') {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          ...beforeLast,
+          item: current,
+        },
+      ];
+    }
     if (last.groupType !== 'quantity' || last.item || !isPlural(current)) {
       return [
         ...accumulator,
