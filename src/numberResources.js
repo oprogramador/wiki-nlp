@@ -29,6 +29,9 @@ const fuzzy = {
   many: {
     min: 3,
   },
+  numerous: {
+    min: 3,
+  },
 };
 
 const aroundWords = [
