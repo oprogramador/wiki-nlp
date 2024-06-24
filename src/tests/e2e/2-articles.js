@@ -339,6 +339,38 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with a verb followed by a preposition', () => {
+    const words = 'the plane went to San Francisco';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          {
+            groupType: 'article',
+            words: [
+              'San',
+              'Francisco',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'plane',
+            ],
+          },
+        ],
+        verb: 'went',
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 

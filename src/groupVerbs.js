@@ -59,7 +59,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         }];
       }
       const insideIndex = phrase.findIndex((item, i) => objectGroupTypes.includes(item.groupType)
-          && objectGroupTypes.includes((phrase[i + 1] || {}).groupType));
+          && (objectGroupTypes.includes((phrase[i + 1] || {}).groupType) || prepositions.includes(phrase[i + 1])));
       const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
         let verb = _.last(phrase[insideIndex].words);
