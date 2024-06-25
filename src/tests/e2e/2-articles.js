@@ -204,12 +204,36 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with a past date, subject wiht a pronoun, and a currency object', () => {
+  it('converts a phrase with a past date, subject wiht a pronoun, and a currency object', () => {
     const words = 'In 2021, its budget exceeded €123 billion';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 123e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'its',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'exceeded',
+        when: {
+          groupType: 'date',
+          year: 2021,
+        },
+      },
     ]]);
   });
 
