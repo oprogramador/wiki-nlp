@@ -747,6 +747,106 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts with "beginning on" at the beginning, followed by day, month, year', () => {
+    const words = 'Beginning on 23 March 2024, the position is held by myself';
+
+    const result = flow(splitText(words));
+    const { maxYear, maxMonth, maxDay } = result[0][0].when;
+
+    expect(maxYear).to.be.a('number');
+    expect(maxYear).to.equal(new Date().getFullYear());
+    expect(maxMonth).to.be.a('number');
+    expect(maxMonth).to.equal(new Date().getMonth() + 1);
+    expect(maxDay).to.be.a('number');
+    expect(maxDay).to.equal(new Date().getDate());
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'myself',
+            ],
+            subject: [
+              'held',
+            ],
+            verb: 'by',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'position',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxDay,
+          maxMonth,
+          maxYear,
+          minDay: 23,
+          minMonth: 3,
+          minYear: 2024,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "since" at the beginning, followed by day, month, year', () => {
+    const words = 'Beginning on 30 May 2024, the position is held by yourself';
+
+    const result = flow(splitText(words));
+    const { maxYear, maxMonth, maxDay } = result[0][0].when;
+
+    expect(maxYear).to.be.a('number');
+    expect(maxYear).to.equal(new Date().getFullYear());
+    expect(maxMonth).to.be.a('number');
+    expect(maxMonth).to.equal(new Date().getMonth() + 1);
+    expect(maxDay).to.be.a('number');
+    expect(maxDay).to.equal(new Date().getDate());
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'yourself',
+            ],
+            subject: [
+              'held',
+            ],
+            verb: 'by',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'position',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxDay,
+          maxMonth,
+          maxYear,
+          minDay: 30,
+          minMonth: 5,
+          minYear: 2024,
+        },
+      },
+    ]]);
+  });
+
   it('converts with "since" at the beginning', () => {
     const words = 'Since 2019, Ursula von der Leyen has been the president of the European Commission.';
 

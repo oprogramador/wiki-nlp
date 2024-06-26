@@ -5,13 +5,20 @@ const { getBeforeLast, withoutFirst, withoutLast } = require('./listUtils');
 const createDate = {
   in: object => ({
     groupType: 'date',
-    year: object.value,
+    ...(object.value ? { year: object.value } : {}),
+    ..._.pick(object, 'maxYear', 'minYear'),
   }),
-  since: object => ({
-    groupType: 'date',
-    maxYear: new Date().getFullYear(),
-    minYear: object.value,
-  }),
+  since: (object) => {
+    const now = new Date();
+
+    return {
+      groupType: 'date',
+      maxYear: new Date().getFullYear(),
+      minYear: object.value || object.year,
+      ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
+      ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
+    };
+  },
 };
 
 const includeDates = phrase => phrase.reduce(
@@ -19,7 +26,7 @@ const includeDates = phrase => phrase.reduce(
     const initialPreposition = toLowerCase(_.get(current, 'subject.0'));
     if (
       createDate[initialPreposition]
-        && _.get(current, 'subject.1.groupType') === 'quantity'
+        && ['quantity', 'date'].includes(_.get(current, 'subject.1.groupType'))
     ) {
       return [
         ...accumulator,

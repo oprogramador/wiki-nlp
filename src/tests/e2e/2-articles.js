@@ -132,16 +132,14 @@ describe('articles, dates, verbs (e2e)', () => {
           },
         ],
         subject: [
-          'In',
-          {
-            groupType: 'date',
-            maxYear: 1999,
-            minYear: 1990,
-          },
-          ',',
           'Bob',
         ],
         verb: 'received',
+        when: {
+          groupType: 'date',
+          maxYear: 1999,
+          minYear: 1990,
+        },
       },
     ]]);
   });
@@ -163,16 +161,14 @@ describe('articles, dates, verbs (e2e)', () => {
           },
         ],
         subject: [
-          'In',
-          {
-            groupType: 'date',
-            maxYear: 1994,
-            minYear: 1990,
-          },
-          ',',
           'Bob',
         ],
         verb: 'received',
+        when: {
+          groupType: 'date',
+          maxYear: 1994,
+          minYear: 1990,
+        },
       },
     ]]);
   });
