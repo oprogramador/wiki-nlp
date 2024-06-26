@@ -13,7 +13,7 @@ const createDate = {
 
     return {
       groupType: 'date',
-      maxYear: new Date().getFullYear(),
+      maxYear: now.getFullYear(),
       minYear: object.value || object.year,
       ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
       ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
