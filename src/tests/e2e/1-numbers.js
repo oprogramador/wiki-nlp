@@ -798,7 +798,7 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts with "since" at the beginning, followed by day, month, year', () => {
-    const words = 'Beginning on 30 May 2024, the position is held by yourself';
+    const words = 'Since 30 May 2024, the position is held by yourself';
 
     const result = flow(splitText(words));
     const { maxYear, maxMonth, maxDay } = result[0][0].when;
