@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const addCommas = require('./addCommas');
-const convertBeginningOn = require('./convertBeginningOn');
+const convertSynonyms = require('./convertSynonyms');
 const convertBn = require('./convertBn');
 const convertDateRanges = require('./convertDateRanges');
 const convertDecades = require('./convertDecades');
@@ -26,7 +26,7 @@ const flow = (phrases) => {
     groupDates,
     convertPercent,
     convertBn,
-    convertBeginningOn,
+    convertSynonyms,
     groupNumbers,
     convertNumbers,
     groupArticles,
