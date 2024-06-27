@@ -4,7 +4,7 @@ const { getLast, withoutLast } = require('./listUtils');
 const groupAnd = (phrase, separator = 'and') => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator) || {};
-    if (last === separator) {
+    if (last === separator && (current.groupType !== 'share' || current.item)) {
       const index = _.findLastIndex(
         accumulator,
         (word, i) => word !== ',' && (accumulator.length - i) % 2 === 0,

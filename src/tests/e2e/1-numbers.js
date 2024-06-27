@@ -747,6 +747,76 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts with AND of shares', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In 2010, EU countries imported 60 per cent of their gold demands, 75 percent of their silver demands, and 80% of their iron demands';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'their',
+                    'gold',
+                    'demands',
+                  ],
+                },
+                value: 0.6,
+              },
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'their',
+                    'silver',
+                    'demands',
+                  ],
+                },
+                value: 0.75,
+              },
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'their',
+                    'iron',
+                    'demands',
+                  ],
+                },
+                value: 0.8,
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'EU',
+              'countries',
+            ],
+          },
+        ],
+        verb: 'imported',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
+
   it('converts with "beginning on" at the beginning, followed by day, month, year', () => {
     const words = 'Beginning on 23 March 2024, the position is held by myself';
 

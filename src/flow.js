@@ -34,6 +34,7 @@ const flow = (phrases) => {
     groupAnd,
     groupOr,
     itemize,
+    groupAnd,
     convertDateRanges,
     groupVerbs,
     includeDates,

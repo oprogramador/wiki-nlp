@@ -25,7 +25,7 @@ const stripComa = (subject) => {
   return subject;
 };
 
-const objectGroupTypes = ['article', 'currency', 'quantity'];
+const objectGroupTypes = ['article', 'currency', 'quantity', 'and', 'or'];
 
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   if (phrase && phrase.length === 1 && phrase[0].groupType === 'verb') {
