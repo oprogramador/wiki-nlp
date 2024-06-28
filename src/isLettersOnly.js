@@ -1,3 +1,4 @@
+// letters or dashes
 const isLettersOnly = (item) => {
   if (!item) {
     return false;
@@ -6,7 +7,7 @@ const isLettersOnly = (item) => {
     return false;
   }
 
-  return /^[a-zA-Z]+$/.test(item);
+  return /^[a-zA-Z-]+$/.test(item);
 };
 
 module.exports = isLettersOnly;

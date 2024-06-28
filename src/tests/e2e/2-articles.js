@@ -391,6 +391,59 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts an article with a dash', () => {
+    const words = 'At least 1 per cent of non-EU citizens were living in the EU';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'EU',
+                ],
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'non-EU',
+                'citizens',
+              ],
+            },
+            min: 0.01,
+          },
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it.skip('converts a phrase with present simple', () => {
+    const words = 'At least 1 per cent of non-EU citizens live in the EU';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 
