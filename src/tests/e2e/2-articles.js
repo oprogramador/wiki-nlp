@@ -664,7 +664,7 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it('does not converts localities for AND as an object', () => {
+  it('does not convert localities for AND as an object', () => {
     const words = 'They were living in France, Spain, and Portugal';
 
     const result = flow(splitText(words));
