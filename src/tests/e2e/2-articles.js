@@ -453,6 +453,291 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with a locality', () => {
+    const words = 'They were living in Paris, France';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                general: 'France',
+                groupType: 'locality',
+                precise: 'Paris',
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('converts a phrase with a multi-word locality', () => {
+    const words = 'They were living in Rio de Janeiro, Brazil';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                general: 'Brazil',
+                groupType: 'locality',
+                precise: {
+                  groupType: 'article',
+                  words: [
+                    'Rio',
+                    'de',
+                    'Janeiro',
+                  ],
+                },
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('converts a phrase with a multi-word general locality', () => {
+    const words = 'They were living in Prague, Czech Republic';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                general: {
+                  groupType: 'article',
+                  words: [
+                    'Czech',
+                    'Republic',
+                  ],
+                },
+                groupType: 'locality',
+                precise: 'Prague',
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it.skip('converts a phrase with two localities', () => {
+    const words = 'They were living in Paris, France, and Madrid, Spain';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  {
+                    general: 'France',
+                    groupType: 'locality',
+                    precise: 'Paris',
+                  },
+                  {
+                    general: 'Spain',
+                    groupType: 'locality',
+                    precise: 'Madrid',
+                  },
+                ],
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it.skip('converts a phrase with two localities, with no coma before and', () => {
+    const words = 'They were living in São Paulo, Brazil and San Francisco, United States';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  {
+                    general: 'Brazil',
+                    groupType: 'locality',
+                    precise: {
+                      groupType: 'article',
+                      words: [
+                        'São',
+                        'Paulo',
+                      ],
+                    },
+                  },
+                  {
+                    general: {
+                      groupType: 'article',
+                      words: [
+                        'United',
+                        'States',
+                      ],
+                    },
+                    groupType: 'locality',
+                    precise: {
+                      groupType: 'article',
+                      words: [
+                        'San',
+                        'Francisco',
+                      ],
+                    },
+                  },
+                ],
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('does not converts localities for AND as an object', () => {
+    const words = 'They were living in France, Spain, and Portugal';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  'France',
+                  'Spain',
+                  'Portugal',
+                ],
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('does not convert localities for AND as a subject', () => {
+    const words = 'Belgium, Luxembourg, the Netherlands, and United States are rich';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'Belgium',
+              'Luxembourg',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Netherlands',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'United',
+                  'States',
+                ],
+              },
+            ],
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts a day range', () => {
     const words = 'The period is 1–5 June 2000';
 

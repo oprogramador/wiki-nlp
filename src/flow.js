@@ -1,15 +1,16 @@
 const _ = require('lodash');
 const addCommas = require('./addCommas');
-const convertSynonyms = require('./convertSynonyms');
 const convertBn = require('./convertBn');
 const convertDateRanges = require('./convertDateRanges');
 const convertDecades = require('./convertDecades');
 const convertNumbers = require('./convertNumbers');
 const convertPercent = require('./convertPercent');
 const convertPunctuation = require('./convertPunctuation');
+const convertSynonyms = require('./convertSynonyms');
 const groupAnd = require('./groupAnd');
 const groupArticles = require('./groupArticles');
 const groupDates = require('./groupDates');
+const groupLocality = require('./groupLocality');
 const groupNumbers = require('./groupNumbers');
 const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
@@ -31,6 +32,7 @@ const flow = (phrases) => {
     convertNumbers,
     groupArticles,
     convertDecades,
+    groupLocality,
     groupAnd,
     groupOr,
     itemize,
