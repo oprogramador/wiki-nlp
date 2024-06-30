@@ -2,7 +2,9 @@ const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
-const { getBeforeLast, withoutLast, withoutLastOne } = require('./listUtils');
+const {
+  getBeforeLast, getBeforeBeforeLast, withoutLast,
+} = require('./listUtils');
 const isLettersOnly = require('./isLettersOnly');
 const isUpperCase = require('./isUpperCase');
 const toLowerCase = require('./toLowerCase');
@@ -30,25 +32,38 @@ const condition = word => (isLettersOnly(word) && isUpperCase(word) && !isDissal
     && (isUpperCase(word.words[0]) || (toLowerCase(word.words[0]) === 'the' && isUpperCase(word.words[1])))
   );
 
-const convertPossibly = (beforeLast, last, current) => {
-  if (condition(beforeLast) && last === ',' && condition(current)) {
-    return [
-      {
-        general: current,
-        groupType: 'locality',
-        precise: beforeLast,
-      },
-    ];
-  }
+const allowedBefore = [
+  ...auxiliary,
+  'in',
+  '(',
+];
 
-  return [beforeLast, last, current];
-};
+const allowedAfterComma = [
+  ...auxiliary,
+  'at',
+  ')',
+];
 
 const groupLocality = phrase => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator) || {};
     const beforeLast = getBeforeLast(accumulator);
-    if (beforeLast.groupType === 'locality' && last === ',' && (condition(current) || isDissalowed(current))) {
+    const beforeBeforeLast = getBeforeBeforeLast(accumulator);
+    if (allowedBefore.includes(toLowerCase(beforeBeforeLast))
+      && condition(beforeLast)
+      && last === ','
+      && (condition(current))
+    ) {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          general: current,
+          groupType: 'locality',
+          precise: beforeLast,
+        },
+      ];
+    }
+    if (beforeLast.groupType === 'locality' && last === ',' && !allowedAfterComma.includes(current)) {
       return [
         ...withoutLast(accumulator, 2),
         beforeLast.precise,
@@ -56,21 +71,6 @@ const groupLocality = phrase => phrase.reduce(
         beforeLast.general,
         last,
         current,
-      ];
-    }
-    if (last.groupType === 'locality' && auxiliary.includes(current)) {
-      return [
-        ...withoutLastOne(accumulator),
-        last.precise,
-        ',',
-        last.general,
-        current,
-      ];
-    }
-    if (condition(beforeLast) && last === ',' && condition(current)) {
-      return [
-        ...withoutLast(accumulator, 2),
-        ...convertPossibly(beforeLast, last, current),
       ];
     }
 

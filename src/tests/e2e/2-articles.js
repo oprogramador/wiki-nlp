@@ -470,12 +470,44 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with present simple', () => {
-    const words = 'At least 1 per cent of non-EU citizens live in the EU';
+  it('does not convert locality when enumerating', () => {
+    const words = 'I was living in Madrid, Barcelona, Valencia, Sevilla et al.';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Madrid',
+              ',',
+              'Barcelona',
+              ',',
+              'Valencia',
+              ',',
+              {
+                groupType: 'article',
+                words: [
+                  'Sevilla',
+                  'et',
+                  'al',
+                ],
+              },
+            ],
+            subject: [
+              'living',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'I',
+        ],
+        verb: 'was',
+      },
     ]]);
   });
 
