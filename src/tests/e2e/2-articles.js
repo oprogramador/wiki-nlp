@@ -471,7 +471,7 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it('does not convert locality when enumerating', () => {
-    const words = 'I was living in Madrid, Barcelona, Valencia, Sevilla et al.';
+    const words = 'I was living in Spain (Madrid, Barcelona, Valencia, Sevilla et al.)';
 
     const result = flow(splitText(words));
 
@@ -482,20 +482,19 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'preposition',
             object: [
-              'Madrid',
-              ',',
-              'Barcelona',
-              ',',
-              'Valencia',
-              ',',
+              'Spain',
+              '(',
               {
-                groupType: 'article',
-                words: [
+                groupType: 'and',
+                members: [
+                  'Madrid',
+                  'Barcelona',
+                  'Valencia',
                   'Sevilla',
-                  'et',
-                  'al',
+                  'others',
                 ],
               },
+              ')',
             ],
             subject: [
               'living',

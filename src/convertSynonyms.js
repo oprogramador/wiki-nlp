@@ -3,10 +3,11 @@ const toLowerCase = require('./toLowerCase');
 const { withoutLastOne } = require('./listUtils');
 
 const map = {
-  [JSON.stringify(['beginning', 'on'])]: 'since',
-  [JSON.stringify(['at', 'least'])]: 'above',
-  [JSON.stringify(['more', 'than'])]: 'above',
-  [JSON.stringify(['well', 'over'])]: 'above',
+  [JSON.stringify(['beginning', 'on'])]: ['since'],
+  [JSON.stringify(['at', 'least'])]: ['above'],
+  [JSON.stringify(['more', 'than'])]: ['above'],
+  [JSON.stringify(['well', 'over'])]: ['above'],
+  [JSON.stringify(['et', 'al.'])]: [',', 'and', 'others'],
 };
 
 const convertSynonyms = phrase => phrase
@@ -18,7 +19,7 @@ const convertSynonyms = phrase => phrase
     if (found) {
       return [
         ...withoutLastOne(accumulator),
-        found,
+        ...found,
       ];
     }
 
