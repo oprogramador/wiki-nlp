@@ -2,7 +2,7 @@ const _ = require('lodash');
 const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
-const { getBeforeLast, withoutLast } = require('./listUtils');
+const { getBeforeLast, withoutLast, withoutLastOne } = require('./listUtils');
 const isLettersOnly = require('./isLettersOnly');
 const isUpperCase = require('./isUpperCase');
 const toLowerCase = require('./toLowerCase');
@@ -55,6 +55,15 @@ const groupLocality = phrase => phrase.reduce(
         ',',
         beforeLast.general,
         last,
+        current,
+      ];
+    }
+    if (last.groupType === 'locality' && auxiliary.includes(current)) {
+      return [
+        ...withoutLastOne(accumulator),
+        last.precise,
+        ',',
+        last.general,
         current,
       ];
     }

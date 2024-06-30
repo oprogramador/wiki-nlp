@@ -435,6 +435,41 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('does not convert locality when followed by a verb', () => {
+    const words = 'With the Bologna Process, the EU is great';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'great',
+        ],
+        subject: [
+          'With',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Bologna',
+              'Process',
+            ],
+          },
+          ',',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'EU',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with present simple', () => {
     const words = 'At least 1 per cent of non-EU citizens live in the EU';
 
