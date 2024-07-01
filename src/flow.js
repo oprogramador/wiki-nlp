@@ -16,6 +16,7 @@ const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
 const groupVerbs = require('./groupVerbs');
 const includeDates = require('./includeDates');
+const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
 
@@ -40,6 +41,7 @@ const flow = (phrases) => {
     convertDateRanges,
     groupVerbs,
     includeDates,
+    includeLocalities,
     groupPrepositions,
   )(phrase));
 

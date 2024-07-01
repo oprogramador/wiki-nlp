@@ -3,7 +3,7 @@ const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const { withoutLastOne, withoutLast, getBeforeLast } = require('./listUtils');
 
-const isPlural = word => word.groupType
+const isPlural = word => (word.groupType && !['locality'].includes(word.groupType))
   || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
   || ['people', 'children'].includes(word);
 

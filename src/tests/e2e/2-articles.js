@@ -510,6 +510,52 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with both date, and locality', () => {
+    const words = 'The agency, founded in 2010 in Lisbon, Portugal, is great';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'great',
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                // TODO - should be "when", with "groupType: 'date'"
+                value: 2010,
+              },
+              ',',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'The',
+                  'agency',
+                ],
+              },
+              ',',
+              'founded',
+            ],
+            verb: 'in',
+          },
+        ],
+        verb: 'is',
+        where: {
+          general: 'Portugal',
+          groupType: 'locality',
+          precise: 'Lisbon',
+        },
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 
@@ -528,25 +574,17 @@ describe('articles, dates, verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                general: 'France',
-                groupType: 'locality',
-                precise: 'Paris',
-              },
-            ],
-            subject: [
-              'living',
-            ],
-            verb: 'in',
-          },
+          'living',
         ],
         subject: [
           'They',
         ],
         verb: 'were',
+        where: {
+          general: 'France',
+          groupType: 'locality',
+          precise: 'Paris',
+        },
       },
     ]]);
   });
@@ -560,32 +598,24 @@ describe('articles, dates, verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                general: 'Brazil',
-                groupType: 'locality',
-                precise: {
-                  groupType: 'article',
-                  words: [
-                    'Rio',
-                    'de',
-                    'Janeiro',
-                  ],
-                },
-              },
-            ],
-            subject: [
-              'living',
-            ],
-            verb: 'in',
-          },
+          'living',
         ],
         subject: [
           'They',
         ],
         verb: 'were',
+        where: {
+          general: 'Brazil',
+          groupType: 'locality',
+          precise: {
+            groupType: 'article',
+            words: [
+              'Rio',
+              'de',
+              'Janeiro',
+            ],
+          },
+        },
       },
     ]]);
   });
@@ -599,31 +629,23 @@ describe('articles, dates, verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                general: {
-                  groupType: 'article',
-                  words: [
-                    'Czech',
-                    'Republic',
-                  ],
-                },
-                groupType: 'locality',
-                precise: 'Prague',
-              },
-            ],
-            subject: [
-              'living',
-            ],
-            verb: 'in',
-          },
+          'living',
         ],
         subject: [
           'They',
         ],
         verb: 'were',
+        where: {
+          general: {
+            groupType: 'article',
+            words: [
+              'Czech',
+              'Republic',
+            ],
+          },
+          groupType: 'locality',
+          precise: 'Prague',
+        },
       },
     ]]);
   });

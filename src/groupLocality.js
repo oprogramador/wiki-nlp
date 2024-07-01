@@ -55,17 +55,19 @@ const groupLocality = phrase => phrase.reduce(
       && (condition(current))
     ) {
       return [
-        ...withoutLast(accumulator, 2),
+        ...withoutLast(accumulator, 3),
         {
           general: current,
           groupType: 'locality',
           precise: beforeLast,
+          preposition: beforeBeforeLast,
         },
       ];
     }
     if (beforeLast.groupType === 'locality' && last === ',' && !allowedAfterComma.includes(current)) {
       return [
         ...withoutLast(accumulator, 2),
+        beforeLast.preposition,
         beforeLast.precise,
         ',',
         beforeLast.general,
