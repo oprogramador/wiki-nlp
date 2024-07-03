@@ -6,6 +6,7 @@ const withoutLast = (list, number) => list.slice(0, -number);
 const withoutFirst = (list, number) => list.slice(number);
 const withoutLastOne = list => withoutLast(list, 1);
 const withoutFirstOne = list => withoutFirst(list, 1);
+const withoutRange = (list, start, end) => [...getFirst(list, start), ...getLast(list, list.length - end - 1)];
 
 module.exports = {
   getBeforeBeforeLast,
@@ -16,4 +17,5 @@ module.exports = {
   withoutFirstOne,
   withoutLast,
   withoutLastOne,
+  withoutRange,
 };
