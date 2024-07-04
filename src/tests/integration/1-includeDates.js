@@ -38,7 +38,6 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
           },
         ],
         subject: [
-          ',',
           {
             groupType: 'article',
             words: [

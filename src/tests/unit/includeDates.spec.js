@@ -28,7 +28,6 @@ describe('includeDates', () => {
           'big',
         ],
         subject: [
-          ',',
           {
             groupType: 'article',
             words: [

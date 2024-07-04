@@ -40,8 +40,8 @@ const flow = (phrases) => {
     groupAnd,
     convertDateRanges,
     groupVerbs,
-    includeDates,
     includeLocalities,
+    includeDates,
     groupPrepositions,
   )(phrase));
 

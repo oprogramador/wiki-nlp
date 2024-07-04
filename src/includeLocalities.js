@@ -1,6 +1,9 @@
 const _ = require('lodash');
 
 const includeLocalities = (phrase) => {
+  if (!phrase[0]) {
+    return phrase;
+  }
   const { object, subject } = phrase[0];
   if (!object) {
     return phrase;

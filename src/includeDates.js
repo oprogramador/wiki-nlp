@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const toLowerCase = require('./toLowerCase');
-const { getBeforeLast, withoutFirst, withoutLast } = require('./listUtils');
+const { withoutRange } = require('./listUtils');
 
 const createDate = {
   in: object => ({
@@ -21,41 +21,30 @@ const createDate = {
   },
 };
 
-const includeDates = phrase => phrase.reduce(
-  (accumulator, current) => {
-    const initialPreposition = toLowerCase(_.get(current, 'subject.0'));
-    if (
-      createDate[initialPreposition]
-        && ['quantity', 'date'].includes(_.get(current, 'subject.1.groupType'))
-    ) {
-      return [
-        ...accumulator,
-        {
-          ...current,
-          subject: withoutFirst(current.subject, 2),
-          when: createDate[initialPreposition](_.get(current, 'subject.1')),
-        },
-      ];
-    }
-    const last = _.last(current.object) || {};
-    const beforeLast = getBeforeLast(current.object);
-    if (
-      createDate[beforeLast]
-      && last.groupType === 'quantity'
-    ) {
-      return [
-        ...accumulator,
-        {
-          ...current,
-          object: withoutLast(current.object, 2),
-          when: createDate[beforeLast](last),
-        },
-      ];
-    }
+const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
+  && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
-    return [...accumulator, current];
-  },
-  [],
-);
+const includeDates = (phrase) => {
+  const { object, subject } = phrase[0];
+  if (!object) {
+    return phrase;
+  }
+  const foundInObjectIndex = object.findIndex(match(object));
+  const foundInSubjectIndex = subject.findIndex(match(subject));
+  const foundInObject = object[foundInObjectIndex];
+  const foundInSubject = subject[foundInSubjectIndex];
+  if (!foundInObject && !foundInSubject) {
+    return phrase;
+  }
+  const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
+  const when = createDate[preposition](_.omit(foundInObject || foundInSubject, ['preposition']));
+
+  return [{
+    ...phrase[0],
+    object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex + 1) : object,
+    subject: foundInSubject ? withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + 1) : subject,
+    ...(foundInObject || foundInSubject ? { when } : {}),
+  }];
+};
 
 module.exports = includeDates;

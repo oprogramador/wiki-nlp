@@ -523,30 +523,20 @@ describe('articles, dates, verbs (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'quantity',
-                // TODO - should be "when", with "groupType: 'date'"
-                value: 2010,
-              },
-              ',',
+            groupType: 'article',
+            words: [
+              'The',
+              'agency',
             ],
-            subject: [
-              {
-                groupType: 'article',
-                words: [
-                  'The',
-                  'agency',
-                ],
-              },
-              ',',
-              'founded',
-            ],
-            verb: 'in',
           },
+          ',',
+          'founded',
         ],
         verb: 'is',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
         where: {
           general: 'Portugal',
           groupType: 'locality',
