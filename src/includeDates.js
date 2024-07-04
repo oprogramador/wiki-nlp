@@ -37,13 +37,13 @@ const includeDates = (phrase) => {
     return phrase;
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
-  const when = createDate[preposition](_.omit(foundInObject || foundInSubject, ['preposition']));
+  const when = createDate[preposition](foundInObject || foundInSubject);
 
   return [{
     ...phrase[0],
     object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex + 1) : object,
     subject: foundInSubject ? withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + 1) : subject,
-    ...(foundInObject || foundInSubject ? { when } : {}),
+    when,
   }];
 };
 
