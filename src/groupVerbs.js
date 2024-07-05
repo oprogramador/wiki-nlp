@@ -79,14 +79,18 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         }
         verb = _.get(phrase[insideIndex + 1], 'words.0');
         if (verb) {
-          const foundObject = withoutFirst(phrase, insideIndex + 1)[0];
+          const foundObject = withoutFirst(phrase, insideIndex + 1);
+          const foundObjectBegin = foundObject[0];
 
           return [{
             groupType,
-            object: [{
-              ...foundObject,
-              words: withoutFirstOne(foundObject.words),
-            }],
+            object: [
+              {
+                ...foundObjectBegin,
+                words: withoutFirstOne(foundObjectBegin.words),
+              },
+              ...withoutFirstOne(foundObject),
+            ],
             subject: [foundSubject],
             verb,
           }];

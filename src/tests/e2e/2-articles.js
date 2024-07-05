@@ -546,6 +546,51 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with a preposition', () => {
+    const words = 'The Treaty gave effect to the Charter';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Charter',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'effect',
+                ],
+              },
+            ],
+            verb: 'to',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'Treaty',
+            ],
+          },
+        ],
+        verb: 'gave',
+      },
+    ]]);
+  });
+
   it.skip('converts a phrase with a verb after comma', () => {
     const words = 'the EU is reluctant, gives authoritarian.';
 
