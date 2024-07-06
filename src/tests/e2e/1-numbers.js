@@ -1010,4 +1010,60 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts wit max year', () => {
+    const words = 'it is to be completed by 2100';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-21') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          'be',
+          'completed',
+        ],
+        subject: [
+          'it',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 2025,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with max date', () => {
+    const words = 'it is to be completed by 13 January 2100';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-21') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          'be',
+          'completed',
+        ],
+        subject: [
+          'it',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxDay: 13,
+          maxMonth: 1,
+          maxYear: 2100,
+          minDay: 21,
+          minMonth: 7,
+          minYear: 2024,
+        },
+      },
+    ]]);
+  });
 });
