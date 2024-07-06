@@ -820,15 +820,8 @@ describe('numbers (e2e)', () => {
   it('converts with "beginning on" at the beginning, followed by day, month, year', () => {
     const words = 'Beginning on 23 March 2024, the position is held by myself';
 
-    const result = flow(splitText(words));
-    const { maxYear, maxMonth, maxDay } = result[0][0].when;
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
 
-    expect(maxYear).to.be.a('number');
-    expect(maxYear).to.equal(new Date().getFullYear());
-    expect(maxMonth).to.be.a('number');
-    expect(maxMonth).to.equal(new Date().getMonth() + 1);
-    expect(maxDay).to.be.a('number');
-    expect(maxDay).to.equal(new Date().getDate());
     expect(result).to.deep.equal([[
       {
         groupType: 'verb',
@@ -856,9 +849,9 @@ describe('numbers (e2e)', () => {
         verb: 'is',
         when: {
           groupType: 'date',
-          maxDay,
-          maxMonth,
-          maxYear,
+          maxDay: 1,
+          maxMonth: 7,
+          maxYear: 2024,
           minDay: 23,
           minMonth: 3,
           minYear: 2024,
@@ -870,15 +863,8 @@ describe('numbers (e2e)', () => {
   it('converts with "since" at the beginning, followed by day, month, year', () => {
     const words = 'Since 30 May 2024, the position is held by yourself';
 
-    const result = flow(splitText(words));
-    const { maxYear, maxMonth, maxDay } = result[0][0].when;
+    const result = flow(splitText(words), { now: new Date('2025-08-31') });
 
-    expect(maxYear).to.be.a('number');
-    expect(maxYear).to.equal(new Date().getFullYear());
-    expect(maxMonth).to.be.a('number');
-    expect(maxMonth).to.equal(new Date().getMonth() + 1);
-    expect(maxDay).to.be.a('number');
-    expect(maxDay).to.equal(new Date().getDate());
     expect(result).to.deep.equal([[
       {
         groupType: 'verb',
@@ -906,9 +892,9 @@ describe('numbers (e2e)', () => {
         verb: 'is',
         when: {
           groupType: 'date',
-          maxDay,
-          maxMonth,
-          maxYear,
+          maxDay: 31,
+          maxMonth: 8,
+          maxYear: 2025,
           minDay: 30,
           minMonth: 5,
           minYear: 2024,
@@ -920,11 +906,8 @@ describe('numbers (e2e)', () => {
   it('converts with "since" at the beginning', () => {
     const words = 'Since 2019, Ursula von der Leyen has been the president of the European Commission.';
 
-    const result = flow(splitText(words));
-    const { maxYear } = result[0][0].when;
+    const result = flow(splitText(words), { now: new Date('2025-08-31') });
 
-    expect(maxYear).to.be.a('number');
-    expect(maxYear).to.equal(new Date().getFullYear());
     expect(result).to.deep.equal([[
       {
         groupType: 'verb',
@@ -968,7 +951,7 @@ describe('numbers (e2e)', () => {
         verb: 'has',
         when: {
           groupType: 'date',
-          maxYear,
+          maxYear: 2025,
           minYear: 2019,
         },
       },
@@ -978,11 +961,8 @@ describe('numbers (e2e)', () => {
   it('converts with "since" at the end', () => {
     const words = 'Charles Michel has been the president of the European Council since 2019.';
 
-    const result = flow(splitText(words));
-    const { maxYear } = result[0][0].when;
+    const result = flow(splitText(words), { now: new Date('2024-08-31') });
 
-    expect(maxYear).to.be.a('number');
-    expect(maxYear).to.equal(new Date().getFullYear());
     expect(result).to.deep.equal([[
       {
         groupType: 'verb',
@@ -1024,7 +1004,7 @@ describe('numbers (e2e)', () => {
         verb: 'has',
         when: {
           groupType: 'date',
-          maxYear,
+          maxYear: 2024,
           minYear: 2019,
         },
       },
