@@ -8,23 +8,19 @@ const createDate = {
     ...(object.value ? { year: object.value } : {}),
     ..._.pick(object, 'maxYear', 'minYear'),
   }),
-  since: (object) => {
-    const now = new Date();
-
-    return {
-      groupType: 'date',
-      maxYear: now.getFullYear(),
-      minYear: object.value || object.year,
-      ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
-      ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
-    };
-  },
+  since: (object, now) => ({
+    groupType: 'date',
+    maxYear: now.getFullYear(),
+    minYear: object.value || object.year,
+    ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
+    ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
+  }),
 };
 
 const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
-const includeDates = (phrase) => {
+const includeDates = ({ now } = {}) => (phrase) => {
   const { object, subject } = phrase[0];
   if (!object) {
     return phrase;
@@ -37,7 +33,7 @@ const includeDates = (phrase) => {
     return phrase;
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
-  const when = createDate[preposition](foundInObject || foundInSubject);
+  const when = createDate[preposition](foundInObject || foundInSubject, now);
 
   return [{
     ...phrase[0],

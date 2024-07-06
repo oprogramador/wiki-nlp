@@ -20,7 +20,7 @@ const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
 
-const flow = (phrases) => {
+const flow = (phrases, { now } = { now: new Date() }) => {
   const groups = phrases.map(phrase => _.flow(
     convertPunctuation,
     removeMeaningless,
@@ -41,7 +41,7 @@ const flow = (phrases) => {
     convertDateRanges,
     groupVerbs,
     includeLocalities,
-    includeDates,
+    includeDates({ now }),
     groupPrepositions,
   )(phrase));
 

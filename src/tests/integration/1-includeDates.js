@@ -19,7 +19,7 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
       convertNumbers,
       groupArticles,
       groupVerbs,
-      includeDates,
+      includeDates(),
     )(phrase));
 
     expect(result).to.deep.equal([[
@@ -65,7 +65,7 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
       convertNumbers,
       groupArticles,
       groupVerbs,
-      includeDates,
+      includeDates(),
     )(phrase));
 
     expect(result).to.deep.equal([[
@@ -102,7 +102,7 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
       convertNumbers,
       groupArticles,
       groupVerbs,
-      includeDates,
+      includeDates(),
     )(phrase));
 
     expect(result).to.deep.equal([[
@@ -139,7 +139,7 @@ describe('convertPunctuation & convertNumbers & groupArticles & groupVerbs & inc
       convertNumbers,
       groupArticles,
       groupVerbs,
-      includeDates,
+      includeDates(),
     )(phrase));
 
     expect(result).to.deep.equal([[

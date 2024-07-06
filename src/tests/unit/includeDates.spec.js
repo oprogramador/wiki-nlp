@@ -20,7 +20,7 @@ describe('includeDates', () => {
       verb: 'was',
     }];
 
-    const result = includeDates(phrase);
+    const result = includeDates()(phrase);
 
     expect(result).to.deep.equal([
       {
