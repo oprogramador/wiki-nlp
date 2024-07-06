@@ -1011,7 +1011,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts wit max year', () => {
+  it('converts with max year', () => {
     const words = 'it is to be completed by 2100';
 
     const result = flow(splitText(words), { now: new Date('2025-07-21') });
