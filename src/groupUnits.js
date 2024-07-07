@@ -2,8 +2,12 @@ const _ = require('lodash');
 const { withoutLastOne } = require('./listUtils');
 
 const map = {
+  [JSON.stringify('km')]: 'km',
   [JSON.stringify('km2')]: 'km2',
+  [JSON.stringify('metres')]: 'm',
+  [JSON.stringify('kilometres')]: 'km',
   [JSON.stringify({ groupType: 'article', words: ['square', 'kilometers'] })]: 'km2',
+  [JSON.stringify({ groupType: 'article', words: ['square', 'kilometres'] })]: 'km2',
 };
 
 const groupUnits = phrase => phrase
