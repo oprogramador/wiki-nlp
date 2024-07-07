@@ -18,6 +18,7 @@ const groupVerbs = require('./groupVerbs');
 const includeDates = require('./includeDates');
 const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
+const groupUnits = require('./groupUnits');
 const removeMeaningless = require('./removeMeaningless');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -36,6 +37,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     groupLocality,
     groupAnd,
     groupOr,
+    groupUnits,
     itemize,
     groupAnd,
     convertDateRanges,

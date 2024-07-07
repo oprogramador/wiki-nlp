@@ -1066,4 +1066,71 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts km2', () => {
+    const words = 'The area is 1,234 km2';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            unit: 'km2',
+            value: 1234,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'area',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts square kilometers', () => {
+    const words = 'They cover an area of 2,345 square kilometers';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                unit: 'km2',
+                value: 2345,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'an',
+                  'area',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'cover',
+      },
+    ]]);
+  });
 });
