@@ -1077,7 +1077,7 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'quantity',
+            groupType: 'unit',
             unit: 'km2',
             value: 1234,
           },
@@ -1109,9 +1109,47 @@ describe('numbers (e2e)', () => {
             groupType: 'preposition',
             object: [
               {
-                groupType: 'quantity',
+                groupType: 'unit',
                 unit: 'km2',
                 value: 2345,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'an',
+                  'area',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'cover',
+      },
+    ]]);
+  });
+
+  it('skips unit in brackets', () => {
+    const words = 'They cover an area of 3,456 square kilometres (1,334 sq mi)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'unit',
+                unit: 'km2',
+                value: 3456,
               },
             ],
             subject: [
