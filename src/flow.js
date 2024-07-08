@@ -9,16 +9,17 @@ const convertPunctuation = require('./convertPunctuation');
 const convertSynonyms = require('./convertSynonyms');
 const groupAnd = require('./groupAnd');
 const groupArticles = require('./groupArticles');
+const groupBrackets = require('./groupBrackets');
 const groupDates = require('./groupDates');
 const groupLocality = require('./groupLocality');
 const groupNumbers = require('./groupNumbers');
 const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
+const groupUnits = require('./groupUnits');
 const groupVerbs = require('./groupVerbs');
 const includeDates = require('./includeDates');
 const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
-const groupUnits = require('./groupUnits');
 const removeMeaningless = require('./removeMeaningless');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -35,6 +36,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     groupArticles,
     convertDecades,
     groupLocality,
+    groupBrackets,
     groupAnd,
     groupOr,
     groupUnits,

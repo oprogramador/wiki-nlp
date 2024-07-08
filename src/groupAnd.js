@@ -22,6 +22,15 @@ const groupAnd = (phrase, separator = 'and') => phrase.reduce(
         },
       ];
     }
+    if (current.groupType === 'extra') {
+      return [
+        ...accumulator,
+        {
+          ...current,
+          extra: groupAnd(current.extra),
+        },
+      ];
+    }
 
     return [...accumulator, current];
   },

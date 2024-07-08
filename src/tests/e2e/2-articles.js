@@ -482,19 +482,22 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'preposition',
             object: [
-              'Spain',
-              '(',
               {
-                groupType: 'and',
-                members: [
-                  'Madrid',
-                  'Barcelona',
-                  'Valencia',
-                  'Sevilla',
-                  'others',
+                basic: 'Spain',
+                extra: [
+                  {
+                    groupType: 'and',
+                    members: [
+                      'Madrid',
+                      'Barcelona',
+                      'Valencia',
+                      'Sevilla',
+                      'others',
+                    ],
+                  },
                 ],
+                groupType: 'extra',
               },
-              ')',
             ],
             subject: [
               'living',
@@ -1077,6 +1080,33 @@ describe('articles, dates, verbs (e2e)', () => {
               },
             ],
             verb: 'of',
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts brackets', () => {
+    const words = 'Luxembourgish (spoken in Luxembourg) is cool';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'cool',
+        ],
+        subject: [
+          {
+            basic: 'Luxembourgish',
+            extra: [
+              'spoken',
+              'in',
+              'Luxembourg',
+            ],
+            groupType: 'extra',
           },
         ],
         verb: 'is',

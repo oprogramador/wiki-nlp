@@ -1,7 +1,5 @@
 const _ = require('lodash');
-const {
-  withoutLastOne, getBeforeLast, getBeforeBeforeLast, withoutLast,
-} = require('./listUtils');
+const { withoutLastOne } = require('./listUtils');
 
 const map = {
   [JSON.stringify('m')]: 'm',
@@ -19,15 +17,14 @@ const map = {
 const groupUnits = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
-    const beforeLast = getBeforeLast(accumulator);
-    const beforeBeforeLast = getBeforeBeforeLast(accumulator);
 
-    if (beforeBeforeLast.groupType === 'unit' && beforeLast === '(' && last.groupType === 'unit' && current === ')') {
+    if (last.groupType === 'extra' && last.basic.groupType === 'unit') {
       return [
-        ...withoutLast(accumulator, 2),
+        ...withoutLastOne(accumulator),
+        last.basic,
       ];
     }
-    const unit = map[JSON.stringify(current)];
+    const unit = map[JSON.stringify(current.basic || current)];
     if (unit) {
       return [
         ...withoutLastOne(accumulator),
