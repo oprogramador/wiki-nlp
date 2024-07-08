@@ -12,7 +12,7 @@ const groupBrackets = phrase => phrase
 
     if (last.groupType === 'extra' && current !== ')' && last.level) {
       return [
-        ...withoutLast(accumulator, 1),
+        ...withoutLastOne(accumulator),
         {
           ...last,
           extra: [
