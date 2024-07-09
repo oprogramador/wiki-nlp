@@ -1113,4 +1113,62 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts many brackets', () => {
+    const words = 'The lowest rates are in Estonia (10 per cent) and the Czech Republic (13 per cent)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            groupType: 'and',
+            members: [
+              {
+                basic: 'Estonia',
+                extra: [
+                  {
+                    groupType: 'share',
+                    value: 0.1,
+                  },
+                ],
+                groupType: 'extra',
+              },
+              {
+                basic: {
+                  groupType: 'article',
+                  words: [
+                    'the',
+                    'Czech',
+                    'Republic',
+                  ],
+                },
+                extra: [
+                  {
+                    groupType: 'share',
+                    value: 0.13,
+                  },
+                ],
+                groupType: 'extra',
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'lowest',
+              'rates',
+            ],
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
 });
