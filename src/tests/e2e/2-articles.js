@@ -1171,4 +1171,13 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts a locality inside bracket', () => {
+    const words = 'I was in a nice place (Severozapaden, Bulgaria)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
