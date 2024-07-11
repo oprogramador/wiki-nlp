@@ -1172,12 +1172,41 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a locality inside bracket', () => {
+  it('converts a locality inside bracket', () => {
     const words = 'I was in a nice place (Severozapaden, Bulgaria)';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            basic: {
+              groupType: 'article',
+              words: [
+                'a',
+                'nice',
+                'place',
+              ],
+            },
+            extra: [
+              {
+                general: 'Bulgaria',
+                groupType: 'locality',
+                precise: 'Severozapaden',
+                preposition: {},
+              },
+            ],
+            groupType: 'extra',
+          },
+        ],
+        subject: [
+          'I',
+        ],
+        verb: 'was',
+      },
     ]]);
   });
 });

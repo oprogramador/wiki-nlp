@@ -35,7 +35,6 @@ const condition = word => (isLettersOnly(word) && isUpperCase(word) && !isDissal
 const allowedBefore = [
   ...auxiliary,
   'in',
-  '(',
 ];
 
 const allowedAfterComma = [
@@ -49,7 +48,7 @@ const groupLocality = phrase => phrase.reduce(
     const last = _.last(accumulator) || {};
     const beforeLast = getBeforeLast(accumulator);
     const beforeBeforeLast = getBeforeBeforeLast(accumulator);
-    if (allowedBefore.includes(toLowerCase(beforeBeforeLast))
+    if ((allowedBefore.includes(toLowerCase(beforeBeforeLast)) || _.isEqual(beforeBeforeLast, {}))
       && condition(beforeLast)
       && last === ','
       && (condition(current))
@@ -67,12 +66,21 @@ const groupLocality = phrase => phrase.reduce(
     if (beforeLast.groupType === 'locality' && last === ',' && !allowedAfterComma.includes(current)) {
       return [
         ...withoutLast(accumulator, 2),
-        beforeLast.preposition,
+        ...(_.isEqual(beforeLast.preposition, {}) ? [] : [beforeLast.preposition]),
         beforeLast.precise,
         ',',
         beforeLast.general,
         last,
         current,
+      ];
+    }
+    if (current.extra) {
+      return [
+        ...accumulator,
+        {
+          ...current,
+          extra: groupLocality(current.extra),
+        },
       ];
     }
 
