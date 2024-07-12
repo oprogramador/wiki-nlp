@@ -1209,4 +1209,49 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a subject with a preposition, followed by a verb in present simple', () => {
+    const words = 'The champion of Europe eats a banana';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'banana',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'Europe',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'The',
+                  'champion',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'eats',
+      },
+    ]]);
+  });
 });
