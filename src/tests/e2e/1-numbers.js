@@ -1171,4 +1171,48 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts numbered', () => {
+    const words = 'Article 27 of the Treaty recognises the status';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'status',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Treaty',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'numbered',
+                item: 'Article',
+                number: 27,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'recognises',
+      },
+    ]]);
+  });
 });

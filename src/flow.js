@@ -12,6 +12,7 @@ const groupArticles = require('./groupArticles');
 const groupBrackets = require('./groupBrackets');
 const groupDates = require('./groupDates');
 const groupLocality = require('./groupLocality');
+const groupNumbered = require('./groupNumbered');
 const groupNumbers = require('./groupNumbers');
 const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
@@ -41,6 +42,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     groupOr,
     groupUnits,
     itemize,
+    groupNumbered,
     groupAnd,
     convertDateRanges,
     groupVerbs,
