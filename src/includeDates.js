@@ -28,6 +28,9 @@ const match = list => (word, index) => ['quantity', 'date'].includes(word.groupT
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
 const includeDates = ({ now } = {}) => (phrase) => {
+  if (!phrase[0]) {
+    return phrase;
+  }
   const { object, subject } = phrase[0];
   if (!object) {
     return phrase;
