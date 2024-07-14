@@ -3,6 +3,7 @@ const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const { withoutLastOne } = require('./listUtils');
 const pronouns = require('./pronounsList');
+const isAdverb = require('./isAdverb');
 const isUpperCase = require('./isUpperCase');
 const toLowerCase = require('./toLowerCase');
 
@@ -20,7 +21,7 @@ const isDissalowed = word => [
   'later',
 ]
   .includes(toLowerCase(word))
-  || /ly$/.test(word)
+  || isAdverb(word)
   || /ing$/.test(word);
 
 const groupNumbered = phrase => phrase
