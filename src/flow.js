@@ -3,6 +3,7 @@ const addCommas = require('./addCommas');
 const convertBn = require('./convertBn');
 const convertDateRanges = require('./convertDateRanges');
 const convertDecades = require('./convertDecades');
+const convertFractions = require('./convertFractions');
 const convertNumbers = require('./convertNumbers');
 const convertPercent = require('./convertPercent');
 const convertPunctuation = require('./convertPunctuation');
@@ -34,6 +35,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     convertSynonyms,
     groupNumbers,
     convertNumbers,
+    convertFractions,
     groupArticles,
     convertDecades,
     groupBrackets,

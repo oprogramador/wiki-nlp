@@ -1215,4 +1215,81 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a fraction with 1 as the numerator', () => {
+    const words = 'They have approximately one fifth of global nominal GDP';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'global',
+                  'nominal',
+                  'GDP',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'quantity',
+                isExact: false,
+                value: 0.2,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
+  it('converts a fraction with 2 as the numerator', () => {
+    const words = 'They have around two fifths of global population';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'global',
+                  'population',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'quantity',
+                isExact: false,
+                value: 0.4,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
 });
