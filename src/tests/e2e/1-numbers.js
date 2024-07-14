@@ -1226,25 +1226,17 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'article',
-                words: [
-                  'global',
-                  'nominal',
-                  'GDP',
-                ],
-              },
-            ],
-            subject: [
-              {
-                groupType: 'quantity',
-                isExact: false,
-                value: 0.2,
-              },
-            ],
-            verb: 'of',
+            groupType: 'share',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'global',
+                'nominal',
+                'GDP',
+              ],
+            },
+            value: 0.2,
           },
         ],
         subject: [
@@ -1265,24 +1257,16 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'article',
-                words: [
-                  'global',
-                  'population',
-                ],
-              },
-            ],
-            subject: [
-              {
-                groupType: 'quantity',
-                isExact: false,
-                value: 0.4,
-              },
-            ],
-            verb: 'of',
+            groupType: 'share',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'global',
+                'population',
+              ],
+            },
+            value: 0.4,
           },
         ],
         subject: [

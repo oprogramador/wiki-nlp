@@ -36,6 +36,7 @@ const convertFractions = phrase => phrase
         ...withoutLastOne(accumulator),
         {
           ...last,
+          groupType: 'share',
           value: last.value / denominator,
         },
       ];
