@@ -11,6 +11,7 @@ const isUpperCase = require('./isUpperCase');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
 const toLowerCase = require('./toLowerCase');
+const isAdverb = require('./isAdverb');
 
 const negations = [
   'no',
@@ -26,6 +27,20 @@ const stripComa = (subject) => {
 };
 
 const objectGroupTypes = ['article', 'currency', 'quantity', 'and', 'or'];
+
+const findAdverb = (subjectWords) => {
+  const last = _.last(subjectWords);
+  if (isAdverb(last) && !isUpperCase(last)) {
+    return {
+      adverb: last,
+      subjectWords: withoutLastOne(subjectWords),
+    };
+  }
+
+  return {
+    subjectWords,
+  };
+};
 
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   if (phrase && phrase.length === 1 && phrase[0].groupType === 'verb') {
@@ -73,14 +88,18 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       if (insideIndex >= 0) {
         let verb = _.last(phrase[insideIndex].words);
         if (!isUpperCase(verb)) {
+          const basicSubjectWords = foundSubject.words ? withoutLastOne(foundSubject.words) : null;
+          const { subjectWords, adverb } = findAdverb(basicSubjectWords);
+
           return [{
+            ...(adverb ? { adverb } : {}),
             groupType,
             object: withoutFirst(phrase, insideIndex + 1),
             subject: [
               ...getFirst(phrase, insideIndex),
               {
                 ...foundSubject,
-                ...(foundSubject.words ? { words: withoutLastOne(foundSubject.words) } : {}),
+                ...(subjectWords ? { words: subjectWords } : {}),
               },
             ],
             verb,

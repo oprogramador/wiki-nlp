@@ -1254,4 +1254,36 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an adverb', () => {
+    const words = 'Norway formally notified the European Council';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'formally',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'European',
+              'Council',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Norway',
+            ],
+          },
+        ],
+        verb: 'notified',
+      },
+    ]]);
+  });
 });
