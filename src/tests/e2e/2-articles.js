@@ -1286,4 +1286,51 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('finds a date at the beginning, with AND', () => {
+    const words = 'In 1930, Belgium and France signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('finds a date at the beginning, without a comma', () => {
+    const words = 'In 1930 Belgium signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          'Belgium',
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+      },
+    ]]);
+  });
+
+  it.skip('converts with "which"', () => {
+    const words = 'In 1930, Belgium and France signed the Treaty, which created the alliance';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

@@ -44,11 +44,14 @@ const includeDates = ({ now } = {}) => (phrase) => {
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
   const when = createDate[preposition](foundInObject || foundInSubject, now);
+  const isCommaInSubject = subject[foundInSubjectIndex + 1] === ',';
 
   return [{
     ...phrase[0],
     object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex + 1) : object,
-    subject: foundInSubject ? withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + 1) : subject,
+    subject: foundInSubject
+      ? withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + (isCommaInSubject ? 1 : 0))
+      : subject,
     when,
   }];
 };
