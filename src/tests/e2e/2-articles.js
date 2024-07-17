@@ -1296,6 +1296,53 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it.skip('finds a date at the beginning, with AND, without a comma', () => {
+    const words = 'In 1930 Belgium and France signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('finds a date with a two-words subject, without a comma', () => {
+    const words = 'In 1930 these countries signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('finds a date with a pronoun subject, without a comma', () => {
+    const words = 'In 1930 they signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+      },
+    ]]);
+  });
+
   it('finds a date at the beginning, without a comma', () => {
     const words = 'In 1930 Belgium signed the Treaty';
 
