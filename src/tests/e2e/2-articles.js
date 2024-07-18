@@ -1306,7 +1306,7 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it.skip('finds a date with a two-words subject, without a comma', () => {
-    const words = 'In 1930 these countries signed the Treaty'';
+    const words = 'In 1930 these countries signed the Treaty';
 
     const result = flow(splitText(words));
 
