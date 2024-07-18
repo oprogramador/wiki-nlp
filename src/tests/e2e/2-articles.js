@@ -1314,12 +1314,37 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with a number in the subject', () => {
+  it('converts with a number in the subject', () => {
     const words = '123 countries signed the Treaty';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'countries',
+              ],
+            },
+            value: 123,
+          },
+        ],
+        verb: 'signed',
+      },
     ]]);
   });
 

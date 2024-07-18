@@ -42,6 +42,31 @@ const findAdverb = (subjectWords) => {
   };
 };
 
+const getWords = object => object.words || _.get(object, 'item.words');
+
+const replaceWords = (object, newWords) => {
+  if (!newWords) {
+    return object;
+  }
+  if (object.words) {
+    return {
+      ...object,
+      words: newWords,
+    };
+  }
+  if (_.get(object, 'item.words')) {
+    return {
+      ...object,
+      item: {
+        ...object.item,
+        words: newWords,
+      },
+    };
+  }
+
+  return object;
+};
+
 const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   if (phrase && phrase.length === 1 && phrase[0].groupType === 'verb') {
     const group = phrase[0];
@@ -75,10 +100,10 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       }
       const insideIndex = phrase.findIndex((item, i) => objectGroupTypes.includes(item.groupType)
         && (
-          !item.words
-          || item.words.length > 2
-          || isUpperCase(item.words[1])
-          || !['the', 'a'].includes(toLowerCase(item.words[0]))
+          !getWords(item)
+          || getWords(item).length > 2
+          || isUpperCase(getWords(item)[1])
+          || !['the', 'a'].includes(toLowerCase(getWords(item)[0]))
         )
           && (
             objectGroupTypes.includes((phrase[i + 1] || {}).groupType)
@@ -86,9 +111,9 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           ));
       const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
-        let verb = _.last(phrase[insideIndex].words);
+        let verb = _.last(getWords(phrase[insideIndex]));
         if (!isUpperCase(verb)) {
-          const basicSubjectWords = foundSubject.words ? withoutLastOne(foundSubject.words) : null;
+          const basicSubjectWords = getWords(foundSubject) ? withoutLastOne(getWords(foundSubject)) : null;
           const { subjectWords, adverb } = findAdverb(basicSubjectWords);
 
           return [{
@@ -97,10 +122,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
             object: withoutFirst(phrase, insideIndex + 1),
             subject: [
               ...getFirst(phrase, insideIndex),
-              {
-                ...foundSubject,
-                ...(subjectWords ? { words: subjectWords } : {}),
-              },
+              replaceWords(foundSubject, subjectWords),
             ],
             verb,
           }];
@@ -113,10 +135,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           return [{
             groupType,
             object: [
-              {
-                ...foundObjectBegin,
-                words: withoutFirstOne(foundObjectBegin.words),
-              },
+              replaceWords(foundObjectBegin, withoutFirstOne(getWords(foundObjectBegin))),
               ...withoutFirstOne(foundObject),
             ],
             subject: [foundSubject],
