@@ -1306,7 +1306,16 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it.skip('finds a date with a two-words subject, without a comma', () => {
-    const words = 'In 1930 these countries signed the Treaty';
+    const words = '1930 countries signed the Treaty';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts with a number in the subject', () => {
+    const words = '123 countries signed the Treaty';
 
     const result = flow(splitText(words));
 
