@@ -1296,12 +1296,38 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a date at the beginning, with AND, without a comma', () => {
+  it('finds a date at the beginning, with AND, without a comma', () => {
     const words = 'In 1930 Belgium and France signed the Treaty';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'Belgium',
+              'France',
+            ],
+          },
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+      },
     ]]);
   });
 
