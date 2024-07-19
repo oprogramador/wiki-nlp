@@ -27,6 +27,18 @@ const createDate = {
 const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
+const convertSubject = ({ foundInSubject, foundInSubjectIndex, subject }) => {
+  const isCommaInSubject = subject[foundInSubjectIndex + 1] === ',';
+  if (!foundInSubject) {
+    return subject;
+  }
+  if (foundInSubject.item) {
+    return [foundInSubject.item];
+  }
+
+  return withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + (isCommaInSubject ? 1 : 0));
+};
+
 const includeDates = ({ now } = {}) => (phrase) => {
   if (!phrase[0]) {
     return phrase;
@@ -44,14 +56,11 @@ const includeDates = ({ now } = {}) => (phrase) => {
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
   const when = createDate[preposition](foundInObject || foundInSubject, now);
-  const isCommaInSubject = subject[foundInSubjectIndex + 1] === ',';
 
   return [{
     ...phrase[0],
     object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex + 1) : object,
-    subject: foundInSubject
-      ? withoutRange(subject, foundInSubjectIndex - 1, foundInSubjectIndex + (isCommaInSubject ? 1 : 0))
-      : subject,
+    subject: convertSubject({ foundInSubject, foundInSubjectIndex, subject }),
     when,
   }];
 };

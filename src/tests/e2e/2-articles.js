@@ -1305,12 +1305,38 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a date with a two-words subject, without a comma', () => {
+  it('finds a date with a two-words subject, without a comma', () => {
     const words = 'In 1930 these countries signed the Treaty';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'these',
+              'countries',
+            ],
+          },
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+      },
     ]]);
   });
 
