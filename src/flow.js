@@ -20,6 +20,7 @@ const groupPrepositions = require('./groupPrepositions');
 const groupUnits = require('./groupUnits');
 const groupVerbs = require('./groupVerbs');
 const includeDates = require('./includeDates');
+const includeDatesFromAnd = require('./includeDatesFromAnd');
 const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
@@ -50,6 +51,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     groupVerbs,
     includeLocalities,
     includeDates({ now }),
+    includeDatesFromAnd({ now }),
     groupPrepositions,
   )(phrase));
 

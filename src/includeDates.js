@@ -1,28 +1,6 @@
-const _ = require('lodash');
 const toLowerCase = require('./toLowerCase');
 const { withoutRange } = require('./listUtils');
-
-const createDate = {
-  by: (object, now) => ({
-    groupType: 'date',
-    maxYear: object.value || object.year,
-    minYear: now.getFullYear(),
-    ...(object.month ? { maxMonth: object.month, minMonth: now.getMonth() + 1 } : { }),
-    ...(object.day ? { maxDay: object.day, minDay: now.getDate() } : { }),
-  }),
-  in: object => ({
-    groupType: 'date',
-    ...(object.value ? { year: object.value } : {}),
-    ..._.pick(object, 'maxYear', 'minYear'),
-  }),
-  since: (object, now) => ({
-    groupType: 'date',
-    maxYear: now.getFullYear(),
-    minYear: object.value || object.year,
-    ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
-    ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
-  }),
-};
+const createDate = require('./createDate');
 
 const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));

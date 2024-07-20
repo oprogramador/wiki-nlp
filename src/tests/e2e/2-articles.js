@@ -1287,12 +1287,90 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a date at the beginning, with AND', () => {
+  it('finds a date at the beginning, with AND', () => {
     const words = 'In 1930, Belgium and France signed the Treaty';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Treaty',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'Belgium',
+              'France',
+            ],
+          },
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+      },
+    ]]);
+  });
+
+  it('finds a date at the beginning, with AND, and "since"', () => {
+    const words = 'Since 1930, Belgium, the Netherlands and France have been in the alliance';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'alliance',
+                ],
+              },
+            ],
+            subject: [
+              'been',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'Belgium',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Netherlands',
+                ],
+              },
+              'France',
+            ],
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 2024,
+          minYear: 1930,
+        },
+      },
     ]]);
   });
 
