@@ -1323,9 +1323,9 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it('finds a date at the beginning, with AND, and "since"', () => {
-    const words = 'Since 1930, Belgium, the Netherlands and France have been in the alliance';
+    const words = 'Since 1931, Belgium, the Netherlands and France have been in an alliance';
 
-    const result = flow(splitText(words));
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
 
     expect(result).to.deep.equal([[
       {
@@ -1337,7 +1337,7 @@ describe('articles, dates, verbs (e2e)', () => {
               {
                 groupType: 'article',
                 words: [
-                  'the',
+                  'an',
                   'alliance',
                 ],
               },
@@ -1367,15 +1367,15 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'have',
         when: {
           groupType: 'date',
-          maxYear: 2024,
-          minYear: 1930,
+          maxYear: 2025,
+          minYear: 1931,
         },
       },
     ]]);
   });
 
   it('finds a date at the beginning, with AND, without a comma', () => {
-    const words = 'In 1930 Belgium and France signed the Treaty';
+    const words = 'In 1932 Belgium and France signed the Treaty';
 
     const result = flow(splitText(words));
 
@@ -1403,14 +1403,14 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'signed',
         when: {
           groupType: 'date',
-          year: 1930,
+          year: 1932,
         },
       },
     ]]);
   });
 
   it('finds a date with a two-words subject, without a comma', () => {
-    const words = 'In 1930 these countries signed the Treaty';
+    const words = 'In 1933 these countries signed the Treaty';
 
     const result = flow(splitText(words));
 
@@ -1438,7 +1438,7 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'signed',
         when: {
           groupType: 'date',
-          year: 1930,
+          year: 1933,
         },
       },
     ]]);
@@ -1479,7 +1479,7 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it('finds a date with a pronoun subject, without a comma', () => {
-    const words = 'In 1930 they signed the Treaty';
+    const words = 'In 1934 they signed the Treaty';
 
     const result = flow(splitText(words));
 
@@ -1501,14 +1501,14 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'signed',
         when: {
           groupType: 'date',
-          year: 1930,
+          year: 1934,
         },
       },
     ]]);
   });
 
   it('finds a date at the beginning, without a comma', () => {
-    const words = 'In 1930 Belgium signed the Treaty';
+    const words = 'In 1935 Belgium signed the Treaty';
 
     const result = flow(splitText(words));
 
@@ -1530,14 +1530,14 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'signed',
         when: {
           groupType: 'date',
-          year: 1930,
+          year: 1935,
         },
       },
     ]]);
   });
 
   it.skip('converts with "which"', () => {
-    const words = 'In 1930, Belgium and France signed the Treaty, which created the alliance';
+    const words = 'In 1936, Belgium and France signed the Treaty, which created the alliance';
 
     const result = flow(splitText(words));
 

@@ -22,9 +22,6 @@ const includeDatesFromAnd = ({ now } = {}) => (phrase) => {
     return phrase;
   }
   const { object, subject } = phrase[0];
-  if (!subject) {
-    return phrase;
-  }
   if (!_.get(subject, '1.members')) {
     return phrase;
   }
