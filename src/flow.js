@@ -24,6 +24,7 @@ const includeDatesFromAnd = require('./includeDatesFromAnd');
 const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
+const splitBut = require('./splitBut');
 const splitWhich = require('./splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -49,6 +50,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),
     p => p.map(pp => splitWhich(pp)).flat(),
+    p => p.map(pp => splitBut(pp)).flat(),
     p => p.map(convertDateRanges),
     p => p.map(groupVerbs),
     p => p.map(includeLocalities),

@@ -1276,4 +1276,31 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('finds a date at the end, without an object', () => {
+    const words = 'Panama joined in 1971';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('finds a date at the beginning, without an object', () => {
+    const words = 'In 1975, Nicaragua joined';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('finds an exact date', () => {
+    const words = 'On 3 May 2020, he purchased 16 grams of gold';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

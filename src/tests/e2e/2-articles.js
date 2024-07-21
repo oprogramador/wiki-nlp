@@ -1536,6 +1536,107 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it.skip('finds date & locality', () => {
+    const words = 'In 2010 at the Madrid Conference, plans became a reality';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts an object with neither article nor quantity', () => {
+    const words = 'They sent applications';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts with "but" and a subject', () => {
+    const words = 'they sent many applications, but they canceled';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'quantity',
+              item: 'applications',
+              min: 3,
+            },
+          ],
+          subject: [
+            'they',
+          ],
+          verb: 'sent',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          subject: [
+            'they',
+          ],
+          verb: 'canceled',
+        },
+      ],
+    ]);
+  });
+
+  it('converts with "but" without a subject', () => {
+    const words = 'Turkey is not an EU member, but has signed a cooperation agreement';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          isNegated: true,
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'an',
+                'EU',
+                'member',
+              ],
+            },
+          ],
+          subject: [
+            'Turkey',
+          ],
+          verb: 'is',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'signed',
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'cooperation',
+                'agreement',
+              ],
+            },
+          ],
+          subject: [
+            'it',
+          ],
+          verb: 'has',
+        },
+      ],
+    ]);
+  });
+
   it('converts with "which"', () => {
     const words = 'In 1936, Belgium and France signed the Treaty, which created the alliance';
 
