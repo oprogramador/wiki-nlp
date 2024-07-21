@@ -1536,12 +1536,58 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts with "which"', () => {
+  it('converts with "which"', () => {
     const words = 'In 1936, Belgium and France signed the Treaty, which created the alliance';
 
     const result = flow(splitText(words));
 
-    expect(result).to.deep.equal([[
-    ]]);
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Treaty',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'and',
+              members: [
+                'Belgium',
+                'France',
+              ],
+            },
+          ],
+          verb: 'signed',
+          when: {
+            groupType: 'date',
+            year: 1936,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'alliance',
+              ],
+            },
+          ],
+          subject: [
+            'it',
+          ],
+          verb: 'created',
+        },
+      ],
+    ]);
   });
 });
