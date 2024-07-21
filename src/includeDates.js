@@ -21,10 +21,11 @@ const includeDates = ({ now } = {}) => (phrase) => {
   if (!phrase[0]) {
     return phrase;
   }
-  const { object, subject } = phrase[0];
-  if (!object) {
+  if (!phrase[0].object && !phrase[0].subject) {
     return phrase;
   }
+  const object = phrase[0].object || [];
+  const subject = phrase[0].subject || [];
   const foundInObjectIndex = object.findIndex(match(object));
   const foundInSubjectIndex = subject.findIndex(match(subject));
   const foundInObject = object[foundInObjectIndex];

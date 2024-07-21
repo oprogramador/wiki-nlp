@@ -1286,12 +1286,24 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a date at the beginning, without an object', () => {
+  it('finds a date at the beginning, without an object', () => {
     const words = 'In 1975, Nicaragua joined';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Nicaragua',
+        ],
+        verb: 'joined',
+        when: {
+          groupType: 'date',
+          year: 1975,
+        },
+      },
     ]]);
   });
 
