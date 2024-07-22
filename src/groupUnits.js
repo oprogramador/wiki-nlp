@@ -2,16 +2,23 @@ const _ = require('lodash');
 const { withoutLastOne } = require('./listUtils');
 
 const map = {
-  [JSON.stringify('m')]: 'm',
-  [JSON.stringify('km')]: 'km',
-  [JSON.stringify('mi')]: 'mi',
   [JSON.stringify('ft')]: 'ft',
-  [JSON.stringify('km2')]: 'km2',
-  [JSON.stringify('metres')]: 'm',
+  [JSON.stringify('g')]: 'g',
+  [JSON.stringify('grams')]: 'g',
+  [JSON.stringify('kg')]: 'kg',
+  [JSON.stringify('kilograms')]: 'kg',
   [JSON.stringify('kilometres')]: 'km',
+  [JSON.stringify('km')]: 'km',
+  [JSON.stringify('km2')]: 'km2',
+  [JSON.stringify('m')]: 'm',
+  [JSON.stringify('metres')]: 'm',
+  [JSON.stringify('mi')]: 'mi',
+  [JSON.stringify('t')]: 't',
+  [JSON.stringify('tonnes')]: 't',
+  [JSON.stringify('tons')]: 't',
+  [JSON.stringify({ groupType: 'article', words: ['sq', 'mi'] })]: 'mi2',
   [JSON.stringify({ groupType: 'article', words: ['square', 'kilometers'] })]: 'km2',
   [JSON.stringify({ groupType: 'article', words: ['square', 'kilometres'] })]: 'km2',
-  [JSON.stringify({ groupType: 'article', words: ['sq', 'mi'] })]: 'mi2',
 };
 
 const groupUnits = phrase => phrase

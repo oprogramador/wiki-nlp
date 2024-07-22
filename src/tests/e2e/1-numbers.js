@@ -1277,12 +1277,24 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a date at the end, without an object', () => {
+  it('finds a date at the end, without an object', () => {
     const words = 'Panama joined in 1971';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Panama',
+        ],
+        verb: 'joined',
+        when: {
+          groupType: 'date',
+          year: 1971,
+        },
+      },
     ]]);
   });
 
@@ -1307,12 +1319,33 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds an exact date', () => {
+  it('finds an exact date', () => {
     const words = 'On 3 May 2020, he purchased 16 grams of gold';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            item: 'gold',
+            unit: 'g',
+            value: 16,
+          },
+        ],
+        subject: [
+          'he',
+        ],
+        verb: 'purchased',
+        when: {
+          day: 3,
+          groupType: 'date',
+          month: 5,
+          year: 2020,
+        },
+      },
     ]]);
   });
 });

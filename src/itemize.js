@@ -11,7 +11,7 @@ const itemize = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
     const beforeLast = getBeforeLast(accumulator);
-    if (beforeLast.groupType === 'share' && last === 'of') {
+    if (['share', 'unit'].includes(beforeLast.groupType) && last === 'of') {
       return [
         ...withoutLast(accumulator, 2),
         {

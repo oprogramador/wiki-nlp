@@ -26,7 +26,7 @@ const stripComa = (subject) => {
   return subject;
 };
 
-const objectGroupTypes = ['article', 'currency', 'quantity', 'and', 'or'];
+const objectGroupTypes = ['article', 'currency', 'quantity', 'unit', 'and', 'or'];
 
 const findAdverb = (subjectWords) => {
   const last = _.last(subjectWords);
@@ -82,7 +82,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   const verbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0
-        && objectGroupTypes.includes(item.groupType)
+        && (objectGroupTypes.includes(item.groupType) || prepositions.includes(item))
         && isLettersOnly(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   if (verbPlace === 0) {
