@@ -1078,8 +1078,8 @@ describe('numbers (e2e)', () => {
         object: [
           {
             groupType: 'unit',
-            unit: 'km2',
-            value: 1234,
+            unit: 'm2',
+            value: 1.234e9,
           },
         ],
         subject: [
@@ -1110,8 +1110,8 @@ describe('numbers (e2e)', () => {
             object: [
               {
                 groupType: 'unit',
-                unit: 'km2',
-                value: 2345,
+                unit: 'm2',
+                value: 2.345e9,
               },
             ],
             subject: [
@@ -1148,8 +1148,8 @@ describe('numbers (e2e)', () => {
             object: [
               {
                 groupType: 'unit',
-                unit: 'km2',
-                value: 3456,
+                unit: 'm2',
+                value: 3.456e9,
               },
             ],
             subject: [
@@ -1331,8 +1331,8 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'unit',
             item: 'gold',
-            unit: 'g',
-            value: 16,
+            unit: 'kg',
+            value: 0.016,
           },
         ],
         subject: [
