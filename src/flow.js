@@ -19,6 +19,7 @@ const groupOr = require('./groupOr');
 const groupPrepositions = require('./groupPrepositions');
 const groupUnits = require('./groupUnits');
 const groupVerbs = require('./groupVerbs');
+const includeAccordance = require('./includeAccordance');
 const includeDates = require('./includeDates');
 const includeDatesFromAnd = require('./includeDatesFromAnd');
 const includeLocalities = require('./includeLocalities');
@@ -53,6 +54,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(pp => splitBut(pp)).flat(),
     p => p.map(convertDateRanges),
     p => p.map(groupVerbs),
+    p => p.map(includeAccordance),
     p => p.map(includeLocalities),
     p => p.map(includeDates({ now })),
     p => p.map(includeDatesFromAnd({ now })),

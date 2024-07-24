@@ -1691,4 +1691,81 @@ describe('articles, dates, verbs (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts a source, with no comma', () => {
+    const words = 'According to the United Nations the average European income is €40,000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 40000,
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'United',
+            'Nations',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'average',
+              'European',
+              'income',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts a source, with a comma', () => {
+    const words = 'According to the OECD, the average European income is €41,000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 41000,
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'OECD',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'average',
+              'European',
+              'income',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
