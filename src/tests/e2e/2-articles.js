@@ -1545,6 +1545,32 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts with irregular past verb, and negation', () => {
+    const words = 'They sent no good applications';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'good',
+              'applications',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'sent',
+      },
+    ]]);
+  });
+
   it.skip('converts an object with neither article nor quantity', () => {
     const words = 'They sent applications';
 

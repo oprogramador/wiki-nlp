@@ -79,12 +79,13 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
     }];
   }
   const auxiliaryPlace = phrase.findIndex(item => list.includes(item));
-  const verbPlace = auxiliaryPlace >= 0
+  const potentialVerbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0
         && (objectGroupTypes.includes(item.groupType) || prepositions.includes(item))
         && isLettersOnly(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
+  const verbPlace = ['no', 'not'].includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
   if (verbPlace === 0) {
     return phrase;
   }
