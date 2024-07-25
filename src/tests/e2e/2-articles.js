@@ -1692,6 +1692,72 @@ describe('articles, dates, verbs (e2e)', () => {
     ]);
   });
 
+  it('converts a source from the end, with an adjective', () => {
+    const words = 'The average European income is very high according to EFTA';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'very',
+              'high',
+            ],
+          },
+        ],
+        source: 'EFTA',
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'average',
+              'European',
+              'income',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts a source from the end', () => {
+    const words = 'The average European income is €42,000 according to EFTA';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 42000,
+          },
+        ],
+        source: 'EFTA',
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'average',
+              'European',
+              'income',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it('converts a source, with no comma', () => {
     const words = 'According to the United Nations the average European income is €40,000';
 

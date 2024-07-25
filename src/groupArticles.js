@@ -33,6 +33,7 @@ const isDissalowed = word => [
   'or',
   'no',
   'not',
+  'according',
 ]
   .includes(toLowerCase(word));
 

@@ -1,4 +1,10 @@
-const { withoutFirst } = require('./listUtils');
+const _ = require('lodash');
+const {
+  getBeforeBeforeLast,
+  getBeforeLast,
+  withoutFirst,
+  withoutLast,
+} = require('./listUtils');
 
 const includeAccordance = (phrase) => {
   if (!phrase[0]) {
@@ -13,6 +19,14 @@ const includeAccordance = (phrase) => {
       ...phrase[0],
       source: subject[2],
       subject: withoutFirst(subject, 3),
+    }];
+  }
+  const object = phrase[0].object || [];
+  if (getBeforeBeforeLast(object) === 'according' && getBeforeLast(object) === 'to') {
+    return [{
+      ...phrase[0],
+      object: withoutLast(object, 3),
+      source: _.last(object),
     }];
   }
 
