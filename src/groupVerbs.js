@@ -99,7 +99,10 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
           verb: last,
         }];
       }
-      const insideIndex = phrase.findIndex((item, i) => objectGroupTypes.includes(item.groupType)
+      const insideIndex = phrase.findIndex((item, i) => (
+        [...objectGroupTypes].includes(item.groupType)
+        || (!item.groupType && isLettersOnly(item) && !prepositions.includes(toLowerCase(item)))
+      )
         && (
           !getWords(item)
           || getWords(item).length > 2
@@ -113,7 +116,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
         let verb = _.last(getWords(phrase[insideIndex]));
-        if (!isUpperCase(verb)) {
+        if (verb && !isUpperCase(verb)) {
           const basicSubjectWords = getWords(foundSubject) ? withoutLastOne(getWords(foundSubject)) : null;
           const { subjectWords, adverb } = findAdverb(basicSubjectWords);
 

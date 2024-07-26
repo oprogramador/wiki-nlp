@@ -1571,12 +1571,27 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts an object with neither article nor quantity', () => {
+  it('converts an object with neither article nor quantity', () => {
     const words = 'They sent applications';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'applications',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'sent',
+      },
     ]]);
   });
 
