@@ -100,7 +100,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         }];
       }
       const insideIndex = phrase.findIndex((item, i) => (
-        [...objectGroupTypes].includes(item.groupType)
+        objectGroupTypes.includes(item.groupType)
         || (!item.groupType && isLettersOnly(item) && !prepositions.includes(toLowerCase(item)))
       )
         && (
