@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const addCommas = require('./addCommas');
 const convertBn = require('./convertBn');
+const convertBoth = require('./convertBoth');
 const convertDateRanges = require('./convertDateRanges');
 const convertDecades = require('./convertDecades');
 const convertFractions = require('./convertFractions');
@@ -8,6 +9,7 @@ const convertNumbers = require('./convertNumbers');
 const convertPercent = require('./convertPercent');
 const convertPunctuation = require('./convertPunctuation');
 const convertSynonyms = require('./convertSynonyms');
+const flatArticles = require('./flatArticles');
 const groupAnd = require('./groupAnd');
 const groupArticles = require('./groupArticles');
 const groupBrackets = require('./groupBrackets');
@@ -50,6 +52,8 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(itemize),
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),
+    p => p.map(pp => convertBoth(pp)),
+    p => p.map(pp => flatArticles(pp)),
     p => p.map(pp => splitWhich(pp)).flat(),
     p => p.map(pp => splitBut(pp)).flat(),
     p => p.map(convertDateRanges),

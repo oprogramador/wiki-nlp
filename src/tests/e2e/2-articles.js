@@ -1875,4 +1875,187 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('removes "both" after an irregular verb', () => {
+    const words = 'He ate both an orange and a banana';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'an',
+                  'orange',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'banana',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          'He',
+        ],
+        verb: 'ate',
+      },
+    ]]);
+  });
+
+  it('removes "both" after an auxiliary verb', () => {
+    const words = 'He is both a police officer and a basketball player';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'police',
+                  'officer',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'basketball',
+                  'player',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          'He',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('removes "both" after a regular past verb', () => {
+    const words = 'In 2005, the president pardoned both a young man and an old woman';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'young',
+                  'man',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'an',
+                  'old',
+                  'woman',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'president',
+            ],
+          },
+        ],
+        verb: 'pardoned',
+        when: {
+          groupType: 'date',
+          year: 2005,
+        },
+      },
+    ]]);
+  });
+
+  it('does not convert "both" at the beginning', () => {
+    const words = 'Both cities are cool';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'cool',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Both',
+              'cities',
+            ],
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('removes "both" after a preposition', () => {
+    const words = 'It was agreed by both France and Germany';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                members: [
+                  'France',
+                  'Germany',
+                ],
+              },
+            ],
+            subject: [
+              'agreed',
+            ],
+            verb: 'by',
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
 });
