@@ -1348,4 +1348,36 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('does not convert a fraction without a numerator', () => {
+    const words = 'The anthem is the ninth symphony';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'ninth',
+              'symphony',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'anthem',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

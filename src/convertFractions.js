@@ -31,7 +31,7 @@ const convertFractions = phrase => phrase
     const last = _.last(accumulator) || {};
 
     const denominator = map[current];
-    if (denominator) {
+    if (denominator && last.value) {
       return [
         ...withoutLastOne(accumulator),
         {
