@@ -26,6 +26,7 @@ const convertBoth = phrase => phrase
         return [
           ...accumulator,
           {
+            ...current,
             members: [
               {
                 ...current.members[0],

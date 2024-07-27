@@ -2039,6 +2039,7 @@ describe('articles, dates, verbs (e2e)', () => {
             groupType: 'preposition',
             object: [
               {
+                groupType: 'and',
                 members: [
                   'France',
                   'Germany',
