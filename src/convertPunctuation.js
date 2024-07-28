@@ -1,12 +1,12 @@
 const _ = require('lodash');
-const { withoutFirstOne, withoutLastOne } = require('./listUtils');
+const { withoutFirst, withoutLastOne } = require('./listUtils');
+const { currencies } = require('./numberResources');
 
 const list = [
+  ...Object.keys(currencies),
   ',',
   ':',
   '%',
-  '€',
-  '$',
   '(',
   ')',
   '–',
@@ -17,15 +17,15 @@ const convertPunctuationRecursive = (word) => {
   let start = '';
   let middle = word;
   let end = '';
-  const first = _.first(word);
   const last = _.last(word);
   if (list.includes(last)) {
     middle = withoutLastOne(middle);
     end = last;
   }
-  if (list.includes(first)) {
-    start = first;
-    middle = withoutFirstOne(middle);
+  const found = list.find(x => word.startsWith(x));
+  if (found) {
+    start = found;
+    middle = withoutFirst(middle, found.length);
   }
   const middleGroup = middle === word
     ? [middle]

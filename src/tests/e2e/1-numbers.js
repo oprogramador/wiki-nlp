@@ -1380,4 +1380,50 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a currency with a country code', () => {
+    const words = 'EFTA member states generated a GDP of around US$1.7 trillion';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                currency: 'USD',
+                groupType: 'currency',
+                isExact: false,
+                value: 1.7e12,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'GDP',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'EFTA',
+              'member',
+              'states',
+            ],
+          },
+        ],
+        verb: 'generated',
+      },
+    ]]);
+  });
 });
