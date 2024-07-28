@@ -1426,4 +1426,46 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts USD inside a bracket', () => {
+    const words = 'The USA has the largest GDP (US$25 trillion)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            basic: {
+              groupType: 'article',
+              words: [
+                'the',
+                'largest',
+                'GDP',
+              ],
+            },
+            extra: [
+              {
+                currency: 'USD',
+                groupType: 'currency',
+                value: 2.5e13,
+              },
+            ],
+            groupType: 'extra',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'USA',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });

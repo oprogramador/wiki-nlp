@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const { withoutFirst, withoutLastOne } = require('./listUtils');
 const { currencies } = require('./numberResources');
+const toLowerCase = require('./toLowerCase');
 
 const list = [
   ...Object.keys(currencies),
@@ -22,7 +23,7 @@ const convertPunctuationRecursive = (word) => {
     middle = withoutLastOne(middle);
     end = last;
   }
-  const found = list.find(x => word.startsWith(x));
+  const found = list.find(x => toLowerCase(word).startsWith(x));
   if (found) {
     start = found;
     middle = withoutFirst(middle, found.length);
