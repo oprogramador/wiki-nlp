@@ -1468,4 +1468,130 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a growth with dates', () => {
+    const words = 'The trade surplus rose from $123 billion in 2000 to more than $246 billion in 2010';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        endValue: {
+          currency: 'USD',
+          groupType: 'currency',
+          min: 2.46e11,
+        },
+        groupType: 'verb',
+        initialValue: {
+          currency: 'USD',
+          groupType: 'currency',
+          value: 1.23e11,
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'trade',
+              'surplus',
+            ],
+          },
+        ],
+        verb: 'rose',
+        whenEndValue: {
+          groupType: 'quantity',
+          value: 2010,
+        },
+        whenInitialValue: {
+          groupType: 'quantity',
+          value: 2000,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a growth', () => {
+    const words = 'The trade surplus rose from $12 billion to 15 billion';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        endValue: {
+          groupType: 'quantity',
+          value: 1.5e10,
+        },
+        groupType: 'verb',
+        initialValue: {
+          currency: 'USD',
+          groupType: 'currency',
+          value: 1.2e10,
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'trade',
+              'surplus',
+            ],
+          },
+        ],
+        verb: 'rose',
+      },
+    ]]);
+  });
+
+  it('converts a growth with brackets', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The ratio ranged from 60 per cent (Barcelona) to 270 per cent (Luxembourg)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        endValue: {
+          basic: {
+            groupType: 'share',
+            value: 2.7,
+          },
+          extra: [
+            'Luxembourg',
+          ],
+          groupType: 'extra',
+        },
+        groupType: 'verb',
+        initialValue: {
+          basic: {
+            groupType: 'share',
+            value: 0.6,
+          },
+          extra: [
+            'Barcelona',
+          ],
+          groupType: 'extra',
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'ratio',
+            ],
+          },
+        ],
+        verb: 'ranged',
+      },
+    ]]);
+  });
+
+  it.skip('converts a growth with brackets and another preposition inside', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The ratio ranged from 60 per cent (Barcelona) of the EU28 average (€40,000) to 270 per cent (Luxembourg)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
