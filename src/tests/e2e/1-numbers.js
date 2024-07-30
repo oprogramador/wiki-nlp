@@ -1543,7 +1543,6 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts a growth with brackets', () => {
-    // eslint-disable-next-line max-len
     const words = 'The ratio ranged from 60 per cent (Barcelona) to 270 per cent (Luxembourg)';
 
     const result = flow(splitText(words));

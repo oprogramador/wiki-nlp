@@ -1,10 +1,7 @@
 const _ = require('lodash');
 
 const convertFromToInPhrase = (phrase) => {
-  if (!phrase[0]) {
-    return phrase;
-  }
-  if (!phrase[0].object && !phrase[0].subject) {
+  if (!_.get(phrase, '0.object')) {
     return phrase;
   }
   const { object } = phrase[0];
