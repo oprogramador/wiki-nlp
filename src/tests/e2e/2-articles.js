@@ -69,6 +69,55 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts an OR as an object', () => {
+    const words = 'Bob wants a cat, a dog, or a hamster';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'or',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'cat',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'dog',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'hamster',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+            ],
+          },
+        ],
+        verb: 'wants',
+      },
+    ]]);
+  });
+
   it('converts a phrase with past simple tense, and quantity', () => {
     const words = 'Bob received 5 cats';
 
