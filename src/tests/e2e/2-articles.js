@@ -2108,4 +2108,13 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts "it" in the next phrase', () => {
+    const words = 'The Court was established in 1950. It is composed of two judges per member state.';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
