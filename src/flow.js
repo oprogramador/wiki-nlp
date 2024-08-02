@@ -9,6 +9,7 @@ const convertFromTo = require('./convertFromTo');
 const convertFromToInPhrase = require('./convertFromToInPhrase');
 const convertNumbers = require('./convertNumbers');
 const convertPercent = require('./convertPercent');
+const convertPronouns = require('./convertPronouns');
 const convertPunctuation = require('./convertPunctuation');
 const convertSynonyms = require('./convertSynonyms');
 const flatArticles = require('./flatArticles');
@@ -67,6 +68,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeDates({ now })),
     p => p.map(includeDatesFromAnd({ now })),
     p => p.map(groupPrepositions),
+    p => p.map((current, i) => convertPronouns(current, p[i - 1])),
   )(phrases);
 
   return groups;
