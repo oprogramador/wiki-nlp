@@ -2114,73 +2114,132 @@ describe('articles, dates, verbs (e2e)', () => {
 
     const result = flow(splitText(words));
 
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          'established',
-        ],
-        subject: [
-          {
-            groupType: 'article',
-            words: [
-              'The',
-              'Court',
-            ],
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'established',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'The',
+                'Court',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            year: 1950,
           },
-        ],
-        verb: 'was',
-        when: {
-          groupType: 'date',
-          year: 1950,
         },
-      },
-    ],
-    [
-      {
-        groupType: 'verb',
-        object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'preposition',
-                object: [
-                  {
-                    groupType: 'article',
-                    words: [
-                      'member',
-                      'state',
-                    ],
-                  },
-                ],
-                subject: [
-                  {
-                    groupType: 'quantity',
-                    item: 'judges',
-                    value: 2,
-                  },
-                ],
-                verb: 'per',
-              },
-            ],
-            subject: [
-              'composed',
-            ],
-            verb: 'of',
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'preposition',
+              object: [
+                {
+                  groupType: 'preposition',
+                  object: [
+                    {
+                      groupType: 'article',
+                      words: [
+                        'member',
+                        'state',
+                      ],
+                    },
+                  ],
+                  subject: [
+                    {
+                      groupType: 'quantity',
+                      item: 'judges',
+                      value: 2,
+                    },
+                  ],
+                  verb: 'per',
+                },
+              ],
+              subject: [
+                'composed',
+              ],
+              verb: 'of',
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'The',
+                'Court',
+              ],
+            },
+          ],
+          verb: 'is',
+        },
+      ],
+    ]);
+  });
+
+  it('converts "they" in the next phrase', () => {
+    const words = 'The judges were elected in 2000. They were the best possible candidates.';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'elected',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'The',
+                'judges',
+              ],
+            },
+          ],
+          verb: 'were',
+          when: {
+            groupType: 'date',
+            year: 2000,
           },
-        ],
-        subject: [
-          {
-            groupType: 'article',
-            words: [
-              'The',
-              'Court',
-            ],
-          },
-        ],
-        verb: 'is',
-      },
-    ]]);
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'best',
+                'possible',
+                'candidates',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'The',
+                'judges',
+              ],
+            },
+          ],
+          verb: 'were',
+        },
+      ],
+    ]);
   });
 });
