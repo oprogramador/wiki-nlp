@@ -22,6 +22,10 @@ const largeNumbers = {
 };
 
 const fuzzy = {
+  handful: {
+    min: 1,
+    max: 5,
+  },
   several: {
     min: 3,
     max: 99,

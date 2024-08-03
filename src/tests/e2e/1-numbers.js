@@ -1593,4 +1593,28 @@ describe('numbers (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts "handful"', () => {
+    const words = 'He knows a handful of languages';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'languages',
+            max: 5,
+            min: 1,
+          },
+        ],
+        subject: [
+          'He',
+        ],
+        verb: 'knows',
+      },
+    ]]);
+  });
 });
