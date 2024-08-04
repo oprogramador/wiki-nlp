@@ -1,25 +1,28 @@
 const toLowerCase = require('./toLowerCase');
 const { getLast, withoutLast } = require('./listUtils');
 
-const map = {
-  [JSON.stringify(['beginning', 'on'])]: ['since'],
-  [JSON.stringify(['at', 'least'])]: ['above'],
-  [JSON.stringify(['more', 'than'])]: ['above'],
-  [JSON.stringify(['well', 'over'])]: ['above'],
-  [JSON.stringify(['et', 'al.'])]: [',', 'and', 'others'],
-  [JSON.stringify(['a', 'handful', 'of'])]: ['handful'],
-  [JSON.stringify(['the', 'handful', 'of'])]: ['handful'],
-};
+const map = [
+  { from: ['beginning', 'on'], to: ['since'] },
+  { from: ['at', 'least'], to: ['above'] },
+  { from: ['more', 'than'], to: ['above'] },
+  { from: ['well', 'over'], to: ['above'] },
+  { from: ['et', 'al.'], to: [',', 'and', 'others'] },
+  { from: ['a', 'handful', 'of'], to: ['handful'] },
+  { from: ['the', 'handful', 'of'], to: ['handful'] },
+];
 
 const convertSynonyms = phrase => phrase
   .reduce((accumulator, current) => {
-    const key = Object.keys(map)
-      .find(k => JSON.stringify(getLast([...accumulator, current].map(toLowerCase), JSON.parse(k).length)) === k);
-    const found = map[key];
+    const found = map.find(e => JSON.stringify(
+      getLast(
+        [...accumulator, current].map(toLowerCase),
+        e.from.length,
+      ),
+    ) === JSON.stringify(e.from));
     if (found) {
       return [
-        ...withoutLast(accumulator, JSON.parse(key).length - 1),
-        ...found,
+        ...withoutLast(accumulator, found.from.length - 1),
+        ...found.to,
       ];
     }
 
