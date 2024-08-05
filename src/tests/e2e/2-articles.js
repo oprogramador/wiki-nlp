@@ -2305,4 +2305,13 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts passive voice with an irregular verb', () => {
+    const words = 'The growth was shown by the manager';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

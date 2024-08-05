@@ -8,6 +8,7 @@ const map = [
   { from: ['well', 'over'], to: ['above'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
+  { from: ['a', 'number', 'of'], to: ['number'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
 ];
 

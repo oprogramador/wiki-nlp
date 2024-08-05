@@ -1617,4 +1617,13 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts month & year without a day', () => {
+    const words = 'The parliament passed the budget in September 2020';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

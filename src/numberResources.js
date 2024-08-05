@@ -26,6 +26,9 @@ const fuzzy = {
     min: 1,
     max: 5,
   },
+  number: {
+    min: 3,
+  },
   several: {
     min: 3,
     max: 99,
