@@ -8,6 +8,7 @@ const convertFractions = require('./convertFractions');
 const convertFromTo = require('./convertFromTo');
 const convertFromToInPhrase = require('./convertFromToInPhrase');
 const convertNumbers = require('./convertNumbers');
+const convertPassive = require('./convertPassive');
 const convertPercent = require('./convertPercent');
 const convertPronouns = require('./convertPronouns');
 const convertPunctuation = require('./convertPunctuation');
@@ -68,6 +69,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeDates({ now })),
     p => p.map(includeDatesFromAnd({ now })),
     p => p.map(groupPrepositions),
+    p => p.map(convertPassive),
     p => p.map((current, i) => convertPronouns(current, p[i - 1])),
   )(phrases);
 

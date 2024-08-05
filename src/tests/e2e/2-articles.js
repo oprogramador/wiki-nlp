@@ -2084,27 +2084,18 @@ describe('articles, dates, verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'and',
-                members: [
-                  'France',
-                  'Germany',
-                ],
-              },
-            ],
-            subject: [
-              'agreed',
-            ],
-            verb: 'by',
-          },
+          'it',
         ],
         subject: [
-          'It',
+          {
+            groupType: 'and',
+            members: [
+              'France',
+              'Germany',
+            ],
+          },
         ],
-        verb: 'was',
+        verb: 'agree',
       },
     ]]);
   });
@@ -2241,5 +2232,77 @@ describe('articles, dates, verbs (e2e)', () => {
         },
       ],
     ]);
+  });
+
+  it('does not convert "by" after an object', () => {
+    const words = 'They encourage the industry by market interventions';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'market',
+                  'interventions',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'industry',
+                ],
+              },
+            ],
+            verb: 'by',
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'encourage',
+      },
+    ]]);
+  });
+
+  it('converts passive voice', () => {
+    const words = 'The European economy is influenced by the coastline';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'European',
+              'economy',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'coastline',
+            ],
+          },
+        ],
+        verb: 'influence',
+      },
+    ]]);
   });
 });
