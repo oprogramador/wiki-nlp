@@ -1618,12 +1618,39 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts month & year without a day', () => {
+  it('converts month & year without a day', () => {
     const words = 'The parliament passed the budget in September 2020';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'budget',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'parliament',
+            ],
+          },
+        ],
+        verb: 'passed',
+        when: {
+          groupType: 'date',
+          month: 9,
+          year: 2020,
+        },
+      },
     ]]);
   });
 });
