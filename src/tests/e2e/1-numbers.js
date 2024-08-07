@@ -1653,4 +1653,28 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a number of" followed by "in"', () => {
+    const words = 'they act in a number of areas';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            groupType: 'quantity',
+            item: 'areas',
+            min: 3,
+          },
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'act',
+      },
+    ]]);
+  });
 });

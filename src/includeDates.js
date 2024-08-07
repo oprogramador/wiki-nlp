@@ -3,6 +3,7 @@ const { withoutRange } = require('./listUtils');
 const createDate = require('./createDate');
 
 const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
+  && (!word.item || word.value)
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
 const convertSubject = ({ foundInSubject, foundInSubjectIndex, subject }) => {
