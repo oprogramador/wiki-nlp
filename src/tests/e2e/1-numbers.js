@@ -1654,7 +1654,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts "a number of" followed by "in"', () => {
+  it('converts "a number of" preceded by "in"', () => {
     const words = 'they act in a number of areas';
 
     const result = flow(splitText(words));
