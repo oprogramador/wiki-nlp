@@ -2274,7 +2274,7 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it('converts passive voice', () => {
+  it('converts passive voice with skipping "d"', () => {
     const words = 'The European economy is influenced by the coastline';
 
     const result = flow(splitText(words));
@@ -2302,6 +2302,41 @@ describe('articles, dates, verbs (e2e)', () => {
           },
         ],
         verb: 'influence',
+      },
+    ]]);
+  });
+
+  it('converts passive voice with skipping "ed"', () => {
+    const words = 'In 2000, the bill was passed by the parliament';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'bill',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'parliament',
+            ],
+          },
+        ],
+        verb: 'pass',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
       },
     ]]);
   });
