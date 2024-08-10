@@ -2,7 +2,7 @@ const convertPastParticipleToPresent = require('../../convertPastParticipleToPre
 const expect = require('../expect');
 
 describe('convertPastParticipleToPresent', () => {
-  it('', () => {
+  it('converts', () => {
     const map = {
       adopted: 'adopt',
       affected: 'affect',

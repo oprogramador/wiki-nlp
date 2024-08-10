@@ -1,57 +1,48 @@
 const isVowel = require('./isVowel');
 
 const convertPastParticipleToPresent = (word) => {
-  const withoutEd = word.replace(/ed$/, '');
-  const last = withoutEd[withoutEd.length - 1];
-  const beforeLast = withoutEd[withoutEd.length - 2];
-  const beforeBeforeLast = withoutEd[withoutEd.length - 3];
+  const base = word.replace(/ed$/, '');
+  const withE = `${base}e`;
+  const withoutDuplicatedLast = base.replace(/.$/, '');
+  const last = base[base.length - 1];
+  const beforeLast = base[base.length - 2];
+  const beforeBeforeLast = base[base.length - 3];
+
   if (last === 'i') {
-    return withoutEd.replace(/i$/, 'y');
-  }
-  if (beforeLast === 'e' && last === 'l') {
-    return withoutEd;
-  }
-  if (beforeLast === 'p' && last === 's') {
-    return `${withoutEd}e`;
+    return base.replace(/i$/, 'y');
   }
   if (last === 'x') {
-    return withoutEd;
-  }
-  if (beforeBeforeLast === 'e' && ['a', 'e'].includes(beforeLast)) {
-    return withoutEd;
+    return base;
   }
   if (beforeLast === last && ['p', 'n', 'r'].includes(last)) {
-    return withoutEd.replace(/.$/, '');
+    return withoutDuplicatedLast;
   }
-  if (beforeBeforeLast === 'e' && beforeLast === last && ['l'].includes(last)) {
-    return withoutEd.replace(/.$/, '');
+  if (beforeBeforeLast === 'e' && ['a', 'e'].includes(beforeLast)) {
+    return base;
+  }
+  if (beforeBeforeLast === 'e' && beforeLast === last && last === 'l') {
+    return withoutDuplicatedLast;
   }
   if (['a', 'o'].includes(beforeBeforeLast) && beforeLast === 'i') {
-    return withoutEd;
+    return base;
   }
-  if (beforeLast === 'i' && last === 't') {
-    return withoutEd;
+  if (beforeLast === 'e' && ['l', 'n'].includes(last)) {
+    return base;
   }
-  if (beforeLast === 'b' && last === 'l') {
-    return `${withoutEd}e`;
+  if (['it', 'ng'].includes(`${beforeLast}${last}`)) {
+    return base;
   }
-  if (beforeLast === 'e' && last === 'n') {
-    return withoutEd;
+  if (['ar', 'bl', 'ps'].includes(`${beforeLast}${last}`)) {
+    return withE;
   }
-  if (beforeLast === 'n' && last === 'g') {
-    return withoutEd;
-  }
-  if (beforeLast === 'a' && last === 'r') {
-    return `${withoutEd}e`;
-  }
-  if (['r', 'w', 'y'].includes(last) && ['a', 'e', 'o'].includes(beforeLast)) {
-    return withoutEd;
+  if (['a', 'e', 'o'].includes(beforeLast) && ['r', 'w', 'y'].includes(last)) {
+    return base;
   }
   if (isVowel(beforeLast) || isVowel(last) || ['c', 'g', 'v'].includes(last)) {
-    return `${withoutEd}e`;
+    return withE;
   }
 
-  return withoutEd;
+  return base;
 };
 
 module.exports = convertPastParticipleToPresent;
