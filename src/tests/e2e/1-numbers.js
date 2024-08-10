@@ -827,18 +827,6 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              'myself',
-            ],
-            subject: [
-              'held',
-            ],
-            verb: 'by',
-          },
-        ],
-        subject: [
-          {
             groupType: 'article',
             words: [
               'the',
@@ -846,7 +834,10 @@ describe('numbers (e2e)', () => {
             ],
           },
         ],
-        verb: 'is',
+        subject: [
+          'myself',
+        ],
+        verb: 'hold',
         when: {
           groupType: 'date',
           maxDay: 1,
@@ -870,18 +861,6 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              'yourself',
-            ],
-            subject: [
-              'held',
-            ],
-            verb: 'by',
-          },
-        ],
-        subject: [
-          {
             groupType: 'article',
             words: [
               'the',
@@ -889,7 +868,10 @@ describe('numbers (e2e)', () => {
             ],
           },
         ],
-        verb: 'is',
+        subject: [
+          'yourself',
+        ],
+        verb: 'hold',
         when: {
           groupType: 'date',
           maxDay: 31,

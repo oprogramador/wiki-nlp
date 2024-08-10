@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const convertPastParticipleToPresent = require('./convertPastParticipleToPresent');
 const toLowerCase = require('./toLowerCase');
+const irregularVerbsList = require('./irregularVerbsList');
 
 const isToBe = word => ['am', 'is', 'are', 'was', 'were'].includes(word);
 
@@ -12,13 +13,18 @@ const convertPassive = (phrase) => {
 
   const potentialNewVerb = _.get(object, '0.subject.0');
 
-  if (isToBe(verb) && _.get(object, '0.verb') === 'by' && /ed$/.test(potentialNewVerb)) {
+  const found = _.get(
+    irregularVerbsList.find(item => item.pastParticiple === potentialNewVerb),
+    'present',
+  );
+
+  if (isToBe(verb) && _.get(object, '0.verb') === 'by' && (/ed$/.test(potentialNewVerb) || found)) {
     return [
       {
         ...phrase[0],
         object: subject.map(toLowerCase),
         subject: object[0].object,
-        verb: convertPastParticipleToPresent(potentialNewVerb),
+        verb: found || convertPastParticipleToPresent(potentialNewVerb),
       },
     ];
   }
