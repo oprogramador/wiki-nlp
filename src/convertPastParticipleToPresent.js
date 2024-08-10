@@ -8,7 +8,22 @@ const convertPastParticipleToPresent = (word) => {
   if (last === 'i') {
     return withoutEd.replace(/i$/, 'y');
   }
+  if (beforeLast === 'e' && last === 'l') {
+    return withoutEd;
+  }
+  if (beforeLast === 'p' && last === 's') {
+    return `${withoutEd}e`;
+  }
+  if (last === 'x') {
+    return withoutEd;
+  }
+  if (beforeBeforeLast === 'e' && ['a', 'e'].includes(beforeLast)) {
+    return withoutEd;
+  }
   if (beforeLast === last && ['p', 'n', 'r'].includes(last)) {
+    return withoutEd.replace(/.$/, '');
+  }
+  if (beforeBeforeLast === 'e' && beforeLast === last && ['l'].includes(last)) {
     return withoutEd.replace(/.$/, '');
   }
   if (['a', 'o'].includes(beforeBeforeLast) && beforeLast === 'i') {
@@ -25,6 +40,9 @@ const convertPastParticipleToPresent = (word) => {
   }
   if (beforeLast === 'n' && last === 'g') {
     return withoutEd;
+  }
+  if (beforeLast === 'a' && last === 'r') {
+    return `${withoutEd}e`;
   }
   if (['r', 'w', 'y'].includes(last) && ['a', 'e', 'o'].includes(beforeLast)) {
     return withoutEd;
