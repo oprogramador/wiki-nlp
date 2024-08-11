@@ -1,7 +1,9 @@
 const _ = require('lodash');
 const { withoutLastOne } = require('./listUtils');
-const irregularVerbsPast = require('./irregularVerbsPastList');
 const auxiliary = require('./auxiliaryList');
+const irregularVerbsList = require('./irregularVerbsList');
+
+const irregularVerbsPast = irregularVerbsList.map(item => item.past);
 
 const looksLikeVerb = word => auxiliary.includes(word)
   || /ed$/.test(word)
