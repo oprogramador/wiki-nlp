@@ -1,6 +1,16 @@
+const _ = require('lodash');
 const isVowel = require('./isVowel');
+const irregularVerbsList = require('./irregularVerbsList');
 
 const convertPastParticipleToPresent = (word) => {
+  const found = _.get(
+    irregularVerbsList.find(item => item.pastParticiple === word),
+    'present',
+  );
+  if (found) {
+    return found;
+  }
+
   const base = word.replace(/ed$/, '');
   const withE = `${base}e`;
   const withoutDuplicatedLast = base.replace(/.$/, '');
