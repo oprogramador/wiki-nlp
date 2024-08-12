@@ -1585,12 +1585,90 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds date & locality', () => {
+  it('finds locality with "at"', () => {
+    const words = 'At the Paris Conference, the leaders signed an agreement';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'agreement',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'leaders',
+            ],
+          },
+        ],
+        verb: 'signed',
+        where: {
+          groupType: 'locality',
+          precise: {
+            groupType: 'article',
+            words: [
+              'the',
+              'Paris',
+              'Conference',
+            ],
+          },
+        },
+      },
+    ]]);
+  });
+
+  it('finds date & locality', () => {
     const words = 'In 2010 at the Madrid Conference, plans became a reality';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'reality',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'plans',
+            ],
+          },
+        ],
+        verb: 'became',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+        where: {
+          groupType: 'locality',
+          precise: {
+            groupType: 'article',
+            words: [
+              'the',
+              'Madrid',
+              'Conference',
+            ],
+          },
+        },
+      },
     ]]);
   });
 

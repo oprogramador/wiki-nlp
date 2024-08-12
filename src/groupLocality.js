@@ -34,6 +34,7 @@ const condition = word => (isLettersOnly(word) && isUpperCase(word) && !isDissal
 
 const allowedBefore = [
   ...auxiliary,
+  'at',
   'in',
 ];
 
@@ -48,6 +49,16 @@ const groupLocality = phrase => phrase.reduce(
     const last = _.last(accumulator) || {};
     const beforeLast = getBeforeLast(accumulator);
     const beforeBeforeLast = getBeforeBeforeLast(accumulator);
+    if (toLowerCase(beforeLast) === 'at' && _.get(last, 'groupType') === 'article' && current === ',') {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          groupType: 'locality',
+          precise: last,
+          preposition: 'at',
+        },
+      ];
+    }
     if ((allowedBefore.includes(toLowerCase(beforeBeforeLast)) || _.isEqual(beforeBeforeLast, {}))
       && condition(beforeLast)
       && last === ','
