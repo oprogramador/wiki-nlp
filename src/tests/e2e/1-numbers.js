@@ -1659,4 +1659,13 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts a pre-numbered item', () => {
+    const words = 'That street is named after the 1925 agreement';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
