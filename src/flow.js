@@ -22,6 +22,7 @@ const groupLocality = require('./groupLocality');
 const groupNumbered = require('./groupNumbered');
 const groupNumbers = require('./groupNumbers');
 const groupOr = require('./groupOr');
+const groupPrenumbered = require('./groupPrenumbered');
 const groupPrepositions = require('./groupPrepositions');
 const groupUnits = require('./groupUnits');
 const groupVerbs = require('./groupVerbs');
@@ -54,6 +55,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(pp => groupAnd(pp)),
     p => p.map(groupOr),
     p => p.map(groupUnits),
+    p => p.map(groupPrenumbered),
     p => p.map(itemize),
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),

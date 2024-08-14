@@ -1660,12 +1660,47 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a pre-numbered item', () => {
-    const words = 'That street is named after the 1925 agreement';
+  it('converts a pre-numbered item', () => {
+    const words = 'That street is named after the 1925 Paris Agreement';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'prenumbered',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'Paris',
+                    'Agreement',
+                  ],
+                },
+                number: 1925,
+              },
+            ],
+            subject: [
+              'named',
+            ],
+            verb: 'after',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'That',
+              'street',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
     ]]);
   });
 });
