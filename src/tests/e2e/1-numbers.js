@@ -1703,4 +1703,54 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('does not convert prenumbered when the second word is lowercase', () => {
+    const words = 'In 2023, the agrement was signed by leaders of the 27 EU member states';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'agrement',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'the',
+              {
+                groupType: 'quantity',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'EU',
+                    'member',
+                    'states',
+                  ],
+                },
+                value: 27,
+              },
+            ],
+            subject: [
+              'leaders',
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'sign',
+        when: {
+          groupType: 'date',
+          year: 2023,
+        },
+      },
+    ]]);
+  });
 });

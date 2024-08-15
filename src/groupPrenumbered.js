@@ -13,6 +13,7 @@ const groupPrenumbered = phrase => phrase
         && last.groupType === 'quantity'
         && current.groupType === 'article'
         && isUpperCase(current.words[0])
+        && isUpperCase(current.words[1])
     ) {
       return [
         ...withoutLast(accumulator, 2),
