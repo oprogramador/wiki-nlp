@@ -7,7 +7,7 @@ const isLettersOnly = (item) => {
     return false;
   }
 
-  return /^[a-zA-Záéíóúâêôãõàèìòòäöü-]+$/.test(item);
+  return /^[a-zA-Záéíóúâêôãõàèìòäöü-]+$/.test(item);
 };
 
 module.exports = isLettersOnly;
