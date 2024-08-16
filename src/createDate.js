@@ -14,10 +14,8 @@ const createDate = {
     ...(object.value ? { year: object.value } : {}),
   }),
   on: object => ({
-    day: object.day,
+    ..._.pick(object, 'minDay', 'maxDay', 'day', 'month', 'year'),
     groupType: 'date',
-    month: object.month,
-    year: object.year,
   }),
   since: (object, now) => ({
     groupType: 'date',

@@ -2449,4 +2449,42 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a day range after "on"', () => {
+    const words = 'The third session was held on 10–20 May 2015 in Pärnu, Estonia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'held',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'The',
+              'third',
+              'session',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxDay: 20,
+          minDay: 10,
+          month: 5,
+          year: 2015,
+        },
+        where: {
+          general: 'Estonia',
+          groupType: 'locality',
+          precise: 'Pärnu',
+        },
+      },
+    ]]);
+  });
 });
