@@ -275,7 +275,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'spending',
             ],
           },
@@ -1068,7 +1068,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'area',
             ],
           },
@@ -1353,7 +1353,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'anthem',
             ],
           },
@@ -1441,7 +1441,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'USA',
             ],
           },
@@ -1473,7 +1473,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'trade',
               'surplus',
             ],
@@ -1513,7 +1513,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'trade',
               'surplus',
             ],
@@ -1556,7 +1556,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'ratio',
             ],
           },
@@ -1621,7 +1621,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'parliament',
             ],
           },
@@ -1789,6 +1789,41 @@ describe('numbers (e2e)', () => {
           month: 8,
           year: 1954,
         },
+      },
+    ]]);
+  });
+
+  it('skips "The" before a number', () => {
+    const words = 'The two largest suppliers are Russia and Norway';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              'Russia',
+              'Norway',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'largest',
+                'suppliers',
+              ],
+            },
+            value: 2,
+          },
+        ],
+        verb: 'are',
       },
     ]]);
   });

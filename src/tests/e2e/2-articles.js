@@ -334,7 +334,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'budget',
             ],
           },
@@ -577,7 +577,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'agency',
             ],
           },
@@ -633,7 +633,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'Treaty',
             ],
           },
@@ -934,7 +934,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'period',
             ],
           },
@@ -1210,7 +1210,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'lowest',
               'rates',
             ],
@@ -1291,7 +1291,7 @@ describe('articles, dates, verbs (e2e)', () => {
               {
                 groupType: 'article',
                 words: [
-                  'The',
+                  'the',
                   'champion',
                 ],
               },
@@ -1882,7 +1882,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'average',
               'European',
               'income',
@@ -1914,7 +1914,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'average',
               'European',
               'income',
@@ -2194,7 +2194,7 @@ describe('articles, dates, verbs (e2e)', () => {
             {
               groupType: 'article',
               words: [
-                'The',
+                'the',
                 'Court',
               ],
             },
@@ -2244,7 +2244,7 @@ describe('articles, dates, verbs (e2e)', () => {
             {
               groupType: 'article',
               words: [
-                'The',
+                'the',
                 'Court',
               ],
             },
@@ -2271,7 +2271,7 @@ describe('articles, dates, verbs (e2e)', () => {
             {
               groupType: 'article',
               words: [
-                'The',
+                'the',
                 'judges',
               ],
             },
@@ -2301,7 +2301,7 @@ describe('articles, dates, verbs (e2e)', () => {
             {
               groupType: 'article',
               words: [
-                'The',
+                'the',
                 'judges',
               ],
             },
@@ -2364,7 +2364,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'European',
               'economy',
             ],
@@ -2431,7 +2431,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'growth',
             ],
           },
@@ -2465,7 +2465,7 @@ describe('articles, dates, verbs (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'The',
+              'the',
               'third',
               'session',
             ],
