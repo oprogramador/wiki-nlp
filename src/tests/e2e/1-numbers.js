@@ -1725,7 +1725,6 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'preposition',
             object: [
-              'the',
               {
                 groupType: 'quantity',
                 item: {
@@ -1749,6 +1748,46 @@ describe('numbers (e2e)', () => {
         when: {
           groupType: 'date',
           year: 2023,
+        },
+      },
+    ]]);
+  });
+
+  it('skips "the" before a number', () => {
+    const words = 'On 13 August 1954, the three countries accepted the rules';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'rules',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'countries',
+              ],
+            },
+            value: 3,
+          },
+        ],
+        verb: 'accepted',
+        when: {
+          day: 13,
+          groupType: 'date',
+          month: 8,
+          year: 1954,
         },
       },
     ]]);

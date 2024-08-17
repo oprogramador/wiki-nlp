@@ -32,6 +32,7 @@ const includeDatesFromAnd = require('./includeDatesFromAnd');
 const includeLocalities = require('./includeLocalities');
 const itemize = require('./itemize');
 const removeMeaningless = require('./removeMeaningless');
+const skipArticleBeforeNumber = require('./skipArticleBeforeNumber');
 const splitBut = require('./splitBut');
 const splitWhich = require('./splitWhich');
 
@@ -57,6 +58,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupUnits),
     p => p.map(groupPrenumbered),
     p => p.map(itemize),
+    p => p.map(skipArticleBeforeNumber),
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),
     p => p.map(pp => convertBoth(pp)),
