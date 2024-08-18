@@ -1827,4 +1827,35 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts an ordinal', () => {
+    const words = 'India was the second-largest textile exporter in the 2003 calendar year';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            item: [
+              'textile',
+              'exporter',
+            ],
+            ordinal: 2,
+          },
+        ],
+        subject: [
+          'India',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2003,
+        },
+      },
+    ]]);
+  });
 });
