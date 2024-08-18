@@ -1828,7 +1828,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts an ordinal', () => {
+  it('converts an ordinal - second', () => {
     const words = 'India was the second-largest textile exporter in the 2003 calendar year';
 
     const result = flow(splitText(words));
@@ -1854,6 +1854,37 @@ describe('numbers (e2e)', () => {
         when: {
           groupType: 'date',
           year: 2003,
+        },
+      },
+    ]]);
+  });
+
+  it('converts an ordinal - third', () => {
+    const words = 'In 2005, Japan was the third-largest fish exporter';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            item: [
+              'fish',
+              'exporter',
+            ],
+            ordinal: 3,
+          },
+        ],
+        subject: [
+          'Japan',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2005,
         },
       },
     ]]);

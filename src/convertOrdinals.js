@@ -19,7 +19,7 @@ const convertOrdinals = phrase => phrase
           {
             adjective: current.replace(`${found}-`, ''),
             groupType: 'ordinal',
-            ordinal: 2,
+            ordinal: map[found],
           },
         ];
       }
