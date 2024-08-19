@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { withoutLastOne } = require('./listUtils');
+const { getBeforeLast, withoutLast, withoutLastOne } = require('./listUtils');
 const prepositions = require('./prepositionList');
 
 const map = {
@@ -10,6 +10,7 @@ const map = {
 const convertOrdinals = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
+    const beforeLast = getBeforeLast(accumulator);
 
     if (last === 'the' && current.startsWith) {
       const found = Object.keys(map).find(key => current.startsWith(`${key}-`));
@@ -26,6 +27,23 @@ const convertOrdinals = phrase => phrase
     }
     if (
       last.groupType === 'ordinal'
+      && last.higher
+      && (current.groupType === 'article' || !current.groupType)
+      && !prepositions.includes(current)
+    ) {
+      return [
+        ...withoutLastOne(accumulator),
+        {
+          ...last,
+          higher: [
+            ...(last.higher || []),
+            current,
+          ],
+        },
+      ];
+    }
+    if (
+      last.groupType === 'ordinal'
       && (current.groupType === 'article' || !current.groupType)
       && !prepositions.includes(current)
     ) {
@@ -35,6 +53,22 @@ const convertOrdinals = phrase => phrase
           ...last,
           item: [
             ...(last.item || []),
+            current,
+          ],
+        },
+      ];
+    }
+    if (
+      beforeLast.groupType === 'ordinal'
+      && last === 'after'
+      && (current.groupType === 'article' || !current.groupType)
+    ) {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          ...beforeLast,
+          higher: [
+            ...(last.higher || []),
             current,
           ],
         },

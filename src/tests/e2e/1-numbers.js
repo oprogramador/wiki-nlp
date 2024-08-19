@@ -1889,4 +1889,74 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts an ordinal with "after" and one word', () => {
+    const words = 'India was the second-largest textile exporter after China in 2004';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            higher: [
+              'China',
+            ],
+            item: [
+              'textile',
+              'exporter',
+            ],
+            ordinal: 2,
+          },
+        ],
+        subject: [
+          'India',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2004,
+        },
+      },
+    ]]);
+  });
+
+  it('converts an ordinal with "after" and many words', () => {
+    const words = 'India was the second-largest services exporter after the United States in 2014';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            higher: [
+              'the',
+              'United',
+              'States',
+            ],
+            item: [
+              'services',
+              'exporter',
+            ],
+            ordinal: 2,
+          },
+        ],
+        subject: [
+          'India',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2014,
+        },
+      },
+    ]]);
+  });
 });
