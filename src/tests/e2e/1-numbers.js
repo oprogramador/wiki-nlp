@@ -1959,4 +1959,23 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts an ordinal with "after" followed by AND with 2 items', () => {
+    const words = 'Japan was the third-largest car exporter after Germany and China in 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts an ordinal with "after" followed by AND with many items', () => {
+    // eslint-disable-next-line max-len
+    const words = 'South Korea was the sixth-largest car exporter after Germany, China, Japan, Mexico and United States in 1990';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
