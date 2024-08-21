@@ -1,6 +1,5 @@
 const _ = require('lodash');
-const { getBeforeLast, withoutLast, withoutLastOne } = require('./listUtils');
-const prepositions = require('./prepositionList');
+const { withoutFirst } = require('./listUtils');
 
 const map = {
   second: 2,
@@ -9,70 +8,19 @@ const map = {
 
 const convertOrdinals = phrase => phrase
   .reduce((accumulator, current) => {
-    const last = _.last(accumulator) || {};
-    const beforeLast = getBeforeLast(accumulator);
-
-    if (last === 'the' && current.startsWith) {
-      const found = Object.keys(map).find(key => current.startsWith(`${key}-`));
+    if (_.get(current, 'groupType') === 'article' && _.get(current, 'words.0') === 'the') {
+      const found = Object.keys(map).find(key => _.get(current, 'words.1', '').startsWith(`${key}-`));
       if (found) {
         return [
-          ...withoutLastOne(accumulator),
+          ...accumulator,
           {
-            adjective: current.replace(`${found}-`, ''),
+            adjective: current.words[1].replace(`${found}-`, ''),
             groupType: 'ordinal',
+            item: withoutFirst(current.words, 2),
             ordinal: map[found],
           },
         ];
       }
-    }
-    if (
-      last.groupType === 'ordinal'
-      && last.higher
-      && (current.groupType === 'article' || !current.groupType)
-      && !prepositions.includes(current)
-    ) {
-      return [
-        ...withoutLastOne(accumulator),
-        {
-          ...last,
-          higher: [
-            ...(last.higher || []),
-            current,
-          ],
-        },
-      ];
-    }
-    if (
-      last.groupType === 'ordinal'
-      && (current.groupType === 'article' || !current.groupType)
-      && !prepositions.includes(current)
-    ) {
-      return [
-        ...withoutLastOne(accumulator),
-        {
-          ...last,
-          item: [
-            ...(last.item || []),
-            current,
-          ],
-        },
-      ];
-    }
-    if (
-      beforeLast.groupType === 'ordinal'
-      && last === 'after'
-      && (current.groupType === 'article' || !current.groupType)
-    ) {
-      return [
-        ...withoutLast(accumulator, 2),
-        {
-          ...beforeLast,
-          higher: [
-            ...(last.higher || []),
-            current,
-          ],
-        },
-      ];
     }
 
     return [

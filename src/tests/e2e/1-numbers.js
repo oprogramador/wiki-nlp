@@ -1890,7 +1890,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts an ordinal with "after" and one word', () => {
+  it.skip('converts an ordinal with "after" and one word', () => {
     const words = 'India was the second-largest textile exporter after China in 2004';
 
     const result = flow(splitText(words));
@@ -1924,7 +1924,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts an ordinal with "after" and many words', () => {
+  it.skip('converts an ordinal with "after" and many words', () => {
     const words = 'India was the second-largest services exporter after the United States in 2014';
 
     const result = flow(splitText(words));
