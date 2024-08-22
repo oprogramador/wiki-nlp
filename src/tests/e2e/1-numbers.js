@@ -1890,7 +1890,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts an ordinal with "after" and one word', () => {
+  it('converts an ordinal with "after" and one word', () => {
     const words = 'India was the second-largest textile exporter after China in 2004';
 
     const result = flow(splitText(words));
@@ -1902,9 +1902,7 @@ describe('numbers (e2e)', () => {
           {
             adjective: 'largest',
             groupType: 'ordinal',
-            higher: [
-              'China',
-            ],
+            higher: 'China',
             item: [
               'textile',
               'exporter',
@@ -1924,7 +1922,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts an ordinal with "after" and many words', () => {
+  it('converts an ordinal with "after" and many words', () => {
     const words = 'India was the second-largest services exporter after the United States in 2014';
 
     const result = flow(splitText(words));
@@ -1936,11 +1934,14 @@ describe('numbers (e2e)', () => {
           {
             adjective: 'largest',
             groupType: 'ordinal',
-            higher: [
-              'the',
-              'United',
-              'States',
-            ],
+            higher: {
+              groupType: 'article',
+              words: [
+                'the',
+                'United',
+                'States',
+              ],
+            },
             item: [
               'services',
               'exporter',
@@ -1960,22 +1961,95 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts an ordinal with "after" followed by AND with 2 items', () => {
+  it('converts an ordinal with "after" followed by AND with 2 items', () => {
     const words = 'Japan was the third-largest car exporter after Germany and China in 2000';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            higher: {
+              groupType: 'and',
+              members: [
+                'Germany',
+                'China',
+              ],
+            },
+            item: [
+              'car',
+              'exporter',
+            ],
+            ordinal: 3,
+          },
+        ],
+        subject: [
+          'Japan',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+      },
     ]]);
   });
 
-  it.skip('converts an ordinal with "after" followed by AND with many items', () => {
+  it('converts an ordinal with "after" followed by AND with many items', () => {
     // eslint-disable-next-line max-len
     const words = 'South Korea was the sixth-largest car exporter after Germany, China, Japan, Mexico and United States in 1990';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            higher: {
+              groupType: 'and',
+              members: [
+                'Germany',
+                'China',
+                'Japan',
+                'Mexico',
+                {
+                  groupType: 'article',
+                  words: [
+                    'United',
+                    'States',
+                  ],
+                },
+              ],
+            },
+            item: [
+              'car',
+              'exporter',
+            ],
+            ordinal: 6,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'South',
+              'Korea',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1990,
+        },
+      },
     ]]);
   });
 });
