@@ -2052,4 +2052,32 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts an ordinal with scope', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Indonesia has the world\'s fourth-largest population';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            item: [
+              'population',
+            ],
+            ordinal: 4,
+            scope: 'world',
+          },
+        ],
+        subject: [
+          'Indonesia',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });

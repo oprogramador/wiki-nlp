@@ -10,6 +10,8 @@ const map = {
   sixth: 6,
 };
 
+const postfix = '\'s';
+
 const convertOrdinals = phrase => phrase
   .reduce((accumulator, current) => {
     const beforeLast = getBeforeLast(accumulator);
@@ -26,15 +28,17 @@ const convertOrdinals = phrase => phrase
     }
 
     if (_.get(current, 'groupType') === 'article' && _.get(current, 'words.0') === 'the') {
-      const found = Object.keys(map).find(key => _.get(current, 'words.1', '').startsWith(`${key}-`));
+      const position = _.get(current, 'words.1', '').endsWith(postfix) ? 2 : 1;
+      const found = Object.keys(map).find(key => _.get(current, `words.${position}`, '').startsWith(`${key}-`));
       if (found) {
         return [
           ...accumulator,
           {
-            adjective: current.words[1].replace(`${found}-`, ''),
+            adjective: current.words[position].replace(`${found}-`, ''),
             groupType: 'ordinal',
-            item: withoutFirst(current.words, 2),
+            item: withoutFirst(current.words, position + 1),
             ordinal: map[found],
+            ...(position > 1 ? { scope: current.words[1].replace(postfix, '') } : {}),
           },
         ];
       }
