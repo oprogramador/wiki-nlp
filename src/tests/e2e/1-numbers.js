@@ -2054,7 +2054,6 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts an ordinal with scope', () => {
-    // eslint-disable-next-line max-len
     const words = 'Indonesia has the world\'s fourth-largest population';
 
     const result = flow(splitText(words));
@@ -2077,6 +2076,49 @@ describe('numbers (e2e)', () => {
           'Indonesia',
         ],
         verb: 'has',
+      },
+    ]]);
+  });
+
+  it('converts AND of ordinals', () => {
+    const words = 'In 2010, Japan was the fourth-largest importer and the third-largest exporter';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                adjective: 'largest',
+                groupType: 'ordinal',
+                item: [
+                  'importer',
+                ],
+                ordinal: 4,
+              },
+              {
+                adjective: 'largest',
+                groupType: 'ordinal',
+                item: [
+                  'exporter',
+                ],
+                ordinal: 3,
+              },
+            ],
+          },
+        ],
+        subject: [
+          'Japan',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
       },
     ]]);
   });

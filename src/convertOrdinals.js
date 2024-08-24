@@ -8,6 +8,8 @@ const map = {
   fourth: 4,
   fifth: 5,
   sixth: 6,
+  ninth: 9,
+  sixteenth: 16,
 };
 
 const postfix = '\'s';
@@ -42,6 +44,15 @@ const convertOrdinals = phrase => phrase
           },
         ];
       }
+    }
+    if (_.get(current, 'groupType') === 'and') {
+      return [
+        ...accumulator,
+        {
+          ...current,
+          members: current.members.map(item => convertOrdinals([item])[0]),
+        },
+      ];
     }
 
     return [
