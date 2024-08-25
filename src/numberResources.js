@@ -42,6 +42,9 @@ const stripPlural = (word) => {
 };
 
 const ordinalToNumberWord = (word) => {
+  if (word === 'first') {
+    return 'one';
+  }
   if (word === 'second') {
     return 'two';
   }
@@ -53,6 +56,12 @@ const ordinalToNumberWord = (word) => {
   }
   if (!word.replace) {
     return '';
+  }
+  if (word.endsWith('hth')) {
+    return word.replace(/hth$/, 'ht');
+  }
+  if (word.endsWith('inth')) {
+    return word.replace(/inth$/, 'ine');
   }
   if (word.endsWith('fth')) {
     return word.replace(/fth$/, 've');

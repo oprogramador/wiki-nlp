@@ -2139,7 +2139,7 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts AND of ordinals', () => {
-    const words = 'In 2010, Japan was the fourth-largest importer and the third-largest exporter';
+    const words = 'In 2010, Brazil was the first-fastest producer, the ninth-largest importer and the eighth-largest exporter';
 
     const result = flow(splitText(words));
 
@@ -2151,12 +2151,20 @@ describe('numbers (e2e)', () => {
             groupType: 'and',
             members: [
               {
+                adjective: 'fastest',
+                groupType: 'ordinal',
+                item: [
+                  'producer',
+                ],
+                ordinal: 1,
+              },
+              {
                 adjective: 'largest',
                 groupType: 'ordinal',
                 item: [
                   'importer',
                 ],
-                ordinal: 4,
+                ordinal: 9,
               },
               {
                 adjective: 'largest',
@@ -2164,13 +2172,13 @@ describe('numbers (e2e)', () => {
                 item: [
                   'exporter',
                 ],
-                ordinal: 3,
+                ordinal: 8,
               },
             ],
           },
         ],
         subject: [
-          'Japan',
+          'Brazil',
         ],
         verb: 'was',
         when: {
