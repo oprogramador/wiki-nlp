@@ -2139,6 +2139,7 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts AND of ordinals', () => {
+    // eslint-disable-next-line max-len
     const words = 'In 2010, Brazil was the first-fastest producer, the ninth-largest importer and the eighth-largest exporter';
 
     const result = flow(splitText(words));
