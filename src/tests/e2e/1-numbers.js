@@ -2189,4 +2189,37 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts an ordinal with "by"', () => {
+    const words = 'Saudi Arabia is the twelfth-largest country by area';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            by: 'area',
+            groupType: 'ordinal',
+            item: [
+              'country',
+            ],
+            ordinal: 12,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Saudi',
+              'Arabia',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

@@ -20,6 +20,16 @@ const convertOrdinals = phrase => phrase
       ];
     }
 
+    if (beforeLast.groupType === 'ordinal' && last === 'by') {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          ...beforeLast,
+          by: current,
+        },
+      ];
+    }
+
     if (_.get(current, 'groupType') === 'article' && _.get(current, 'words.0') === 'the') {
       const position = _.get(current, 'words.1', '').endsWith(postfix) ? 2 : 1;
       const multiWord = _.get(current, `words.${position}`, '');
