@@ -1,16 +1,7 @@
 const _ = require('lodash');
 const { getBeforeLast, withoutFirst, withoutLast } = require('./listUtils');
-
-/* eslint-disable sort-keys */
-const map = {
-  second: 2,
-  third: 3,
-  fourth: 4,
-  fifth: 5,
-  sixth: 6,
-  ninth: 9,
-  sixteenth: 16,
-};
+const { ordinalToNumber } = require('./numberResources');
+const isLettersOnly = require('./isLettersOnly');
 
 const postfix = '\'s';
 
@@ -31,18 +22,23 @@ const convertOrdinals = phrase => phrase
 
     if (_.get(current, 'groupType') === 'article' && _.get(current, 'words.0') === 'the') {
       const position = _.get(current, 'words.1', '').endsWith(postfix) ? 2 : 1;
-      const found = Object.keys(map).find(key => _.get(current, `words.${position}`, '').startsWith(`${key}-`));
-      if (found) {
-        return [
-          ...accumulator,
-          {
-            adjective: current.words[position].replace(`${found}-`, ''),
-            groupType: 'ordinal',
-            item: withoutFirst(current.words, position + 1),
-            ordinal: map[found],
-            ...(position > 1 ? { scope: current.words[1].replace(postfix, '') } : {}),
-          },
-        ];
+      const multiWord = _.get(current, `words.${position}`, '');
+      const split = multiWord.split('-');
+      if (split.length === 2 && isLettersOnly(split[0]) && isLettersOnly(split[1])) {
+        const numberWord = multiWord.split('-')[0];
+        const found = ordinalToNumber(numberWord);
+        if (found) {
+          return [
+            ...accumulator,
+            {
+              adjective: current.words[position].replace(`${numberWord}-`, ''),
+              groupType: 'ordinal',
+              item: withoutFirst(current.words, position + 1),
+              ordinal: found,
+              ...(position > 1 ? { scope: current.words[1].replace(postfix, '') } : {}),
+            },
+          ];
+        }
       }
     }
     if (_.get(current, 'groupType') === 'and') {

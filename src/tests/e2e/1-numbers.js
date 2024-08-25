@@ -1229,6 +1229,64 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts a fraction with "half"', () => {
+    const words = 'They had one half of the GDP';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'GDP',
+              ],
+            },
+            value: 0.5,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'had',
+      },
+    ]]);
+  });
+
+  it('converts a fraction with "ies"', () => {
+    const words = 'They had three twenties of the GDP';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'GDP',
+              ],
+            },
+            value: 0.15,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'had',
+      },
+    ]]);
+  });
+
   it('converts a fraction with 2 as the numerator', () => {
     const words = 'They have around two fifths of global population';
 

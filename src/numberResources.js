@@ -30,6 +30,39 @@ const wordsToNumbers = {
   ninety: 90,
 };
 
+const stripPlural = (word) => {
+  if (!word.endsWith) {
+    return word;
+  }
+  if (word.endsWith('ies')) {
+    return word.replace(/ies$/, 'y');
+  }
+
+  return word.replace(/s$/, '');
+};
+
+const ordinalToNumberWord = (word) => {
+  if (word === 'second') {
+    return 'two';
+  }
+  if (word === 'half') {
+    return 'two';
+  }
+  if (word === 'third') {
+    return 'three';
+  }
+  if (!word.replace) {
+    return '';
+  }
+  if (word.endsWith('fth')) {
+    return word.replace(/fth$/, 've');
+  }
+
+  return word.replace(/th$/, '');
+};
+
+const ordinalToNumber = word => wordsToNumbers[ordinalToNumberWord(stripPlural(word))];
+
 const largeNumbers = {
   million: 1e6,
   billion: 1e9,
@@ -108,12 +141,13 @@ const isNumeric = (word) => {
 };
 
 module.exports = {
-  wordsToNumbers,
-  largeNumbers,
-  fuzzy,
-  aroundWords,
   aboveWords,
-  currencies,
+  aroundWords,
   convertWithDigits,
+  currencies,
+  fuzzy,
   isNumeric,
+  largeNumbers,
+  ordinalToNumber,
+  wordsToNumbers,
 };
