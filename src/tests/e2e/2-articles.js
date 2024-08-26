@@ -2487,4 +2487,38 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "respectively"', () => {
+    const words = 'The Shias and Ahmadis, respectively, constitute 1.5% and 0.3% of Muslims';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      [
+        {
+          object: {
+            groupType: 'share',
+            value: 0.015,
+          },
+          subject: {
+            groupType: 'article',
+            words: [
+              'the',
+              'Shias',
+            ],
+          },
+          verb: 'constitute',
+        },
+        {
+          object: {
+            groupType: 'share',
+            item: 'Muslims',
+            value: 0.003,
+          },
+          subject: 'Ahmadis',
+          verb: 'constitute',
+        },
+      ],
+    ]]);
+  });
 });

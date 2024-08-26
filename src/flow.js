@@ -14,6 +14,7 @@ const convertPassive = require('./convertPassive');
 const convertPercent = require('./convertPercent');
 const convertPronouns = require('./convertPronouns');
 const convertPunctuation = require('./convertPunctuation');
+const convertRespectively = require('./convertRespectively');
 const convertSynonyms = require('./convertSynonyms');
 const flatArticles = require('./flatArticles');
 const groupAnd = require('./groupAnd');
@@ -71,6 +72,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(pp => splitBut(pp)).flat(),
     p => p.map(convertDateRanges),
     p => p.map(groupVerbs),
+    p => p.map(convertRespectively),
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),
     p => p.map(includeLocalities),
