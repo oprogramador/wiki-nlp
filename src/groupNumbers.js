@@ -1,14 +1,17 @@
 const _ = require('lodash');
 const {
-  largeNumbers,
-  fuzzy,
-  aroundWords,
   aboveWords,
+  aroundWords,
   currencies,
+  fuzzy,
   isNumeric,
+  largeNumbers,
+  nullWords,
 } = require('./numberResources');
 const toLowerCase = require('./toLowerCase');
 const { getBeforeLast, withoutLastOne, withoutLast } = require('./listUtils');
+
+const specialWords = [...aroundWords, ...aboveWords, ...nullWords];
 
 const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {
@@ -24,7 +27,7 @@ const groupNumbers = phrase => phrase
       ];
     }
     if (isNumeric(current)) {
-      if ([...aroundWords, ...aboveWords].includes(toLowerCase(beforeLast)) && Object.keys(currencies).includes(last)) {
+      if (specialWords.includes(toLowerCase(beforeLast)) && Object.keys(currencies).includes(last)) {
         return [
           ...withoutLast(accumulator, 2),
           {
@@ -34,7 +37,7 @@ const groupNumbers = phrase => phrase
         ];
       }
 
-      if ([...aroundWords, ...aboveWords, ...Object.keys(currencies)].includes(toLowerCase(last))) {
+      if ([...specialWords, ...Object.keys(currencies)].includes(toLowerCase(last))) {
         return [
           ...withoutLastOne(accumulator),
           {

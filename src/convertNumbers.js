@@ -1,11 +1,12 @@
 const {
-  wordsToNumbers,
-  largeNumbers,
-  fuzzy,
-  aroundWords,
   aboveWords,
-  currencies,
+  aroundWords,
   convertWithDigits,
+  currencies,
+  fuzzy,
+  largeNumbers,
+  nullWords,
+  wordsToNumbers,
 } = require('./numberResources');
 const { withoutFirstOne } = require('./listUtils');
 const toLowerCase = require('./toLowerCase');
@@ -32,7 +33,7 @@ const convertNumbers = phrase => phrase
     let isExact = true;
     let isMin = false;
     let currency = null;
-    if ([...aroundWords, ...aboveWords].includes(toLowerCase(words[0]))) {
+    if ([...aroundWords, ...aboveWords, ...nullWords].includes(toLowerCase(words[0]))) {
       if (aroundWords.includes(toLowerCase(words[0]))) {
         isExact = false;
       }

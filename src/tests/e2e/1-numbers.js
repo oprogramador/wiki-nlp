@@ -2222,4 +2222,76 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('skips "only" before a number', () => {
+    const words = 'The government officially recognises only four religions';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'officially',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'religions',
+            value: 4,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'government',
+            ],
+          },
+        ],
+        verb: 'recognises',
+      },
+    ]]);
+  });
+
+  it('converts an example (with a colon)', () => {
+    const words = 'The government officially recognises four religions: Islam, Hinduism, Buddhism, and Confucianism';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'officially',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              example: {
+                groupType: 'and',
+                members: [
+                  'Islam',
+                  'Hinduism',
+                  'Buddhism',
+                  'Confucianism',
+                ],
+              },
+              general: 'religions',
+              groupType: 'example',
+            },
+            value: 4,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'government',
+            ],
+          },
+        ],
+        verb: 'recognises',
+      },
+    ]]);
+  });
 });

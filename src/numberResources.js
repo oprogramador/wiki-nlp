@@ -104,6 +104,10 @@ const aroundWords = [
   'approximately',
 ];
 
+const nullWords = [
+  'only',
+];
+
 const aboveWords = [
   'above',
   'over',
@@ -157,6 +161,7 @@ module.exports = {
   fuzzy,
   isNumeric,
   largeNumbers,
+  nullWords,
   ordinalToNumber,
   wordsToNumbers,
 };
