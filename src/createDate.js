@@ -8,6 +8,10 @@ const createDate = {
     ...(object.month ? { maxMonth: object.month, minMonth: now.getMonth() + 1 } : { }),
     ...(object.day ? { maxDay: object.day, minDay: now.getDate() } : { }),
   }),
+  during: object => ({
+    groupType: 'date',
+    ..._.pick(object, 'maxYear', 'minYear', 'month', 'year'),
+  }),
   in: object => ({
     groupType: 'date',
     ..._.pick(object, 'maxYear', 'minYear', 'month', 'year'),

@@ -2521,4 +2521,26 @@ describe('articles, dates, verbs (e2e)', () => {
       ],
     ]]);
   });
+
+  it('converts a decade with "during"', () => {
+    const words = 'Production peaked during the 1950s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Production',
+        ],
+        verb: 'peaked',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+          minYear: 1950,
+        },
+      },
+    ]]);
+  });
 });
