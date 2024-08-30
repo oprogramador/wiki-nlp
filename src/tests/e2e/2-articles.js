@@ -2543,4 +2543,13 @@ describe('articles, dates, verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts a century', () => {
+    const words = 'In the 19th century, Indian literature was created by great writers';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
