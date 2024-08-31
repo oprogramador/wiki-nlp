@@ -2612,7 +2612,7 @@ describe('articles, dates, verbs (e2e)', () => {
   });
 
   it('converts a century with "late"', () => {
-    const words = 'In the late 14th century, there was a plague';
+    const words = 'In the late 3rd century, there was a plague';
 
     const result = flow(splitText(words));
 
@@ -2634,8 +2634,32 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'was',
         when: {
           groupType: 'date',
-          maxYear: 1400,
-          minYear: 1351,
+          maxYear: 300,
+          minYear: 251,
+        },
+      },
+    ]]);
+  });
+
+  it.skip('converts a century with a number word', () => {
+    const words = 'Italy was rich in the fourteenth century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Italy',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1399,
+          minYear: 1300,
         },
       },
     ]]);

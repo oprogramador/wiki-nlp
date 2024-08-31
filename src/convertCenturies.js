@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const { getBeforeLast, withoutLast } = require('./listUtils');
+const { ordinalToNumber } = require('./numberResources');
 
 const convertCenturies = phrase => phrase.reduce(
   (accumulator, current) => {
@@ -9,7 +10,7 @@ const convertCenturies = phrase => phrase.reduce(
     if (!_.get(last, 'replace')) {
       return [...accumulator, current];
     }
-    const potentialNumber = Number(last.replace(/th$/, '')) - 1;
+    const potentialNumber = ordinalToNumber(last) - 1;
 
     if (!Number.isNaN(potentialNumber)
       && current === 'century'

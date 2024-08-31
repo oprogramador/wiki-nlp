@@ -67,10 +67,17 @@ const ordinalToNumberWord = (word) => {
     return word.replace(/fth$/, 've');
   }
 
-  return word.replace(/th$/, '');
+  return word
+    .replace(/th$/, '')
+    .replace(/nd$/, '')
+    .replace(/rd$/, '');
 };
 
-const ordinalToNumber = word => wordsToNumbers[ordinalToNumberWord(stripPlural(word))];
+const ordinalToNumber = (word) => {
+  const number = ordinalToNumberWord(stripPlural(word));
+
+  return wordsToNumbers[number] || Number(number);
+};
 
 const largeNumbers = {
   million: 1e6,
