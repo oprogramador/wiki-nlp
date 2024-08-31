@@ -66,6 +66,9 @@ const ordinalToNumberWord = (word) => {
   if (word.endsWith('fth')) {
     return word.replace(/fth$/, 've');
   }
+  if (word.endsWith('ieth')) {
+    return word.replace(/ieth$/, 'y');
+  }
 
   return word
     .replace(/th$/, '')

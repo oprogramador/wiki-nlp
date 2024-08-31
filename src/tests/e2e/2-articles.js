@@ -2641,8 +2641,8 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a century with a number word', () => {
-    const words = 'Italy was rich in the fourteenth century';
+  it('converts a century with a number word', () => {
+    const words = 'Rome was destroyed in the fifth century';
 
     const result = flow(splitText(words));
 
@@ -2650,16 +2650,68 @@ describe('articles, dates, verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          'rich',
+          'destroyed',
         ],
         subject: [
-          'Italy',
+          'Rome',
         ],
         verb: 'was',
         when: {
           groupType: 'date',
-          maxYear: 1399,
-          minYear: 1300,
+          maxYear: 500,
+          minYear: 401,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a century with a number word + "late"', () => {
+    const words = 'Rome was strong in the late second century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'strong',
+        ],
+        subject: [
+          'Rome',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 200,
+          minYear: 151,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a century with a number word + "early"', () => {
+    const words = 'In the early twentieth century, there were many dictatorships';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'dictatorships',
+            min: 3,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
         },
       },
     ]]);

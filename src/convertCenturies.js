@@ -7,17 +7,31 @@ const convertCenturies = phrase => phrase.reduce(
     const beforeLast = getBeforeLast(accumulator);
     const last = _.last(accumulator);
 
-    if (!_.get(last, 'replace')) {
+    let toSkip = 2;
+    let begin = beforeLast.words;
+    let middle = last;
+    let end = current;
+
+    if (current.groupType === 'article'
+      && _.last(current.words) === 'century'
+    ) {
+      toSkip = 0;
+      begin = withoutLast(current.words, 2);
+      middle = getBeforeLast(current.words);
+      end = _.last(current.words);
+    }
+
+    if (!_.get(middle, 'replace')) {
       return [...accumulator, current];
     }
-    const potentialNumber = ordinalToNumber(last) - 1;
+    const potentialNumber = ordinalToNumber(middle) - 1;
 
     if (!Number.isNaN(potentialNumber)
-      && current === 'century'
+      && end === 'century'
     ) {
-      if (JSON.stringify(_.get(beforeLast, 'words')) === '["the"]') {
+      if (JSON.stringify(begin) === '["the"]') {
         return [
-          ...withoutLast(accumulator, 2),
+          ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
             maxYear: potentialNumber * 100 + 100,
@@ -25,9 +39,9 @@ const convertCenturies = phrase => phrase.reduce(
           },
         ];
       }
-      if (JSON.stringify(_.get(beforeLast, 'words')) === '["the","early"]') {
+      if (JSON.stringify(begin) === '["the","early"]') {
         return [
-          ...withoutLast(accumulator, 2),
+          ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
             maxYear: potentialNumber * 100 + 50,
@@ -35,9 +49,9 @@ const convertCenturies = phrase => phrase.reduce(
           },
         ];
       }
-      if (JSON.stringify(_.get(beforeLast, 'words')) === '["the","late"]') {
+      if (JSON.stringify(begin) === '["the","late"]') {
         return [
-          ...withoutLast(accumulator, 2),
+          ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
             maxYear: potentialNumber * 100 + 100,

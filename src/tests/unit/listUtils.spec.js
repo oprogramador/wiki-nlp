@@ -2,6 +2,7 @@ const {
   getBeforeLast,
   getBeforeBeforeLast,
   getLast,
+  withoutLast,
   withoutRange,
 } = require('../../listUtils');
 const expect = require('../expect');
@@ -52,6 +53,32 @@ describe('listUtils', () => {
       const result = getBeforeBeforeLast(['a', 'b', 'c', 'd', 'e']);
 
       expect(result).to.deep.equal('c');
+    });
+  });
+
+  describe('withoutLast', () => {
+    it('skips 0 elements', () => {
+      const result = withoutLast(['a', 'b', 'c'], 0);
+
+      expect(result).to.deep.equal(['a', 'b', 'c']);
+    });
+
+    it('skips 1 element', () => {
+      const result = withoutLast(['a', 'b', 'c'], 1);
+
+      expect(result).to.deep.equal(['a', 'b']);
+    });
+
+    it('skips 2 elements', () => {
+      const result = withoutLast(['a', 'b', 'c'], 2);
+
+      expect(result).to.deep.equal(['a']);
+    });
+
+    it('skips 3 elements', () => {
+      const result = withoutLast(['a', 'b', 'c'], 3);
+
+      expect(result).to.deep.equal([]);
     });
   });
 
