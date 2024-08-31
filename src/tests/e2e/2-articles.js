@@ -2573,8 +2573,8 @@ describe('articles, dates, verbs (e2e)', () => {
         verb: 'create',
         when: {
           groupType: 'date',
-          maxYear: 1999,
-          minYear: 1900,
+          maxYear: 1900,
+          minYear: 1801,
         },
       },
     ]]);

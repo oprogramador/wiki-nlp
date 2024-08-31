@@ -9,7 +9,7 @@ const convertCenturies = phrase => phrase.reduce(
     if (!_.get(last, 'replace')) {
       return [...accumulator, current];
     }
-    const potentialNumber = Number(last.replace(/th$/, ''));
+    const potentialNumber = Number(last.replace(/th$/, '')) - 1;
 
     if (!Number.isNaN(potentialNumber)
       && current === 'century'
@@ -19,8 +19,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, 2),
           {
             groupType: 'date',
-            maxYear: potentialNumber * 100 + 99,
-            minYear: potentialNumber * 100,
+            maxYear: potentialNumber * 100 + 100,
+            minYear: potentialNumber * 100 + 1,
           },
         ];
       }
@@ -29,8 +29,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, 2),
           {
             groupType: 'date',
-            maxYear: (potentialNumber - 1) * 100 + 50,
-            minYear: (potentialNumber - 1) * 100 + 1,
+            maxYear: potentialNumber * 100 + 50,
+            minYear: potentialNumber * 100 + 1,
           },
         ];
       }
@@ -39,8 +39,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, 2),
           {
             groupType: 'date',
-            maxYear: (potentialNumber - 1) * 100 + 100,
-            minYear: (potentialNumber - 1) * 100 + 51,
+            maxYear: potentialNumber * 100 + 100,
+            minYear: potentialNumber * 100 + 51,
           },
         ];
       }
