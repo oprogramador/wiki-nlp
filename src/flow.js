@@ -3,6 +3,7 @@ const addCommas = require('./addCommas');
 const convertArticlesToLowerCase = require('./convertArticlesToLowerCase');
 const convertBn = require('./convertBn');
 const convertBoth = require('./convertBoth');
+const convertCenturies = require('./convertCenturies');
 const convertColon = require('./convertColon');
 const convertDateRanges = require('./convertDateRanges');
 const convertDecades = require('./convertDecades');
@@ -55,6 +56,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupArticles),
     p => p.map(convertArticlesToLowerCase),
     p => p.map(convertDecades),
+    p => p.map(convertCenturies),
     p => p.map(groupBrackets),
     p => p.map(convertFromTo),
     p => p.map(groupLocality),

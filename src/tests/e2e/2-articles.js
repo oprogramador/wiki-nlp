@@ -2544,12 +2544,100 @@ describe('articles, dates, verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a century', () => {
+  it('converts a century', () => {
     const words = 'In the 19th century, Indian literature was created by great writers';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Indian',
+              'literature',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'great',
+              'writers',
+            ],
+          },
+        ],
+        verb: 'create',
+        when: {
+          groupType: 'date',
+          maxYear: 1999,
+          minYear: 1900,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a century with "early"', () => {
+    const words = 'In the early 20th century, the economic growth was high';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'high',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'economic',
+              'growth',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a century with "late"', () => {
+    const words = 'In the late 14th century, there was a plague';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'plague',
+            ],
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1400,
+          minYear: 1351,
+        },
+      },
     ]]);
   });
 });
