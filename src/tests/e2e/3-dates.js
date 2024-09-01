@@ -3,6 +3,114 @@ const splitText = require('../../splitText');
 const expect = require('../expect');
 
 describe('dates', () => {
+  it('finds a date at the end, without an object', () => {
+    const words = 'Panama joined in 1971';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Panama',
+        ],
+        verb: 'joined',
+        when: {
+          groupType: 'date',
+          year: 1971,
+        },
+      },
+    ]]);
+  });
+
+  it('finds a date at the beginning, without an object', () => {
+    const words = 'In 1975, Nicaragua joined';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Nicaragua',
+        ],
+        verb: 'joined',
+        when: {
+          groupType: 'date',
+          year: 1975,
+        },
+      },
+    ]]);
+  });
+
+  it('finds an exact date', () => {
+    const words = 'On 3 May 2020, he purchased 16 grams of gold';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            item: 'gold',
+            unit: 'kg',
+            value: 0.016,
+          },
+        ],
+        subject: [
+          'he',
+        ],
+        verb: 'purchased',
+        when: {
+          day: 3,
+          groupType: 'date',
+          month: 5,
+          year: 2020,
+        },
+      },
+    ]]);
+  });
+
+  it('converts month & year without a day', () => {
+    const words = 'The parliament passed the budget in September 2020';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'budget',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'parliament',
+            ],
+          },
+        ],
+        verb: 'passed',
+        when: {
+          groupType: 'date',
+          month: 9,
+          year: 2020,
+        },
+      },
+    ]]);
+  });
+
   it('converts a phrase with a decade', () => {
     const words = 'In the 1990s, Bob received about €2 million';
 
@@ -753,6 +861,238 @@ describe('dates', () => {
           groupType: 'date',
           maxYear: 1950,
           minYear: 1901,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "beginning on" at the beginning, followed by day, month, year', () => {
+    const words = 'Beginning on 23 March 2024, the position is held by myself';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'position',
+            ],
+          },
+        ],
+        subject: [
+          'myself',
+        ],
+        verb: 'hold',
+        when: {
+          groupType: 'date',
+          maxDay: 1,
+          maxMonth: 7,
+          maxYear: 2024,
+          minDay: 23,
+          minMonth: 3,
+          minYear: 2024,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "since" at the beginning, followed by day, month, year', () => {
+    const words = 'Since 30 May 2024, the position is held by yourself';
+
+    const result = flow(splitText(words), { now: new Date('2025-08-31') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'position',
+            ],
+          },
+        ],
+        subject: [
+          'yourself',
+        ],
+        verb: 'hold',
+        when: {
+          groupType: 'date',
+          maxDay: 31,
+          maxMonth: 8,
+          maxYear: 2025,
+          minDay: 30,
+          minMonth: 5,
+          minYear: 2024,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "since" at the beginning', () => {
+    const words = 'Since 2019, Ursula von der Leyen has been the president of the European Commission.';
+
+    const result = flow(splitText(words), { now: new Date('2025-08-31') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'European',
+                  'Commission',
+                ],
+              },
+            ],
+            subject: [
+              'been',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'president',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Ursula',
+              'von',
+              'der',
+              'Leyen',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2025,
+          minYear: 2019,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with "since" at the end', () => {
+    const words = 'Charles Michel has been the president of the European Council since 2019.';
+
+    const result = flow(splitText(words), { now: new Date('2024-08-31') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'European',
+                  'Council',
+                ],
+              },
+            ],
+            subject: [
+              'been',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'president',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Charles',
+              'Michel',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2024,
+          minYear: 2019,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with max year', () => {
+    const words = 'it is to be completed by 2100';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-21') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          'be',
+          'completed',
+        ],
+        subject: [
+          'it',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 2025,
+        },
+      },
+    ]]);
+  });
+
+  it('converts with max date', () => {
+    const words = 'it is to be completed by 13 January 2100';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-21') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          'be',
+          'completed',
+        ],
+        subject: [
+          'it',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxDay: 13,
+          maxMonth: 1,
+          maxYear: 2100,
+          minDay: 21,
+          minMonth: 7,
+          minYear: 2024,
         },
       },
     ]]);
