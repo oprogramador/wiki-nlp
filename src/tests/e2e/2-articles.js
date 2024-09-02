@@ -628,7 +628,7 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a phrase with two localities, with no coma before and', () => {
+  it.skip('converts a phrase with two localities, with no comma before and', () => {
     const words = 'They were living in São Paulo, Brazil and San Francisco, United States';
 
     const result = flow(splitText(words));

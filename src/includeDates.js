@@ -1,9 +1,10 @@
+const _ = require('lodash');
 const toLowerCase = require('./toLowerCase');
 const { withoutRange } = require('./listUtils');
 const createDate = require('./createDate');
 
 const match = list => (word, index) => ['quantity', 'date'].includes(word.groupType)
-  && (!word.item || word.value)
+  && (!word.item || _.get(word, 'item.words.0') === 'these' || word.groupType === 'and')
   && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
 
 const convertSubject = ({ foundInSubject, foundInSubjectIndex, subject }) => {

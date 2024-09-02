@@ -3,9 +3,24 @@ const auxiliary = require('./auxiliaryList');
 const prepositions = require('./prepositionList');
 const { withoutLastOne, withoutLast, getBeforeLast } = require('./listUtils');
 
-const isPlural = word => (word.groupType && !['locality'].includes(word.groupType))
+const isPluralWord = word => (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
+  || ['people', 'children'].includes(word);
+
+const isPlural = (word) => {
+  if (_.get(word, 'words.0') === 'these') {
+    return true;
+  }
+  const result = (
+    isPluralWord(_.last(_.get(word, 'words')))
+    || isPluralWord(_.get(word, 'words.0'))
+    || (word.groupType === 'and' && isPluralWord(word.members[0]))
+    || isPluralWord(word.general)
+  )
   || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
   || ['people', 'children'].includes(word);
+
+  return result;
+};
 
 const itemize = phrase => phrase
   .reduce((accumulator, current) => {

@@ -1954,4 +1954,33 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('does not create a date for "by" followed by a number with an item', () => {
+    const words = 'Catalan literature was composed by 777 poets';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Catalan',
+              'literature',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'poets',
+            value: 777,
+          },
+        ],
+        verb: 'compose',
+      },
+    ]]);
+  });
 });
