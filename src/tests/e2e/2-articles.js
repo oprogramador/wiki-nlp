@@ -1062,12 +1062,7 @@ describe('articles & verbs (e2e)', () => {
           },
         ],
         subject: [
-          {
-            groupType: 'article',
-            words: [
-              'Norway',
-            ],
-          },
+          'Norway',
         ],
         verb: 'notified',
       },
@@ -1959,6 +1954,108 @@ describe('articles & verbs (e2e)', () => {
           verb: 'constitute',
         },
       ],
+    ]]);
+  });
+
+  it('converts subject+verb+object with no articles', () => {
+    const words = 'Pakistan supported decolonisation';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'decolonisation',
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+      },
+    ]]);
+  });
+
+  it('converts subject+verb+object+preposition', () => {
+    const words = 'Pakistan supported decolonisation in Africa';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Africa',
+            ],
+            subject: [
+              'decolonisation',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+      },
+    ]]);
+  });
+
+  it('converts subject+adverb+verb+object', () => {
+    const words = 'Pakistan strongly supported decolonisation';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'strongly',
+        groupType: 'verb',
+        object: [
+          'decolonisation',
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+      },
+    ]]);
+  });
+
+  it('converts subject+adverb+verb+object+preposition', () => {
+    const words = 'Pakistan strongly supported decolonisation in Africa and Oceania';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'strongly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  'Africa',
+                  'Oceania',
+                ],
+              },
+            ],
+            subject: [
+              'decolonisation',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+      },
     ]]);
   });
 });

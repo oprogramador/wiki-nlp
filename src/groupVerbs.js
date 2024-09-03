@@ -87,9 +87,40 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   const verbPlace = ['no', 'not'].includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
   if (verbPlace === 0) {
+    if (
+      groupType === 'verb'
+      && typeof phrase[0] === 'string'
+      && _.get(phrase, '1.words.length') === 2
+    ) {
+      return [{
+        groupType,
+        object: [
+          phrase[1].words[1],
+          ...withoutFirst(phrase, 2),
+        ],
+        subject: [phrase[0]],
+        verb: phrase[1].words[0],
+      }];
+    }
+
     return phrase;
   }
   if (verbPlace < 0) {
+    if (
+      groupType === 'verb'
+      && isAdverb(_.get(phrase, '0.words.1'))
+    ) {
+      return [{
+        adverb: phrase[0].words[1],
+        groupType,
+        object: [
+          ...(phrase[0].words[3] ? [phrase[0].words[3]] : []),
+          ...withoutFirstOne(phrase),
+        ],
+        subject: [phrase[0].words[0]],
+        verb: phrase[0].words[2],
+      }];
+    }
     const last = _.last(phrase);
     if (groupType === 'verb') {
       if (last && last.charAt && /[a-z]/.test(last.charAt(0))) {
