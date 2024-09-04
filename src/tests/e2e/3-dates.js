@@ -1097,4 +1097,84 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it('converts subject+adverb+verb+object + preposition (with AND) + decade', () => {
+    const words = 'Pakistan strongly supported decolonisation in Africa and Oceania in the 1950s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'strongly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  'Africa',
+                  'Oceania',
+                ],
+              },
+            ],
+            subject: [
+              'decolonisation',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+          minYear: 1950,
+        },
+      },
+    ]]);
+  });
+
+  it.skip('converts decade + subject+adverb+verb+object + preposition (with AND)', () => {
+    const words = 'In the 1950s, Pakistan strongly supported decolonisation in Africa and Oceania';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'strongly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'and',
+                members: [
+                  'Africa',
+                  'Oceania',
+                ],
+              },
+            ],
+            subject: [
+              'decolonisation',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'Pakistan',
+        ],
+        verb: 'supported',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+          minYear: 1950,
+        },
+      },
+    ]]);
+  });
 });
