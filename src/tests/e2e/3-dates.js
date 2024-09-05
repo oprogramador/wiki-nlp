@@ -1177,4 +1177,13 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it.skip('converts a century BCE', () => {
+    const words = 'In the 13th century BCE, Egypt was rapidly expanding';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
