@@ -1186,4 +1186,13 @@ describe('dates', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it.skip('converts a millennium BCE', () => {
+    const words = 'In the third millennium BCE, Egypt was a rich land';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
