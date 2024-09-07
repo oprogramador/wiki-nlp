@@ -2,6 +2,11 @@ const _ = require('lodash');
 const { getBeforeLast, withoutLast } = require('./listUtils');
 const { ordinalToNumber } = require('./numberResources');
 
+const map = {
+  century: 100,
+  millennium: 1000,
+};
+
 const convertCenturies = phrase => phrase.reduce(
   (accumulator, current) => {
     const beforeLast = getBeforeLast(accumulator);
@@ -13,7 +18,7 @@ const convertCenturies = phrase => phrase.reduce(
     let end = current;
 
     if (current.groupType === 'article'
-      && _.last(current.words) === 'century'
+      && map[_.last(current.words)]
     ) {
       toSkip = 0;
       begin = withoutLast(current.words, 2);
@@ -27,15 +32,16 @@ const convertCenturies = phrase => phrase.reduce(
     const potentialNumber = ordinalToNumber(middle) - 1;
 
     if (!Number.isNaN(potentialNumber)
-      && end === 'century'
+      && map[end]
     ) {
+      const period = map[end];
       if (JSON.stringify(begin) === '["the"]') {
         return [
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * 100 + 100,
-            minYear: potentialNumber * 100 + 1,
+            maxYear: potentialNumber * period + period,
+            minYear: potentialNumber * period + 1,
           },
         ];
       }
@@ -44,8 +50,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * 100 + 50,
-            minYear: potentialNumber * 100 + 1,
+            maxYear: potentialNumber * period + 50,
+            minYear: potentialNumber * period + 1,
           },
         ];
       }
@@ -54,8 +60,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * 100 + 100,
-            minYear: potentialNumber * 100 + 51,
+            maxYear: potentialNumber * period + period,
+            minYear: potentialNumber * period + 51,
           },
         ];
       }

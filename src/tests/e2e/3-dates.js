@@ -1209,12 +1209,34 @@ describe('dates', () => {
     ]]);
   });
 
-  it.skip('converts a millennium BCE', () => {
+  it('converts a millennium BCE', () => {
     const words = 'In the third millennium BCE, Egypt was a rich land';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'rich',
+              'land',
+            ],
+          },
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: -2001,
+          minYear: -3000,
+        },
+      },
     ]]);
   });
 });
