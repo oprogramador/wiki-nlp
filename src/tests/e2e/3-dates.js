@@ -1178,12 +1178,34 @@ describe('dates', () => {
     ]]);
   });
 
-  it.skip('converts a century BCE', () => {
-    const words = 'In the 13th century BCE, Egypt was rapidly expanding';
+  it('converts a century BCE', () => {
+    const words = 'In the 13th century BCE, Egypt conquered the Nile basin';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Nile',
+              'basin',
+            ],
+          },
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'conquered',
+        when: {
+          groupType: 'date',
+          maxYear: -1201,
+          minYear: -1300,
+        },
+      },
     ]]);
   });
 
