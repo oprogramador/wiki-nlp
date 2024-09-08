@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const addCommas = require('./addCommas');
+const convertAdverbs = require('./convertAdverbs');
 const convertArticlesToLowerCase = require('./convertArticlesToLowerCase');
 const convertBce = require('./convertBce');
 const convertBn = require('./convertBn');
@@ -15,6 +16,7 @@ const convertNumbers = require('./convertNumbers');
 const convertOrdinals = require('./convertOrdinals');
 const convertPassive = require('./convertPassive');
 const convertPercent = require('./convertPercent');
+const convertPreAdverbs = require('./convertPreAdverbs');
 const convertPreBce = require('./convertPreBce');
 const convertPronouns = require('./convertPronouns');
 const convertPunctuation = require('./convertPunctuation');
@@ -79,7 +81,9 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(pp => splitWhich(pp)).flat(),
     p => p.map(pp => splitBut(pp)).flat(),
     p => p.map(convertDateRanges),
+    p => p.map(convertPreAdverbs),
     p => p.map(groupVerbs),
+    p => p.map(convertAdverbs),
     p => p.map(convertRespectively),
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),

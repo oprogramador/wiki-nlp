@@ -11,7 +11,6 @@ const isUpperCase = require('./isUpperCase');
 const prepositions = require('./prepositionList');
 const pronouns = require('./pronounsList');
 const toLowerCase = require('./toLowerCase');
-const isAdverb = require('./isAdverb');
 
 const negations = [
   'no',
@@ -27,20 +26,6 @@ const stripComa = (subject) => {
 };
 
 const objectGroupTypes = ['article', 'currency', 'quantity', 'unit', 'and', 'or'];
-
-const findAdverb = (subjectWords) => {
-  const last = _.last(subjectWords);
-  if (isAdverb(last) && !isUpperCase(last)) {
-    return {
-      adverb: last,
-      subjectWords: withoutLastOne(subjectWords),
-    };
-  }
-
-  return {
-    subjectWords,
-  };
-};
 
 const getWords = object => object.words || _.get(object, 'item.words');
 
@@ -106,21 +91,6 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
     return phrase;
   }
   if (verbPlace < 0) {
-    if (
-      groupType === 'verb'
-      && isAdverb(_.get(phrase, '0.words.1'))
-    ) {
-      return [{
-        adverb: phrase[0].words[1],
-        groupType,
-        object: [
-          ...(phrase[0].words[3] ? [phrase[0].words[3]] : []),
-          ...withoutFirstOne(phrase),
-        ],
-        subject: [phrase[0].words[0]],
-        verb: phrase[0].words[2],
-      }];
-    }
     const last = _.last(phrase);
     if (groupType === 'verb') {
       if (last && last.charAt && /[a-z]/.test(last.charAt(0))) {
@@ -148,11 +118,9 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
       if (insideIndex >= 0) {
         let verb = _.last(getWords(phrase[insideIndex]));
         if (verb && !isUpperCase(verb)) {
-          const basicSubjectWords = getWords(foundSubject) ? withoutLastOne(getWords(foundSubject)) : null;
-          const { subjectWords, adverb } = findAdverb(basicSubjectWords);
+          const subjectWords = getWords(foundSubject) ? withoutLastOne(getWords(foundSubject)) : null;
 
           return [{
-            ...(adverb ? { adverb } : {}),
             groupType,
             object: withoutFirst(phrase, insideIndex + 1),
             subject: [
