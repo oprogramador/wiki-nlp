@@ -67,7 +67,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   const potentialVerbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0
-        && (objectGroupTypes.includes(item.groupType) || prepositions.includes(item))
+        && (objectGroupTypes.includes(_.get(item, 'groupType')) || prepositions.includes(item))
         && isLettersOnly(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   const verbPlace = ['no', 'not'].includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
@@ -101,8 +101,8 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         }];
       }
       const insideIndex = phrase.findIndex((item, i) => (
-        objectGroupTypes.includes(item.groupType)
-        || (!item.groupType && isLettersOnly(item) && !prepositions.includes(toLowerCase(item)))
+        objectGroupTypes.includes(_.get(item, 'groupType'))
+        || (!_.get(item, 'groupType') && isLettersOnly(item) && !prepositions.includes(toLowerCase(item)))
       )
         && (
           !getWords(item)

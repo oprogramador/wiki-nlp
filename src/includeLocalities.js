@@ -8,7 +8,7 @@ const includeLocalities = (phrase) => {
   if (!object) {
     return phrase;
   }
-  const match = word => word.groupType === 'locality';
+  const match = word => _.get(word, 'groupType') === 'locality';
   const foundInObject = object.find(match);
   const foundInSubject = subject.find(match);
   const where = _.omit(foundInObject || foundInSubject, ['preposition']);

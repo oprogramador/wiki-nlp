@@ -2058,4 +2058,13 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts subject+verb+adverb', () => {
+    const words = 'Internationalism won particularly';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

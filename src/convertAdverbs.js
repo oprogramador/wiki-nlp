@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const convertAdverbs = (phrase) => {
   if (!phrase[0]) {
     return phrase;
@@ -14,8 +16,8 @@ const convertAdverbs = (phrase) => {
       {
         ...phrase[0],
         adverb,
-        object: object.filter(item => item.groupType !== 'adverb'),
-        subject: subject.filter(item => item.groupType !== 'adverb'),
+        object: object.filter(item => _.get(item, 'groupType') !== 'adverb'),
+        subject: subject.filter(item => _.get(item, 'groupType') !== 'adverb'),
       },
     ];
   }
