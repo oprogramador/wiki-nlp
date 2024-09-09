@@ -20,10 +20,10 @@ const convertPreAdverbs = phrase => phrase.reduce(
             ...current,
             words: getFirst(current.words, adverbPlace),
           }),
-          articleToWord({
+          ...(adverbPlace < current.words.length - 1 ? [articleToWord({
             ...current,
             words: withoutFirst(current.words, adverbPlace + 1),
-          }),
+          })] : []),
           ...(shouldAddAtEnd ? adverbItems : []),
         ];
       }

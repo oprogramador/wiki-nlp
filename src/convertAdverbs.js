@@ -4,10 +4,8 @@ const convertAdverbs = (phrase) => {
   if (!phrase[0]) {
     return phrase;
   }
-  const { object, subject } = phrase[0];
-  if (!object) {
-    return phrase;
-  }
+  const object = _.get(phrase, '0.object', []);
+  const subject = _.get(phrase, '0.subject', []);
 
   const { adverb } = [...object, ...subject].find(item => item.groupType === 'adverb') || {};
 

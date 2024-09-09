@@ -2059,12 +2059,21 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts subject+verb+adverb', () => {
+  it('converts subject+verb+adverb', () => {
     const words = 'Internationalism won particularly';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        adverb: 'particularly',
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Internationalism',
+        ],
+        verb: 'won',
+      },
     ]]);
   });
 
@@ -2078,6 +2087,7 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it.skip('handles "respectively" with "such as"', () => {
+    // eslint-disable-next-line max-len
     const words = 'Businesses, such as Apple and Google, which create an operating system and search engine, respectively, have high profits';
 
     const result = flow(splitText(words));
