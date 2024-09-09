@@ -2067,4 +2067,22 @@ describe('articles & verbs (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it.skip('handles "respectively" with no listed items', () => {
+    const words = 'Businesses, respectively, are run by the government';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('handles "respectively" with "such as"', () => {
+    const words = 'Businesses, such as Apple and Google, which create an operating system and search engine, respectively, have high profits';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });

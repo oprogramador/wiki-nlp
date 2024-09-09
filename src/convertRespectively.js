@@ -1,7 +1,12 @@
+const _ = require('lodash');
+
 const convertRespectively = (phrase) => {
   const { object, subject, verb } = phrase[0];
 
   if (!(subject || []).includes('respectively')) {
+    return phrase;
+  }
+  if (!_.get(object, '0.members')) {
     return phrase;
   }
 
