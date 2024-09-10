@@ -1239,4 +1239,13 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it.skip('converts a year BCE', () => {
+    const words = 'By about 7000 BCE, a Neolithic culture started in Egypt';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
