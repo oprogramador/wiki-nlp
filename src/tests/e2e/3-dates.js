@@ -1240,12 +1240,35 @@ describe('dates', () => {
     ]]);
   });
 
-  it.skip('converts a year BCE', () => {
+  it('converts a year BCE', () => {
     const words = 'By about 7000 BCE, a Neolithic culture started in Egypt';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          'Egypt',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'Neolithic',
+              'culture',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          maxYear: -7000,
+        },
+      },
     ]]);
   });
 });
