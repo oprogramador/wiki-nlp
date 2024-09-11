@@ -8,7 +8,7 @@ const createDate = {
     return {
       groupType: 'date',
       maxYear,
-      ...(minYear < maxYear ? { minYear: now.getFullYear() } : {}),
+      ...(minYear < maxYear ? { minYear } : {}),
       ...(object.month ? { maxMonth: object.month, minMonth: now.getMonth() + 1 } : { }),
       ...(object.day ? { maxDay: object.day, minDay: now.getDate() } : { }),
       ..._.pick(object, 'isExact'),
