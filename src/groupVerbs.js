@@ -74,7 +74,6 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   if (verbPlace === 0) {
     if (
       groupType === 'verb'
-      && typeof phrase[0] === 'string'
       && _.get(phrase, '1.words.length') === 2
     ) {
       return [{
