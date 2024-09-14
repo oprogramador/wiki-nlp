@@ -1983,4 +1983,27 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "almost"', () => {
+    const words = 'Almost 200 dogs are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'dogs',
+            max: 200,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
 });

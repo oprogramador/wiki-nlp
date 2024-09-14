@@ -6,12 +6,18 @@ const {
   fuzzy,
   isNumeric,
   largeNumbers,
+  maxWords,
   nullWords,
 } = require('./numberResources');
 const toLowerCase = require('./toLowerCase');
 const { getBeforeLast, withoutLastOne, withoutLast } = require('./listUtils');
 
-const specialWords = [...aroundWords, ...aboveWords, ...nullWords];
+const specialWords = [
+  ...aboveWords,
+  ...aroundWords,
+  ...maxWords,
+  ...nullWords,
+];
 
 const groupNumbers = phrase => phrase
   .reduce((accumulator, current) => {

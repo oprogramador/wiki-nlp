@@ -123,6 +123,10 @@ const aboveWords = [
   'over',
 ];
 
+const maxWords = [
+  'almost',
+];
+
 const currencies = {
   '€': 'EUR',
   $: 'USD',
@@ -171,6 +175,7 @@ module.exports = {
   fuzzy,
   isNumeric,
   largeNumbers,
+  maxWords,
   nullWords,
   ordinalToNumber,
   wordsToNumbers,

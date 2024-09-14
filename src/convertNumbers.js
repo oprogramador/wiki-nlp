@@ -5,6 +5,7 @@ const {
   currencies,
   fuzzy,
   largeNumbers,
+  maxWords,
   nullWords,
   wordsToNumbers,
 } = require('./numberResources');
@@ -32,13 +33,17 @@ const convertNumbers = phrase => phrase
     let { words } = current;
     let isExact = true;
     let isMin = false;
+    let isMax = false;
     let currency = null;
-    if ([...aroundWords, ...aboveWords, ...nullWords].includes(toLowerCase(words[0]))) {
+    if ([...aroundWords, ...aboveWords, ...maxWords, ...nullWords].includes(toLowerCase(words[0]))) {
       if (aroundWords.includes(toLowerCase(words[0]))) {
         isExact = false;
       }
       if (aboveWords.includes(toLowerCase(words[0]))) {
         isMin = true;
+      }
+      if (maxWords.includes(toLowerCase(words[0]))) {
+        isMax = true;
       }
       words = withoutFirstOne(words);
     }
@@ -75,6 +80,10 @@ const convertNumbers = phrase => phrase
     }
     if (isMin && !minValue) {
       minValue = value;
+      value = null;
+    }
+    if (isMax) {
+      maxValue = value;
       value = null;
     }
 
