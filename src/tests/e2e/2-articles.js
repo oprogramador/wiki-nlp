@@ -2095,4 +2095,47 @@ describe('articles & verbs (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('does not find an adverb with uppercase', () => {
+    const words = 'Al Ahly is the most successful team in Africa according to CAF';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Africa',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'most',
+                  'successful',
+                  'team',
+                ],
+              },
+            ],
+            verb: 'in',
+          },
+        ],
+        source: 'CAF',
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Al',
+              'Ahly',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

@@ -1,11 +1,12 @@
 const isAdverb = require('./isAdverb');
 const { getFirst, withoutFirst } = require('./listUtils');
 const articleToWord = require('./articleToWord');
+const isUpperCase = require('./isUpperCase');
 
 const convertPreAdverbs = phrase => phrase.reduce(
   (accumulator, current) => {
     if (current.groupType === 'article' && current.words) {
-      const adverbPlace = current.words.findIndex(isAdverb);
+      const adverbPlace = current.words.findIndex(word => isAdverb(word) && !isUpperCase(word));
       if (adverbPlace >= 0) {
         const shouldAddAtEnd = adverbPlace <= 1 && current.words.length > 3;
         const adverbItems = [{
