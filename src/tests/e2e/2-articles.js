@@ -2096,7 +2096,7 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it('does not find an adverb with uppercase', () => {
+  it('does not find an adverb with uppercase (in the middle)', () => {
     const words = 'Al Ahly is the most successful team in Africa according to CAF';
 
     const result = flow(splitText(words));
@@ -2132,6 +2132,35 @@ describe('articles & verbs (e2e)', () => {
               'Al',
               'Ahly',
             ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('finds uppercase adverb at the beginning', () => {
+    const words = 'Tectonically, most of Indonesia is unstable';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'tectonically',
+        groupType: 'verb',
+        object: [
+          'unstable',
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Indonesia',
+            ],
+            subject: [
+              'most',
+            ],
+            verb: 'of',
           },
         ],
         verb: 'is',
