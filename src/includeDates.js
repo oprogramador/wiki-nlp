@@ -37,6 +37,9 @@ const includeDates = ({ now } = {}) => (phrase) => {
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
   const when = createDate[preposition](foundInObject || foundInSubject, now);
+  if (Object.keys(when).length < 2) {
+    return phrase;
+  }
 
   return [{
     ...phrase[0],

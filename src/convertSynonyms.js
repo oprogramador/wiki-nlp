@@ -10,6 +10,7 @@ const map = [
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
+  { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
 ];
 
 const convertSynonyms = phrase => phrase

@@ -2167,4 +2167,59 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles "the number of"', () => {
+    const words = 'There is a rise in the number of African champions';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'preposition',
+                object: [
+                  {
+                    groupType: 'article',
+                    words: [
+                      'African',
+                      'champions',
+                    ],
+                  },
+                ],
+                subject: [
+                  {
+                    groupType: 'article',
+                    words: [
+                      'the',
+                      'amount',
+                    ],
+                  },
+                ],
+                verb: 'of',
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'rise',
+                ],
+              },
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
