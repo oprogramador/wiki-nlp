@@ -125,6 +125,7 @@ const aboveWords = [
 
 const maxWords = [
   'almost',
+  'nearly',
 ];
 
 const currencies = {
