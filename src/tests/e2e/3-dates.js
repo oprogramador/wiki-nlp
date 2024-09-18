@@ -1271,4 +1271,13 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it.skip('converts "recent years"', () => {
+    const words = 'In recent years, the Nigerian economy has expanded';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
