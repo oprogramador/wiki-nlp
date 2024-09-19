@@ -1272,12 +1272,65 @@ describe('dates', () => {
     ]]);
   });
 
-  it.skip('converts "recent years"', () => {
+  it('converts "recent years"', () => {
     const words = 'In recent years, the Nigerian economy has expanded';
 
-    const result = flow(splitText(words));
+    const result = flow(splitText(words), { now: new Date('2022-07-01') });
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'expanded',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Nigerian',
+              'economy',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2022,
+          minYear: 2007,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "recent decades"', () => {
+    const words = 'In recent decades, the Ghanaian economy has expanded';
+
+    const result = flow(splitText(words), { now: new Date('2022-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'expanded',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Ghanaian',
+              'economy',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2022,
+          minYear: 1982,
+        },
+      },
     ]]);
   });
 });

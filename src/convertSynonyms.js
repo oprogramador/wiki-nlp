@@ -13,9 +13,14 @@ const map = [
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
 ];
 
-const convertSynonyms = phrase => phrase
+const convertSynonyms = ({ now } = {}) => phrase => phrase
   .reduce((accumulator, current) => {
-    const found = map.find(e => JSON.stringify(
+    const mapBasedOnTime = [
+      { from: ['recent', 'years'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
+      { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
+    ];
+
+    const found = [...map, ...mapBasedOnTime].find(e => JSON.stringify(
       getLast(
         [...accumulator, current].map(toLowerCase),
         e.from.length,

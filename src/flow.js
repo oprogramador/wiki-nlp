@@ -53,7 +53,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupDates),
     p => p.map(convertPercent),
     p => p.map(convertBn),
-    p => p.map(convertSynonyms),
+    p => p.map(convertSynonyms({ now })),
     p => p.map(groupNumbers),
     p => p.map(convertNumbers),
     p => p.map(convertFractions),
