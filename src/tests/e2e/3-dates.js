@@ -1333,4 +1333,32 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it('converts "between [...] and"', () => {
+    const words = 'Between 1620 and 1652, Tunisia experienced seven famines';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'famines',
+            value: 7,
+          },
+        ],
+        subject: [
+          'Tunisia',
+        ],
+        verb: 'experienced',
+        when: {
+          groupType: 'date',
+          maxYear: 1652,
+          minYear: 1620,
+        },
+      },
+    ]]);
+  });
 });

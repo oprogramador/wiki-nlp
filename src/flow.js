@@ -3,6 +3,7 @@ const addCommas = require('./addCommas');
 const convertAdverbs = require('./convertAdverbs');
 const convertArticlesToLowerCase = require('./convertArticlesToLowerCase');
 const convertBce = require('./convertBce');
+const convertBetween = require('./convertBetween');
 const convertBn = require('./convertBn');
 const convertBoth = require('./convertBoth');
 const convertCenturies = require('./convertCenturies');
@@ -54,6 +55,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPercent),
     p => p.map(convertBn),
     p => p.map(convertSynonyms({ now })),
+    p => p.map(convertBetween),
     p => p.map(groupNumbers),
     p => p.map(convertNumbers),
     p => p.map(convertFractions),
