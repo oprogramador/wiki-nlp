@@ -1361,4 +1361,52 @@ describe('dates', () => {
       },
     ]]);
   });
+
+  it('converts "between [...] and [...] centuries"', () => {
+    const words = 'Between the sixth and tenth centuries CE, India was rich';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'India',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1000,
+          minYear: 501,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "between [...] and [...] centuries BCE"', () => {
+    const words = 'Between the sixth and fourth centuries BCE, Greece was rich';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Greece',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: -301,
+          minYear: -600,
+        },
+      },
+    ]]);
+  });
 });

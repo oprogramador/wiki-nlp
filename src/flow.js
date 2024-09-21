@@ -13,6 +13,7 @@ const convertDecades = require('./convertDecades');
 const convertFractions = require('./convertFractions');
 const convertFromTo = require('./convertFromTo');
 const convertFromToInPhrase = require('./convertFromToInPhrase');
+const convertManyCenturies = require('./convertManyCenturies');
 const convertNumbers = require('./convertNumbers');
 const convertOrdinals = require('./convertOrdinals');
 const convertPassive = require('./convertPassive');
@@ -64,6 +65,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertArticlesToLowerCase),
     p => p.map(convertDecades),
     p => p.map(convertCenturies),
+    p => p.map(convertManyCenturies),
     p => p.map(convertBce),
     p => p.map(groupBrackets),
     p => p.map(convertFromTo),
