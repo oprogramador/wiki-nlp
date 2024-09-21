@@ -2,7 +2,7 @@ const flow = require('../../flow');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe('dates', () => {
+describe('dates (e2e)', () => {
   it('finds a date at the end, without an object', () => {
     const words = 'Panama joined in 1971';
 
@@ -1357,6 +1357,34 @@ describe('dates', () => {
           groupType: 'date',
           maxYear: 1652,
           minYear: 1620,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "between [...] and [...] BCE"', () => {
+    const words = 'Between 350 and 210 BCE, Persia experienced seven floods';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'floods',
+            value: 7,
+          },
+        ],
+        subject: [
+          'Persia',
+        ],
+        verb: 'experienced',
+        when: {
+          groupType: 'date',
+          maxYear: -210,
+          minYear: -350,
         },
       },
     ]]);
