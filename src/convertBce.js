@@ -10,11 +10,11 @@ const convertBce = phrase => phrase.reduce(
         ...withoutLastOne(accumulator),
         {
           ...last,
+          max: -last.max,
           maxYear: -last.minYear,
+          min: -last.min,
           minYear: -last.maxYear,
           value: -last.value,
-          max: -last.max,
-          min: -last.min,
         },
       ];
     }
