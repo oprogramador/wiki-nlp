@@ -8,7 +8,7 @@ const irregularVerbsPast = irregularVerbsList.map(item => item.past);
 const looksLikeVerb = word => auxiliary.includes(word)
   || /ed$/.test(word)
   || irregularVerbsPast.includes(word)
-  || /s$/.test(word);
+  || /[a-z]+s$/.test(word);
 
 const splitBut = phrase => phrase
   .reduce((accumulator, current) => {

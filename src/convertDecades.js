@@ -12,25 +12,27 @@ const convertDecades = phrase => phrase.reduce(
       return [...accumulator, current];
     }
 
-    if (JSON.stringify(last.words) === '["the"]') {
-      return [
-        ...withoutLastOne(accumulator),
-        {
-          groupType: 'date',
-          maxYear: potentialNumber + 9,
-          minYear: potentialNumber,
-        },
-      ];
-    }
-    if (JSON.stringify(last.words) === '["the","early"]') {
-      return [
-        ...withoutLastOne(accumulator),
-        {
-          groupType: 'date',
-          maxYear: potentialNumber + 4,
-          minYear: potentialNumber,
-        },
-      ];
+    if (_.get(last, 'words')) {
+      if (JSON.stringify(last.words) === '["the"]') {
+        return [
+          ...withoutLastOne(accumulator),
+          {
+            groupType: 'date',
+            maxYear: potentialNumber + 9,
+            minYear: potentialNumber,
+          },
+        ];
+      }
+      if (JSON.stringify(last.words) === '["the","early"]') {
+        return [
+          ...withoutLastOne(accumulator),
+          {
+            groupType: 'date',
+            maxYear: potentialNumber + 4,
+            minYear: potentialNumber,
+          },
+        ];
+      }
     }
 
     return [...accumulator, current];

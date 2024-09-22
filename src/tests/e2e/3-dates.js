@@ -1437,4 +1437,30 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles decade with a noun', () => {
+    const words = '1960s singers were the best';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'best',
+            ],
+          },
+        ],
+        subject: [
+          '1960s',
+          'singers',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
 });
