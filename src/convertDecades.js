@@ -33,6 +33,16 @@ const convertDecades = phrase => phrase.reduce(
           },
         ];
       }
+      if (JSON.stringify(last.words) === '["the","late"]') {
+        return [
+          ...withoutLastOne(accumulator),
+          {
+            groupType: 'date',
+            maxYear: potentialNumber + 9,
+            minYear: potentialNumber + 5,
+          },
+        ];
+      }
     }
 
     return [...accumulator, current];

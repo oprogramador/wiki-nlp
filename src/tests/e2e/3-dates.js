@@ -169,6 +169,34 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts a phrase with a decade, and late', () => {
+    const words = 'In the late 1920s, Alan received €3 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 3e6,
+          },
+        ],
+        subject: [
+          'Alan',
+        ],
+        verb: 'received',
+        when: {
+          groupType: 'date',
+          maxYear: 1929,
+          minYear: 1925,
+        },
+      },
+    ]]);
+  });
+
   it('converts a phrase with a past date, and a currency object', () => {
     const words = 'In 2020, Bob received €123,456';
 
