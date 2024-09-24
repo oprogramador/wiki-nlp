@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 /* eslint-disable sort-keys */
 const wordsToNumbers = {
   zero: 0,
@@ -29,6 +31,8 @@ const wordsToNumbers = {
   eighty: 80,
   ninety: 90,
 };
+
+const numbersToWords = _.invert(wordsToNumbers);
 
 const stripPlural = (word) => {
   if (!word.endsWith) {
@@ -178,6 +182,7 @@ module.exports = {
   largeNumbers,
   maxWords,
   nullWords,
+  numbersToWords,
   ordinalToNumber,
   wordsToNumbers,
 };

@@ -1883,6 +1883,34 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts a mixed ordinal', () => {
+    const words = 'Egypt is the world\'s 14th-largest country by population';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            by: 'population',
+            groupType: 'ordinal',
+            item: [
+              'country',
+            ],
+            ordinal: 14,
+            scope: 'world',
+          },
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it('skips "only" before a number', () => {
     const words = 'The government officially recognises only four religions';
 
