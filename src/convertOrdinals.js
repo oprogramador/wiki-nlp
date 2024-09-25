@@ -2,6 +2,7 @@ const _ = require('lodash');
 const { getBeforeLast, withoutFirst, withoutLast } = require('./listUtils');
 const { ordinalToNumber } = require('./numberResources');
 const isLettersOnly = require('./isLettersOnly');
+const isUpperCase = require('./isUpperCase');
 
 const postfix = '\'s';
 
@@ -9,6 +10,16 @@ const convertOrdinals = phrase => phrase
   .reduce((accumulator, current) => {
     const beforeLast = getBeforeLast(accumulator);
     const last = _.last(accumulator);
+
+    if (last === 'in' && _.get(beforeLast, 'groupType') === 'ordinal' && !beforeLast.scope && isUpperCase(current)) {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          ...beforeLast,
+          scope: current,
+        },
+      ];
+    }
 
     if (beforeLast.groupType === 'ordinal' && last === 'after') {
       return [

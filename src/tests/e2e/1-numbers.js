@@ -1883,6 +1883,34 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts a mixed ordinal with scope defined after "in"', () => {
+    const words = 'Egypt is the 3rd-largest country in Africa by population';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            by: 'population',
+            groupType: 'ordinal',
+            item: [
+              'country',
+            ],
+            ordinal: 3,
+            scope: 'Africa',
+          },
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it('converts a mixed ordinal', () => {
     const words = 'Egypt is the world\'s 14th-largest country by population';
 
