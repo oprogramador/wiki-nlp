@@ -1362,6 +1362,24 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "between [...] and" at the end', () => {
+    const words = 'Tunisia experienced seven famines between 1620 and 1652';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts "between [...] and" at the end, after "sometime"', () => {
+    const words = 'Tunisia started its modern period sometime between 1920 and 1970';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "between [...] and"', () => {
     const words = 'Between 1620 and 1652, Tunisia experienced seven famines';
 
