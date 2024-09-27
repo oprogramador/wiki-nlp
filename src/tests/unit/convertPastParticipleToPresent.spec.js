@@ -1,4 +1,4 @@
-const convertPastParticipleToPresent = require('../../convertPastParticipleToPresent');
+const convertPastParticipleToPresent = require('../../utils/convertPastParticipleToPresent');
 const expect = require('../expect');
 
 describe('convertPastParticipleToPresent', () => {

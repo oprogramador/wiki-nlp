@@ -1,10 +1,10 @@
 const _ = require('lodash');
-const convertPunctuation = require('../../convertPunctuation');
-const convertNumbers = require('../../convertNumbers');
-const groupArticles = require('../../groupArticles');
-const groupNumbers = require('../../groupNumbers');
-const groupVerbs = require('../../groupVerbs');
-const includeDates = require('../../includeDates');
+const convertPunctuation = require('../../transformers/convertPunctuation');
+const convertNumbers = require('../../transformers/convertNumbers');
+const groupArticles = require('../../transformers/groupArticles');
+const groupNumbers = require('../../transformers/groupNumbers');
+const groupVerbs = require('../../transformers/groupVerbs');
+const includeDates = require('../../transformers/includeDates');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 

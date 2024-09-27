@@ -1,4 +1,4 @@
-const convertNumbers = require('../../convertNumbers');
+const convertNumbers = require('../../transformers/convertNumbers');
 const expect = require('../expect');
 
 describe('convertNumbers', () => {

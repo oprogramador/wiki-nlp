@@ -4,7 +4,7 @@ const {
   getLast,
   withoutLast,
   withoutRange,
-} = require('../../listUtils');
+} = require('../../utils/listUtils');
 const expect = require('../expect');
 
 describe('listUtils', () => {

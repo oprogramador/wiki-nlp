@@ -1,9 +1,9 @@
 const _ = require('lodash');
-const groupAnd = require('../../groupAnd');
-const convertNumbers = require('../../convertNumbers');
-const groupNumbers = require('../../groupNumbers');
-const itemize = require('../../itemize');
-const groupVerbs = require('../../groupVerbs');
+const groupAnd = require('../../transformers/groupAnd');
+const convertNumbers = require('../../transformers/convertNumbers');
+const groupNumbers = require('../../transformers/groupNumbers');
+const itemize = require('../../transformers/itemize');
+const groupVerbs = require('../../transformers/groupVerbs');
 const expect = require('../expect');
 
 describe('groupAnd & convertNumbers & itemize & groupVerbs', () => {

@@ -1,4 +1,4 @@
-const includeDates = require('../../includeDates');
+const includeDates = require('../../transformers/includeDates');
 const expect = require('../expect');
 
 describe('includeDates', () => {

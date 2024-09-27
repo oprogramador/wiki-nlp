@@ -1,4 +1,4 @@
-const convertPunctuation = require('../../convertPunctuation');
+const convertPunctuation = require('../../transformers/convertPunctuation');
 const expect = require('../expect');
 
 describe('convertPunctuation', () => {

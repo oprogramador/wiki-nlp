@@ -1,8 +1,8 @@
 const _ = require('lodash');
-const convertPunctuation = require('../../convertPunctuation');
-const groupArticles = require('../../groupArticles');
-const groupVerbs = require('../../groupVerbs');
-const groupPrepositions = require('../../groupPrepositions');
+const convertPunctuation = require('../../transformers/convertPunctuation');
+const groupArticles = require('../../transformers/groupArticles');
+const groupVerbs = require('../../transformers/groupVerbs');
+const groupPrepositions = require('../../transformers/groupPrepositions');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 

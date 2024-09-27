@@ -1,4 +1,4 @@
-const groupPrepositions = require('../../groupPrepositions');
+const groupPrepositions = require('../../transformers/groupPrepositions');
 const expect = require('../expect');
 
 describe('groupPrepositions', () => {

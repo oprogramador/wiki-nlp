@@ -1,4 +1,4 @@
-const convertPercent = require('../../convertPercent');
+const convertPercent = require('../../transformers/convertPercent');
 const expect = require('../expect');
 
 describe('convertPercent', () => {

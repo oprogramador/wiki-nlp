@@ -1,4 +1,4 @@
-const groupDates = require('../../groupDates');
+const groupDates = require('../../transformers/groupDates');
 const expect = require('../expect');
 
 describe('groupDates', () => {

@@ -1,4 +1,4 @@
-const addCommas = require('../../addCommas');
+const addCommas = require('../../transformers/addCommas');
 const expect = require('../expect');
 
 describe('addCommas', () => {

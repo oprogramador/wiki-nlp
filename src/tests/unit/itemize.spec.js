@@ -1,4 +1,4 @@
-const itemize = require('../../itemize');
+const itemize = require('../../transformers/itemize');
 const expect = require('../expect');
 
 describe('itemize', () => {

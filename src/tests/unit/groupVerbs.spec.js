@@ -1,4 +1,4 @@
-const groupVerbs = require('../../groupVerbs');
+const groupVerbs = require('../../transformers/groupVerbs');
 const expect = require('../expect');
 
 describe('groupVerbs', () => {

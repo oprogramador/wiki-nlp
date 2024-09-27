@@ -1,4 +1,4 @@
-const groupAnd = require('../../groupAnd');
+const groupAnd = require('../../transformers/groupAnd');
 const expect = require('../expect');
 
 describe('groupAnd', () => {
