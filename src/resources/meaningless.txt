@@ -18,5 +18,6 @@ moreover
 nevertheless
 nonetheless
 similarly
+sometime
 still
 too

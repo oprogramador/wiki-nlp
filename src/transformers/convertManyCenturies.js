@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
-const { getLast, withoutFirst } = require('../utils/listUtils');
+const { getLast, withoutLast } = require('../utils/listUtils');
 const { ordinalToNumber } = require('../utils/numberResources');
 
 const convertManyCenturies = phrase => phrase.reduce(
@@ -25,7 +25,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       ]);
 
       return [
-        ...withoutFirst(accumulator, 4),
+        ...withoutLast(accumulator, 4),
         'in',
         {
           groupType: 'date',

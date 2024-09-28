@@ -1,7 +1,7 @@
 const toLowerCase = require('../utils/toLowerCase');
 const {
   getLast,
-  withoutFirst,
+  withoutLast,
 } = require('../utils/listUtils');
 
 const convertBetween = phrase => phrase
@@ -19,7 +19,7 @@ const convertBetween = phrase => phrase
       && last === 'and'
     ) {
       return [
-        ...withoutFirst(accumulator, 4),
+        ...withoutLast(accumulator, 4),
         'in',
         `${beforeBeforeLast}–${current}`,
       ];

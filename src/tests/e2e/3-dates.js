@@ -1362,21 +1362,62 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "between [...] and" at the end', () => {
-    const words = 'Tunisia experienced seven famines between 1620 and 1652';
+  it('converts "between [...] and" at the end', () => {
+    const words = 'Tunisia experienced many famines between 1620 and 1652';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'famines',
+            min: 3,
+          },
+        ],
+        subject: [
+          'Tunisia',
+        ],
+        verb: 'experienced',
+        when: {
+          groupType: 'date',
+          maxYear: 1652,
+          minYear: 1620,
+        },
+      },
     ]]);
   });
 
-  it.skip('converts "between [...] and" at the end, after "sometime"', () => {
-    const words = 'Tunisia started its modern period sometime between 1920 and 1970';
+  it('converts "between [...] and" at the end, after "sometime"', () => {
+    const words = 'Tunisia started the modern period sometime between 1920 and 1970';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'modern',
+              'period',
+            ],
+          },
+        ],
+        subject: [
+          'Tunisia',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          maxYear: 1970,
+          minYear: 1920,
+        },
+      },
     ]]);
   });
 
@@ -1460,6 +1501,54 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "between [...] and [...] centuries", at the end, with mixed ordinals', () => {
+    const words = 'Italy was rich between the 13th and 16th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Italy',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1201,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "between [...] and [...] centuries", at the end', () => {
+    const words = 'Italy was rich between the thirteenth and sixteenth centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Italy',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1201,
+        },
+      },
+    ]]);
+  });
+
   it('converts "between [...] and [...] centuries BCE"', () => {
     const words = 'Between the sixth and fourth centuries BCE, Greece was rich';
 
@@ -1479,6 +1568,36 @@ describe('dates (e2e)', () => {
           groupType: 'date',
           maxYear: -301,
           minYear: -600,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "between [...] and [...] centuries BCE", at the end', () => {
+    const words = 'Cyrene and Cyprus were occupied by Greece between the fifth and third centuries BCE';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              'Cyrene',
+              'Cyprus',
+            ],
+          },
+        ],
+        subject: [
+          'Greece',
+        ],
+        verb: 'occupy',
+        when: {
+          groupType: 'date',
+          maxYear: -201,
+          minYear: -500,
         },
       },
     ]]);
