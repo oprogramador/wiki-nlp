@@ -1,3 +1,17 @@
 {
-  "extends": "eslint-config-airbnb-improved",
+  extends: 'eslint-config-airbnb-improved',
+  plugins: [
+    'no-credentials',
+  ],
+  rules: {
+    'no-credentials/no-credentials': [
+      'error',
+      {
+        delimiters: ['/', '-', '.', '+'],
+        maximumEntropy: 8.4,
+        minimumWordLength: 4,
+        shouldSplitCamelCase: true,
+      },
+    ],
+  },
 }

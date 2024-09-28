@@ -1985,6 +1985,14 @@ eslint-plugin-mocha@^8.1.0:
     eslint-utils "^2.1.0"
     ramda "^0.27.1"
 
+eslint-plugin-no-credentials@^2.1.13:
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-credentials/-/eslint-plugin-no-credentials-2.1.13.tgz#95dfd0345d6a57e0f7620b279f9f8be7da065536"
+  integrity sha512-Bhb2QB3t9x/kBNFY0HpjyBwUiaPfm+WB+DJF9urfulu5i+WeFSCPWxxLnmilYkMMtw01z26A4dW+qOYvM1q/kA==
+  dependencies:
+    lodash "^4.17.21"
+    semantic-release "19"
+
 eslint-plugin-react@^7.23.1:
   version "7.34.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.34.1.tgz#6806b70c97796f5bbfb235a5d3379ece5f4da997"

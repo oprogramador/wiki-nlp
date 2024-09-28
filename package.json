@@ -26,6 +26,7 @@
     "chai": "^4.3.4",
     "eslint": "^7.23.0",
     "eslint-config-airbnb-improved": "^5.0.3",
+    "eslint-plugin-no-credentials": "^2.1.13",
     "mocha": "^10.4.0",
     "nyc": "^15.1.0"
   }
