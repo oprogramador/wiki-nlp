@@ -55,6 +55,9 @@ const ordinalToNumberWord = (word) => {
   if (word === 'half') {
     return 'two';
   }
+  if (word === 'quarter') {
+    return 'four';
+  }
   if (word === 'third') {
     return 'three';
   }

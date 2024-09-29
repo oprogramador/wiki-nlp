@@ -1026,6 +1026,35 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts a fraction with "quarters"', () => {
+    const words = 'They had three quarters of the GDP';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'GDP',
+              ],
+            },
+            value: 0.75,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'had',
+      },
+    ]]);
+  });
+
   it('converts a fraction with "ies"', () => {
     const words = 'They had three twenties of the GDP';
 
