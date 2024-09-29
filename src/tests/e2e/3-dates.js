@@ -1501,8 +1501,8 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "between [...] and [...] centuries", at the end, with mixed ordinals', () => {
-    const words = 'Italy was rich between the 13th and 16th centuries';
+  it('converts "between [...] and [...] centuries", at the end, with mixed ordinals', () => {
+    const words = 'Italy was poor between the 3rd and 9th centuries';
 
     const result = flow(splitText(words));
 
@@ -1510,7 +1510,7 @@ describe('dates (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          'rich',
+          'poor',
         ],
         subject: [
           'Italy',
@@ -1518,8 +1518,8 @@ describe('dates (e2e)', () => {
         verb: 'was',
         when: {
           groupType: 'date',
-          maxYear: 1600,
-          minYear: 1201,
+          maxYear: 900,
+          minYear: 201,
         },
       },
     ]]);

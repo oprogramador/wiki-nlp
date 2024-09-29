@@ -1,6 +1,6 @@
 const { numbersToWords } = require('../utils/numberResources');
 
-const convertMixedOrdinals = phrase => phrase
+const convertMixedOrdinalsWithDash = phrase => phrase
   .reduce((accumulator, current) => {
     if (/-/.test(current)) {
       const [first, second] = current.split('-');
@@ -25,4 +25,4 @@ const convertMixedOrdinals = phrase => phrase
   },
   []);
 
-module.exports = convertMixedOrdinals;
+module.exports = convertMixedOrdinalsWithDash;
