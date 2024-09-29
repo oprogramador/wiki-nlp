@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const addArticleToDecade = require('./transformers/addArticleToDecade');
 const addCommas = require('./transformers/addCommas');
 const convertAdverbs = require('./transformers/convertAdverbs');
 const convertArticlesToLowerCase = require('./transformers/convertArticlesToLowerCase');
@@ -14,6 +15,7 @@ const convertFractions = require('./transformers/convertFractions');
 const convertFromTo = require('./transformers/convertFromTo');
 const convertFromToInPhrase = require('./transformers/convertFromToInPhrase');
 const convertManyCenturies = require('./transformers/convertManyCenturies');
+const convertManyDecades = require('./transformers/convertManyDecades');
 const convertMixedOrdinalsSimple = require('./transformers/convertMixedOrdinalsSimple');
 const convertMixedOrdinalsWithDash = require('./transformers/convertMixedOrdinalsWithDash');
 const convertNumbers = require('./transformers/convertNumbers');
@@ -67,6 +69,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPreBce),
     p => p.map(groupArticles),
     p => p.map(convertArticlesToLowerCase),
+    p => p.map(addArticleToDecade),
     p => p.map(convertDecades),
     p => p.map(convertCenturies),
     p => p.map(convertManyCenturies),
@@ -75,6 +78,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertFromTo),
     p => p.map(groupLocality),
     p => p.map(pp => groupAnd(pp)),
+    p => p.map(convertManyDecades),
     p => p.map(convertOrdinals),
     p => p.map(convertColon),
     p => p.map(groupOr),

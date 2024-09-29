@@ -140,6 +140,79 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  describe('two decades', () => {
+    const expected = [[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            isExact: false,
+            value: 2e6,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'received',
+        when: {
+          groupType: 'date',
+          maxYear: 1989,
+          minYear: 1970,
+        },
+      },
+    ]];
+
+    it('converts a phrase with two decades, at the beginning, with double "the"', () => {
+      const words = 'In the 1970s and the 1980s, Bob received about €2 million';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('converts a phrase with two decades, at the beginning, with single "the"', () => {
+      const words = 'In the 1970s and 1980s, Bob received about €2 million';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('converts a phrase with two decades, at the beginning, without "the"', () => {
+      const words = 'In 1970s and 1980s, Bob received about €2 million';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('converts a phrase with two decades, at the end, with double "the"', () => {
+      const words = 'Bob received about €2 million in the 1970s and the 1980s';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('converts a phrase with two decades, at the end, with single "the"', () => {
+      const words = 'Bob received about €2 million in the 1970s and 1980s';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+
+    it('converts a phrase with two decades, at the end, without "the"', () => {
+      const words = 'Bob received about €2 million in 1970s and 1980s';
+
+      const result = flow(splitText(words));
+
+      expect(result).to.deep.equal(expected);
+    });
+  });
+
   it('converts a phrase with a decade, and early', () => {
     const words = 'In the early 1990s, Bob received about €2 million';
 
