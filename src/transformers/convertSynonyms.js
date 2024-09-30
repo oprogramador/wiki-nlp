@@ -5,15 +5,16 @@ const map = [
   { from: ['1st'], to: ['first'] },
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
-  { from: ['beginning', 'on'], to: ['since'] },
-  { from: ['at', 'least'], to: ['above'] },
-  { from: ['more', 'than'], to: ['above'] },
-  { from: ['well', 'over'], to: ['above'] },
-  { from: ['et', 'al.'], to: [',', 'and', 'others'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
+  { from: ['at', 'least'], to: ['above'] },
+  { from: ['beginning', 'on'], to: ['since'] },
+  { from: ['et', 'al.'], to: [',', 'and', 'others'] },
+  { from: ['more', 'than'], to: ['above'] },
+  { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
+  { from: ['well', 'over'], to: ['above'] },
 ];
 
 const convertSynonyms = ({ now } = {}) => phrase => phrase

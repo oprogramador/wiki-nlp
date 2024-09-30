@@ -2222,4 +2222,48 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "such as"', () => {
+    const words = 'Some popular dishes such as pizza, burgers, french fries, and kebabs are fattening';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'fattening',
+        ],
+        subject: [
+          {
+            example: {
+              groupType: 'and',
+              members: [
+                'pizza',
+                'burgers',
+                {
+                  groupType: 'article',
+                  words: [
+                    'french',
+                    'fries',
+                  ],
+                },
+                'kebabs',
+              ],
+            },
+            general: {
+              groupType: 'article',
+              words: [
+                'Some',
+                'popular',
+                'dishes',
+              ],
+            },
+            groupType: 'example',
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
 });
