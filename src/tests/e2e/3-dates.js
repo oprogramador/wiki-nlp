@@ -891,6 +891,37 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "the second half of the [...] century"', () => {
+    const words = 'In the second half of the 19th century, there was a cholera outbreak';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'cholera',
+              'outbreak',
+            ],
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1900,
+          minYear: 1851,
+        },
+      },
+    ]]);
+  });
+
   it('converts a century with a number word', () => {
     const words = 'Rome was destroyed in the fifth century';
 

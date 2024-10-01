@@ -14,6 +14,7 @@ const map = [
   { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
+  { from: ['the', 'second', 'half', 'of', 'the'], to: ['the', 'late'] },
   { from: ['well', 'over'], to: ['above'] },
 ];
 
