@@ -1732,4 +1732,38 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a location with a dot', () => {
+    const words = 'In 2010, Obama met the audience in Washington, D.C.';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'audience',
+            ],
+          },
+        ],
+        subject: [
+          'Obama',
+        ],
+        verb: 'met',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+        where: {
+          general: 'D.C',
+          groupType: 'locality',
+          precise: 'Washington',
+        },
+      },
+    ]]);
+  });
 });

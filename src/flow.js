@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const addArticleToDecade = require('./transformers/addArticleToDecade');
 const addCommas = require('./transformers/addCommas');
+const convertAbbreviations = require('./transformers/convertAbbreviations');
 const convertAdverbs = require('./transformers/convertAdverbs');
 const convertArticlesToLowerCase = require('./transformers/convertArticlesToLowerCase');
 const convertBce = require('./transformers/convertBce');
@@ -60,6 +61,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPercent),
     p => p.map(convertBn),
     p => p.map(convertSynonyms({ now })),
+    p => p.map(convertAbbreviations),
     p => p.map(convertMixedOrdinalsSimple),
     p => p.map(convertMixedOrdinalsWithDash),
     p => p.map(convertBetween),
