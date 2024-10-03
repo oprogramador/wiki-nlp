@@ -1637,6 +1637,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "out of"', () => {
+    const words = 'Armenia was ranked 142nd out of 190 countries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts an ordinal with "after" and one word', () => {
     const words = 'India was the second-largest textile exporter after China in 2004';
 
