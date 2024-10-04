@@ -21,6 +21,7 @@ const convertMixedOrdinalsSimple = require('./transformers/convertMixedOrdinalsS
 const convertMixedOrdinalsWithDash = require('./transformers/convertMixedOrdinalsWithDash');
 const convertNumbers = require('./transformers/convertNumbers');
 const convertOrdinals = require('./transformers/convertOrdinals');
+const convertOutOf = require('./transformers/convertOutOf');
 const convertPassive = require('./transformers/convertPassive');
 const convertPercent = require('./transformers/convertPercent');
 const convertPreAdverbs = require('./transformers/convertPreAdverbs');
@@ -87,6 +88,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupUnits),
     p => p.map(groupPrenumbered),
     p => p.map(itemize),
+    p => p.map(convertOutOf),
     p => p.map(skipArticleBeforeNumber),
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),

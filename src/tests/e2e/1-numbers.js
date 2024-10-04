@@ -1637,12 +1637,187 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of"', () => {
+  it('converts "out of" with an ordinal', () => {
     const words = 'Armenia was ranked 142nd out of 190 countries';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'ranked',
+          {
+            groupType: 'article',
+            item: 'countries',
+            maxScope: 190,
+            ordinal: 142,
+          },
+        ],
+        subject: [
+          'Armenia',
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with a number', () => {
+    const words = 'Armenia is ranked 100 out of 190 countries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'ranked',
+          {
+            groupType: 'article',
+            item: 'countries',
+            maxScope: 190,
+            ordinal: 100,
+          },
+        ],
+        subject: [
+          'Armenia',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts "out of" as an only part of the object', () => {
+    const words = 'The party won 49 out of 300 seats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            item: 'seats',
+            maxScope: 300,
+            ordinal: 49,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'party',
+            ],
+          },
+        ],
+        verb: 'won',
+      },
+    ]]);
+  });
+
+  it.skip('converts "out of" at the beginning, with word numbers', () => {
+    const words = 'Five out of twelve customers have lost electricity';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts "out of" at the beginning, with partially word numbers', () => {
+    const words = '5 out of eleven customers have lost electricity';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'lost',
+              'electricity',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            item: 'customers',
+            maxScope: 11,
+            ordinal: 5,
+          },
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
+  it('converts "out of" at the beginning, with a non-integer', () => {
+    const words = '123.5 out of 1000 children are poor';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'poor',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            item: 'children',
+            maxScope: 1000,
+            ordinal: 123.5,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with nothing before', () => {
+    const words = 'Out of 10,000 female individuals 19 are homeless in San Diego, California';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'homeless',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            item: {
+              groupType: 'article',
+              words: [
+                'female',
+                'individuals',
+              ],
+            },
+            maxScope: 10000,
+            ordinal: 19,
+          },
+        ],
+        verb: 'are',
+        where: {
+          general: 'California',
+          groupType: 'locality',
+          precise: {
+            groupType: 'article',
+            words: [
+              'San',
+              'Diego',
+            ],
+          },
+        },
+      },
     ]]);
   });
 
