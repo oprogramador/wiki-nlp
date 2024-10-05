@@ -1648,10 +1648,10 @@ describe('numbers (e2e)', () => {
         object: [
           'ranked',
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: 'countries',
             maxScope: 190,
-            ordinal: 142,
+            place: 142,
           },
         ],
         subject: [
@@ -1673,10 +1673,10 @@ describe('numbers (e2e)', () => {
         object: [
           'ranked',
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: 'countries',
             maxScope: 190,
-            ordinal: 100,
+            place: 100,
           },
         ],
         subject: [
@@ -1697,10 +1697,10 @@ describe('numbers (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: 'seats',
             maxScope: 300,
-            ordinal: 49,
+            place: 49,
           },
         ],
         subject: [
@@ -1745,10 +1745,10 @@ describe('numbers (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: 'customers',
             maxScope: 11,
-            ordinal: 5,
+            place: 5,
           },
         ],
         verb: 'have',
@@ -1769,10 +1769,10 @@ describe('numbers (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: 'children',
             maxScope: 1000,
-            ordinal: 123.5,
+            place: 123.5,
           },
         ],
         verb: 'are',
@@ -1793,7 +1793,7 @@ describe('numbers (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'article',
+            groupType: 'outOf',
             item: {
               groupType: 'article',
               words: [
@@ -1802,7 +1802,7 @@ describe('numbers (e2e)', () => {
               ],
             },
             maxScope: 10000,
-            ordinal: 19,
+            place: 19,
           },
         ],
         verb: 'are',

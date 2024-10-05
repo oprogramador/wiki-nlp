@@ -25,7 +25,15 @@ const stripComa = (subject) => {
   return subject;
 };
 
-const objectGroupTypes = ['article', 'currency', 'quantity', 'unit', 'and', 'or'];
+const objectGroupTypes = [
+  'and',
+  'article',
+  'currency',
+  'or',
+  'outOf',
+  'quantity',
+  'unit',
+];
 
 const getWords = object => object.words || _.get(object, 'item.words');
 

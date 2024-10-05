@@ -22,23 +22,23 @@ const convertOutOf = phrase => phrase
       return [
         ...withoutLast(accumulator, 3),
         {
-          groupType: 'article',
+          groupType: 'outOf',
           item: current.item,
           maxScope: current.value,
-          ordinal: ordinalToNumber(beforeBeforeLast) || beforeBeforeLast.value,
+          place: ordinalToNumber(beforeBeforeLast) || beforeBeforeLast.value,
         },
       ];
     }
     if (
       _.get(last, 'maxScope')
-      && !last.ordinal
+      && !last.place
       && _.get(current, 'value')
     ) {
       return [
         ...withoutLastOne(accumulator),
         {
           ...last,
-          ordinal: current.value,
+          place: current.value,
         },
       ];
     }
