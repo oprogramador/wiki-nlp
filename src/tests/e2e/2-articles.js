@@ -2266,4 +2266,33 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles "at" followed by an article, space and comma', () => {
+    const words = 'Bob is at the square , here';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'at',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'square',
+            ],
+          },
+          ',',
+          ',',
+          'here',
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

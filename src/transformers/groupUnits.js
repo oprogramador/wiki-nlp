@@ -31,7 +31,7 @@ const groupUnits = phrase => phrase
         last.basic,
       ];
     }
-    const info = map[JSON.stringify(current.basic || current)];
+    const info = map[JSON.stringify(_.get(current, 'basic') || current)];
     if (info) {
       return [
         ...withoutLastOne(accumulator),

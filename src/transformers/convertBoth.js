@@ -5,7 +5,7 @@ const convertBoth = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator) || {};
 
-    if (current.groupType === 'and') {
+    if (_.get(current, 'groupType') === 'and') {
       if (last === 'both') {
         return [
           ...withoutLastOne(accumulator),

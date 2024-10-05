@@ -17,7 +17,7 @@ const convertPreAdverbs = phrase => phrase.reduce(
         },
       ];
     }
-    if (current.groupType === 'article' && current.words) {
+    if (_.get(current, 'groupType') === 'article' && current.words) {
       const adverbPlace = current.words.findIndex(word => isAdverb(word) && !isUpperCase(word));
       if (adverbPlace >= 0) {
         const shouldAddAtEnd = adverbPlace <= 1 && current.words.length > 3;
