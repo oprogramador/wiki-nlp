@@ -5,7 +5,10 @@ const {
   withoutLast,
   withoutLastOne,
 } = require('../utils/listUtils');
-const { ordinalToNumber } = require('../utils/numberResources');
+const {
+  ordinalToNumber,
+  wordsToNumbers,
+} = require('../utils/numberResources');
 const toLowerCase = require('../utils/toLowerCase');
 
 const convertOutOf = phrase => phrase
@@ -19,13 +22,17 @@ const convertOutOf = phrase => phrase
       && last === 'of'
       && _.get(current, 'groupType') === 'quantity'
     ) {
+      const place = ordinalToNumber(beforeBeforeLast)
+        || beforeBeforeLast.value
+        || wordsToNumbers[toLowerCase(beforeBeforeLast)];
+
       return [
         ...withoutLast(accumulator, 3),
         {
           groupType: 'outOf',
           item: current.item,
           maxScope: current.value,
-          place: ordinalToNumber(beforeBeforeLast) || beforeBeforeLast.value,
+          place,
         },
       ];
     }

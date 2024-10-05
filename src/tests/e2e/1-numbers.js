@@ -1717,12 +1717,33 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of" at the beginning, with word numbers', () => {
+  it('converts "out of" at the beginning, with word numbers', () => {
     const words = 'Five out of twelve customers have lost electricity';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'lost',
+              'electricity',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'customers',
+            maxScope: 12,
+            place: 5,
+          },
+        ],
+        verb: 'have',
+      },
     ]]);
   });
 
