@@ -1717,6 +1717,27 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with an item after the first number', () => {
+    const words = '35 dogs out of 100 walked';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'dogs',
+            maxScope: 100,
+            place: 35,
+          },
+        ],
+        verb: 'walked',
+      },
+    ]]);
+  });
+
   it('converts "out of" at the beginning, with word numbers', () => {
     const words = 'Five out of twelve customers have lost electricity';
 

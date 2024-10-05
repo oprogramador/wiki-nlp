@@ -30,7 +30,7 @@ const convertOutOf = phrase => phrase
         ...withoutLast(accumulator, 3),
         {
           groupType: 'outOf',
-          item: current.item,
+          item: current.item || beforeBeforeLast.item,
           maxScope: current.value,
           place,
         },
