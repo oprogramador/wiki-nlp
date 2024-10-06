@@ -22,7 +22,7 @@ const convertOutOf = phrase => phrase
       && last === 'of'
       && _.get(current, 'groupType') === 'quantity'
     ) {
-      const place = ordinalToNumber(beforeBeforeLast)
+      const number = ordinalToNumber(beforeBeforeLast)
         || beforeBeforeLast.value
         || wordsToNumbers[toLowerCase(beforeBeforeLast)];
 
@@ -32,20 +32,20 @@ const convertOutOf = phrase => phrase
           groupType: 'outOf',
           item: current.item || beforeBeforeLast.item,
           maxScope: current.value,
-          place,
+          number,
         },
       ];
     }
     if (
       _.get(last, 'maxScope')
-      && !last.place
+      && !last.number
       && _.get(current, 'value')
     ) {
       return [
         ...withoutLastOne(accumulator),
         {
           ...last,
-          place: current.value,
+          number: current.value,
         },
       ];
     }
