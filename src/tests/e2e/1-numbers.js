@@ -1738,6 +1738,83 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with an item and bracket', () => {
+    const words = '45 dogs (out of 100) walked';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'dogs',
+            maxScope: 100,
+            number: 45,
+          },
+        ],
+        verb: 'walked',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with bracket but no item', () => {
+    const words = 'They scored 19 (out of twenty)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            maxScope: 20,
+            number: 19,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'scored',
+      },
+    ]]);
+  });
+
+  it.skip('converts "out of" with no item after an ordinal', () => {
+    const words = 'They were 3rd (out of 10)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts "out of" with an item inside bracket', () => {
+    const words = 'They scored 789 (out of 1000 points)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: 'points',
+            maxScope: 1000,
+            number: 789,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'scored',
+      },
+    ]]);
+  });
+
   it('converts "out of" at the beginning, with word numbers', () => {
     const words = 'Five out of twelve customers have lost electricity';
 

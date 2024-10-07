@@ -37,6 +37,30 @@ const convertOutOf = phrase => phrase
       ];
     }
     if (
+      _.get(current, 'extra.0') === 'out'
+      && _.get(current, 'extra.1') === 'of'
+    ) {
+      const number = ordinalToNumber(last)
+        || last.value
+        || wordsToNumbers[toLowerCase(last)]
+        || current.basic.value
+        || ordinalToNumber(current.basic);
+
+      const item = current.basic.groupType === 'quantity'
+        ? current.extra[3]
+        : current.basic;
+
+      return [
+        ...withoutLast(accumulator, current.basic.groupType === 'quantity' ? 0 : 1),
+        {
+          groupType: 'outOf',
+          ...(item ? { item } : {}),
+          maxScope: current.extra[2].value,
+          number,
+        },
+      ];
+    }
+    if (
       _.get(last, 'maxScope')
       && !last.number
       && _.get(current, 'value')
