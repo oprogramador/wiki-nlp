@@ -1782,6 +1782,30 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with "around"', () => {
+    const words = 'Around 1 out of 100,000 is excellent';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'excellent',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            isExact: false,
+            maxScope: 100000,
+            number: 1,
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
   it.skip('converts "out of" with no item after an ordinal', () => {
     const words = 'They were 3rd (out of 10)';
 

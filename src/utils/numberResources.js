@@ -119,6 +119,7 @@ const aroundWords = [
   'around',
   'about',
   'approximately',
+  'roughly',
 ];
 
 const nullWords = [

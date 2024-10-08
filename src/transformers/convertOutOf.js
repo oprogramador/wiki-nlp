@@ -25,14 +25,17 @@ const convertOutOf = phrase => phrase
       const number = ordinalToNumber(beforeBeforeLast)
         || beforeBeforeLast.value
         || wordsToNumbers[toLowerCase(beforeBeforeLast)];
+      const { isExact } = beforeBeforeLast;
+      const item = current.item || beforeBeforeLast.item;
 
       return [
         ...withoutLast(accumulator, 3),
         {
           groupType: 'outOf',
-          item: current.item || beforeBeforeLast.item,
+          ...(item ? { item } : {}),
           maxScope: current.value,
           number,
+          ...(typeof isExact !== 'undefined' ? { isExact } : {}),
         },
       ];
     }
