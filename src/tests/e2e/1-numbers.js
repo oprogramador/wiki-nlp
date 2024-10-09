@@ -1782,6 +1782,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "out of" with currency', () => {
+    const words = 'They risked only $15,000 (out of $100,000)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "out of" with "around"', () => {
     const words = 'Around 1 out of 100,000 is excellent';
 
