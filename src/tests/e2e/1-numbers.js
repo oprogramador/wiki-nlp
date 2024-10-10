@@ -1782,12 +1782,30 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of" with currency', () => {
+  it('converts "out of" with currency', () => {
     const words = 'They risked only $15,000 (out of $100,000)';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: {
+              currency: 'USD',
+              groupType: 'currency',
+            },
+            maxScope: 100000,
+            number: 15000,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'risked',
+      },
     ]]);
   });
 

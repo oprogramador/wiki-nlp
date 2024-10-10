@@ -11,6 +11,14 @@ const {
 } = require('../utils/numberResources');
 const toLowerCase = require('../utils/toLowerCase');
 
+const omit = (item, toOmit) => {
+  if (typeof item === 'object') {
+    return _.omit(item, toOmit);
+  }
+
+  return item;
+};
+
 const convertOutOf = phrase => phrase
   .reduce((accumulator, current) => {
     const beforeBeforeLast = getBeforeBeforeLast(accumulator);
@@ -51,10 +59,13 @@ const convertOutOf = phrase => phrase
 
       const item = current.basic.groupType === 'quantity'
         ? current.extra[3]
-        : current.basic;
+        : omit(current.basic, 'value');
 
       return [
-        ...withoutLast(accumulator, current.basic.groupType === 'quantity' ? 0 : 1),
+        ...withoutLast(
+          accumulator,
+          ['quantity', 'currency'].includes(current.basic.groupType) ? 0 : 1,
+        ),
         {
           groupType: 'outOf',
           ...(item ? { item } : {}),
