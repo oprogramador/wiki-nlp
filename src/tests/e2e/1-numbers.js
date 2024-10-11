@@ -1809,6 +1809,38 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with a range', () => {
+    const words = 'It occurs in 40–70 out of 100,000 live births';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            groupType: 'outOf',
+            item: {
+              groupType: 'article',
+              words: [
+                'live',
+                'births',
+              ],
+            },
+            max: 70,
+            maxScope: 100000,
+            min: 40,
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'occurs',
+      },
+    ]]);
+  });
+
   it('converts "out of" with "around"', () => {
     const words = 'Around 1 out of 100,000 is excellent';
 

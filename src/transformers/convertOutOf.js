@@ -42,8 +42,9 @@ const convertOutOf = phrase => phrase
           groupType: 'outOf',
           ...(item ? { item } : {}),
           maxScope: current.value,
-          number,
+          ...(number ? { number } : {}),
           ...(typeof isExact !== 'undefined' ? { isExact } : {}),
+          ..._.pick(beforeBeforeLast, 'min', 'max'),
         },
       ];
     }
