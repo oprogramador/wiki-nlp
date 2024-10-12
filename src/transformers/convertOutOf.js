@@ -19,6 +19,8 @@ const omit = (item, toOmit) => {
   return item;
 };
 
+const omitUndefined = object => _.omitBy(object, x => typeof x === 'undefined');
+
 const convertOutOf = phrase => phrase
   .reduce((accumulator, current) => {
     const beforeBeforeLast = getBeforeBeforeLast(accumulator);
@@ -38,14 +40,16 @@ const convertOutOf = phrase => phrase
 
       return [
         ...withoutLast(accumulator, 3),
-        {
+        omitUndefined({
           groupType: 'outOf',
-          ...(item ? { item } : {}),
+          isExact,
+          item,
+          max: _.get(beforeBeforeLast, 'members.1.value'),
           maxScope: current.value,
-          ...(number ? { number } : {}),
-          ...(typeof isExact !== 'undefined' ? { isExact } : {}),
+          min: _.get(beforeBeforeLast, 'members.0.value'),
+          number,
           ..._.pick(beforeBeforeLast, 'min', 'max'),
-        },
+        }),
       ];
     }
     if (

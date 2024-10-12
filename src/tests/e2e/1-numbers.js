@@ -1841,6 +1841,47 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "out of" with a range defined with "to"', () => {
+    const words = 'It occurs in 50 to 60 out of 1000 live births';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts "out of" with a range defined with "or"', () => {
+    const words = 'Only four or five out of 100 such trees will have mushrooms';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'have',
+          'mushrooms',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: {
+              groupType: 'article',
+              words: [
+                'such',
+                'trees',
+              ],
+            },
+            max: 5,
+            maxScope: 100,
+            min: 4,
+          },
+        ],
+        verb: 'will',
+      },
+    ]]);
+  });
+
   it('converts "out of" with "around"', () => {
     const words = 'Around 1 out of 100,000 is excellent';
 
