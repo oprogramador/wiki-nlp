@@ -1841,12 +1841,36 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of" with a range defined with "to"', () => {
-    const words = 'It occurs in 50 to 60 out of 1000 live births';
+  it('converts "out of" with a range defined with "to"', () => {
+    const words = 'It occurs in about 50 to 60 out of 1000 live births';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            groupType: 'outOf',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'live',
+                'births',
+              ],
+            },
+            max: 60,
+            maxScope: 1000,
+            min: 50,
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'occurs',
+      },
     ]]);
   });
 

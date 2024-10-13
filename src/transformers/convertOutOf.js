@@ -2,6 +2,8 @@ const _ = require('lodash');
 const {
   getBeforeBeforeLast,
   getBeforeLast,
+  getFirst,
+  getLast,
   withoutLast,
   withoutLastOne,
 } = require('../utils/listUtils');
@@ -23,9 +25,33 @@ const omitUndefined = object => _.omitBy(object, x => typeof x === 'undefined');
 
 const convertOutOf = phrase => phrase
   .reduce((accumulator, current) => {
+    const farBefore = getFirst(getLast(accumulator, 5), 2);
     const beforeBeforeLast = getBeforeBeforeLast(accumulator);
     const beforeLast = getBeforeLast(accumulator);
     const last = _.last(accumulator);
+
+    if (
+      _.get(farBefore, '0.groupType') === 'quantity'
+      && _.get(farBefore, '1') === 'to'
+      && toLowerCase(beforeLast) === 'out'
+      && last === 'of'
+      && _.get(current, 'groupType') === 'quantity'
+    ) {
+      const { isExact } = farBefore[0];
+      const item = current.item || beforeBeforeLast.item;
+
+      return [
+        ...withoutLast(accumulator, 5),
+        omitUndefined({
+          groupType: 'outOf',
+          isExact,
+          item,
+          max: beforeBeforeLast.value,
+          maxScope: current.value,
+          min: farBefore[0].value,
+        }),
+      ];
+    }
 
     if (
       toLowerCase(beforeLast) === 'out'
