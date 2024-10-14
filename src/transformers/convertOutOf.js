@@ -118,6 +118,20 @@ const convertOutOf = phrase => phrase
         },
       ];
     }
+    if (
+      _.get(beforeLast, 'maxScope')
+      && !beforeLast.number
+      && last === ','
+      && _.get(current, 'value')
+    ) {
+      return [
+        ...withoutLast(accumulator, 2),
+        {
+          ...beforeLast,
+          number: current.value,
+        },
+      ];
+    }
 
     return [
       ...accumulator,

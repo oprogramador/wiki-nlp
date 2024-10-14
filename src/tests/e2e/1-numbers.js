@@ -2047,6 +2047,30 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with nothing before, and a comma before the number', () => {
+    const words = 'Out of 123 villages, 67 were bombed';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'bombed',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'villages',
+            maxScope: 123,
+            number: 67,
+          },
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
   it('converts "out of" with nothing before', () => {
     const words = 'Out of 10,000 female individuals 19 are homeless in San Diego, California';
 
