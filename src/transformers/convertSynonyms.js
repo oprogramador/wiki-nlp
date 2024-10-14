@@ -16,6 +16,7 @@ const map = [
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
   { from: ['the', 'second', 'half', 'of', 'the'], to: ['the', 'late'] },
   { from: ['well', 'over'], to: ['above'] },
+  { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
 ];
 
 const convertSynonyms = ({ now } = {}) => phrase => phrase

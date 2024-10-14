@@ -2071,6 +2071,39 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of a population of"', () => {
+    const words = 'Out of a population of 2 million, only 500,000 people have stayed in Kharkiv';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Kharkiv',
+            ],
+            subject: [
+              'stayed',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'people',
+            maxScope: 2e6,
+            number: 5e5,
+          },
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
   it('converts "out of" with nothing before', () => {
     const words = 'Out of 10,000 female individuals 19 are homeless in San Diego, California';
 

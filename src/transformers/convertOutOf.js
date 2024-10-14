@@ -126,10 +126,11 @@ const convertOutOf = phrase => phrase
     ) {
       return [
         ...withoutLast(accumulator, 2),
-        {
-          ...beforeLast,
+        omitUndefined({
+          item: current.item,
           number: current.value,
-        },
+          ...beforeLast,
+        }),
       ];
     }
 
