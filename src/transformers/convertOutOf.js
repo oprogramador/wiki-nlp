@@ -23,6 +23,11 @@ const omit = (item, toOmit) => {
 
 const omitUndefined = object => _.omitBy(object, x => typeof x === 'undefined');
 
+const createScopeFields = quantity => ({
+  maxScope: quantity.value || quantity.max || quantity.min,
+  ...(quantity.value && quantity.isExact !== false ? {} : { maxScopeDetails: quantity }),
+});
+
 const convertOutOf = phrase => phrase
   .reduce((accumulator, current) => {
     const farBefore = getFirst(getLast(accumulator, 5), 2);
@@ -47,7 +52,7 @@ const convertOutOf = phrase => phrase
           isExact,
           item,
           max: beforeBeforeLast.value,
-          maxScope: current.value,
+          ...(createScopeFields(current)),
           min: farBefore[0].value,
         }),
       ];
@@ -71,7 +76,7 @@ const convertOutOf = phrase => phrase
           isExact,
           item,
           max: _.get(beforeBeforeLast, 'members.1.value'),
-          maxScope: current.value,
+          ...(createScopeFields(current)),
           min: _.get(beforeBeforeLast, 'members.0.value'),
           number,
           ..._.pick(beforeBeforeLast, 'min', 'max'),
@@ -100,7 +105,7 @@ const convertOutOf = phrase => phrase
         {
           groupType: 'outOf',
           ...(item ? { item } : {}),
-          maxScope: current.extra[2].value,
+          ...(createScopeFields(current.extra[2])),
           number,
         },
       ];

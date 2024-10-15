@@ -732,8 +732,8 @@ describe('numbers (e2e)', () => {
               {
                 groupType: 'quantity',
                 item: 'applications',
-                max: 40000,
-                min: 30000,
+                max: 4e4,
+                min: 3e4,
               },
             ],
             verb: 'with',
@@ -1797,8 +1797,8 @@ describe('numbers (e2e)', () => {
               currency: 'USD',
               groupType: 'currency',
             },
-            maxScope: 100000,
-            number: 15000,
+            maxScope: 1e5,
+            number: 15e3,
           },
         ],
         subject: [
@@ -1829,7 +1829,7 @@ describe('numbers (e2e)', () => {
               ],
             },
             max: 70,
-            maxScope: 100000,
+            maxScope: 1e5,
             min: 40,
           },
         ],
@@ -1921,7 +1921,7 @@ describe('numbers (e2e)', () => {
           {
             groupType: 'outOf',
             isExact: false,
-            maxScope: 100000,
+            maxScope: 1e5,
             number: 1,
           },
         ],
@@ -2104,6 +2104,63 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with "as many as" & "little more than"', () => {
+    const words = 'Famine killed as many as 3 million Egyptians out of a population of little more than 13 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: 'Egyptians',
+            maxScope: 13e6,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              min: 13e6,
+            },
+            number: 3e6,
+          },
+        ],
+        subject: [
+          'Famine',
+        ],
+        verb: 'killed',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with non-exact max scope', () => {
+    const words = 'Famine killed 3 million Egyptians out of a population of around 13 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: 'Egyptians',
+            maxScope: 13e6,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              isExact: false,
+              value: 13e6,
+            },
+            number: 3e6,
+          },
+        ],
+        subject: [
+          'Famine',
+        ],
+        verb: 'killed',
+      },
+    ]]);
+  });
+
   it('converts "out of" with nothing before', () => {
     const words = 'Out of 10,000 female individuals 19 are homeless in San Diego, California';
 
@@ -2125,7 +2182,7 @@ describe('numbers (e2e)', () => {
                 'individuals',
               ],
             },
-            maxScope: 10000,
+            maxScope: 1e4,
             number: 19,
           },
         ],

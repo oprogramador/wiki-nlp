@@ -1,23 +1,26 @@
+const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
 
-const map = [
+const map = _.sortBy([
   { from: ['1st'], to: ['first'] },
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
+  { from: ['as', 'many', 'as'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
+  { from: ['little', 'more', 'than'], to: ['above'] },
   { from: ['more', 'than'], to: ['above'] },
+  { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
   { from: ['the', 'second', 'half', 'of', 'the'], to: ['the', 'late'] },
   { from: ['well', 'over'], to: ['above'] },
-  { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
-];
+], x => -x.from.length);
 
 const convertSynonyms = ({ now } = {}) => phrase => phrase
   .reduce((accumulator, current) => {
