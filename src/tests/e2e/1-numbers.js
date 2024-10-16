@@ -2071,6 +2071,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "out of" with nothing before, and a preposition', () => {
+    const words = 'Out of 123 villages in Japan, 67 were bombed';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "out of a population of"', () => {
     const words = 'Out of a population of 2 million, only 500,000 people have stayed in Kharkiv';
 
