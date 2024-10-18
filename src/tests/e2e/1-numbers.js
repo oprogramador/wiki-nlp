@@ -2089,6 +2089,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "out of" with "between [...] and" followed by a comma', () => {
+    const words = 'Their group numbered between 350,000 and 420,000 people, out of a population of 2 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "out of a population of"', () => {
     const words = 'Out of a population of 2 million, only 500,000 people have stayed in Kharkiv';
 
