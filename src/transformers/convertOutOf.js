@@ -111,6 +111,21 @@ const convertOutOf = phrase => phrase
       ];
     }
     if (
+      _.get(farBefore, '0.groupType') === 'outOf'
+      && beforeBeforeLast === 'in'
+      && last === ','
+      && _.get(current, 'groupType') === 'quantity'
+    ) {
+      return [
+        ...withoutLast(accumulator, 5),
+        {
+          ...farBefore[0],
+          number: current.value,
+          place: beforeLast,
+        },
+      ];
+    }
+    if (
       _.get(last, 'maxScope')
       && !last.number
       && _.get(current, 'value')

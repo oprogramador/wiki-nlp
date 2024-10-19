@@ -2071,12 +2071,28 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of" with nothing before, and a preposition', () => {
+  it('converts "out of" with nothing before, and a preposition', () => {
     const words = 'Out of 123 villages in Japan, 67 were bombed';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'bombed',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'villages',
+            maxScope: 123,
+            number: 67,
+            place: 'Japan',
+          },
+        ],
+        verb: 'were',
+      },
     ]]);
   });
 
