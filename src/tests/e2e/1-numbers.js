@@ -709,6 +709,30 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts ranges with large numbers', () => {
+    const words = 'It has 3–4 million inhabitants';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'inhabitants',
+            max: 4e6,
+            min: 3e6,
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
   it('converts ranges', () => {
     const words = 'They have 30,000–40,000 applications with 1,500–1,700 candidates';
 

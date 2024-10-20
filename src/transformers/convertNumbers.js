@@ -73,6 +73,7 @@ const convertNumbers = phrase => phrase
         value = 1;
       }
       value *= largeNumbers[item];
+      minValue *= largeNumbers[item];
     }
     if (minValue) {
       maxValue = value;
