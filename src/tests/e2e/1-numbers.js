@@ -2096,12 +2096,88 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "out of" with a range scope', () => {
+  it('converts "out of" with a range, after a comma', () => {
     const words = 'Out of 123 villages, 67–100 were bombed';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'bombed',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'villages',
+            max: 100,
+            maxScope: 123,
+            min: 67,
+          },
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with a range scope with scope first', () => {
+    const words = 'Out of 100–120 villages, ten were bombed';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'bombed',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'villages',
+            maxScope: 120,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              item: 'villages',
+              max: 120,
+              min: 100,
+            },
+            number: 10,
+          },
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('converts "out of" with a range scope with scope later', () => {
+    const words = 'Sixty out of 200–300 villages were bombed';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'bombed',
+        ],
+        subject: [
+          {
+            groupType: 'outOf',
+            item: 'villages',
+            maxScope: 300,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              item: 'villages',
+              max: 300,
+              min: 200,
+            },
+            number: 60,
+          },
+        ],
+        verb: 'were',
+      },
     ]]);
   });
 

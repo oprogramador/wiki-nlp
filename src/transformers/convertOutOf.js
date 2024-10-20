@@ -128,7 +128,7 @@ const convertOutOf = phrase => phrase
     if (
       _.get(last, 'maxScope')
       && !last.number
-      && _.get(current, 'value')
+      && _.get(current, 'groupType') === 'quantity'
     ) {
       return [
         ...withoutLastOne(accumulator),
@@ -142,13 +142,14 @@ const convertOutOf = phrase => phrase
       _.get(beforeLast, 'maxScope')
       && !beforeLast.number
       && last === ','
-      && _.get(current, 'value')
+      && _.get(current, 'groupType') === 'quantity'
     ) {
       return [
         ...withoutLast(accumulator, 2),
         omitUndefined({
           item: current.item,
           number: current.value,
+          ..._.pick(current, 'min', 'max'),
           ...beforeLast,
         }),
       ];
