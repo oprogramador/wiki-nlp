@@ -8,6 +8,7 @@ const map = _.sortBy([
   { from: ['3rd'], to: ['third'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
+  { from: ['an', 'estimated'], to: ['around'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
   { from: ['beginning', 'on'], to: ['since'] },

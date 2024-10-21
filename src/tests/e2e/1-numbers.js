@@ -96,6 +96,27 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "an estimated"', () => {
+    const words = 'An estimated 3 million Nigerians migrated';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        subject: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'Nigerians',
+            value: 3e6,
+          },
+        ],
+        verb: 'migrated',
+      },
+    ]]);
+  });
+
   it('converts with "Approximately" (uppercase)', () => {
     const words = 'Approximately three apples are from imports';
 
