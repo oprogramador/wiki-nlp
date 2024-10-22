@@ -2268,6 +2268,56 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('splits "and it"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The famine affected an estimated 123,000 people out of a population of 1.1 million and it shocked the society';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            isExact: false,
+            item: 'people',
+            maxScope: 11e5,
+            number: 123e3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'famine',
+            ],
+          },
+        ],
+        verb: 'affected',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'society',
+            ],
+          },
+        ],
+        subject: [
+          'it',
+        ],
+        verb: 'shocked',
+      },
+    ]]);
+  });
+
   it('converts "out of" with "as many as" & "little more than"', () => {
     const words = 'Famine killed as many as 3 million Egyptians out of a population of little more than 13 million';
 

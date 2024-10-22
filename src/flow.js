@@ -51,6 +51,7 @@ const itemize = require('./transformers/itemize');
 const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
 const splitBut = require('./transformers/splitBut');
+const splitAndIt = require('./transformers/splitAndIt');
 const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -80,6 +81,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupBrackets),
     p => p.map(convertFromTo),
     p => p.map(groupLocality),
+    p => p.map(pp => splitAndIt(pp)).flat(),
     p => p.map(pp => groupAnd(pp)),
     p => p.map(convertManyDecades),
     p => p.map(convertOrdinals),
