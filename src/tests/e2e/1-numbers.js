@@ -2346,6 +2346,34 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "out of" with "no more than"', () => {
+    const words = 'Famine killed 3 million Egyptians out of a population of no more than 13 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: 'Egyptians',
+            maxScope: 13e6,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              max: 13e6,
+            },
+            number: 3e6,
+          },
+        ],
+        subject: [
+          'Famine',
+        ],
+        verb: 'killed',
+      },
+    ]]);
+  });
+
   it('converts "out of" with non-exact max scope', () => {
     const words = 'Famine killed 3 million Egyptians out of a population of around 13 million';
 

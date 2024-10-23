@@ -15,6 +15,7 @@ const map = _.sortBy([
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
   { from: ['more', 'than'], to: ['above'] },
+  { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
