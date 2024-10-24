@@ -2268,6 +2268,49 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('splits ", and it"', () => {
+    const words = 'The famine started in 1903, and it ended in 1910';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'famine',
+              ],
+            },
+          ],
+          verb: 'started',
+          when: {
+            groupType: 'date',
+            year: 1903,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            'it',
+          ],
+          verb: 'ended',
+          when: {
+            groupType: 'date',
+            year: 1910,
+          },
+        },
+      ],
+    ]);
+  });
+
   it('splits "and it"', () => {
     // eslint-disable-next-line max-len
     const words = 'The famine affected an estimated 123,000 people out of a population of 1.1 million and it shocked the society';
