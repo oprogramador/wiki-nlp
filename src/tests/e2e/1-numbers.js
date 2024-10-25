@@ -2311,6 +2311,39 @@ describe('numbers (e2e)', () => {
     ]);
   });
 
+  it('converts "as of" & ", out of a population of"', () => {
+    const words = 'As of 2010, Bangkok had over 1.7 million squatters, out of a population of approximately 9 million';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'outOf',
+            item: 'squatters',
+            maxScope: 9e6,
+            maxScopeDetails: {
+              groupType: 'quantity',
+              isExact: false,
+              value: 9e6,
+            },
+            min: 1.7e6,
+          },
+        ],
+        subject: [
+          'Bangkok',
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
+
   it('splits "and it"', () => {
     // eslint-disable-next-line max-len
     const words = 'The famine affected an estimated 123,000 people out of a population of 1.1 million and it shocked the society';

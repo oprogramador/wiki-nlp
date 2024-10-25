@@ -3,6 +3,7 @@ const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
 
 const map = _.sortBy([
+  { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
@@ -10,6 +11,7 @@ const map = _.sortBy([
   { from: ['a', 'number', 'of'], to: ['number'] },
   { from: ['an', 'estimated'], to: ['around'] },
   { from: ['as', 'many', 'as'], to: [] },
+  { from: ['as', 'of'], to: ['in'] },
   { from: ['at', 'least'], to: ['above'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
