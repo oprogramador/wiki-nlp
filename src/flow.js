@@ -48,10 +48,11 @@ const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
 const itemize = require('./transformers/itemize');
+const moveAdverbs = require('./transformers/moveAdverbs');
 const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
-const splitBut = require('./transformers/splitBut');
 const splitAndIt = require('./transformers/splitAndIt');
+const splitBut = require('./transformers/splitBut');
 const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -71,6 +72,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertNumbers),
     p => p.map(convertFractions),
     p => p.map(convertPreBce),
+    p => p.map(moveAdverbs),
     p => p.map(groupArticles),
     p => p.map(convertArticlesToLowerCase),
     p => p.map(addArticleToDecade),

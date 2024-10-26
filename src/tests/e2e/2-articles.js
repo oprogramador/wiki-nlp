@@ -2295,4 +2295,43 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles an adverb with passive', () => {
+    const words = 'In 1950s, the public transport was commonly used by the lower classes';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'commonly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'public',
+              'transport',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'lower',
+              'classes',
+            ],
+          },
+        ],
+        verb: 'use',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+          minYear: 1950,
+        },
+      },
+    ]]);
+  });
 });
