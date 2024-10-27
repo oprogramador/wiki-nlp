@@ -2334,4 +2334,38 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles an adverb with passive, irregular verb', () => {
+    const words = 'The public transport is mostly paid by the local taxpayers';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'mostly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'public',
+              'transport',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'local',
+              'taxpayers',
+            ],
+          },
+        ],
+        verb: 'pay',
+      },
+    ]]);
+  });
 });

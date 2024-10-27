@@ -1,8 +1,10 @@
 const _ = require('lodash');
 const auxiliaryList = require('../utils/auxiliaryList');
+const convertPastParticipleToPresent = require('../utils/convertPastParticipleToPresent');
 const isAdverb = require('../utils/isAdverb');
 const {
-  getBeforeLast, withoutLastOne,
+  getBeforeLast,
+  withoutLastOne,
 } = require('../utils/listUtils');
 
 const moveAdverbs = phrase => phrase.reduce(
@@ -13,7 +15,7 @@ const moveAdverbs = phrase => phrase.reduce(
     if (
       auxiliaryList.includes(beforeLast)
       && isAdverb(last)
-      && /ed/.test(current)
+      && convertPastParticipleToPresent(current)
     ) {
       return [
         ...withoutLastOne(accumulator),
