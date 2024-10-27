@@ -2368,4 +2368,59 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles an adverb after an article', () => {
+    const words = 'They were a strongly diversified group';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'strongly',
+              'diversified',
+              'group',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ]]);
+  });
+
+  it('handles a verb adverb, and an adverb after an article', () => {
+    const words = 'They met quickly a strongly diversified group';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'quickly',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'strongly',
+              'diversified',
+              'group',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'met',
+      },
+    ]]);
+  });
 });

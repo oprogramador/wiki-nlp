@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const articles = require('../utils/articleList');
 const isAdverb = require('../utils/isAdverb');
 const { getFirst, withoutFirst, withoutLastOne } = require('../utils/listUtils');
 const articleToWord = require('../utils/articleToWord');
@@ -19,7 +20,10 @@ const convertPreAdverbs = phrase => phrase.reduce(
     }
     if (_.get(current, 'groupType') === 'article' && current.words) {
       const adverbPlace = current.words.findIndex(word => isAdverb(word) && !isUpperCase(word));
-      if (adverbPlace >= 0) {
+      if (
+        adverbPlace >= 0
+        && !articles.includes(current.words[adverbPlace - 1])
+      ) {
         const shouldAddAtEnd = adverbPlace <= 1 && current.words.length > 3;
         const adverbItems = [{
           adverb: current.words[adverbPlace],

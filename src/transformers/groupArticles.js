@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const articles = require('../utils/articleList');
 const auxiliary = require('../utils/auxiliaryList');
 const prepositions = require('../utils/prepositionList');
 const pronouns = require('../utils/pronounsList');
@@ -13,12 +14,6 @@ const {
   withoutLast,
   withoutLastOne,
 } = require('../utils/listUtils');
-
-const articles = [
-  'a',
-  'an',
-  'the',
-];
 
 const allowedPrepositions = [
   'for',

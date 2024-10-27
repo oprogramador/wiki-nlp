@@ -1,12 +1,7 @@
 const _ = require('lodash');
+const articles = require('../utils/articleList');
 const { withoutFirstOne } = require('../utils/listUtils');
 const toLowerCase = require('../utils/toLowerCase');
-
-const articles = [
-  'a',
-  'an',
-  'the',
-];
 
 const convertArticlesToLowerCase = phrase => phrase
   .reduce((accumulator, current) => {
