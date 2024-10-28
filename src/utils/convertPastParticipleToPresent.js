@@ -3,6 +3,9 @@ const isVowel = require('./isVowel');
 const irregularVerbsList = require('./irregularVerbsList');
 
 const convertPastParticipleToPresent = (word) => {
+  if (!_.get(word, 'replace')) {
+    return word;
+  }
   const found = _.get(
     irregularVerbsList.find(item => item.pastParticiple === word),
     'present',

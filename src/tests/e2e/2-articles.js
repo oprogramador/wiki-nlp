@@ -2449,4 +2449,33 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles an adverb before a number', () => {
+    const words = 'The amount is usually twelve';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            value: 12,
+          },
+          'usually',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'amount',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
