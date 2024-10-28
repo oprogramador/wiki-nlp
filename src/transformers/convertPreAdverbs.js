@@ -18,6 +18,20 @@ const convertPreAdverbs = phrase => phrase.reduce(
         },
       ];
     }
+    if (
+      !_.get(last, 'groupType')
+      && isAdverb(current)
+      && !isUpperCase(current)
+      && current !== 'respectively'
+    ) {
+      return [
+        accumulator,
+        {
+          adverb: toLowerCase(current),
+          groupType: 'adverb',
+        },
+      ];
+    }
     if (_.get(current, 'groupType') === 'article' && current.words) {
       const adverbPlace = current.words.findIndex(word => isAdverb(word) && !isUpperCase(word));
       if (

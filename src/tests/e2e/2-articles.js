@@ -2423,4 +2423,30 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an adverb after a pronoun', () => {
+    const words = 'She usually had a dream';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'usually',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'dream',
+            ],
+          },
+        ],
+        subject: [
+          'She',
+        ],
+        verb: 'had',
+      },
+    ]]);
+  });
 });
