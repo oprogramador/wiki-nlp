@@ -13,6 +13,17 @@ const moveAdverbs = phrase => phrase.reduce(
     const last = _.last(accumulator);
 
     if (
+      auxiliaryList.includes(last)
+      && isAdverb(current)
+    ) {
+      return [
+        ...withoutLastOne(accumulator),
+        current,
+        last,
+      ];
+    }
+
+    if (
       auxiliaryList.includes(beforeLast)
       && isAdverb(last)
       && convertPastParticipleToPresent(current)

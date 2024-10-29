@@ -2450,20 +2450,20 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it('handles an adverb before a number', () => {
+  it('finds an adverb before a number', () => {
     const words = 'The amount is usually twelve';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
       {
+        adverb: 'usually',
         groupType: 'verb',
         object: [
           {
             groupType: 'quantity',
             value: 12,
           },
-          'usually',
         ],
         subject: [
           {
@@ -2471,6 +2471,68 @@ describe('articles & verbs (e2e)', () => {
             words: [
               'the',
               'amount',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('finds an adverb before a unit', () => {
+    const words = 'Their weight is usually eleven kilograms';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'usually',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            unit: 'kg',
+            value: 11,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Their',
+              'weight',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('finds an adverb before an article', () => {
+    const words = 'Their pet is usually a dog';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverb: 'usually',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'dog',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Their',
+              'pet',
             ],
           },
         ],
