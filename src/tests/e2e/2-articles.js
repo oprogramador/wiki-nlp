@@ -2369,6 +2369,15 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
+  it.skip('finds a simple place at the beginning', () => {
+    const words = 'In Oslo, the public transport is mostly paid by the local taxpayers';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('handles an adverb after an article', () => {
     const words = 'They were a strongly diversified group';
 
