@@ -2550,12 +2550,30 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('handles "long" as an adverb', () => {
+  it('handles "long" as an adverb', () => {
     const words = 'That was long an essential issue';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        adverb: 'perennially',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'essential',
+              'issue',
+            ],
+          },
+        ],
+        subject: [
+          'That',
+        ],
+        verb: 'was',
+      },
     ]]);
   });
 });
