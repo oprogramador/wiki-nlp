@@ -13,7 +13,7 @@ const convertAdverbs = (phrase) => {
     return [
       {
         ...phrase[0],
-        adverb,
+        adverbs: [adverb],
         object: object.filter(item => _.get(item, 'groupType') !== 'adverb'),
         subject: subject.filter(item => _.get(item, 'groupType') !== 'adverb').flat(),
       },

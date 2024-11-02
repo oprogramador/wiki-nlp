@@ -1049,7 +1049,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'formally',
+        adverbs: ['formally'],
         groupType: 'verb',
         object: [
           {
@@ -2011,7 +2011,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'strongly',
+        adverbs: ['strongly'],
         groupType: 'verb',
         object: [
           'decolonisation',
@@ -2031,7 +2031,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'strongly',
+        adverbs: ['strongly'],
         groupType: 'verb',
         object: [
           {
@@ -2066,7 +2066,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'particularly',
+        adverbs: ['particularly'],
         groupType: 'verb',
         object: [],
         subject: [
@@ -2146,7 +2146,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'tectonically',
+        adverbs: ['tectonically'],
         groupType: 'verb',
         object: [
           'unstable',
@@ -2303,7 +2303,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'commonly',
+        adverbs: ['commonly'],
         groupType: 'verb',
         object: [
           {
@@ -2342,7 +2342,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'mostly',
+        adverbs: ['mostly'],
         groupType: 'verb',
         object: [
           {
@@ -2412,7 +2412,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'quickly',
+        adverbs: ['quickly'],
         groupType: 'verb',
         object: [
           {
@@ -2440,7 +2440,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'usually',
+        adverbs: ['usually'],
         groupType: 'verb',
         object: [
           {
@@ -2466,7 +2466,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'usually',
+        adverbs: ['usually'],
         groupType: 'verb',
         object: [
           {
@@ -2495,7 +2495,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'usually',
+        adverbs: ['usually'],
         groupType: 'verb',
         object: [
           {
@@ -2525,7 +2525,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'usually',
+        adverbs: ['usually'],
         groupType: 'verb',
         object: [
           {
@@ -2557,7 +2557,7 @@ describe('articles & verbs (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'perennially',
+        adverbs: ['perennially'],
         groupType: 'verb',
         object: [
           {

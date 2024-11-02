@@ -1237,7 +1237,7 @@ describe('dates (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'strongly',
+        adverbs: ['strongly'],
         groupType: 'verb',
         object: [
           {
@@ -1277,7 +1277,7 @@ describe('dates (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'strongly',
+        adverbs: ['strongly'],
         groupType: 'verb',
         object: [
           {

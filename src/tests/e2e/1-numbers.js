@@ -2858,7 +2858,7 @@ describe('numbers (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'officially',
+        adverbs: ['officially'],
         groupType: 'verb',
         object: [
           {
@@ -2888,7 +2888,7 @@ describe('numbers (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
-        adverb: 'officially',
+        adverbs: ['officially'],
         groupType: 'verb',
         object: [
           {
