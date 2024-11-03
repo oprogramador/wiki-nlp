@@ -2576,4 +2576,50 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('handles multiple adverbs', () => {
+    const words = 'Taxonomically, the Indian leopard was usually classified as a distinct specie';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'taxonomically',
+          'usually',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'distinct',
+                  'specie',
+                ],
+              },
+            ],
+            subject: [
+              'classified',
+            ],
+            verb: 'as',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Indian',
+              'leopard',
+            ],
+          },
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
 });

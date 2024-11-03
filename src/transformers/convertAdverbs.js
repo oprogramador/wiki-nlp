@@ -7,13 +7,15 @@ const convertAdverbs = (phrase) => {
   const object = _.get(phrase, '0.object', []);
   const subject = _.get(phrase, '0.subject', []);
 
-  const { adverb } = [...object, ...subject].find(item => _.get(item, 'groupType') === 'adverb') || {};
+  const adverbs = [...object, ...subject]
+    .filter(item => _.get(item, 'groupType') === 'adverb')
+    .map(x => x.adverb);
 
-  if (adverb) {
+  if (_.get(adverbs, '0')) {
     return [
       {
         ...phrase[0],
-        adverbs: [adverb],
+        adverbs,
         object: object.filter(item => _.get(item, 'groupType') !== 'adverb'),
         subject: subject.filter(item => _.get(item, 'groupType') !== 'adverb').flat(),
       },
