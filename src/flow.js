@@ -45,6 +45,7 @@ const groupUnits = require('./transformers/groupUnits');
 const groupVerbs = require('./transformers/groupVerbs');
 const includeAccordance = require('./transformers/includeAccordance');
 const includeDates = require('./transformers/includeDates');
+const convertAgo = require('./transformers/convertAgo');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
 const itemize = require('./transformers/itemize');
@@ -71,6 +72,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupNumbers),
     p => p.map(convertNumbers),
     p => p.map(convertFractions),
+    p => p.map(convertAgo({ now })),
     p => p.map(convertPreBce),
     p => p.map(moveAdverbs),
     p => p.map(groupArticles),

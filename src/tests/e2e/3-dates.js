@@ -1766,4 +1766,121 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "ago"', () => {
+    const words = 'They started the business 100 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'business',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1925,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "ago" with "about"', () => {
+    const words = 'They started the business about 200 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'business',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: 1824,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "ago" with "almost"', () => {
+    const words = 'They started the business almost 100 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'business',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          minYear: 1924,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "ago" with "over"', () => {
+    const words = 'They started the business over 100 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'business',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          maxYear: 1924,
+        },
+      },
+    ]]);
+  });
 });

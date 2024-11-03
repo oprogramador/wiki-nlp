@@ -4,7 +4,6 @@ const { getLast, withoutLast } = require('../utils/listUtils');
 
 const map = _.sortBy([
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
-  { from: ['long'], to: ['perennially'] },
   { from: ['1st'], to: ['first'] },
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
@@ -17,6 +16,7 @@ const map = _.sortBy([
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
+  { from: ['long'], to: ['perennially'] },
   { from: ['more', 'than'], to: ['above'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
