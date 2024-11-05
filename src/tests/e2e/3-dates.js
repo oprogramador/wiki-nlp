@@ -1883,4 +1883,76 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a long time ago"', () => {
+    const words = 'A massive asteroid hit the Moon a long time ago';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Moon',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'massive',
+              'asteroid',
+            ],
+          },
+        ],
+        verb: 'hit',
+        when: {
+          groupType: 'date',
+          maxYear: 1920,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "not a long time ago"', () => {
+    const words = 'A little asteroid hit the Moon not a long time ago';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Moon',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'little',
+              'asteroid',
+            ],
+          },
+        ],
+        verb: 'hit',
+        when: {
+          groupType: 'date',
+          minYear: 1920,
+        },
+      },
+    ]]);
+  });
 });

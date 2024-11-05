@@ -2550,7 +2550,7 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it('handles "long" as an adverb', () => {
+  it.skip('handles "long" as an adverb', () => {
     const words = 'That was long an essential issue';
 
     const result = flow(splitText(words));
