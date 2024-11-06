@@ -12,6 +12,7 @@ const map = _.sortBy([
   { from: ['an', 'estimated'], to: ['around'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['as', 'of'], to: ['in'] },
+  { from: ['as', 'recently', 'as'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },

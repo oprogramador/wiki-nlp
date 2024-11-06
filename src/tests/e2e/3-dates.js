@@ -1955,4 +1955,33 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as recently as"', () => {
+    const words = 'They started the business as recently as 20 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'business',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 2006,
+        },
+      },
+    ]]);
+  });
 });
