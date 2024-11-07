@@ -1884,6 +1884,35 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('handles "years ago" at the beginning', () => {
+    const words = '200 years ago, the GDP was low';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'low',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'GDP',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1825,
+        },
+      },
+    ]]);
+  });
+
   it('converts "a long time ago"', () => {
     const words = 'A massive asteroid hit the Moon a long time ago';
 
