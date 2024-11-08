@@ -17,6 +17,7 @@ const map = _.sortBy([
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
+  { from: ['quite', 'a', 'long', 'time', 'ago'], to: ['over', '200', 'years', 'ago'] },
   { from: ['a', 'long', 'time', 'ago'], to: ['over', '100', 'years', 'ago'] },
   { from: ['not', 'a', 'long', 'time', 'ago'], to: ['below', '100', 'years', 'ago'] },
   { from: ['more', 'than'], to: ['above'] },
