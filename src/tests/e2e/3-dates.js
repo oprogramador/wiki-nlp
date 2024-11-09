@@ -2021,6 +2021,15 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "a long time ago" with passive', () => {
+    const words = 'Indian literature was created a long time ago by amazing writers';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "as recently as"', () => {
     const words = 'They started the business as recently as 20 years ago';
 
