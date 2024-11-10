@@ -375,6 +375,121 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "billions of"', () => {
+    const words = 'Billions of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 1e9,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "millions of"', () => {
+    const words = 'Millions of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 1e6,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "thousands of"', () => {
+    const words = 'Thousands of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 1e3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "hundreds of"', () => {
+    const words = 'Hundreds of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 100,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "dozens of"', () => {
+    const words = 'Dozens of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 10,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts with trillion', () => {
     const words = 'Alan has 3.45 trillion apples';
 
