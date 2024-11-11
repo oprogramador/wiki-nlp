@@ -29,7 +29,7 @@ const convertPreBce = require('./transformers/convertPreBce');
 const convertPronouns = require('./transformers/convertPronouns');
 const convertPunctuation = require('./transformers/convertPunctuation');
 const convertRespectively = require('./transformers/convertRespectively');
-const convertSynonyms = require('./transformers/convertSynonyms');
+const { convertSynonyms0, convertSynonyms } = require('./transformers/convertSynonyms');
 const flatArticles = require('./transformers/flatArticles');
 const groupAnd = require('./transformers/groupAnd');
 const groupArticles = require('./transformers/groupArticles');
@@ -64,6 +64,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupDates),
     p => p.map(convertPercent),
     p => p.map(convertBn),
+    p => p.map(convertSynonyms0),
     p => p.map(convertSynonyms({ now })),
     p => p.map(convertAbbreviations),
     p => p.map(convertMixedOrdinalsSimple),

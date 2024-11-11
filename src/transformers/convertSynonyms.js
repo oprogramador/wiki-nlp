@@ -2,6 +2,10 @@ const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
 
+const first = [
+  { from: ['hundreds', 'of', 'thousands', 'of'], to: ['above', '100000'] },
+];
+
 const map = _.sortBy([
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
@@ -35,14 +39,14 @@ const map = _.sortBy([
   { from: ['well', 'over'], to: ['above'] },
 ], x => -x.from.length);
 
-const convertSynonyms = ({ now } = {}) => phrase => phrase
+const convertSynonyms = ({ list, now } = {}) => phrase => phrase
   .reduce((accumulator, current) => {
     const mapBasedOnTime = [
       { from: ['recent', 'years'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
       { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
     ];
 
-    const found = [...map, ...mapBasedOnTime].find(e => JSON.stringify(
+    const found = (list || [...map, ...mapBasedOnTime]).find(e => JSON.stringify(
       getLast(
         [...accumulator, current].map(toLowerCase),
         e.from.length,
@@ -62,4 +66,7 @@ const convertSynonyms = ({ now } = {}) => phrase => phrase
   },
   []);
 
-module.exports = convertSynonyms;
+module.exports = {
+  convertSynonyms,
+  convertSynonyms0: convertSynonyms({ list: first, now: new Date() }),
+};
