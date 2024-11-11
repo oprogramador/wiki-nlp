@@ -375,6 +375,35 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "hundreds of billions of"', () => {
+    const words = 'The government spends hundreds of billions of dollars';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'dollars',
+            min: 1e11,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'government',
+            ],
+          },
+        ],
+        verb: 'spends',
+      },
+    ]]);
+  });
+
   it('converts "billions of"', () => {
     const words = 'Billions of people are hungry';
 
@@ -391,6 +420,29 @@ describe('numbers (e2e)', () => {
             groupType: 'quantity',
             item: 'people',
             min: 1e9,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "hundreds of millions of"', () => {
+    const words = 'Hundreds of millions of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 1e8,
           },
         ],
         verb: 'are',
