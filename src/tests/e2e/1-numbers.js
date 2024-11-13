@@ -473,6 +473,29 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "many hundreds of thousands of"', () => {
+    const words = 'Many hundreds of thousands of people are hungry';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 1e5,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts "hundreds of thousands of"', () => {
     const words = 'Hundreds of thousands of people are hungry';
 
