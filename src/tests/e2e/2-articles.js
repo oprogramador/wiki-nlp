@@ -118,6 +118,15 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts a NOR as an object', () => {
+    const words = 'Bob wants neither a cat nor a dog';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts a phrase with past simple tense, and quantity', () => {
     const words = 'Bob received 5 cats';
 
