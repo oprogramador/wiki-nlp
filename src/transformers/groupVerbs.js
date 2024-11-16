@@ -8,6 +8,7 @@ const {
 } = require('../utils/listUtils');
 const isLettersOnly = require('../utils/isLettersOnly');
 const isUpperCase = require('../utils/isUpperCase');
+const logicalList = require('../utils/logicalList');
 const prepositions = require('../utils/prepositionList');
 const pronouns = require('../utils/pronounsList');
 const toLowerCase = require('../utils/toLowerCase');
@@ -26,10 +27,9 @@ const stripComa = (subject) => {
 };
 
 const objectGroupTypes = [
-  'and',
+  ...logicalList,
   'article',
   'currency',
-  'or',
   'outOf',
   'quantity',
   'unit',

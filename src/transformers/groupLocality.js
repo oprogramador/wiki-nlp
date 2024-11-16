@@ -1,30 +1,15 @@
 const _ = require('lodash');
 const auxiliary = require('../utils/auxiliaryList');
-const prepositions = require('../utils/prepositionList');
-const pronouns = require('../utils/pronounsList');
 const {
-  getBeforeLast, getBeforeBeforeLast, withoutLast,
+  getBeforeLast,
+  getBeforeBeforeLast,
+  withoutLast,
 } = require('../utils/listUtils');
 const isLettersOnly = require('../utils/isLettersOnly');
 const isUpperCase = require('../utils/isUpperCase');
 const toLowerCase = require('../utils/toLowerCase');
 
-const isDissalowed = word => [
-  ...auxiliary,
-  ...prepositions,
-  ...pronouns,
-  'and',
-  'or',
-  'no',
-  'not',
-  'previously',
-  'later',
-  'initially',
-  'constitutionally',
-]
-  .includes(toLowerCase(word));
-
-const condition = word => (isLettersOnly(word) && isUpperCase(word) && !isDissalowed(word))
+const condition = word => (isLettersOnly(word) && isUpperCase(word))
   || (
     word.groupType === 'article'
     && !word.abbreviation

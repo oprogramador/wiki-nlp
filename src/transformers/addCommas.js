@@ -1,9 +1,6 @@
 const _ = require('lodash');
 
-const separators = [
-  'and',
-  'or',
-];
+const separators = require('../utils/logicalList');
 
 const addCommas = phrase => phrase.reduce(
   (accumulator, current) => {

@@ -118,12 +118,45 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts a NOR as an object', () => {
+  it('converts a NOR as an object', () => {
     const words = 'Bob wants neither a cat nor a dog';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'nor',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'cat',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'dog',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+            ],
+          },
+        ],
+        verb: 'wants',
+      },
     ]]);
   });
 

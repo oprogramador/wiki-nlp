@@ -8,6 +8,7 @@ const isAdverb = require('../utils/isAdverb');
 const isLettersOnly = require('../utils/isLettersOnly');
 const toLowerCase = require('../utils/toLowerCase');
 const isUpperCase = require('../utils/isUpperCase');
+const logicalList = require('../utils/logicalList');
 const {
   getBeforeLast,
   getBeforeBeforeLast,
@@ -24,8 +25,7 @@ const isDissalowed = word => [
   ...auxiliary,
   ...prepositions,
   ...pronouns,
-  'and',
-  'or',
+  ...logicalList,
   'no',
   'not',
   'according',
