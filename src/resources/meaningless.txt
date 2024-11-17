@@ -15,7 +15,6 @@ lately
 likewise
 meanwhile
 moreover
-neither
 nevertheless
 nonetheless
 similarly

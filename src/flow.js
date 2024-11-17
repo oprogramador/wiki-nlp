@@ -9,6 +9,7 @@ const convertBce = require('./transformers/convertBce');
 const convertBetween = require('./transformers/convertBetween');
 const convertBn = require('./transformers/convertBn');
 const convertBoth = require('./transformers/convertBoth');
+const convertNeither = require('./transformers/convertNeither');
 const convertCenturies = require('./transformers/convertCenturies');
 const convertColon = require('./transformers/convertColon');
 const convertDateRanges = require('./transformers/convertDateRanges');
@@ -101,6 +102,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupNumbered),
     p => p.map(pp => groupAnd(pp)),
     p => p.map(convertBoth),
+    p => p.map(convertNeither),
     p => p.map(flatArticles),
     p => p.map(pp => splitWhich(pp)).flat(),
     p => p.map(pp => splitBut(pp)).flat(),

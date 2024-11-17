@@ -69,7 +69,7 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it('converts an OR as an object', () => {
+  it('converts OR as an object', () => {
     const words = 'Bob wants a cat, a dog, or a hamster';
 
     const result = flow(splitText(words));
@@ -118,7 +118,89 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it('converts a NOR as an object', () => {
+  it('does not remove "neither" when without "nor"', () => {
+    const words = 'In 2008, neither party won a net gain';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'net',
+              'gain',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'neither',
+              'party',
+            ],
+          },
+        ],
+        verb: 'won',
+        when: {
+          groupType: 'date',
+          year: 2008,
+        },
+      },
+    ]]);
+  });
+
+  it('converts NOR as a subject', () => {
+    const words = 'Neither his cat nor the dog was smart';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'smart',
+        ],
+        subject: [
+          {
+            groupType: 'nor',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'his',
+                  'cat',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'dog',
+                ],
+              },
+            ],
+          },
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
+
+  it.skip('converts NOR as a subject, after a year', () => {
+    const words = 'In 2000, neither his cat nor the dog was smart';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it('converts NOR as an object', () => {
     const words = 'Bob wants neither a cat nor a dog';
 
     const result = flow(splitText(words));
