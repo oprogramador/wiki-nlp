@@ -9,9 +9,9 @@ const convertBce = require('./transformers/convertBce');
 const convertBetween = require('./transformers/convertBetween');
 const convertBn = require('./transformers/convertBn');
 const convertBoth = require('./transformers/convertBoth');
-const convertNeither = require('./transformers/convertNeither');
 const convertCenturies = require('./transformers/convertCenturies');
 const convertColon = require('./transformers/convertColon');
+const convertCurrencies = require('./transformers/convertCurrencies');
 const convertDateRanges = require('./transformers/convertDateRanges');
 const convertDecades = require('./transformers/convertDecades');
 const convertFractions = require('./transformers/convertFractions');
@@ -21,6 +21,7 @@ const convertManyCenturies = require('./transformers/convertManyCenturies');
 const convertManyDecades = require('./transformers/convertManyDecades');
 const convertMixedOrdinalsSimple = require('./transformers/convertMixedOrdinalsSimple');
 const convertMixedOrdinalsWithDash = require('./transformers/convertMixedOrdinalsWithDash');
+const convertNeither = require('./transformers/convertNeither');
 const convertNumbers = require('./transformers/convertNumbers');
 const convertOrdinals = require('./transformers/convertOrdinals');
 const convertOutOf = require('./transformers/convertOutOf');
@@ -51,6 +52,7 @@ const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
 const itemize = require('./transformers/itemize');
+const joinPhrases = require('./transformers/joinPhrases');
 const moveAdverbs = require('./transformers/moveAdverbs');
 const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
@@ -60,6 +62,7 @@ const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
   const groups = _.flow(
+    joinPhrases,
     p => p.map(convertPunctuation),
     p => p.map(removeMeaningless),
     p => p.map(addCommas),
@@ -97,6 +100,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupUnits),
     p => p.map(groupPrenumbered),
     p => p.map(itemize),
+    p => p.map(convertCurrencies),
     p => p.map(convertOutOf),
     p => p.map(skipArticleBeforeNumber),
     p => p.map(groupNumbered),

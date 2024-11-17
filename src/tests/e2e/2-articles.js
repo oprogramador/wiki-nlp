@@ -2746,4 +2746,68 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "U.S. dollars"', () => {
+    const words = 'Their total budget is billions of U.S. dollars';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'USD',
+            groupType: 'currency',
+            min: 1e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Their',
+              'total',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
+
+  it('converts "U.S. dollars" followed by a year', () => {
+    const words = 'Their total budget was billions of U.S. dollars in 2015';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'USD',
+            groupType: 'currency',
+            min: 1e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Their',
+              'total',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2015,
+        },
+      },
+    ]]);
+  });
 });
