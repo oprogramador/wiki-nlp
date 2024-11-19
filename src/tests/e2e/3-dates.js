@@ -2058,4 +2058,49 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "now"', () => {
+    const words = 'It contains now essential information on several hundred issues';
+
+    const result = flow(splitText(words), { now: new Date('2022-05-30') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: 'issues',
+                max: 1000,
+                min: 101,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'essential',
+                  'information',
+                ],
+              },
+            ],
+            verb: 'on',
+          },
+        ],
+        subject: [
+          'It',
+        ],
+        verb: 'contains',
+        when: {
+          day: 30,
+          groupType: 'date',
+          month: 5,
+          year: 2022,
+        },
+      },
+    ]]);
+  });
 });

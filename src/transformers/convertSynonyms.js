@@ -2,11 +2,23 @@ const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
 
+const convertNow = now => [
+  'on',
+  {
+    day: now.getDate(),
+    groupType: 'date',
+    month: now.getMonth() + 1,
+    year: now.getFullYear(),
+  },
+  ',',
+];
+
 const createMap = ({ now }) => [
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
+  { from: ['a', 'few', 'hundred'], to: ['101–1000'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'long', 'time', 'ago'], to: ['over', '100', 'years', 'ago'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
@@ -40,19 +52,21 @@ const createMap = ({ now }) => [
   { from: ['more', 'than'], to: ['above'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['not', 'a', 'long', 'time', 'ago'], to: ['below', '100', 'years', 'ago'] },
+  { from: ['now'], to: convertNow(now) },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['quite', 'a', 'long', 'time', 'ago'], to: ['over', '200', 'years', 'ago'] },
   { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
   { from: ['recent', 'years'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
+  { from: ['several', 'hundred'], to: ['101–1000'] },
   { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
   { from: ['the', 'second', 'half', 'of', 'the'], to: ['the', 'late'] },
   { from: ['thousands', 'of'], to: ['above', '1000'] },
   { from: ['trillions', 'of'], to: ['above', 'one', 'trillion'] },
+  { from: ['u.s.', 'dollars'], to: ['USDs'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
-  { from: ['u.s.', 'dollars'], to: ['USDs'] },
 ];
 
 const convertSynonyms = ({ now } = {}) => (phrase) => {
