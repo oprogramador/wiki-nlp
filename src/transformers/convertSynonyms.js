@@ -22,6 +22,7 @@ const createMap = ({ now }) => [
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'long', 'time', 'ago'], to: ['over', '100', 'years', 'ago'] },
   { from: ['a', 'number', 'of'], to: ['number'] },
+  { from: ['american', 'dollars'], to: ['USDs'] },
   { from: ['an', 'estimated'], to: ['around'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['as', 'of'], to: ['in'] },
@@ -65,6 +66,8 @@ const createMap = ({ now }) => [
   { from: ['thousands', 'of'], to: ['above', '1000'] },
   { from: ['trillions', 'of'], to: ['above', 'one', 'trillion'] },
   { from: ['u.s.', 'dollars'], to: ['USDs'] },
+  { from: ['united', 'states', 'dollars'], to: ['USDs'] },
+  { from: ['us', 'dollars'], to: ['USDs'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
 ];
