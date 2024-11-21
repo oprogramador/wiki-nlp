@@ -79,6 +79,7 @@ const ordinalToNumberWord = (word) => {
 
   return word
     .replace(/th$/, '')
+    .replace(/st$/, '')
     .replace(/nd$/, '')
     .replace(/rd$/, '');
 };

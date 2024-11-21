@@ -1707,6 +1707,48 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "21st century"', () => {
+    const words = 'In the 21st century, the Germans and the French are friends';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'friends',
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Germans',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'French',
+                ],
+              },
+            ],
+          },
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 2001,
+        },
+      },
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 
