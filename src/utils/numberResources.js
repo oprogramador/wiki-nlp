@@ -4,6 +4,7 @@ const _ = require('lodash');
 const wordsToNumbers = {
   zero: 0,
   one: 1,
+  'twenty-one': 21,
   two: 2,
   three: 3,
   four: 4,
@@ -48,6 +49,9 @@ const stripPlural = (word) => {
 const ordinalToNumberWord = (word) => {
   if (word === 'first') {
     return 'one';
+  }
+  if (word === 'twenty-first') {
+    return 'twenty-one';
   }
   if (word === 'second') {
     return 'two';

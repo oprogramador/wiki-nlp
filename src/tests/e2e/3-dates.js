@@ -1749,6 +1749,36 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "between the 19th and 21st centuries"', () => {
+    const words = 'Between the 19th and 21st centuries, the world was developed';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'developed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'world',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 1801,
+        },
+      },
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 
