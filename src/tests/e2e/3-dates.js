@@ -1779,6 +1779,24 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "in the late [...] and early [...] centuries"', () => {
+    const words = 'In the late 19th and early 20th centuries, there were many protests';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
+  it.skip('converts "in the [...]–[...] centuries"', () => {
+    const words = 'In the 20th–21st centuries, the population was large';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 
