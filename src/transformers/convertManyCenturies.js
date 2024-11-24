@@ -9,8 +9,31 @@ const convertManyCenturies = phrase => phrase.reduce(
       beforeBeforeBeforeLast,
       beforeBeforeLast,
       beforeLast,
+      // When this array has few elements, these variable names aren't descriptive enough.
       last,
     ] = getLast(accumulator, 4);
+
+    if (
+      toLowerCase(beforeBeforeBeforeLast) === 'in'
+      && /–/.test(beforeLast)
+      && current === 'centuries'
+    ) {
+      const [first, second] = beforeLast.split('–');
+      const [minCentury, maxCentury] = _.sortBy([
+        ordinalToNumber(first),
+        ordinalToNumber(second),
+      ]);
+
+      return [
+        ...withoutLast(accumulator, 4),
+        'in',
+        {
+          groupType: 'date',
+          maxYear: (maxCentury - 1) * 100 + 100,
+          minYear: (minCentury - 1) * 100 + 1,
+        },
+      ];
+    }
 
     if (
       toLowerCase(beforeBeforeBeforeLast) === 'between'

@@ -1788,12 +1788,33 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "in the [...]–[...] centuries"', () => {
+  it('converts "in the [...]–[...] centuries"', () => {
     const words = 'In the 20th–21st centuries, the population was large';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'large',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'population',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 1901,
+        },
+      },
     ]]);
   });
 
