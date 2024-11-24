@@ -1818,6 +1818,36 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "in the [...]–[...] centuries" at the end', () => {
+    const words = 'The schools were poor in the 11th–15th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'poor',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'schools',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1500,
+          minYear: 1001,
+        },
+      },
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 

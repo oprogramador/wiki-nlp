@@ -26,7 +26,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       ]);
 
       return [
-        ...withoutLast(accumulator, 4),
+        ...withoutLast(accumulator, 3),
         'in',
         {
           groupType: 'date',
