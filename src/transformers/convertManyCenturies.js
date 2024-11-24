@@ -6,19 +6,20 @@ const { ordinalToNumber } = require('../utils/numberResources');
 const convertManyCenturies = phrase => phrase.reduce(
   (accumulator, current) => {
     const [
-      beforeBeforeBeforeLast,
-      beforeBeforeLast,
-      beforeLast,
-      // When this array has few elements, these variable names aren't descriptive enough.
       last,
-    ] = getLast(accumulator, 4);
+      beforeLast,
+      beforeBeforeLast,
+      beforeBeforeBeforeLast,
+    ] = getLast(accumulator, 4)
+      .reverse();
 
     if (
-      toLowerCase(beforeBeforeBeforeLast) === 'in'
-      && /–/.test(beforeLast)
+      toLowerCase(beforeBeforeLast) === 'in'
+      && JSON.stringify(_.get(beforeLast, 'words')) === '["the"]'
+      && /–/.test(last)
       && current === 'centuries'
     ) {
-      const [first, second] = beforeLast.split('–');
+      const [first, second] = last.split('–');
       const [minCentury, maxCentury] = _.sortBy([
         ordinalToNumber(first),
         ordinalToNumber(second),
