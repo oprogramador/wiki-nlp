@@ -1779,12 +1779,31 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "in the late [...] and early [...] centuries"', () => {
+  it('converts "in the late [...] and early [...] centuries"', () => {
     const words = 'In the late 19th and early 20th centuries, there were many protests';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'protests',
+            min: 3,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1851,
+        },
+      },
     ]]);
   });
 

@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
-const { getLast, withoutLast } = require('../utils/listUtils');
+const { getFirst, getLast, withoutLast } = require('../utils/listUtils');
 const { ordinalToNumber } = require('../utils/numberResources');
 
 const convertManyCenturies = phrase => phrase.reduce(
@@ -10,7 +10,8 @@ const convertManyCenturies = phrase => phrase.reduce(
       beforeLast,
       beforeBeforeLast,
       beforeBeforeBeforeLast,
-    ] = getLast(accumulator, 4)
+      before4Last,
+    ] = getLast(accumulator, 5)
       .reverse();
 
     if (
@@ -32,6 +33,30 @@ const convertManyCenturies = phrase => phrase.reduce(
           groupType: 'date',
           maxYear: (maxCentury - 1) * 100 + 100,
           minYear: (minCentury - 1) * 100 + 1,
+        },
+      ];
+    }
+
+    if (
+      toLowerCase(before4Last) === 'in'
+      && JSON.stringify(getFirst(_.get(beforeBeforeBeforeLast, 'words', []), 2)) === '["the","late"]'
+      && beforeBeforeLast === ','
+      && beforeLast === 'and'
+      && last === 'early'
+      && _.get(current, 'words.1') === 'centuries'
+    ) {
+      const [minCentury, maxCentury] = _.sortBy([
+        ordinalToNumber(_.get(beforeBeforeBeforeLast, 'words.2')),
+        ordinalToNumber(_.get(current, 'words.0')),
+      ]);
+
+      return [
+        ...withoutLast(accumulator, 5),
+        'in',
+        {
+          groupType: 'date',
+          maxYear: (maxCentury - 1) * 100 + 50,
+          minYear: (minCentury - 1) * 100 + 51,
         },
       ];
     }
