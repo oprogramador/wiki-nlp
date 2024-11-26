@@ -1867,6 +1867,15 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "in the [...]–[...] centuries" with passive, in the middle', () => {
+    const words = 'The village was owned in the 16th–18th centuries by the Williams';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 
