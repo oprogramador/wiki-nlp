@@ -1876,6 +1876,47 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "in the [...] & [...] centuries", in the middle', () => {
+    const words = 'Numerous sailing boats in the 19th & 20th centuries have been named Victoria';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'been',
+              'named',
+              'Victoria',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'sailing',
+                'boats',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: 1801,
+        },
+      },
+    ]]);
+  });
+
   it('handles decade with a noun', () => {
     const words = '1960s singers were the best';
 

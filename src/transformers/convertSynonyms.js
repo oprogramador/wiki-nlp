@@ -14,6 +14,7 @@ const convertNow = now => [
 ];
 
 const createMap = ({ now }) => [
+  { from: ['&'], to: ['and'] },
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
   { from: ['21st'], to: ['twenty-first'] },

@@ -62,7 +62,7 @@ const convertManyCenturies = phrase => phrase.reduce(
     }
 
     if (
-      toLowerCase(beforeBeforeBeforeLast) === 'between'
+      ['in', 'between'].includes(toLowerCase(beforeBeforeBeforeLast))
       && beforeLast === ','
       && last === 'and'
       && _.get(current, 'words.1') === 'centuries'
