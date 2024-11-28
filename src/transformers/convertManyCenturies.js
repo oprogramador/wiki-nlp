@@ -17,10 +17,10 @@ const convertManyCenturies = phrase => phrase.reduce(
     if (
       toLowerCase(beforeBeforeLast) === 'in'
       && JSON.stringify(_.get(beforeLast, 'words')) === '["the"]'
-      && /–/.test(last)
+      && /[–-]/.test(last)
       && current === 'centuries'
     ) {
-      const [first, second] = last.split('–');
+      const [first, second] = last.split(/[–-]/);
       const [minCentury, maxCentury] = _.sortBy([
         ordinalToNumber(first),
         ordinalToNumber(second),

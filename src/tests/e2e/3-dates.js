@@ -1837,6 +1837,36 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "in the [...]-[...] centuries" (a hypen)', () => {
+    const words = 'In the 7th-14th centuries, the population was low';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'low',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'population',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1400,
+          minYear: 601,
+        },
+      },
+    ]]);
+  });
+
   it('converts "in the [...]–[...] centuries" at the end', () => {
     const words = 'The schools were poor in the 11th–15th centuries';
 
