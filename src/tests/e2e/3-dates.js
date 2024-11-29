@@ -1906,6 +1906,78 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "in the [...]–[...] centuries" with passive, at the end', () => {
+    const words = 'The village was owned by the Browns in the 15th–18th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'village',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Browns',
+            ],
+          },
+        ],
+        verb: 'own',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1401,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "in the [...]–[...] centuries" with passive, at the beginning', () => {
+    const words = 'In the 12th–18th centuries, the village was owned by the Millers';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'village',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Millers',
+            ],
+          },
+        ],
+        verb: 'own',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1101,
+        },
+      },
+    ]]);
+  });
+
   it('converts "in the [...] & [...] centuries", in the middle', () => {
     const words = 'Numerous sailing boats in the 19th & 20th centuries have been named Victoria';
 
