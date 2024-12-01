@@ -1088,7 +1088,6 @@ describe('dates (e2e)', () => {
               },
             ],
             subject: [
-              'been',
               {
                 groupType: 'article',
                 words: [
@@ -1111,7 +1110,7 @@ describe('dates (e2e)', () => {
             ],
           },
         ],
-        verb: 'has',
+        verb: 'is',
         when: {
           groupType: 'date',
           maxYear: 2025,
@@ -1143,7 +1142,6 @@ describe('dates (e2e)', () => {
               },
             ],
             subject: [
-              'been',
               {
                 groupType: 'article',
                 words: [
@@ -1164,7 +1162,7 @@ describe('dates (e2e)', () => {
             ],
           },
         ],
-        verb: 'has',
+        verb: 'is',
         when: {
           groupType: 'date',
           maxYear: 2024,

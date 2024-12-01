@@ -294,4 +294,34 @@ describe('times (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a total of [...] times"', () => {
+    const words = 'The World Cup has been won by Brazil a total of five times';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'World',
+              'Cup',
+            ],
+          },
+        ],
+        subject: [
+          'Brazil',
+        ],
+        times: {
+          groupType: 'quantity',
+          value: 5,
+        },
+        verb: 'win',
+      },
+    ]]);
+  });
 });
