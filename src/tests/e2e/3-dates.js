@@ -1905,7 +1905,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "in the [...]–[...] centuries" with passive, at the end', () => {
-    const words = 'The village was owned by the Browns in the 15th–18th centuries';
+    const words = 'The village was owned by the Browns family in the 15th–18th centuries';
 
     const result = flow(splitText(words));
 
@@ -1927,6 +1927,7 @@ describe('dates (e2e)', () => {
             words: [
               'the',
               'Browns',
+              'family',
             ],
           },
         ],
