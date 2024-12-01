@@ -1,5 +1,10 @@
 const _ = require('lodash');
-const { withoutLastOne } = require('../utils/listUtils');
+const {
+  getBeforeBeforeLast,
+  getBeforeLast,
+  withoutLast,
+  withoutLastOne,
+} = require('../utils/listUtils');
 
 const months = [
   'January',
@@ -37,6 +42,24 @@ const createDayObject = (word) => {
 const groupDates = phrase => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator) || {};
+    const beforeLast = getBeforeLast(accumulator);
+    const beforeBeforeLast = getBeforeBeforeLast(accumulator);
+
+    if (
+      current === 'year'
+      && last === 'calendar'
+      && !Number.isNaN(Number(beforeLast))
+      && beforeBeforeLast === 'the'
+    ) {
+      return [
+        ...withoutLast(accumulator, 3),
+        {
+          groupType: 'date',
+          year: Number(beforeLast),
+        },
+      ];
+    }
+
     if (months.includes(current)) {
       const month = months.findIndex(element => element === current) + 1;
       const dayObject = createDayObject(last);

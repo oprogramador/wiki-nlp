@@ -43,7 +43,7 @@ const includeDates = ({ now } = {}) => (phrase) => {
 
   return [{
     ...phrase[0],
-    object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex + 1) : object,
+    object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex) : object,
     subject: convertSubject({ foundInSubject, foundInSubjectIndex, subject }),
     when,
   }];

@@ -2332,12 +2332,38 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "a long time ago" with passive', () => {
+  it('converts "a long time ago" with passive', () => {
     const words = 'Indian literature was created a long time ago by amazing writers';
 
     const result = flow(splitText(words), { now: new Date('2026-07-01') });
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Indian',
+              'literature',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'amazing',
+              'writers',
+            ],
+          },
+        ],
+        verb: 'create',
+        when: {
+          groupType: 'date',
+          maxYear: 1926,
+        },
+      },
     ]]);
   });
 
