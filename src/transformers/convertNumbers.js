@@ -61,7 +61,7 @@ const convertNumbers = phrase => phrase
       minValue = convertWithDigits(split[0]);
       value = convertWithDigits(split[1]);
     } else {
-      value = wordsToNumbers[valueWord] || convertWithDigits(valueWord);
+      value = wordsToNumbers[toLowerCase(valueWord)] || convertWithDigits(valueWord);
     }
     const item = words[1];
     if (item === '%') {

@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const toLowerCase = require('./toLowerCase');
 
 /* eslint-disable sort-keys */
 const wordsToNumbers = {
@@ -58,6 +59,9 @@ const ordinalToNumberWord = (word) => {
   }
   if (word === 'half') {
     return 'two';
+  }
+  if (word === 'quarter') {
+    return 'four';
   }
   if (word === 'quarter') {
     return 'four';
@@ -165,7 +169,7 @@ const convertWithDigits = (word) => {
 };
 
 const isNumeric = (word) => {
-  if (wordsToNumbers[word]) {
+  if (wordsToNumbers[toLowerCase(word)]) {
     return true;
   }
   if (typeof convertWithDigits(word) === 'number') {
