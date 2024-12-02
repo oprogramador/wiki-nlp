@@ -63,9 +63,6 @@ const ordinalToNumberWord = (word) => {
   if (word === 'quarter') {
     return 'four';
   }
-  if (word === 'quarter') {
-    return 'four';
-  }
   if (word === 'third') {
     return 'three';
   }
