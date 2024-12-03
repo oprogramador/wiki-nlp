@@ -19,6 +19,7 @@ const convertFromTo = require('./transformers/convertFromTo');
 const convertFromToInPhrase = require('./transformers/convertFromToInPhrase');
 const convertManyCenturies = require('./transformers/convertManyCenturies');
 const convertManyDecades = require('./transformers/convertManyDecades');
+const convertIncluding = require('./transformers/convertIncluding');
 const convertMixedOrdinalsSimple = require('./transformers/convertMixedOrdinalsSimple');
 const convertMixedOrdinalsWithDash = require('./transformers/convertMixedOrdinalsWithDash');
 const convertNeither = require('./transformers/convertNeither');
@@ -93,6 +94,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupLocality),
     p => p.map(pp => splitAndIt(pp)).flat(),
     p => p.map(pp => groupAnd(pp)),
+    p => p.map(convertIncluding),
     p => p.map(convertManyDecades),
     p => p.map(convertOrdinals),
     p => p.map(convertColon),

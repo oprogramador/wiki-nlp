@@ -2810,4 +2810,39 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "including"', () => {
+    const words = 'Many countries are landlocked, including Switzerland, Austria, Czechia and Slovakia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'landlocked',
+          {
+            groupType: 'including',
+            what: {
+              groupType: 'and',
+              members: [
+                'Switzerland',
+                'Austria',
+                'Czechia',
+                'Slovakia',
+              ],
+            },
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'countries',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
 });
