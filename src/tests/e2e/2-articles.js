@@ -2880,6 +2880,53 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts "including" with an item', () => {
+    const words = 'The university currently has about 40,000 students, including over 14,000 international students';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'currently',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'students',
+            value: 4e4,
+          },
+          {
+            groupType: 'including',
+            what: {
+              groupType: 'quantity',
+              item: {
+                groupType: 'article',
+                words: [
+                  'international',
+                  'students',
+                ],
+              },
+              min: 14e3,
+            },
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'university',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
   it('converts "respectively" at the beginning, with lowercase', () => {
     const words = 'respectively, Garcias adopted a dog and a cat';
 
