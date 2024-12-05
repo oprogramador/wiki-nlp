@@ -4,17 +4,17 @@ const convertRespectively = (phrase) => {
   const { object, subject, verb } = phrase[0];
 
   if (!(subject || []).includes('respectively')) {
-    return phrase;
+    return [phrase];
   }
   if (!_.get(object, '0.members')) {
-    return phrase;
+    return [phrase];
   }
 
-  return [object[0].members.map((objectItem, i) => ({
-    object: objectItem,
-    subject: subject[0].members[i],
+  return object.map(o => [o.members.map((objectItem, i) => ({
+    object: [objectItem],
+    subject: [_.get(subject, `0.members.${i}`) || _.get(subject, 2)],
     verb,
-  }))];
+  }))]);
 };
 
 module.exports = convertRespectively;

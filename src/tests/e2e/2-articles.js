@@ -2055,26 +2055,26 @@ describe('articles & verbs (e2e)', () => {
     expect(result).to.deep.equal([[
       [
         {
-          object: {
+          object: [{
             groupType: 'share',
             value: 0.015,
-          },
-          subject: {
+          }],
+          subject: [{
             groupType: 'article',
             words: [
               'the',
               'Shias',
             ],
-          },
+          }],
           verb: 'constitute',
         },
         {
-          object: {
+          object: [{
             groupType: 'share',
             item: 'Muslims',
             value: 0.003,
-          },
-          subject: 'Ahmadis',
+          }],
+          subject: ['Ahmadis'],
           verb: 'constitute',
         },
       ],
@@ -2877,6 +2877,39 @@ describe('articles & verbs (e2e)', () => {
         ],
         verb: 'are',
       },
+    ]]);
+  });
+
+  it('converts "respectively" at the beginning, with lowercase', () => {
+    const words = 'respectively, Garcias adopted a dog and a cat';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      [
+        {
+          object: [{
+            groupType: 'article',
+            words: [
+              'a',
+              'dog',
+            ],
+          }],
+          subject: ['Garcias'],
+          verb: 'adopted',
+        },
+        {
+          object: [{
+            groupType: 'article',
+            words: [
+              'a',
+              'cat',
+            ],
+          }],
+          subject: ['Garcias'],
+          verb: 'adopted',
+        },
+      ],
     ]]);
   });
 });

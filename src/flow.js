@@ -117,7 +117,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPreAdverbs),
     p => p.map(groupVerbs),
     p => p.map(convertAdverbs),
-    p => p.map(convertRespectively),
+    p => p.map(pp => convertRespectively(pp)).flat(),
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),
     p => p.map(includeLocalities),
