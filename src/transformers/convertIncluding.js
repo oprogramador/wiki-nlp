@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { getBeforeLast, withoutLast } = require('../utils/listUtils');
+const { getBeforeLast, withoutLast, withoutLastOne } = require('../utils/listUtils');
 
 const convertIncluding = phrase => phrase.reduce(
   (accumulator, current) => {
@@ -12,6 +12,18 @@ const convertIncluding = phrase => phrase.reduce(
     ) {
       return [
         ...withoutLast(accumulator, 2),
+        {
+          groupType: 'including',
+          what: current,
+        },
+      ];
+    }
+
+    if (
+      last === 'including'
+    ) {
+      return [
+        ...withoutLastOne(accumulator),
         {
           groupType: 'including',
           what: current,

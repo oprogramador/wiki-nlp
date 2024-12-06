@@ -2927,6 +2927,47 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts "including" without a comma', () => {
+    const words = 'The university currently has about 40,000 students including over 21,000 girls';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'currently',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'students',
+            value: 4e4,
+          },
+          {
+            groupType: 'including',
+            what: {
+              groupType: 'quantity',
+              item: 'girls',
+              min: 21e3,
+            },
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'university',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
   it('converts "respectively" at the beginning, with lowercase', () => {
     const words = 'respectively, Garcias adopted a dog and a cat';
 
