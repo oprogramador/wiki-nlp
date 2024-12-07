@@ -2941,17 +2941,14 @@ describe('articles & verbs (e2e)', () => {
         object: [
           {
             groupType: 'quantity',
-            isExact: false,
-            item: 'students',
-            value: 4e4,
-          },
-          {
-            groupType: 'including',
-            what: {
+            including: {
               groupType: 'quantity',
               item: 'girls',
               min: 21e3,
             },
+            isExact: false,
+            item: 'students',
+            value: 4e4,
           },
         ],
         subject: [
