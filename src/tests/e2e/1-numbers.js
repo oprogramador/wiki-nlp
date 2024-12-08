@@ -3229,6 +3229,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts with AND, and without visible plural', () => {
+    const words = 'French casualties were 123 dead and 567 injured';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "almost"', () => {
     const words = 'Almost 200 dogs are hungry';
 
