@@ -3229,6 +3229,29 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "or more"', () => {
+    const words = 'They have five or more dogs';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'dogs',
+            min: 5,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
   it.skip('converts with AND, and without visible plural', () => {
     const words = 'French casualties were 123 dead and 567 injured';
 
