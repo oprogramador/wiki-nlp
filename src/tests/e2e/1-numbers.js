@@ -3252,6 +3252,39 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts AND of items with numbers', () => {
+    const words = 'They have five dogs and four cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'quantity',
+                item: 'dogs',
+                value: 5,
+              },
+              {
+                groupType: 'quantity',
+                item: 'cats',
+                value: 4,
+              },
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'have',
+      },
+    ]]);
+  });
+
   it.skip('converts with AND, and without visible plural', () => {
     const words = 'French casualties were 123 dead and 567 injured';
 
