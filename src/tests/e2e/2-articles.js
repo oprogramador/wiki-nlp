@@ -2277,14 +2277,9 @@ describe('articles & verbs (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'preposition',
-            object: [
-              'Indonesia',
-            ],
-            subject: [
-              'most',
-            ],
-            verb: 'of',
+            groupType: 'share',
+            item: 'Indonesia',
+            min: 0.5,
           },
         ],
         verb: 'is',

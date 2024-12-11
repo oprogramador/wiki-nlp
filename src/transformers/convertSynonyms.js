@@ -78,6 +78,7 @@ const createMap = ({ now }) => [
   { from: ['us', 'dollars'], to: ['USDs'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
+  { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
 ];
 
 const convertSynonyms = ({ now } = {}) => (phrase) => {

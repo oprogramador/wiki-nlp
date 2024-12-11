@@ -300,6 +300,60 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts "most of" at the beginning', () => {
+    const words = 'Most of the casualties were the result of the tsunami in 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'tsunami',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'result',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'casualties',
+              ],
+            },
+            min: 0.5,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+      },
+    ]]);
+  });
+
   it('converts with percent of', () => {
     const words = 'The spending is 28 percent of GDP';
 
