@@ -354,6 +354,15 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "most of" with AND followed by a preposition', () => {
+    const words = 'They have visited most of Europe, and parts of Asia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts with percent of', () => {
     const words = 'The spending is 28 percent of GDP';
 
