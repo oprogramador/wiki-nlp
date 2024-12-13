@@ -39,6 +39,7 @@ const createMap = ({ now }) => [
   { from: ['dozens', 'of', 'trillions', 'of'], to: ['above', '1e13'] },
   { from: ['dozens', 'of'], to: ['above', '10'] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
+  { from: ['excluding', ':'], to: ['excluding'] },
   { from: ['has', 'been'], to: ['is'] },
   { from: ['hundreds', 'of', 'billions', 'of'], to: ['above', '1e11'] },
   { from: ['hundreds', 'of', 'millions', 'of'], to: ['above', '1e8'] },
@@ -56,6 +57,7 @@ const createMap = ({ now }) => [
   { from: ['many', 'trillions', 'of'], to: ['above', 'one', 'trillion'] },
   { from: ['millions', 'of'], to: ['above', 'one', 'million'] },
   { from: ['more', 'than'], to: ['above'] },
+  { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['not', 'a', 'long', 'time', 'ago'], to: ['below', '100', 'years', 'ago'] },
   { from: ['now'], to: convertNow(now) },
@@ -78,7 +80,6 @@ const createMap = ({ now }) => [
   { from: ['us', 'dollars'], to: ['USDs'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
-  { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
 ];
 
 const convertSynonyms = ({ now } = {}) => (phrase) => {

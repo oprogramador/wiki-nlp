@@ -2875,6 +2875,73 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
+  it('converts "excluding"', () => {
+    const words = 'Many countries are landlocked, excluding France, Spain, and Portugal';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'landlocked',
+          {
+            groupType: 'excluding',
+            what: {
+              groupType: 'and',
+              members: [
+                'France',
+                'Spain',
+                'Portugal',
+              ],
+            },
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'countries',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "excluding:"', () => {
+    const words = 'Numerous countries are landlocked, excluding: Belgium & Netherlands';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'landlocked',
+          {
+            groupType: 'excluding',
+            what: {
+              groupType: 'and',
+              members: [
+                'Belgium',
+                'Netherlands',
+              ],
+            },
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'countries',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
   it('converts "including" with an item', () => {
     const words = 'The university currently has about 40,000 students, including over 14,000 international students';
 

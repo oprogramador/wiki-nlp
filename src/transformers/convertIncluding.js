@@ -1,32 +1,32 @@
 const _ = require('lodash');
 const { getBeforeLast, withoutLast } = require('../utils/listUtils');
 
-const convertIncluding = phrase => phrase.reduce(
+const convertIncluding = ({ separator }) => phrase => phrase.reduce(
   (accumulator, current) => {
     const beforeLast = getBeforeLast(accumulator);
     const last = _.last(accumulator);
 
     if (
       beforeLast === ','
-      && last === 'including'
+      && last === separator
     ) {
       return [
         ...withoutLast(accumulator, 2),
         {
-          groupType: 'including',
+          groupType: separator,
           what: current,
         },
       ];
     }
 
     if (
-      last === 'including'
+      last === separator
     ) {
       return [
         ...withoutLast(accumulator, 2),
         {
           ...beforeLast,
-          including: current,
+          [separator]: current,
         },
       ];
     }
