@@ -60,6 +60,8 @@ const createMap = ({ now }) => [
   { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['not', 'a', 'long', 'time', 'ago'], to: ['below', '100', 'years', 'ago'] },
+  { from: ['not', 'excluding'], to: ['including'] },
+  { from: ['not', 'including'], to: ['excluding'] },
   { from: ['now'], to: convertNow(now) },
   { from: ['once'], to: ['1', 'times'] },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
