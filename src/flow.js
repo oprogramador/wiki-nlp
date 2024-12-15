@@ -53,6 +53,7 @@ const includeAccordance = require('./transformers/includeAccordance');
 const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
+const includeRelativeDates = require('./transformers/includeRelativeDates');
 const includeTimes = require('./transformers/includeTimes');
 const itemize = require('./transformers/itemize');
 const joinPhrases = require('./transformers/joinPhrases');
@@ -104,6 +105,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(groupUnits),
     p => p.map(groupPrenumbered),
     p => p.map(itemize),
+    p => p.map((current, i) => includeRelativeDates(current, p[i - 1])),
     p => p.map(convertIncluding({ separator: 'including' })),
     p => p.map(convertIncluding({ separator: 'excluding' })),
     p => p.map(convertCurrencies),

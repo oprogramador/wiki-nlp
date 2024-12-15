@@ -2440,4 +2440,61 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "years later"', () => {
+    const words = 'The system was designed in 1920 by Bob Brown. Seven years later Texas started the production';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'system',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+              'Brown',
+            ],
+          },
+        ],
+        verb: 'design',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'production',
+            ],
+          },
+        ],
+        subject: [
+          'Texas',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1927,
+        },
+      },
+    ]]);
+  });
 });
