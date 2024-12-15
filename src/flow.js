@@ -62,10 +62,12 @@ const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
 const splitAndIt = require('./transformers/splitAndIt');
 const splitBut = require('./transformers/splitBut');
+const splitBySemicolon = require('./transformers/splitBySemicolon');
 const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
   const groups = _.flow(
+    p => p.map(pp => splitBySemicolon(pp)).flat(),
     joinPhrases,
     p => p.map(convertPunctuation),
     p => p.map(removeMeaningless),

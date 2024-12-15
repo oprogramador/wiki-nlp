@@ -2497,4 +2497,59 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "years later" after a semicolon', () => {
+    const words = 'The two systems were designed in 1920 by Bob Brown; five years later Texas started the production';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'systems',
+            value: 2,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+              'Brown',
+            ],
+          },
+        ],
+        verb: 'design',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'production',
+            ],
+          },
+        ],
+        subject: [
+          'Texas',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1925,
+        },
+      },
+    ]]);
+  });
 });

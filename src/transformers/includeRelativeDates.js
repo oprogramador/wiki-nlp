@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const toLowerCase = require('../utils/toLowerCase');
 const { withoutFirst } = require('../utils/listUtils');
 
 const includeRelativeDates = (phrase, previousPhrase) => phrase.reduce(
@@ -8,7 +9,10 @@ const includeRelativeDates = (phrase, previousPhrase) => phrase.reduce(
       && _.get(current, 'item.words.0') === 'years'
       && _.get(current, 'item.words.1') === 'later'
     ) {
-      const base = previousPhrase.find(x => _.get(x, 'groupType') === 'quantity');
+      const base = previousPhrase.find(
+        (x, i) => _.get(x, 'groupType') === 'quantity'
+          && toLowerCase(previousPhrase[i - 1]) === 'in',
+      );
 
       return [
         ...accumulator,
