@@ -13,6 +13,9 @@ const includeRelativeDates = (phrase, previousPhrase) => phrase.reduce(
         (x, i) => _.get(x, 'groupType') === 'quantity'
           && toLowerCase(previousPhrase[i - 1]) === 'in',
       );
+      if (!base) {
+        return [...accumulator, current];
+      }
 
       return [
         ...accumulator,

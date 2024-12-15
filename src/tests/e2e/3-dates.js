@@ -2552,4 +2552,65 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts two semicolons', () => {
+    const words = 'They were poor; five years later they worked efficiently; now they are rich';
+
+    const result = flow(splitText(words), { now: new Date('2025-05-31') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'poor',
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'were',
+      },
+    ],
+    [
+      {
+        adverbs: [
+          'efficiently',
+        ],
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'years',
+                'later',
+              ],
+            },
+            value: 5,
+          },
+          'they',
+        ],
+        verb: 'worked',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'are',
+        when: {
+          day: 31,
+          groupType: 'date',
+          month: 5,
+          year: 2025,
+        },
+      },
+    ]]);
+  });
 });
