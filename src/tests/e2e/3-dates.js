@@ -2441,6 +2441,57 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "some [...] years later"', () => {
+    const words = 'It was designed in 1920 by Bob Brown. Some seventeen years later Texas started the production';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'it',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+              'Brown',
+            ],
+          },
+        ],
+        verb: 'design',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'production',
+            ],
+          },
+        ],
+        subject: [
+          'Texas',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1937,
+        },
+      },
+    ]]);
+  });
+
   it('converts "years later"', () => {
     const words = 'The system was designed in 1920 by Bob Brown. Seven years later Texas started the production';
 
@@ -2609,6 +2660,108 @@ describe('dates (e2e)', () => {
           groupType: 'date',
           month: 5,
           year: 2025,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "at the same time" with a comma', () => {
+    const words = 'The system was designed in 1920 by Bob Brown. At the same time, Texas started the production';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'system',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+              'Brown',
+            ],
+          },
+        ],
+        verb: 'design',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'production',
+            ],
+          },
+        ],
+        subject: [
+          'Texas',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "at the same time" with a decade', () => {
+    const words = 'Life expectancy declined in the 1920s. At the same time, poverty was rising';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Life',
+              'expectancy',
+            ],
+          },
+        ],
+        verb: 'declined',
+        when: {
+          groupType: 'date',
+          maxYear: 1929,
+          minYear: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'rising',
+        ],
+        subject: [
+          'poverty',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1929,
+          minYear: 1920,
         },
       },
     ]]);
