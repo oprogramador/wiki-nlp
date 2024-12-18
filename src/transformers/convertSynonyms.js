@@ -13,7 +13,7 @@ const convertNow = now => [
   ',',
 ];
 
-const createMap = ({ now }) => [
+const createDefaultMap = ({ now }) => [
   { from: ['&'], to: ['and'] },
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
@@ -31,6 +31,7 @@ const createMap = ({ now }) => [
   { from: ['as', 'of'], to: ['in'] },
   { from: ['as', 'recently', 'as'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
+  { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['dozens', 'of', 'billions', 'of'], to: ['above', '1e10'] },
@@ -84,7 +85,7 @@ const createMap = ({ now }) => [
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
 ];
 
-const convertSynonyms = ({ now } = {}) => (phrase) => {
+const convertSynonyms = ({ now, createMap = createDefaultMap } = {}) => (phrase) => {
   const maps = _.sortBy(
     Object.entries(
       _.groupBy(createMap({ now }), x => x.from.length),

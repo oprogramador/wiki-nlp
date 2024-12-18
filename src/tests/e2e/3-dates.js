@@ -2722,6 +2722,55 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "at the same time" without a comma', () => {
+    const words = 'The competition started in 1975; at the same time Diana Davis was sleeping';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'competition',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1975,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'sleeping',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Diana',
+              'Davis',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1975,
+        },
+      },
+    ]]);
+  });
+
   it('converts "at the same time" with a decade', () => {
     const words = 'Life expectancy declined in the 1920s. At the same time, poverty was rising';
 

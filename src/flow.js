@@ -72,6 +72,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPunctuation),
     p => p.map(removeMeaningless),
     p => p.map(convertSynonyms({ now })),
+    p => p.map(convertSynonyms({ createMap: () => [{ from: [',', ','], to: [','] }] })),
     p => p.map(addCommas),
     p => p.map(groupDates),
     p => p.map(convertPercent),

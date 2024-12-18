@@ -2395,22 +2395,22 @@ describe('articles & verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          'at',
-          {
-            groupType: 'article',
-            words: [
-              'the',
-              'square',
-            ],
-          },
-          ',',
-          ',',
           'here',
         ],
         subject: [
           'Bob',
         ],
         verb: 'is',
+        where: {
+          groupType: 'locality',
+          precise: {
+            groupType: 'article',
+            words: [
+              'the',
+              'square',
+            ],
+          },
+        },
       },
     ]]);
   });
