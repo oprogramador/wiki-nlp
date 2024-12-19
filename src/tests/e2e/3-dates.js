@@ -2665,6 +2665,15 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "years later" after "but"', () => {
+    const words = 'A new factory was completed in 1950 but closed some 30 years later';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "at the same time" with a comma', () => {
     const words = 'The system was designed in 1920 by Bob Brown. At the same time, Texas started the production';
 
