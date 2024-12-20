@@ -2665,6 +2665,15 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "years later" after a phrase in the middle', () => {
+    const words = 'He joined the Third Crusade in 1190, and settled in Jerusalem. Nine years later, he married Anna';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it.skip('converts "years later" after "but"', () => {
     const words = 'A new factory was completed in 1950 but closed some 30 years later';
 
