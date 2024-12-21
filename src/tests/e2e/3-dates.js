@@ -2549,6 +2549,63 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "years earlier"', () => {
+    const words = 'The system was refined in 1920 by Bob Brown. Seven years earlier Texas started the production';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'system',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Bob',
+              'Brown',
+            ],
+          },
+        ],
+        verb: 'refine',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'production',
+            ],
+          },
+        ],
+        subject: [
+          'Texas',
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1913,
+        },
+      },
+    ]]);
+  });
+
   it('converts "years later" after a semicolon', () => {
     const words = 'The two systems were designed in 1920 by Bob Brown; five years later Texas started the production';
 
