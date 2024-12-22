@@ -2549,6 +2549,16 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it.skip('converts "years earlier" after a day', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The event was arranged on 31 October 1970 in Paris, France. Five years earlier, it was in Barcelona, Spain';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
+
   it('converts "years earlier"', () => {
     const words = 'The system was refined in 1920 by Bob Brown. Seven years earlier Texas started the production';
 
