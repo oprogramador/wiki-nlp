@@ -2549,13 +2549,59 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "years earlier" after a day', () => {
+  it('converts "years earlier" after a day', () => {
     // eslint-disable-next-line max-len
     const words = 'The event was arranged on 31 October 1970 in Paris, France. Five years earlier, it was in Barcelona, Spain';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'arranged',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'event',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          day: 31,
+          groupType: 'date',
+          month: 10,
+          year: 1970,
+        },
+        where: {
+          general: 'France',
+          groupType: 'locality',
+          precise: 'Paris',
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'it',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1965,
+        },
+        where: {
+          general: 'Spain',
+          groupType: 'locality',
+          precise: 'Barcelona',
+        },
+      },
     ]]);
   });
 
@@ -2896,6 +2942,60 @@ describe('dates (e2e)', () => {
           groupType: 'date',
           maxYear: 1929,
           minYear: 1920,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "at the same time" with a day', () => {
+    const words = 'Their wedding was on 31 March 1920. At the same time, there was a volcano eruption';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Their',
+              'wedding',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          day: 31,
+          groupType: 'date',
+          month: 3,
+          year: 1920,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'volcano',
+              'eruption',
+            ],
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'was',
+        when: {
+          day: 31,
+          groupType: 'date',
+          month: 3,
+          year: 1920,
         },
       },
     ]]);
