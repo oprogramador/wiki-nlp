@@ -3000,4 +3000,56 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "that year"', () => {
+    const words = 'In March 2010, Indonesian people were voting. Also that year, they experienced a tsunami';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'voting',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Indonesian',
+              'people',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          month: 3,
+          year: 2010,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'tsunami',
+            ],
+          },
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'experienced',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
 });

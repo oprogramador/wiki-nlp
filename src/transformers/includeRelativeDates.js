@@ -74,6 +74,23 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
       ];
     }
 
+    if (
+      _.get(current, 'groupType') === 'article'
+      && _.get(current, 'words.0') === 'that'
+      && _.get(current, 'words.1') === 'year'
+    ) {
+      const base = findDate(previousPhrase);
+      if (!base) {
+        return [...accumulator, current];
+      }
+
+      return [
+        ...accumulator,
+        'in',
+        _.pick(base, 'groupType', 'year'),
+      ];
+    }
+
     return [...accumulator, current];
   },
   [],
