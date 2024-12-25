@@ -3001,7 +3001,7 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it('converts "that year"', () => {
+  it('converts "that year" after month+year', () => {
     const words = 'In March 2010, Indonesian people were voting. Also that year, they experienced a tsunami';
 
     const result = flow(splitText(words));
@@ -3051,5 +3051,63 @@ describe('dates (e2e)', () => {
         },
       },
     ]]);
+  });
+
+  it('converts "that year" after a year only', () => {
+    const words = 'In 2003, Bob became a doctor. Also that year, Bob run a marathon';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'doctor',
+              ],
+            },
+          ],
+          subject: [
+            'Bob',
+          ],
+          verb: 'became',
+          when: {
+            groupType: 'date',
+            year: 2003,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'marathon',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'Bob',
+              ],
+            },
+          ],
+          verb: 'run',
+          when: {
+            groupType: 'date',
+            year: 2003,
+          },
+        },
+      ],
+    ]);
   });
 });

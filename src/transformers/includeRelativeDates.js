@@ -16,7 +16,16 @@ const findDate = (previousPhrase) => {
     x => _.get(x, 'groupType') === 'date',
   );
 
-  return base || anotherBase;
+  const date = base || anotherBase;
+
+  if (!date) {
+    return date;
+  }
+
+  return {
+    ...date,
+    groupType: 'date',
+  };
 };
 
 const createRemainingParts = (current) => {
@@ -79,15 +88,19 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
       && _.get(current, 'words.0') === 'that'
       && _.get(current, 'words.1') === 'year'
     ) {
-      const base = findDate(previousPhrase);
-      if (!base) {
+      const date = findDate(previousPhrase);
+      if (!date) {
         return [...accumulator, current];
       }
 
       return [
         ...accumulator,
         'in',
-        _.pick(base, 'groupType', 'year'),
+        {
+          groupType: 'date',
+          value: (date.value || date.year),
+        },
+        ',',
       ];
     }
 
