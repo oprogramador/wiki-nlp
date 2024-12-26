@@ -21,10 +21,12 @@ const findDate = (previousPhrase) => {
   if (!date) {
     return date;
   }
+  const year = date.value || date.year;
 
   return {
     ...date,
     groupType: 'date',
+    ...(year ? { year } : {}),
   };
 };
 
@@ -58,8 +60,8 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
         ...accumulator,
         'in',
         {
-          groupType: 'quantity',
-          value: (date.value || date.year) + current.value * direction,
+          groupType: 'date',
+          year: date.year + current.value * direction,
         },
         ...createRemainingParts(current),
       ];
@@ -71,15 +73,15 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
       && _.get(current, 'precise.words.1') === 'same'
       && _.get(current, 'precise.words.2') === 'time'
     ) {
-      const base = findDate(previousPhrase);
-      if (!base) {
+      const date = findDate(previousPhrase);
+      if (!date) {
         return [...accumulator, current];
       }
 
       return [
         ...accumulator,
-        base.day ? 'on' : 'in',
-        base,
+        date.day ? 'on' : 'in',
+        date,
       ];
     }
 
@@ -96,11 +98,7 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
       return [
         ...accumulator,
         'in',
-        {
-          groupType: 'date',
-          value: (date.value || date.year),
-        },
-        ',',
+        _.pick(date, 'groupType', 'year'),
       ];
     }
 
