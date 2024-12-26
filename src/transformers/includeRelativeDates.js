@@ -31,7 +31,7 @@ const findDate = (previousPhrase) => {
 };
 
 const createRemainingParts = (current) => {
-  if (current.item.words.length < 3) {
+  if (_.get(current, 'item.words.length', 0) < 3) {
     return [];
   }
 
@@ -69,7 +69,7 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
 
     if (
       _.get(current, 'groupType') === 'locality'
-      && _.get(current, 'precise.words.0') === 'the'
+      && toLowerCase(_.get(current, 'precise.words.0')) === 'the'
       && _.get(current, 'precise.words.1') === 'same'
       && _.get(current, 'precise.words.2') === 'time'
     ) {
@@ -87,7 +87,7 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
 
     if (
       _.get(current, 'groupType') === 'article'
-      && _.get(current, 'words.0') === 'that'
+      && toLowerCase(_.get(current, 'words.0')) === 'that'
       && _.get(current, 'words.1') === 'year'
     ) {
       const date = findDate(previousPhrase);
@@ -99,6 +99,7 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
         ...accumulator,
         'in',
         _.pick(date, 'groupType', 'year'),
+        ...createRemainingParts({ item: current }),
       ];
     }
 

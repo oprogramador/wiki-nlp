@@ -3053,7 +3053,7 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it('converts "that year" after a year only', () => {
+  it('converts "that year" after a year only, with a comma', () => {
     const words = 'In 2003, Bob became a doctor. Also that year, Bob run a marathon';
 
     const result = flow(splitText(words));
@@ -3105,6 +3105,112 @@ describe('dates (e2e)', () => {
           when: {
             groupType: 'date',
             year: 2003,
+          },
+        },
+      ],
+    ]);
+  });
+
+  it('converts "that year" after a year only, without a comma', () => {
+    const words = 'In 2013, Bob became a doctor. Also that year Bob run a marathon';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'doctor',
+              ],
+            },
+          ],
+          subject: [
+            'Bob',
+          ],
+          verb: 'became',
+          when: {
+            groupType: 'date',
+            year: 2013,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'marathon',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'Bob',
+              ],
+            },
+          ],
+          verb: 'run',
+          when: {
+            groupType: 'date',
+            year: 2013,
+          },
+        },
+      ],
+    ]);
+  });
+
+  it('converts "that year" after a semicolon', () => {
+    const words = 'In 2019, Bob was frequently walking; that year he lost 10 kilograms';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          adverbs: [
+            'frequently',
+          ],
+          groupType: 'verb',
+          object: [
+            'walking',
+          ],
+          subject: [
+            'Bob',
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            year: 2019,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'unit',
+              unit: 'kg',
+              value: 10,
+            },
+          ],
+          subject: [
+            'he',
+          ],
+          verb: 'lost',
+          when: {
+            groupType: 'date',
+            year: 2019,
           },
         },
       ],
