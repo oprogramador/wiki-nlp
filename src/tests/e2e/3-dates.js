@@ -3216,4 +3216,100 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "later that year", with month+year', () => {
+    const words = 'In March 2005, he graduated; later that year he started a job';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            'he',
+          ],
+          verb: 'graduated',
+          when: {
+            groupType: 'date',
+            month: 3,
+            year: 2005,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'job',
+              ],
+            },
+          ],
+          subject: [
+            'he',
+          ],
+          verb: 'started',
+          when: {
+            groupType: 'date',
+            minMonth: 3,
+            year: 2005,
+          },
+        },
+      ],
+    ]);
+  });
+
+  it('converts "later that year", with a day', () => {
+    const words = 'On 31 March 2006, he graduated; later that year he started a job';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            'he',
+          ],
+          verb: 'graduated',
+          when: {
+            day: 31,
+            groupType: 'date',
+            month: 3,
+            year: 2006,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'job',
+              ],
+            },
+          ],
+          subject: [
+            'he',
+          ],
+          verb: 'started',
+          when: {
+            groupType: 'date',
+            minDay: 31,
+            minMonth: 3,
+            year: 2006,
+          },
+        },
+      ],
+    ]);
+  });
 });

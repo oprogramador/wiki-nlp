@@ -11,6 +11,7 @@ const {
   ordinalToNumber,
   wordsToNumbers,
 } = require('../utils/numberResources');
+const omitUndefined = require('../utils/omitUndefined');
 const toLowerCase = require('../utils/toLowerCase');
 
 const omit = (item, toOmit) => {
@@ -20,8 +21,6 @@ const omit = (item, toOmit) => {
 
   return item;
 };
-
-const omitUndefined = object => _.omitBy(object, x => typeof x === 'undefined');
 
 const createScopeFields = quantity => ({
   maxScope: quantity.value || quantity.max || quantity.min,

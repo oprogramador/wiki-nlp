@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const omitUndefined = require('../utils/omitUndefined');
 const toLowerCase = require('../utils/toLowerCase');
 const { withoutFirst } = require('../utils/listUtils');
 
@@ -23,11 +24,11 @@ const findDate = (previousPhrase) => {
   }
   const year = date.value || date.year;
 
-  return {
+  return omitUndefined({
     ...date,
     groupType: 'date',
-    ...(year ? { year } : {}),
-  };
+    year,
+  });
 };
 
 const createRemainingParts = (current) => {
@@ -100,6 +101,28 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
         'in',
         _.pick(date, 'groupType', 'year'),
         ...createRemainingParts({ item: current }),
+      ];
+    }
+
+    if (
+      _.get(current, 'groupType') === 'article'
+      && toLowerCase(_.get(current, 'words.0')) === 'later'
+      && _.get(current, 'words.1') === 'that'
+      && _.get(current, 'words.2') === 'year'
+    ) {
+      const date = findDate(previousPhrase);
+      if (!date) {
+        return [...accumulator, current];
+      }
+
+      return [
+        ...accumulator,
+        'in',
+        omitUndefined({
+          ..._.pick(date, 'groupType', 'year'),
+          minDay: date.day,
+          minMonth: date.month,
+        }),
       ];
     }
 
