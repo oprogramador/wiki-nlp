@@ -3312,4 +3312,51 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "later that year" at the end', () => {
+    const words = 'In May 2003, he graduated; he started a job later that year';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            'he',
+          ],
+          verb: 'graduated',
+          when: {
+            groupType: 'date',
+            month: 5,
+            year: 2003,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'job',
+              ],
+            },
+          ],
+          subject: [
+            'He',
+          ],
+          verb: 'started',
+          when: {
+            groupType: 'date',
+            minMonth: 5,
+            year: 2003,
+          },
+        },
+      ],
+    ]);
+  });
 });

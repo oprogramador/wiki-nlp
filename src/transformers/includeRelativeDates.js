@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const omitUndefined = require('../utils/omitUndefined');
 const toLowerCase = require('../utils/toLowerCase');
-const { withoutFirst } = require('../utils/listUtils');
+const { getLast, withoutFirst, withoutLast } = require('../utils/listUtils');
 
 const directions = {
   earlier: -1,
@@ -123,6 +123,34 @@ const includeRelativeDates = (phrase, previousPhrase = []) => phrase.reduce(
           minDay: date.day,
           minMonth: date.month,
         }),
+      ];
+    }
+
+    const lastWords = getLast(_.get(current, 'words', []), 3);
+
+    if (
+      _.get(current, 'groupType') === 'article'
+      && toLowerCase(lastWords[0]) === 'later'
+      && lastWords[1] === 'that'
+      && lastWords[2] === 'year'
+    ) {
+      const date = findDate(previousPhrase);
+      if (!date) {
+        return [...accumulator, current];
+      }
+
+      return [
+        ...accumulator,
+        'in',
+        omitUndefined({
+          ..._.pick(date, 'groupType', 'year'),
+          minDay: date.day,
+          minMonth: date.month,
+        }),
+        {
+          ...current,
+          words: withoutLast(current.words, 3),
+        },
       ];
     }
 
