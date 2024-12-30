@@ -54,6 +54,7 @@ const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
 const includeRelativeDates = require('./transformers/includeRelativeDates');
+const includeSimpleLocalities = require('./transformers/includeSimpleLocalities');
 const includeTimes = require('./transformers/includeTimes');
 const itemize = require('./transformers/itemize');
 const joinPhrases = require('./transformers/joinPhrases');
@@ -129,6 +130,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),
     p => p.map(includeLocalities),
+    p => p.map(includeSimpleLocalities),
     p => p.map(includeTimes),
     p => p.map(includeDates({ now })),
     p => p.map(includeDatesFromAnd({ now })),

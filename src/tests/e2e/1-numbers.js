@@ -2584,16 +2584,7 @@ describe('numbers (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              'Kharkiv',
-            ],
-            subject: [
-              'stayed',
-            ],
-            verb: 'in',
-          },
+          'stayed',
         ],
         subject: [
           {
@@ -2604,6 +2595,7 @@ describe('numbers (e2e)', () => {
           },
         ],
         verb: 'have',
+        where: 'Kharkiv',
       },
     ]]);
   });

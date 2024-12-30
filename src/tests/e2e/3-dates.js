@@ -1378,10 +1378,7 @@ describe('dates (e2e)', () => {
     expect(result).to.deep.equal([[
       {
         groupType: 'verb',
-        object: [
-          'in',
-          'Egypt',
-        ],
+        object: [],
         subject: [
           {
             groupType: 'article',
@@ -1398,6 +1395,7 @@ describe('dates (e2e)', () => {
           isExact: false,
           maxYear: -7000,
         },
+        where: 'Egypt',
       },
     ]]);
   });

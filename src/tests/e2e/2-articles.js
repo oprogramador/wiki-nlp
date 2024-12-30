@@ -2109,21 +2109,13 @@ describe('articles & verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              'Africa',
-            ],
-            subject: [
-              'decolonisation',
-            ],
-            verb: 'in',
-          },
+          'decolonisation',
         ],
         subject: [
           'Pakistan',
         ],
         verb: 'supported',
+        where: 'Africa',
       },
     ]]);
   });
@@ -2230,22 +2222,13 @@ describe('articles & verbs (e2e)', () => {
         groupType: 'verb',
         object: [
           {
-            groupType: 'preposition',
-            object: [
-              'Africa',
+            groupType: 'article',
+            words: [
+              'the',
+              'most',
+              'successful',
+              'team',
             ],
-            subject: [
-              {
-                groupType: 'article',
-                words: [
-                  'the',
-                  'most',
-                  'successful',
-                  'team',
-                ],
-              },
-            ],
-            verb: 'in',
           },
         ],
         source: 'CAF',
@@ -2259,6 +2242,7 @@ describe('articles & verbs (e2e)', () => {
           },
         ],
         verb: 'is',
+        where: 'Africa',
       },
     ]]);
   });
