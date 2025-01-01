@@ -3357,4 +3357,29 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts a simple locality before a date', () => {
+    const words = 'Homosexuality has been legal in Kurdistan since 1858';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'legal',
+        ],
+        subject: [
+          'Homosexuality',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2025,
+          minYear: 1858,
+        },
+        where: 'Kurdistan',
+      },
+    ]]);
+  });
 });
