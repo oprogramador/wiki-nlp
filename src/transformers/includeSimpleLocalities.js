@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const { getFirst, getLast } = require('../utils/listUtils');
 const isUpperCase = require('../utils/isUpperCase');
 
@@ -9,7 +10,7 @@ const includeSimpleLocalities = (phrase) => {
   if (!object) {
     return phrase;
   }
-  const lastIndex = object.findLastIndex((item, i) => item === 'in' && isUpperCase(object[i + 1]));
+  const lastIndex = _.findLastIndex(object, (item, i) => item === 'in' && isUpperCase(object[i + 1]));
   if (lastIndex >= 0) {
     return [{
       ...phrase[0],
