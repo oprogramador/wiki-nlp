@@ -13,6 +13,7 @@ const map = {
   [JSON.stringify('m')]: { factor: 1, unit: 'm' },
   [JSON.stringify('metres')]: { factor: 1, unit: 'm' },
   [JSON.stringify('mi')]: { factor: 1609.34, unit: 'm' },
+  [JSON.stringify('mm')]: { factor: 0.001, unit: 'm' },
   [JSON.stringify('t')]: { factor: 1000, unit: 'kg' },
   [JSON.stringify('tonnes')]: { factor: 1000, unit: 'kg' },
   [JSON.stringify('tons')]: { factor: 1000, unit: 'kg' },
