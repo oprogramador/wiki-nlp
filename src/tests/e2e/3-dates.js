@@ -3382,4 +3382,54 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "had been"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Thousands of opponents of the regime had been deported by the dictator in the late 1930s and the early 1940s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'regime',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'quantity',
+                item: 'opponents',
+                min: 1000,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'dictator',
+            ],
+          },
+        ],
+        verb: 'deport',
+        when: {
+          groupType: 'date',
+          maxYear: 1944,
+          minYear: 1935,
+        },
+      },
+    ]]);
+  });
 });
