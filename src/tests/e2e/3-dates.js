@@ -3432,4 +3432,115 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "did not" for a verb ending with "e"', () => {
+    const words = 'The Koreans did not compose own music in the 16th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'own',
+              'music',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Koreans',
+            ],
+          },
+        ],
+        verb: 'composed',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1501,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "did not" for a verb not ending with "e"', () => {
+    const words = 'The Koreans did not play own music in the 16th & 17th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'own',
+              'music',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Koreans',
+            ],
+          },
+        ],
+        verb: 'played',
+        when: {
+          groupType: 'date',
+          maxYear: 1700,
+          minYear: 1501,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "did not" with an irregular verb', () => {
+    const words = 'The Koreans did not write own music in the late 16th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'own',
+              'music',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Koreans',
+            ],
+          },
+        ],
+        verb: 'wrote',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1551,
+        },
+      },
+    ]]);
+  });
 });
