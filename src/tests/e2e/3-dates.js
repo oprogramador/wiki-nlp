@@ -3543,4 +3543,40 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "themselves, however [...] until"', () => {
+    const words = 'The Egyptians themselves, however, did not choose their parliament until 1924';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'their',
+              'parliament',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Egyptians',
+            ],
+          },
+        ],
+        verb: 'chose',
+        when: {
+          groupType: 'date',
+          maxYear: 1924,
+        },
+      },
+    ]]);
+  });
 });
