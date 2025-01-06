@@ -30,6 +30,7 @@ const convertOrdinals = require('./transformers/convertOrdinals');
 const convertOutOf = require('./transformers/convertOutOf');
 const convertPassive = require('./transformers/convertPassive');
 const convertPercent = require('./transformers/convertPercent');
+const convertSelf = require('./transformers/convertSelf');
 const convertPreAdverbs = require('./transformers/convertPreAdverbs');
 const convertPreBce = require('./transformers/convertPreBce');
 const convertPronouns = require('./transformers/convertPronouns');
@@ -91,6 +92,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPreBce),
     p => p.map(moveAdverbs),
     p => p.map(groupArticles),
+    p => p.map(convertSelf),
     p => p.map(convertArticlesToLowerCase),
     p => p.map(addArticleToDecade),
     p => p.map(convertDecades),

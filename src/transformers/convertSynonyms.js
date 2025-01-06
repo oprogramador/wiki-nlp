@@ -76,7 +76,6 @@ const createDefaultMap = ({ now }) => [
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
   { from: ['the', 'second', 'half', 'of', 'the'], to: ['the', 'late'] },
-  { from: ['themselves', ',', ','], to: [] },
   { from: ['though'], to: ['but'] },
   { from: ['thousands', 'of'], to: ['above', '1000'] },
   { from: ['thrice'], to: ['3', 'times'] },

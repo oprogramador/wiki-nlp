@@ -3579,4 +3579,66 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "herself [...] until", without a comma', () => {
+    const words = 'A Tunisian woman herself did not choose her parliament until 1959';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'her',
+              'parliament',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'Tunisian',
+              'woman',
+            ],
+          },
+        ],
+        verb: 'chose',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "itself" with passive', () => {
+    const words = 'A cat is observed by itself';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'cat',
+            ],
+          },
+        ],
+        subject: [
+          'itself',
+        ],
+        verb: 'observe',
+      },
+    ]]);
+  });
 });
