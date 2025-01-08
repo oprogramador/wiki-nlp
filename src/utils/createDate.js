@@ -30,7 +30,7 @@ const createDate = {
   since: (object, now) => ({
     groupType: 'date',
     maxYear: now.getFullYear(),
-    minYear: object.value || object.year,
+    minYear: object.value || object.year || object.minYear,
     ...(object.month ? { maxMonth: now.getMonth() + 1, minMonth: object.month } : { }),
     ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
     ..._.pick(object, 'isExact'),

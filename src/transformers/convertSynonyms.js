@@ -73,6 +73,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
   { from: ['recent', 'years'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
   { from: ['several', 'hundred'], to: ['101–1000'] },
+  { from: ['starting', 'from'], to: ['since'] },
+  { from: ['starting'], to: ['since'] },
   { from: ['such', 'as'], to: [':'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },

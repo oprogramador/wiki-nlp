@@ -3641,4 +3641,97 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "starting from"', () => {
+    const words = 'Starting from the late 2000s, the Chinese economy has been large';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'large',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Chinese',
+              'economy',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 2005,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "starting around"', () => {
+    const words = 'Starting around 2000, he has been collecting old paintings';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'collecting',
+              'old',
+              'paintings',
+            ],
+          },
+        ],
+        subject: [
+          'he',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          maxYear: 2026,
+          minYear: 2000,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "since [...] century"', () => {
+    const words = 'The population has been large since the late 18th century';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'large',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'population',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 1751,
+        },
+      },
+    ]]);
+  });
 });
