@@ -15,6 +15,8 @@ const convertNow = now => [
 
 const createDefaultMap = ({ now }) => [
   { from: ['&'], to: ['and'] },
+  { from: [',', 'on', 'the', 'other', 'hand', ','], to: [] },
+  { from: [',', 'on', 'the', 'other', 'hand'], to: [] },
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['1st'], to: ['first'] },
   { from: ['21st'], to: ['twenty-first'] },
@@ -67,6 +69,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['not', 'including'], to: ['excluding'] },
   { from: ['now'], to: convertNow(now) },
   { from: ['nowadays'], to: convertNow(now) },
+  { from: ['on', 'the', 'other', 'hand', ','], to: [] },
+  { from: ['on', 'the', 'other', 'hand'], to: [] },
   { from: ['once'], to: ['1', 'times'] },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['quite', 'a', 'long', 'time', 'ago'], to: ['over', '200', 'years', 'ago'] },

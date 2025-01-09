@@ -3043,4 +3043,98 @@ describe('articles & verbs (e2e)', () => {
       ],
     ]]);
   });
+
+  it('removes "on the other hand" in the middle', () => {
+    const words = 'Dave, on the other hand, has many cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'cats',
+            min: 3,
+          },
+        ],
+        subject: [
+          'Dave',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
+  it('removes "on the other hand" in the middle, with no comma', () => {
+    const words = 'Dave on the other hand has several cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'cats',
+            max: 99,
+            min: 3,
+          },
+        ],
+        subject: [
+          'Dave',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
+  it('removes "on the other hand" at the begin', () => {
+    const words = 'On the other hand, Dave has about five cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'cats',
+            value: 5,
+          },
+        ],
+        subject: [
+          'Dave',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
+  it('removes "on the other hand" at the end', () => {
+    const words = 'Dave has dozens of cats, on the other hand';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'cats',
+            min: 10,
+          },
+        ],
+        subject: [
+          'Dave',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });
