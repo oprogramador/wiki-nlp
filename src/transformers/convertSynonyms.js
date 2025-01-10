@@ -69,6 +69,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['not', 'including'], to: ['excluding'] },
   { from: ['now'], to: convertNow(now) },
   { from: ['nowadays'], to: convertNow(now) },
+  { from: ['on', 'average'], to: ['typically'] },
   { from: ['on', 'the', 'other', 'hand', ','], to: [] },
   { from: ['on', 'the', 'other', 'hand'], to: [] },
   { from: ['once'], to: ['1', 'times'] },

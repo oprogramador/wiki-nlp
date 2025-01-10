@@ -3734,4 +3734,62 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on average"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the 2010s, on average, the tourist population slightly exceeded the number of permanent residents in Barcelona';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'typically',
+          'slightly',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'permanent',
+                  'residents',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'amount',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'tourist',
+              'population',
+            ],
+          },
+        ],
+        verb: 'exceeded',
+        when: {
+          groupType: 'date',
+          maxYear: 2019,
+          minYear: 2010,
+        },
+        where: 'Barcelona',
+      },
+    ]]);
+  });
 });
