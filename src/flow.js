@@ -16,6 +16,7 @@ const convertDateRanges = require('./transformers/convertDateRanges');
 const convertDecades = require('./transformers/convertDecades');
 const convertDidNot = require('./transformers/convertDidNot');
 const convertFractions = require('./transformers/convertFractions');
+const convertFrequency = require('./transformers/convertFrequency');
 const convertFromTo = require('./transformers/convertFromTo');
 const convertFromToInPhrase = require('./transformers/convertFromToInPhrase');
 const convertIncluding = require('./transformers/convertIncluding');
@@ -130,6 +131,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertDidNot),
     p => p.map(groupVerbs),
     p => p.map(convertAdverbs),
+    p => p.map(convertFrequency),
     p => p.map(pp => convertRespectively(pp)).flat(),
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),
