@@ -113,7 +113,6 @@ describe('frequency (e2e)', () => {
           groupType: 'article',
           words: [
             'federal',
-            'presidential',
             'election',
           ],
         },
