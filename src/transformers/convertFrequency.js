@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { withoutLast } = require('../utils/listUtils');
+const { getFirst, getLast } = require('../utils/listUtils');
 
 const convertFrequency = (phrase) => {
   if (!phrase[0]) {
@@ -16,7 +16,10 @@ const convertFrequency = (phrase) => {
       {
         ...phrase[0],
         frequency,
-        object: withoutLast(object, frequencyIndex),
+        object: [
+          ...getFirst(object, frequencyIndex - 1),
+          ...getLast(object, object.length - frequencyIndex - 1),
+        ],
       },
     ];
   }

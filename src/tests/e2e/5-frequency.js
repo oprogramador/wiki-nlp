@@ -71,4 +71,64 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "every other"', () => {
+    const words = 'The leaders will meet every other month';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'months',
+          value: 2,
+        },
+        groupType: 'verb',
+        object: [
+          'meet',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'leaders',
+            ],
+          },
+        ],
+        verb: 'will',
+      },
+    ]]);
+  });
+
+  it('converts "in every [...] in [...] century"', () => {
+    const words = 'Indiana participated in every federal election in the late 19th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'article',
+          words: [
+            'federal',
+            'presidential',
+            'election',
+          ],
+        },
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Indiana',
+        ],
+        verb: 'participated',
+        when: {
+          groupType: 'date',
+          maxYear: 1900,
+          minYear: 1851,
+        },
+      },
+    ]]);
+  });
 });

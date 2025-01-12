@@ -13,6 +13,10 @@ const prepositions = require('../utils/prepositionList');
 const pronouns = require('../utils/pronounsList');
 const toLowerCase = require('../utils/toLowerCase');
 
+const disallowed = [
+  'every',
+];
+
 const negations = [
   'no',
   'not',
@@ -75,7 +79,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
   const potentialVerbPlace = auxiliaryPlace >= 0
     ? auxiliaryPlace
     : phrase.findIndex((item, i) => i > 0
-        && (objectGroupTypes.includes(_.get(item, 'groupType')) || prepositions.includes(item))
+        && (objectGroupTypes.includes(_.get(item, 'groupType')) || [...disallowed, ...prepositions].includes(item))
         && isLettersOnly(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   const verbPlace = negations.includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
