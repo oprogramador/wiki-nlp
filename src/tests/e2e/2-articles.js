@@ -3137,4 +3137,51 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "and is"', () => {
+    const words = 'The Reserve Bank of Zimbabwe was founded in 1964 and is headquartered in Harare';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'founded',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Reserve',
+                'Bank',
+                'of',
+                'Zimbabwe',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            year: 1964,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'headquartered',
+          ],
+          subject: [
+            'it',
+          ],
+          verb: 'is',
+          where: 'Harare',
+        },
+      ],
+    ]);
+  });
 });
