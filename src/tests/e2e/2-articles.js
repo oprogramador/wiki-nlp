@@ -1394,7 +1394,7 @@ describe('articles & verbs (e2e)', () => {
             },
           ],
           subject: [
-            'it',
+            'Turkey',
           ],
           verb: 'has',
         },
@@ -1449,7 +1449,13 @@ describe('articles & verbs (e2e)', () => {
             },
           ],
           subject: [
-            'it',
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Treaty',
+              ],
+            },
           ],
           verb: 'created',
         },
@@ -3176,7 +3182,16 @@ describe('articles & verbs (e2e)', () => {
             'headquartered',
           ],
           subject: [
-            'it',
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Reserve',
+                'Bank',
+                'of',
+                'Zimbabwe',
+              ],
+            },
           ],
           verb: 'is',
           where: 'Harare',

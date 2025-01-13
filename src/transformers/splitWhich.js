@@ -9,7 +9,7 @@ const splitWhich = phrase => phrase
       return [
         ...withoutLastOne(accumulator),
         withoutLastOne(lastPhrase),
-        ['it'],
+        ['it-object'],
       ];
     }
 

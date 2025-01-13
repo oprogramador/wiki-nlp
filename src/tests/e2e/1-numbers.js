@@ -2631,7 +2631,13 @@ describe('numbers (e2e)', () => {
           groupType: 'verb',
           object: [],
           subject: [
-            'it',
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'famine',
+              ],
+            },
           ],
           verb: 'ended',
           when: {
@@ -2719,7 +2725,13 @@ describe('numbers (e2e)', () => {
           },
         ],
         subject: [
-          'it',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'famine',
+            ],
+          },
         ],
         verb: 'shocked',
       },

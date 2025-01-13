@@ -2587,7 +2587,13 @@ describe('dates (e2e)', () => {
         groupType: 'verb',
         object: [],
         subject: [
-          'it',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'event',
+            ],
+          },
         ],
         verb: 'was',
         when: {
@@ -2763,6 +2769,17 @@ describe('dates (e2e)', () => {
           'rich',
         ],
         subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'years',
+                'later',
+              ],
+            },
+            value: 5,
+          },
           'they',
         ],
         verb: 'are',
@@ -3040,7 +3057,13 @@ describe('dates (e2e)', () => {
           },
         ],
         subject: [
-          'they',
+          {
+            groupType: 'article',
+            words: [
+              'Indonesian',
+              'people',
+            ],
+          },
         ],
         verb: 'experienced',
         when: {
