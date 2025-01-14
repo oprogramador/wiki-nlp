@@ -2,7 +2,9 @@ const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
 
 const pronouns = [
+  'he',
   'it',
+  'she',
   'they',
 ];
 

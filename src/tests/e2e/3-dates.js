@@ -3226,7 +3226,7 @@ describe('dates (e2e)', () => {
             },
           ],
           subject: [
-            'he',
+            'Bob',
           ],
           verb: 'lost',
           when: {
@@ -3368,7 +3368,7 @@ describe('dates (e2e)', () => {
             },
           ],
           subject: [
-            'He',
+            'he',
           ],
           verb: 'started',
           when: {
