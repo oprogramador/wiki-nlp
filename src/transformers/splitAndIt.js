@@ -4,6 +4,7 @@ const {
   withoutLast,
   withoutLastOne,
 } = require('../utils/listUtils');
+const pronouns = require('../utils/pronounsList');
 
 const splitAndIt = phrase => phrase
   .reduce((accumulator, current) => {
@@ -14,7 +15,7 @@ const splitAndIt = phrase => phrase
     if (
       beforeLast === ','
       && last === 'and'
-      && current === 'it'
+      && pronouns.includes(current)
     ) {
       return [
         ...withoutLastOne(accumulator),

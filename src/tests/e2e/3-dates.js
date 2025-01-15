@@ -3815,4 +3815,181 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "and are"', () => {
+    const words = 'The Great Pyramids were built quite a long time ago and are wonderful now';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'built',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Great',
+              'Pyramids',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1826,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'wonderful',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Great',
+              'Pyramids',
+            ],
+          },
+        ],
+        verb: 'are',
+        when: {
+          day: 1,
+          groupType: 'date',
+          month: 7,
+          year: 2026,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "which are"', () => {
+    const words = 'In the 3rd millennium BCE, Egyptian slaves built The Great Pyramids which are higher than 300 ft';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Great',
+              'Pyramids',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Egyptian',
+              'slaves',
+            ],
+          },
+        ],
+        verb: 'built',
+        when: {
+          groupType: 'date',
+          maxYear: -2001,
+          minYear: -3000,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'unit',
+                unit: 'm',
+                value: 91.44,
+              },
+            ],
+            subject: [
+              'higher',
+            ],
+            verb: 'than',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Great',
+              'Pyramids',
+            ],
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
+
+  it('converts "and nobody"', () => {
+    const words = 'The Great Pyramids have been wonderful since the 3rd millennium BCE and nobody argues today';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'been',
+              'wonderful',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Great',
+              'Pyramids',
+            ],
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: -3000,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'nobody',
+        ],
+        verb: 'argues',
+        when: {
+          day: 1,
+          groupType: 'date',
+          month: 7,
+          year: 2026,
+        },
+      },
+    ]]);
+  });
 });

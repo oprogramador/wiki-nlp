@@ -10,7 +10,6 @@ const convertNow = now => [
     month: now.getMonth() + 1,
     year: now.getFullYear(),
   },
-  ',',
 ];
 
 const createDefaultMap = ({ now }) => [
@@ -30,10 +29,12 @@ const createDefaultMap = ({ now }) => [
   { from: ['although'], to: ['but'] },
   { from: ['american', 'dollars'], to: ['USDs'] },
   { from: ['an', 'estimated'], to: ['around'] },
+  { from: ['and', 'are'], to: ['and', 'they', 'are'] },
   { from: ['and', 'had'], to: ['and', 'it', 'had'] },
   { from: ['and', 'has'], to: ['and', 'it', 'has'] },
   { from: ['and', 'is'], to: ['and', 'it', 'is'] },
   { from: ['and', 'was'], to: ['and', 'it', 'was'] },
+  { from: ['and', 'were'], to: ['and', 'they', 'were'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['as', 'of'], to: ['in'] },
   { from: ['as', 'recently', 'as'], to: [] },
@@ -105,6 +106,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['until'], to: ['by'] },
   { from: ['us', 'dollars'], to: ['USDs'] },
   { from: ['well', 'over'], to: ['above'] },
+  { from: ['which'], to: [',', 'which'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
 ];
 
