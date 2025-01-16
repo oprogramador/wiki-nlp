@@ -3941,7 +3941,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "and nobody"', () => {
-    const words = 'The Great Pyramids have been wonderful since the 3rd millennium BCE and nobody argues today';
+    const words = 'The Great Pyramids have been wonderful since the 3rd millennium BCE and nobody disputes today';
 
     const result = flow(splitText(words), { now: new Date('2026-07-01') });
 
@@ -3982,12 +3982,60 @@ describe('dates (e2e)', () => {
         subject: [
           'nobody',
         ],
-        verb: 'argues',
+        verb: 'disputes',
         when: {
           day: 1,
           groupType: 'date',
           month: 7,
           year: 2026,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a plural single word subject, "a majority" & "but" with no comma', () => {
+    const words = 'Negros are a majority of inhabitants in Africa but received a limited power in the 20th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: 'inhabitants',
+            min: 0.5,
+          },
+        ],
+        subject: [
+          'Negros',
+        ],
+        verb: 'are',
+        where: 'Africa',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'limited',
+              'power',
+            ],
+          },
+        ],
+        subject: [
+          'Negros',
+        ],
+        verb: 'received',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: 1901,
         },
       },
     ]]);

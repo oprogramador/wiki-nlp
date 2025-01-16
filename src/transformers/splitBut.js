@@ -6,9 +6,9 @@ const irregularVerbsList = require('../utils/irregularVerbsList');
 const irregularVerbsPast = irregularVerbsList.map(item => item.past);
 
 const looksLikeVerb = word => auxiliary.includes(word)
-  || /ed$/.test(word)
+  || /^[a-z]+ed$/.test(word)
   || irregularVerbsPast.includes(word)
-  || /[a-z]+s$/.test(word);
+  || /^[a-z]+s$/.test(word);
 
 const splitBut = phrase => phrase
   .reduce((accumulator, current) => {
