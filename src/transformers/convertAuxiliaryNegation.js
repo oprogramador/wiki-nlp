@@ -18,7 +18,7 @@ const toPast = (word) => {
   return `${word}ed`;
 };
 
-const convertDidNot = phrase => phrase.reduce(
+const convertAuxiliaryNegation = phrase => phrase.reduce(
   (accumulator, current) => {
     const beforeLast = getBeforeLast(accumulator);
     const last = _.last(accumulator);
@@ -39,9 +39,25 @@ const convertDidNot = phrase => phrase.reduce(
       ];
     }
 
+    if (
+      ['does', 'do'].includes(beforeLast)
+      && last === 'not'
+      && _.get(current, 'groupType') === 'article'
+    ) {
+      return [
+        ...withoutLast(accumulator, 2),
+        current.words[0],
+        'not',
+        {
+          ...current,
+          words: withoutFirstOne(current.words),
+        },
+      ];
+    }
+
     return [...accumulator, current];
   },
   [],
 );
 
-module.exports = convertDidNot;
+module.exports = convertAuxiliaryNegation;

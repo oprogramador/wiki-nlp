@@ -5,6 +5,7 @@ const isAdverb = require('../utils/isAdverb');
 const {
   getBeforeLast,
   withoutLastOne,
+  withoutLast,
 } = require('../utils/listUtils');
 
 const moveAdverbs = phrase => phrase.reduce(
@@ -20,6 +21,19 @@ const moveAdverbs = phrase => phrase.reduce(
         ...withoutLastOne(accumulator),
         current,
         last,
+      ];
+    }
+
+    if (
+      auxiliaryList.includes(beforeLast)
+      && last === 'not'
+      && isAdverb(current)
+    ) {
+      return [
+        ...withoutLast(accumulator, 2),
+        current,
+        beforeLast,
+        'not',
       ];
     }
 

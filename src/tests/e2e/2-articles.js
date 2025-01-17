@@ -3199,4 +3199,40 @@ describe('articles & verbs (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "do not" followed by an adverb', () => {
+    const words = 'The workers do not necessarily pay high taxes in Scotland';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'necessarily',
+        ],
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'high',
+              'taxes',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'workers',
+            ],
+          },
+        ],
+        verb: 'pay',
+        where: 'Scotland',
+      },
+    ]]);
+  });
 });
