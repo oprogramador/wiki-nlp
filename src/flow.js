@@ -5,6 +5,7 @@ const convertAbbreviations = require('./transformers/convertAbbreviations');
 const convertAdverbs = require('./transformers/convertAdverbs');
 const convertAgo = require('./transformers/convertAgo');
 const convertArticlesToLowerCase = require('./transformers/convertArticlesToLowerCase');
+const convertAuxiliaryNegation = require('./transformers/convertAuxiliaryNegation');
 const convertBce = require('./transformers/convertBce');
 const convertBetween = require('./transformers/convertBetween');
 const convertBn = require('./transformers/convertBn');
@@ -14,7 +15,6 @@ const convertColon = require('./transformers/convertColon');
 const convertCurrencies = require('./transformers/convertCurrencies');
 const convertDateRanges = require('./transformers/convertDateRanges');
 const convertDecades = require('./transformers/convertDecades');
-const convertAuxiliaryNegation = require('./transformers/convertAuxiliaryNegation');
 const convertFractions = require('./transformers/convertFractions');
 const convertFrequency = require('./transformers/convertFrequency');
 const convertFromTo = require('./transformers/convertFromTo');
@@ -65,6 +65,7 @@ const moveAdverbs = require('./transformers/moveAdverbs');
 const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
 const splitAndIt = require('./transformers/splitAndIt');
+const splitAndWithPast = require('./transformers/splitAndWithPast');
 const splitBut = require('./transformers/splitBut');
 const splitBySemicolon = require('./transformers/splitBySemicolon');
 const splitWhich = require('./transformers/splitWhich');
@@ -126,6 +127,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(flatArticles),
     p => p.map(pp => splitWhich(pp)).flat(),
     p => p.map(pp => splitBut(pp)).flat(),
+    p => p.map(pp => splitAndWithPast(pp)).flat(),
     p => p.map(convertDateRanges),
     p => p.map(convertPreAdverbs),
     p => p.map(convertAuxiliaryNegation),

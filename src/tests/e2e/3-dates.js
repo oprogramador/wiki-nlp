@@ -4040,4 +4040,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "and" followed by a past irregular verb', () => {
+    const words = 'Koreans visited Spain in 2000 and built several car factories in Valencia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'Spain',
+          ],
+          subject: [
+            'Koreans',
+          ],
+          verb: 'visited',
+          when: {
+            groupType: 'date',
+            year: 2000,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'quantity',
+              item: {
+                groupType: 'article',
+                words: [
+                  'car',
+                  'factories',
+                ],
+              },
+              max: 99,
+              min: 3,
+            },
+          ],
+          subject: [
+            'Koreans',
+          ],
+          verb: 'built',
+          where: 'Valencia',
+        },
+      ],
+    ]);
+  });
 });
