@@ -4089,4 +4089,27 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts a past irregular verb with no article', () => {
+    const words = 'Nepal took 3rd place in 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        object: [
+          'third',
+          'place',
+        ],
+        subject: [
+          'Nepal',
+        ],
+        verb: 'took',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+      },
+    ]]);
+  });
 });

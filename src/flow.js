@@ -38,6 +38,7 @@ const convertPunctuation = require('./transformers/convertPunctuation');
 const convertRespectively = require('./transformers/convertRespectively');
 const convertSelf = require('./transformers/convertSelf');
 const convertSynonyms = require('./transformers/convertSynonyms');
+const findPastVerb = require('./transformers/findPastVerb');
 const flatArticles = require('./transformers/flatArticles');
 const groupAnd = require('./transformers/groupAnd');
 const groupArticles = require('./transformers/groupArticles');
@@ -132,6 +133,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPreAdverbs),
     p => p.map(convertAuxiliaryNegation),
     p => p.map(groupVerbs),
+    p => p.map(findPastVerb),
     p => p.map(convertAdverbs),
     p => p.map(convertFrequency),
     p => p.map(pp => convertRespectively(pp)).flat(),
