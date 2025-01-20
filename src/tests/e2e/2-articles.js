@@ -106,12 +106,7 @@ describe('articles & verbs (e2e)', () => {
           },
         ],
         subject: [
-          {
-            groupType: 'article',
-            words: [
-              'Bob',
-            ],
-          },
+          'Bob',
         ],
         verb: 'wants',
       },
@@ -230,12 +225,7 @@ describe('articles & verbs (e2e)', () => {
           },
         ],
         subject: [
-          {
-            groupType: 'article',
-            words: [
-              'Bob',
-            ],
-          },
+          'Bob',
         ],
         verb: 'wants',
       },
@@ -592,12 +582,7 @@ describe('articles & verbs (e2e)', () => {
               },
             ],
             subject: [
-              {
-                groupType: 'article',
-                words: [
-                  'effect',
-                ],
-              },
+              'effect',
             ],
             verb: 'to',
           },
@@ -1142,12 +1127,7 @@ describe('articles & verbs (e2e)', () => {
           {
             groupType: 'preposition',
             object: [
-              {
-                groupType: 'article',
-                words: [
-                  'Europe',
-                ],
-              },
+              'Europe',
             ],
             subject: [
               {
@@ -1213,12 +1193,7 @@ describe('articles & verbs (e2e)', () => {
         subject: [
           {
             groupType: 'quantity',
-            item: {
-              groupType: 'article',
-              words: [
-                'countries',
-              ],
-            },
+            item: 'countries',
             value: 123,
           },
         ],
@@ -1304,12 +1279,7 @@ describe('articles & verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'article',
-            words: [
-              'applications',
-            ],
-          },
+          'applications',
         ],
         subject: [
           'They',

@@ -133,6 +133,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPreAdverbs),
     p => p.map(convertAuxiliaryNegation),
     p => p.map(groupVerbs),
+    p => p.map(flatArticles),
     p => p.map(findPastVerb),
     p => p.map(convertAdverbs),
     p => p.map(convertFrequency),

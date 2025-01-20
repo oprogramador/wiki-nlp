@@ -707,12 +707,7 @@ describe('dates (e2e)', () => {
           },
         ],
         subject: [
-          {
-            groupType: 'article',
-            words: [
-              'plans',
-            ],
-          },
+          'plans',
         ],
         verb: 'became',
         when: {
@@ -3115,12 +3110,7 @@ describe('dates (e2e)', () => {
             },
           ],
           subject: [
-            {
-              groupType: 'article',
-              words: [
-                'Bob',
-              ],
-            },
+            'Bob',
           ],
           verb: 'run',
           when: {
@@ -3173,12 +3163,7 @@ describe('dates (e2e)', () => {
             },
           ],
           subject: [
-            {
-              groupType: 'article',
-              words: [
-                'Bob',
-              ],
-            },
+            'Bob',
           ],
           verb: 'run',
           when: {
@@ -4097,9 +4082,15 @@ describe('dates (e2e)', () => {
 
     expect(result).to.deep.equal([[
       {
+        groupType: 'verb',
         object: [
-          'third',
-          'place',
+          {
+            groupType: 'article',
+            words: [
+              'third',
+              'place',
+            ],
+          },
         ],
         subject: [
           'Nepal',
@@ -4108,6 +4099,30 @@ describe('dates (e2e)', () => {
         when: {
           groupType: 'date',
           year: 2000,
+        },
+      },
+    ]]);
+  });
+
+  it('converts a date, one-word uppercase subject, past irregular verb & one-word object', () => {
+    const words = 'In 1860s, Russia sold Alaska';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'Alaska',
+        ],
+        subject: [
+          'Russia',
+        ],
+        verb: 'sold',
+        when: {
+          groupType: 'date',
+          maxYear: 1869,
+          minYear: 1860,
         },
       },
     ]]);

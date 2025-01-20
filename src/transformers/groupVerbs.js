@@ -81,6 +81,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
     : phrase.findIndex((item, i) => i > 0
         && (objectGroupTypes.includes(_.get(item, 'groupType')) || [...disallowed, ...prepositions].includes(item))
         && isLettersOnly(phrase[i - 1])
+        && !isUpperCase(phrase[i - 1])
         && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
   const verbPlace = negations.includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
   if (verbPlace === 0) {
@@ -125,10 +126,10 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
             objectGroupTypes.includes((phrase[i + 1] || {}).groupType)
             || prepositions.includes(phrase[i + 1])
           ));
-      const foundSubject = phrase[insideIndex];
       if (insideIndex >= 0) {
         let verb = _.last(getWords(phrase[insideIndex]));
         if (verb && !isUpperCase(verb)) {
+          const foundSubject = phrase[insideIndex];
           const subjectWords = getWords(foundSubject) ? withoutLastOne(getWords(foundSubject)) : null;
 
           return [{
@@ -144,6 +145,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         verb = _.get(phrase[insideIndex + 1], 'words.0');
         if (verb) {
           const foundObject = withoutFirst(phrase, insideIndex + 1);
+          const foundSubject = getFirst(phrase, insideIndex + 1);
           const foundObjectBegin = foundObject[0];
 
           return [{
@@ -152,7 +154,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
               replaceWords(foundObjectBegin, withoutFirstOne(getWords(foundObjectBegin))),
               ...withoutFirstOne(foundObject),
             ],
-            subject: [foundSubject],
+            subject: foundSubject,
             verb,
           }];
         }

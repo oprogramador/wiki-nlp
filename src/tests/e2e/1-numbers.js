@@ -1905,12 +1905,7 @@ describe('numbers (e2e)', () => {
         subject: [
           {
             groupType: 'quantity',
-            item: {
-              groupType: 'article',
-              words: [
-                'countries',
-              ],
-            },
+            item: 'countries',
             value: 3,
           },
         ],
