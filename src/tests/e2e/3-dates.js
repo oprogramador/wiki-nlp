@@ -4127,4 +4127,64 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "and", a past iregular verb and "years later"', () => {
+    const words = 'In 1950, the business was registered, and became a public company seven years later';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'registered',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'business',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            year: 1950,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'public',
+                'company',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'business',
+              ],
+            },
+          ],
+          verb: 'became',
+          when: {
+            groupType: 'date',
+            year: 1957,
+          },
+        },
+      ],
+    ]);
+  });
 });
