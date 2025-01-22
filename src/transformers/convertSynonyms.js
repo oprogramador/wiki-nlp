@@ -22,6 +22,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
   { from: ['a', 'few', 'hundred'], to: ['101–1000'] },
+  { from: [',', 'known', 'as'], to: ['#alternative-name'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'large', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
   { from: ['a', 'long', 'time', 'ago'], to: ['over', '100', 'years', 'ago'] },

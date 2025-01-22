@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 const flatArticles = (item) => {
-  if (_.get(item, 'words.length') === 1) {
+  if (_.get(item, 'words.length') === 1 && _.size(item) < 3) {
     return item.words[0];
   }
   if (typeof item !== 'object') {
