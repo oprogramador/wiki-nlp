@@ -1263,7 +1263,7 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts decade + subject+adverb+verb+object + preposition (with AND)', () => {
+  it('converts decade + subject+adverb+verb+object + preposition (with AND)', () => {
     const words = 'In the 1950s, Pakistan strongly supported decolonisation in Africa and Oceania';
 
     const result = flow(splitText(words));
@@ -1888,12 +1888,39 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "in the [...]–[...] centuries" with passive, in the middle', () => {
+  it('converts "in the [...]–[...] centuries" with passive, in the middle', () => {
     const words = 'The village was owned in the 16th–18th centuries by the Williams';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'village',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Williams',
+            ],
+          },
+        ],
+        verb: 'own',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1501,
+        },
+      },
     ]]);
   });
 
@@ -2797,12 +2824,54 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "years later" after "but"', () => {
+  it('converts "years later" after "but"', () => {
     const words = 'A new factory was completed in 1950 but closed some 30 years later';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'completed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'new',
+              'factory',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1950,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'new',
+              'factory',
+            ],
+          },
+        ],
+        verb: 'closed',
+        when: {
+          groupType: 'date',
+          year: 1980,
+        },
+      },
     ]]);
   });
 
