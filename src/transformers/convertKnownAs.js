@@ -48,6 +48,20 @@ const convertKnownAs = phrase => phrase.reduce(
       ];
     }
 
+    if (
+      _.get(current, 'groupType') === 'extra'
+      && current.extra[0] === 'known'
+      && current.extra[1] === 'as'
+    ) {
+      return [
+        ...accumulator,
+        {
+          ...createArticleIfNeeded(current.basic),
+          alternativeNames: [current.extra[2]],
+        },
+      ];
+    }
+
     return [...accumulator, current];
   },
   [],

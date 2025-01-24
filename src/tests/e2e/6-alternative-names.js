@@ -132,4 +132,45 @@ describe('alternative names (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "also known as" inside a bracket', () => {
+    const words = 'A Venetian window (also known as a central window) was used by artists in the 16th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'central',
+                  'window',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'a',
+              'Venetian',
+              'window',
+            ],
+          },
+        ],
+        subject: [
+          'artists',
+        ],
+        verb: 'use',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1501,
+        },
+      },
+    ]]);
+  });
 });
