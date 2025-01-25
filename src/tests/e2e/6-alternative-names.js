@@ -173,4 +173,62 @@ describe('alternative names (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "also known as" with OR inside a bracket', () => {
+    // eslint-disable-next-line max-len
+    const words = 'A Venetian window (also known as a central window, a large frame or a triple fenestra) was used by artists in the 16th and 17th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'central',
+                  'window',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'large',
+                  'frame',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'triple',
+                  'fenestra',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'a',
+              'Venetian',
+              'window',
+            ],
+          },
+        ],
+        subject: [
+          'artists',
+        ],
+        verb: 'use',
+        when: {
+          groupType: 'date',
+          maxYear: 1700,
+          minYear: 1501,
+        },
+      },
+    ]]);
+  });
 });

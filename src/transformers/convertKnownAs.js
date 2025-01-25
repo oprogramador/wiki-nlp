@@ -52,6 +52,21 @@ const convertKnownAs = phrase => phrase.reduce(
       _.get(current, 'groupType') === 'extra'
       && current.extra[0] === 'known'
       && current.extra[1] === 'as'
+      && _.get(current.extra[2], 'groupType') === 'or'
+    ) {
+      return [
+        ...accumulator,
+        {
+          ...createArticleIfNeeded(current.basic),
+          alternativeNames: current.extra[2].members,
+        },
+      ];
+    }
+
+    if (
+      _.get(current, 'groupType') === 'extra'
+      && current.extra[0] === 'known'
+      && current.extra[1] === 'as'
     ) {
       return [
         ...accumulator,

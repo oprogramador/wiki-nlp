@@ -36,7 +36,7 @@ const groupAnd = (phrase, separator = 'and') => phrase.reduce(
         ...accumulator,
         {
           ...current,
-          extra: groupAnd(current.extra),
+          extra: groupAnd(current.extra, separator),
         },
       ];
     }
