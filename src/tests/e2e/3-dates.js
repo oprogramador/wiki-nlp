@@ -4256,4 +4256,42 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('finds an adverb after a quantity', () => {
+    const words = 'Many street dogs were heavily hungry in Texas in the 1950s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'heavily',
+        ],
+        groupType: 'verb',
+        object: [
+          'hungry',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'street',
+                'dogs',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1959,
+          minYear: 1950,
+        },
+        where: 'Texas',
+      },
+    ]]);
+  });
 });

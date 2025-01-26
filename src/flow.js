@@ -63,6 +63,7 @@ const includeSimpleLocalities = require('./transformers/includeSimpleLocalities'
 const includeTimes = require('./transformers/includeTimes');
 const itemize = require('./transformers/itemize');
 const joinPhrases = require('./transformers/joinPhrases');
+const moveAdverbGroupsBeforeQuantity = require('./transformers/moveAdverbGroupsBeforeQuantity');
 const moveAdverbs = require('./transformers/moveAdverbs');
 const removeMeaningless = require('./transformers/removeMeaningless');
 const skipArticleBeforeNumber = require('./transformers/skipArticleBeforeNumber');
@@ -116,6 +117,8 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertKnownAs),
     p => p.map(groupUnits),
     p => p.map(groupPrenumbered),
+    p => p.map(convertPreAdverbs),
+    p => p.map(moveAdverbGroupsBeforeQuantity),
     p => p.map(itemize),
     p => p.map(convertIncluding({ separator: 'including' })),
     p => p.map(convertIncluding({ separator: 'excluding' })),
@@ -132,7 +135,6 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(pp => splitAndWithPast(pp)).flat(),
     p => p.map((current, i) => includeRelativeDates(current, p[i - 1])),
     p => p.map(convertDateRanges),
-    p => p.map(convertPreAdverbs),
     p => p.map(convertAuxiliaryNegation),
     p => p.map(groupVerbs),
     p => p.map(flatArticles),
