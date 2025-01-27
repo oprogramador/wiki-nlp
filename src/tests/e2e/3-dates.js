@@ -4294,4 +4294,61 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('splits AND with an irregular past verb followed by an object with no article', () => {
+    const words = 'In 2010, the president was elected, and made federal appointments 3 years later';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'elected',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'president',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'federal',
+              'appointments',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'president',
+            ],
+          },
+        ],
+        verb: 'made',
+        when: {
+          groupType: 'date',
+          year: 2013,
+        },
+      },
+    ]]);
+  });
 });
