@@ -2767,7 +2767,7 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "including"', () => {
-    const words = 'Many countries are landlocked, including Switzerland, Austria, Czechia and Slovakia';
+    const words = 'Many countries, including Switzerland, Austria, Czechia and Slovakia, are landlocked';
 
     const result = flow(splitText(words));
 
@@ -2776,9 +2776,11 @@ describe('articles & verbs (e2e)', () => {
         groupType: 'verb',
         object: [
           'landlocked',
+        ],
+        subject: [
           {
-            groupType: 'including',
-            what: {
+            groupType: 'quantity',
+            including: {
               groupType: 'and',
               members: [
                 'Switzerland',
@@ -2787,11 +2789,6 @@ describe('articles & verbs (e2e)', () => {
                 'Slovakia',
               ],
             },
-          },
-        ],
-        subject: [
-          {
-            groupType: 'quantity',
             item: 'countries',
             min: 3,
           },
@@ -2802,7 +2799,7 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "including:"', () => {
-    const words = 'Many countries are landlocked, including: Hungary, Slovakia, and Czechia';
+    const words = 'Many countries, including: Hungary, Slovakia, and Czechia, are landlocked';
 
     const result = flow(splitText(words));
 
@@ -2811,9 +2808,11 @@ describe('articles & verbs (e2e)', () => {
         groupType: 'verb',
         object: [
           'landlocked',
+        ],
+        subject: [
           {
-            groupType: 'including',
-            what: {
+            groupType: 'quantity',
+            including: {
               groupType: 'and',
               members: [
                 'Hungary',
@@ -2821,11 +2820,6 @@ describe('articles & verbs (e2e)', () => {
                 'Czechia',
               ],
             },
-          },
-        ],
-        subject: [
-          {
-            groupType: 'quantity',
             item: 'countries',
             min: 3,
           },
@@ -2836,7 +2830,7 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "excluding"', () => {
-    const words = 'Many countries are landlocked, excluding France, Spain, and Portugal';
+    const words = 'Many countries, excluding France, Spain, and Portugal, are landlocked';
 
     const result = flow(splitText(words));
 
@@ -2845,9 +2839,10 @@ describe('articles & verbs (e2e)', () => {
         groupType: 'verb',
         object: [
           'landlocked',
+        ],
+        subject: [
           {
-            groupType: 'excluding',
-            what: {
+            excluding: {
               groupType: 'and',
               members: [
                 'France',
@@ -2855,10 +2850,6 @@ describe('articles & verbs (e2e)', () => {
                 'Portugal',
               ],
             },
-          },
-        ],
-        subject: [
-          {
             groupType: 'quantity',
             item: 'countries',
             min: 3,
@@ -2870,7 +2861,7 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "excluding:"', () => {
-    const words = 'Numerous countries are landlocked, excluding: Belgium & Netherlands';
+    const words = 'Numerous countries, excluding: Belgium & Netherlands, are landlocked';
 
     const result = flow(splitText(words));
 
@@ -2879,19 +2870,16 @@ describe('articles & verbs (e2e)', () => {
         groupType: 'verb',
         object: [
           'landlocked',
+        ],
+        subject: [
           {
-            groupType: 'excluding',
-            what: {
+            excluding: {
               groupType: 'and',
               members: [
                 'Belgium',
                 'Netherlands',
               ],
             },
-          },
-        ],
-        subject: [
-          {
             groupType: 'quantity',
             item: 'countries',
             min: 3,
@@ -2916,13 +2904,7 @@ describe('articles & verbs (e2e)', () => {
         object: [
           {
             groupType: 'quantity',
-            isExact: false,
-            item: 'students',
-            value: 4e4,
-          },
-          {
-            groupType: 'including',
-            what: {
+            including: {
               groupType: 'quantity',
               item: {
                 groupType: 'article',
@@ -2933,6 +2915,9 @@ describe('articles & verbs (e2e)', () => {
               },
               min: 14e3,
             },
+            isExact: false,
+            item: 'students',
+            value: 4e4,
           },
         ],
         subject: [

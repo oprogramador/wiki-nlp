@@ -4,17 +4,7 @@ const {
   getBeforeBeforeLast,
   withoutLast,
 } = require('../utils/listUtils');
-
-const createArticleIfNeeded = (word) => {
-  if (!_.get(word, 'groupType')) {
-    return {
-      groupType: 'article',
-      words: [word],
-    };
-  }
-
-  return word;
-};
+const createArticleIfNeeded = require('../utils/createArticleIfNeeded');
 
 const convertKnownAs = phrase => phrase.reduce(
   (accumulator, current) => {

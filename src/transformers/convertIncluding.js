@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const { getBeforeLast, withoutLast } = require('../utils/listUtils');
+const createArticleIfNeeded = require('../utils/createArticleIfNeeded');
 
 const convertIncluding = ({ separator }) => phrase => phrase.reduce(
   (accumulator, current) => {
@@ -7,25 +8,12 @@ const convertIncluding = ({ separator }) => phrase => phrase.reduce(
     const last = _.last(accumulator);
 
     if (
-      beforeLast === ','
-      && last === separator
-    ) {
-      return [
-        ...withoutLast(accumulator, 2),
-        {
-          groupType: separator,
-          what: current,
-        },
-      ];
-    }
-
-    if (
       last === separator
     ) {
       return [
         ...withoutLast(accumulator, 2),
         {
-          ...beforeLast,
+          ...createArticleIfNeeded(beforeLast),
           [separator]: current,
         },
       ];

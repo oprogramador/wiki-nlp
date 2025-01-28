@@ -14,6 +14,10 @@ const convertNow = now => [
 
 const createDefaultMap = ({ now }) => [
   { from: ['&'], to: ['and'] },
+  { from: [',', 'are'], to: ['are'] },
+  { from: [',', 'excluding'], to: ['excluding'] },
+  { from: [',', 'including'], to: ['including'] },
+  { from: [',', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'on', 'the', 'other', 'hand', ','], to: [] },
   { from: [',', 'on', 'the', 'other', 'hand'], to: [] },
   { from: [',', 'out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
@@ -22,7 +26,6 @@ const createDefaultMap = ({ now }) => [
   { from: ['2nd'], to: ['second'] },
   { from: ['3rd'], to: ['third'] },
   { from: ['a', 'few', 'hundred'], to: ['101–1000'] },
-  { from: [',', 'known', 'as'], to: ['#alternative-name'] },
   { from: ['a', 'handful', 'of'], to: ['handful'] },
   { from: ['a', 'large', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
   { from: ['a', 'long', 'time', 'ago'], to: ['over', '100', 'years', 'ago'] },
