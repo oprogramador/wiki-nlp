@@ -4351,4 +4351,43 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "has often been"', () => {
+    const words = 'The politics has often been discussed by the community since the late 20th century';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'frequently',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'politics',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'community',
+            ],
+          },
+        ],
+        verb: 'discuss',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 1951,
+        },
+      },
+    ]]);
+  });
 });

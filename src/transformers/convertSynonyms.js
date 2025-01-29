@@ -64,6 +64,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['excluding', ':'], to: ['excluding'] },
   { from: ['had', 'been'], to: ['were'] },
   { from: ['has', 'been'], to: ['is'] },
+  { from: ['has', 'often', 'been'], to: ['frequently', 'is'] },
   { from: ['hundreds', 'of', 'billions', 'of'], to: ['above', '1e11'] },
   { from: ['hundreds', 'of', 'millions', 'of'], to: ['above', '1e8'] },
   { from: ['hundreds', 'of', 'thousands', 'of'], to: ['above', '1e5'] },
