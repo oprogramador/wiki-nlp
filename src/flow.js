@@ -23,6 +23,7 @@ const convertIncluding = require('./transformers/convertIncluding');
 const convertKnownAs = require('./transformers/convertKnownAs');
 const convertManyCenturies = require('./transformers/convertManyCenturies');
 const convertManyDecades = require('./transformers/convertManyDecades');
+const convertMid = require('./transformers/convertMid');
 const convertMixedOrdinalsSimple = require('./transformers/convertMixedOrdinalsSimple');
 const convertMixedOrdinalsWithDash = require('./transformers/convertMixedOrdinalsWithDash');
 const convertNeither = require('./transformers/convertNeither');
@@ -96,6 +97,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertAgo({ now })),
     p => p.map(convertPreBce),
     p => p.map(moveAdverbs),
+    p => p.map(convertMid),
     p => p.map(groupArticles),
     p => p.map(convertSelf),
     p => p.map(convertArticlesToLowerCase),

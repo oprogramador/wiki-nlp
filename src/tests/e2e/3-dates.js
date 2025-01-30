@@ -4390,4 +4390,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "mid- [...] century"', () => {
+    const words = 'In the mid-19th century, the fashion was an important matter in France';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'important',
+              'matter',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'fashion',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1875,
+          minYear: 1826,
+        },
+        where: 'France',
+      },
+    ]]);
+  });
 });
