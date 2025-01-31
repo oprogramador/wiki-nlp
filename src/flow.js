@@ -35,6 +35,7 @@ const convertPassive = require('./transformers/convertPassive');
 const convertPercent = require('./transformers/convertPercent');
 const convertPreAdverbs = require('./transformers/convertPreAdverbs');
 const convertPreBce = require('./transformers/convertPreBce');
+const convertProbability = require('./transformers/convertProbability');
 const convertPronouns = require('./transformers/convertPronouns');
 const convertPunctuation = require('./transformers/convertPunctuation');
 const convertRespectively = require('./transformers/convertRespectively');
@@ -142,6 +143,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(flatArticles),
     p => p.map(findPastVerb),
     p => p.map(convertAdverbs),
+    p => p.map(convertProbability),
     p => p.map(convertFrequency),
     p => p.map(pp => convertRespectively(pp)).flat(),
     p => p.map(convertFromToInPhrase),

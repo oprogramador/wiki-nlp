@@ -4428,4 +4428,57 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "It is speculated that"', () => {
+    const words = 'It is speculated that by 4,000 BCE, sheep were domesticated in Africa';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'domesticated',
+        ],
+        probability: 0.5,
+        subject: [
+          'sheep',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: -4000,
+        },
+        where: 'Africa',
+      },
+    ]]);
+  });
+
+  it('converts "It is speculated that" with an adverb', () => {
+    const words = 'It is speculated that by 7,000 BCE, sheep were partially domesticated in Africa';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'partially',
+        ],
+        groupType: 'verb',
+        object: [
+          'domesticated',
+        ],
+        probability: 0.5,
+        subject: [
+          'sheep',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: -7000,
+        },
+        where: 'Africa',
+      },
+    ]]);
+  });
 });
