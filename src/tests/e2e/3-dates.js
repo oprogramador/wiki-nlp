@@ -3926,7 +3926,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "which are"', () => {
-    const words = 'In the 3rd millennium BCE, Egyptian slaves built The Great Pyramids which are higher than 300 ft';
+    const words = 'In the 3rd millennium BC, Egyptian slaves built The Great Pyramids which are higher than 300 ft';
 
     const result = flow(splitText(words));
 

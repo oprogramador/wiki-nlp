@@ -47,6 +47,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['as', 'recently', 'as'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
   { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
+  { from: ['bc'], to: ['BCE'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['but'], to: [',', 'but'] },
