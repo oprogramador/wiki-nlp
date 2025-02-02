@@ -4481,4 +4481,76 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a locality for two uppercase words', () => {
+    const words = 'In 2000, they met in Rhode Island';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'they',
+        ],
+        verb: 'met',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Rhode',
+            'Island',
+          ],
+        },
+      },
+    ]]);
+  });
+
+  it('does not find a locality for mixed-case words', () => {
+    const words = 'In 2010, she obtained a degree in European law';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'European',
+                  'law',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'degree',
+                ],
+              },
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'she',
+        ],
+        verb: 'obtained',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
 });
