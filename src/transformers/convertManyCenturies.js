@@ -84,6 +84,28 @@ const convertManyCenturies = phrase => phrase.reduce(
       ];
     }
 
+    if (
+      ['in', 'between'].includes(toLowerCase(beforeBeforeBeforeLast))
+      && beforeLast === ','
+      && last === 'and'
+      && _.get(current, 'words.2') === 'centuries'
+    ) {
+      const [minCentury, maxCentury] = _.sortBy([
+        ordinalToNumber(beforeBeforeLast.words[1]),
+        ordinalToNumber(current.words[1]),
+      ]);
+
+      return [
+        ...withoutLast(accumulator, 4),
+        'in',
+        {
+          groupType: 'date',
+          maxYear: (maxCentury - 1) * 100 + 100,
+          minYear: (minCentury - 1) * 100 + 1,
+        },
+      ];
+    }
+
     return [...accumulator, current];
   },
   [],

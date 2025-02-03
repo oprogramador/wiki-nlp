@@ -1596,6 +1596,43 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "between the [...] and the [...] centuries"', () => {
+    const words = 'Between the 15th and the 18th centuries, the slave trade took an estimated 4–8 million slaves';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'slaves',
+            max: 8e6,
+            min: 4e6,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'slave',
+              'trade',
+            ],
+          },
+        ],
+        verb: 'took',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1401,
+        },
+      },
+    ]]);
+  });
+
   it('converts "between [...] and [...] centuries", at the end, with mixed ordinals', () => {
     const words = 'Italy was poor between the 3rd and 9th centuries';
 
