@@ -1314,6 +1314,7 @@ describe('articles & verbs (e2e)', () => {
       [
         {
           groupType: 'verb',
+          object: [],
           subject: [
             'they',
           ],
@@ -2029,31 +2030,29 @@ describe('articles & verbs (e2e)', () => {
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
-      [
-        {
-          object: [{
-            groupType: 'share',
-            value: 0.015,
-          }],
-          subject: [{
-            groupType: 'article',
-            words: [
-              'the',
-              'Shias',
-            ],
-          }],
-          verb: 'constitute',
-        },
-        {
-          object: [{
-            groupType: 'share',
-            item: 'Muslims',
-            value: 0.003,
-          }],
-          subject: ['Ahmadis'],
-          verb: 'constitute',
-        },
-      ],
+      {
+        object: [{
+          groupType: 'share',
+          value: 0.015,
+        }],
+        subject: [{
+          groupType: 'article',
+          words: [
+            'the',
+            'Shias',
+          ],
+        }],
+        verb: 'constitute',
+      },
+      {
+        object: [{
+          groupType: 'share',
+          item: 'Muslims',
+          value: 0.003,
+        }],
+        subject: ['Ahmadis'],
+        verb: 'constitute',
+      },
     ]]);
   });
 
@@ -2978,30 +2977,28 @@ describe('articles & verbs (e2e)', () => {
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
-      [
-        {
-          object: [{
-            groupType: 'article',
-            words: [
-              'a',
-              'dog',
-            ],
-          }],
-          subject: ['Garcias'],
-          verb: 'adopted',
-        },
-        {
-          object: [{
-            groupType: 'article',
-            words: [
-              'a',
-              'cat',
-            ],
-          }],
-          subject: ['Garcias'],
-          verb: 'adopted',
-        },
-      ],
+      {
+        object: [{
+          groupType: 'article',
+          words: [
+            'a',
+            'dog',
+          ],
+        }],
+        subject: ['Garcias'],
+        verb: 'adopted',
+      },
+      {
+        object: [{
+          groupType: 'article',
+          words: [
+            'a',
+            'cat',
+          ],
+        }],
+        subject: ['Garcias'],
+        verb: 'adopted',
+      },
     ]]);
   });
 

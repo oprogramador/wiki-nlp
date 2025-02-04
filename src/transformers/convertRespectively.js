@@ -10,11 +10,11 @@ const convertRespectively = (phrase) => {
     return [phrase];
   }
 
-  return object.map(o => [o.members.map((objectItem, i) => ({
+  return object.map(o => o.members.map((objectItem, i) => ({
     object: [objectItem],
     subject: [_.get(subject, `0.members.${i}`) || _.get(subject, 2)],
     verb,
-  }))]);
+  })));
 };
 
 module.exports = convertRespectively;

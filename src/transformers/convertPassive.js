@@ -20,6 +20,7 @@ const convertPassive = (phrase) => {
     return [
       {
         ...phrase[0],
+        isFromPassive: true,
         object: subject.map(toLowerCase),
         subject: object[0].object,
         verb: present,

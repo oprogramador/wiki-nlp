@@ -4590,4 +4590,60 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts passive with AND followed by a verb', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In addition, at least 0.3 million Europeans were caught by pirates and sold as bondslaves in North Africa in the 16th and 17th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'Europeans',
+            min: 3e5,
+          },
+        ],
+        subject: [
+          'pirates',
+        ],
+        verb: 'catch',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          [
+            {
+              groupType: 'quantity',
+              item: 'Europeans',
+              min: 3e5,
+            },
+          ],
+          'as',
+          'bondslaves',
+        ],
+        subject: [
+          'pirates',
+        ],
+        verb: 'sold',
+        when: {
+          groupType: 'date',
+          maxYear: 1700,
+          minYear: 1501,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'North',
+            'Africa',
+          ],
+        },
+      },
+    ]]);
+  });
 });
