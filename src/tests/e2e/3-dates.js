@@ -4646,4 +4646,65 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a locality at the begin', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In West Africa, the decline of the Atlantic trade caused an economic crisis in the early 20th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'economic',
+              'crisis',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Atlantic',
+                  'trade',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'decline',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'caused',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'West',
+            'Africa',
+          ],
+        },
+      },
+    ]]);
+  });
 });
