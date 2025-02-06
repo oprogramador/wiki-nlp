@@ -12,7 +12,8 @@ const splitBySemicolon = phrase => phrase
         [
           ...withoutLastOne(lastPhrase),
           last.replace(/;$/, ''),
-        ],
+        ]
+          .filter(x => x),
         [_.startCase(current)],
       ];
     }

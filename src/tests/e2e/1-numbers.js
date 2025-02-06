@@ -3378,4 +3378,44 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "while"', () => {
+    const words = 'Alan has several dogs, while Bob has dozens of cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'dogs',
+            max: 99,
+            min: 3,
+          },
+        ],
+        subject: [
+          'Alan',
+        ],
+        verb: 'has',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'cats',
+            min: 10,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });

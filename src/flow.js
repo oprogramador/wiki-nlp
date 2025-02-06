@@ -78,9 +78,10 @@ const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
   const groups = _.flow(
+    p => p.map(convertPunctuation),
+    p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'while'], to: [';'] }] })),
     p => p.map(pp => splitBySemicolon(pp)).flat(),
     joinPhrases,
-    p => p.map(convertPunctuation),
     p => p.map(removeMeaningless),
     p => p.map(convertSynonyms({ now })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', ','], to: [','] }] })),
