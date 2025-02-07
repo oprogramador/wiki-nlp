@@ -3,21 +3,24 @@ const auxiliary = require('../utils/auxiliaryList');
 const prepositions = require('../utils/prepositionList');
 const { withoutLastOne, withoutLast, getBeforeLast } = require('../utils/listUtils');
 
+const pluralIrregularWords = [
+  'children',
+  'people',
+];
+
 const isPluralWord = word => (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
-  || ['people', 'children'].includes(word);
+  || pluralIrregularWords.includes(word);
 
 const isPlural = (word) => {
   if (_.get(word, 'words.0') === 'these') {
     return true;
   }
-  const result = (
-    isPluralWord(_.last(_.get(word, 'words')))
+  const result = isPluralWord(_.last(_.get(word, 'words')))
     || isPluralWord(_.get(word, 'words.0'))
-    || (word.groupType === 'and' && isPluralWord(word.members[0]))
     || isPluralWord(word.general)
-  )
-  || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
-  || ['people', 'children'].includes(word);
+    || (_.get(word, 'groupType') === 'and' && word.members.every(isPlural))
+    || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
+    || pluralIrregularWords.includes(word);
 
   return result;
 };

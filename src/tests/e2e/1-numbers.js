@@ -3347,6 +3347,94 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
+  it('converts AND with numbers & adjectives', () => {
+    const words = 'Bob has about 20 black dogs and above 10 white cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'quantity',
+                isExact: false,
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'black',
+                    'dogs',
+                  ],
+                },
+                value: 20,
+              },
+              {
+                groupType: 'quantity',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'white',
+                    'cats',
+                  ],
+                },
+                min: 10,
+              },
+            ],
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
+  it('converts a single number followed by AND with adjectives', () => {
+    const words = 'Bob has about 20 black dogs and white cats';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: {
+              groupType: 'and',
+              members: [
+                {
+                  groupType: 'article',
+                  words: [
+                    'black',
+                    'dogs',
+                  ],
+                },
+                {
+                  groupType: 'article',
+                  words: [
+                    'white',
+                    'cats',
+                  ],
+                },
+              ],
+            },
+            value: 20,
+          },
+        ],
+        subject: [
+          'Bob',
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
+
   it.skip('converts with AND, and without visible plural', () => {
     const words = 'French casualties were 123 dead and 567 injured';
 
