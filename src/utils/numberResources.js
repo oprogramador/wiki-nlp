@@ -141,6 +141,7 @@ const aboveWords = [
 const maxWords = [
   'below',
   'almost',
+  'near',
   'nearly',
 ];
 

@@ -4707,4 +4707,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "estimated to have been"', () => {
+    const words = 'The nebula is estimated to have been formed some 11,000 years ago in Virgo';
+
+    const result = flow(splitText(words), { now: new Date('2000-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'formed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'nebula',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -9000,
+        },
+        where: 'Virgo',
+      },
+    ]]);
+  });
 });
