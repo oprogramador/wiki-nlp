@@ -3506,4 +3506,52 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "up to", "a thousand", a quantity with OR, "vast majority"', () => {
+    const words = 'Up to a thousand languages or dialects are spoken in the vast majority of African countries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'African',
+                    'countries',
+                  ],
+                },
+                min: 0.6,
+              },
+            ],
+            subject: [
+              'spoken',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'or',
+              members: [
+                'languages',
+                'dialects',
+              ],
+            },
+            max: 1000,
+          },
+        ],
+        verb: 'are',
+      },
+    ]]);
+  });
 });
