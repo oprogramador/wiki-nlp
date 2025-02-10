@@ -78,6 +78,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['hundreds', 'of'], to: ['above', '100'] },
   { from: ['in', 'addition'], to: [] },
   { from: ['in', 'every'], to: ['every'] },
+  { from: ['in', 'total', ',', 'there', 'are'], to: ['there', 'are'] },
+  { from: ['in', 'total', 'there', 'are'], to: ['there', 'are'] },
   { from: ['including', ':'], to: ['including'] },
   { from: ['it', 'is', 'speculated', 'that'], to: ['likely'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
