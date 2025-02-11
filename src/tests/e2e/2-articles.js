@@ -2447,12 +2447,40 @@ describe('articles & verbs (e2e)', () => {
     ]]);
   });
 
-  it.skip('finds a simple place at the beginning', () => {
+  it('finds a simple place at the beginning', () => {
     const words = 'In Oslo, the public transport is mostly paid by the local taxpayers';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'mostly',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'public',
+              'transport',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'local',
+              'taxpayers',
+            ],
+          },
+        ],
+        verb: 'pay',
+        where: 'Oslo',
+      },
     ]]);
   });
 

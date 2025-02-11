@@ -518,21 +518,13 @@ describe('dates (e2e)', () => {
       {
         groupType: 'verb',
         object: [
+          'in',
           {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'article',
-                words: [
-                  'an',
-                  'alliance',
-                ],
-              },
+            groupType: 'article',
+            words: [
+              'an',
+              'alliance',
             ],
-            subject: [
-              'been',
-            ],
-            verb: 'in',
           },
         ],
         subject: [
@@ -551,7 +543,7 @@ describe('dates (e2e)', () => {
             ],
           },
         ],
-        verb: 'have',
+        verb: 'are',
         when: {
           groupType: 'date',
           maxYear: 2025,
@@ -2046,7 +2038,6 @@ describe('dates (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              'been',
               'named',
               'Victoria',
             ],
@@ -2065,7 +2056,7 @@ describe('dates (e2e)', () => {
             min: 3,
           },
         ],
-        verb: 'have',
+        verb: 'are',
         when: {
           groupType: 'date',
           maxYear: 2000,
@@ -4040,13 +4031,7 @@ describe('dates (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'article',
-            words: [
-              'been',
-              'wonderful',
-            ],
-          },
+          'wonderful',
         ],
         subject: [
           {
@@ -4058,7 +4043,7 @@ describe('dates (e2e)', () => {
             ],
           },
         ],
-        verb: 'have',
+        verb: 'are',
         when: {
           groupType: 'date',
           maxYear: 2026,
@@ -4735,6 +4720,49 @@ describe('dates (e2e)', () => {
           year: -9000,
         },
         where: 'Virgo',
+      },
+    ]]);
+  });
+
+  it('converts "known to have been" & "eventually resulting in"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The tower is known to have been used by many archers in the 14th century, eventually resulting in a successful defense';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'tower',
+            ],
+          },
+        ],
+        result: {
+          groupType: 'article',
+          words: [
+            'a',
+            'successful',
+            'defense',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'archers',
+            min: 3,
+          },
+        ],
+        verb: 'use',
+        when: {
+          groupType: 'date',
+          maxYear: 1400,
+          minYear: 1301,
+        },
       },
     ]]);
   });

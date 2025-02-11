@@ -50,13 +50,7 @@ describe('frequency (e2e)', () => {
         },
         groupType: 'verb',
         object: [
-          {
-            groupType: 'article',
-            words: [
-              'been',
-              'meeting',
-            ],
-          },
+          'meeting',
         ],
         subject: [
           {
@@ -67,7 +61,7 @@ describe('frequency (e2e)', () => {
             ],
           },
         ],
-        verb: 'have',
+        verb: 'are',
       },
     ]]);
   });
