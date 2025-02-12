@@ -4766,4 +4766,70 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "over the last couple of decades"', () => {
+    const words = 'Ugandan population has rapidly increased over the last couple of decades';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'rapidly',
+        ],
+        groupType: 'verb',
+        object: [
+          'increased',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Ugandan',
+              'population',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 1996,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "over the last [...] years"', () => {
+    const words = 'Irish population has slowly increased over the last twenty years';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'slowly',
+        ],
+        groupType: 'verb',
+        object: [
+          'increased',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Irish',
+              'population',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 2006,
+        },
+      },
+    ]]);
+  });
 });
