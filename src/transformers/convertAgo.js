@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const {
-  getLast,
-  getBeforeLast,
   getBeforeBeforeLast,
+  getBeforeLast,
+  getLast,
   withoutLast,
 } = require('../utils/listUtils');
 

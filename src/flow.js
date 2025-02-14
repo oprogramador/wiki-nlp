@@ -57,6 +57,7 @@ const groupPrepositions = require('./transformers/groupPrepositions');
 const groupUnits = require('./transformers/groupUnits');
 const groupVerbs = require('./transformers/groupVerbs');
 const includeAccordance = require('./transformers/includeAccordance');
+const includeCause = require('./transformers/includeCause');
 const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
@@ -152,6 +153,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertFromToInPhrase),
     p => p.map(includeAccordance),
     p => p.map(includeResult),
+    p => p.map(includeCause),
     p => p.map(includeLocalities),
     p => p.map(includeSimpleLocalities),
     p => p.map(includeSimpleLocalitiesAtBegin),

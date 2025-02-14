@@ -4832,4 +4832,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "due to"', () => {
+    const words = 'The office was closed in May 2018, due to a natural disaster';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        cause: {
+          groupType: 'article',
+          words: [
+            'a',
+            'natural',
+            'disaster',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          'closed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'office',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          month: 5,
+          year: 2018,
+        },
+      },
+    ]]);
+  });
 });
