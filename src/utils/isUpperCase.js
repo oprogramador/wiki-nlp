@@ -3,7 +3,10 @@ const isUpperCase = (item) => {
     return false;
   }
   if (item.words) {
-    return item.words.every(isUpperCase);
+    return item
+      .words
+      .filter(word => word !== 'the')
+      .every(isUpperCase);
   }
   if (!item.charAt) {
     return false;

@@ -18,7 +18,7 @@ const isPlural = (word) => {
   const result = isPluralWord(_.last(_.get(word, 'words')))
     || isPluralWord(_.get(word, 'words.0'))
     || isPluralWord(word.general)
-    || (['and', 'or'].includes(_.get(word, 'groupType')) && word.members.every(isPlural))
+    || (['and', 'or'].includes(_.get(word, 'groupType')) && word.members.some(isPlural))
     || (/s$/.test(word) && ![...auxiliary, prepositions].includes(word))
     || pluralIrregularWords.includes(word);
 

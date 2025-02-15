@@ -4870,4 +4870,54 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a quantity with AND of adjectives & a place with "the"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Many rare and endangered fish species have been living in the Indian Ocean over the last several millennia';
+
+    const result = flow(splitText(words), { now: new Date('2000-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'living',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'rare',
+                {
+                  groupType: 'article',
+                  words: [
+                    'endangered',
+                    'fish',
+                    'species',
+                  ],
+                },
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: -1000,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Indian',
+            'Ocean',
+          ],
+        },
+      },
+    ]]);
+  });
 });

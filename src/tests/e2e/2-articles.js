@@ -412,22 +412,7 @@ describe('articles & verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'article',
-                words: [
-                  'the',
-                  'EU',
-                ],
-              },
-            ],
-            subject: [
-              'living',
-            ],
-            verb: 'in',
-          },
+          'living',
         ],
         subject: [
           {
@@ -443,6 +428,13 @@ describe('articles & verbs (e2e)', () => {
           },
         ],
         verb: 'were',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'EU',
+          ],
+        },
       },
     ]]);
   });
