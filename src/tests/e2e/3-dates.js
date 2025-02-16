@@ -4920,4 +4920,56 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a quantity with examples', () => {
+    const words = 'In the early 1940s, Africa had only four sovereign states: Egypt, Liberia, Ethiopia & South Africa';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              example: {
+                groupType: 'and',
+                members: [
+                  'Egypt',
+                  'Liberia',
+                  'Ethiopia',
+                  {
+                    groupType: 'article',
+                    words: [
+                      'South',
+                      'Africa',
+                    ],
+                  },
+                ],
+              },
+              general: {
+                groupType: 'article',
+                words: [
+                  'sovereign',
+                  'states',
+                ],
+              },
+              groupType: 'example',
+            },
+            value: 4,
+          },
+        ],
+        subject: [
+          'Africa',
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          maxYear: 1944,
+          minYear: 1940,
+        },
+      },
+    ]]);
+  });
 });

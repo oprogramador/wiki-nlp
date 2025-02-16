@@ -15,6 +15,9 @@ const isPlural = (word) => {
   if (_.get(word, 'words.0') === 'these') {
     return true;
   }
+  if (_.get(word, 'groupType') === 'example') {
+    return isPlural(word.general);
+  }
   const result = isPluralWord(_.last(_.get(word, 'words')))
     || isPluralWord(_.get(word, 'words.0'))
     || isPluralWord(word.general)
