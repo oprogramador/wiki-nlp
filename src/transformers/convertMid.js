@@ -1,6 +1,6 @@
 const convertMid = phrase => phrase.reduce(
   (accumulator, current) => {
-    if (/^mid-/.test(current)) {
+    if (/^mid-[0-9]/.test(current)) {
       return [
         ...accumulator,
         'mid',

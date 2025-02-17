@@ -4972,4 +4972,61 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "mid to late"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The payment system was designed in the mid to late 20th century in the city of London but was applied in the mid-to-late 2000s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'designed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'payment',
+              'system',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: 1926,
+        },
+        where: 'London',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'applied',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'payment',
+              'system',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2009,
+          minYear: 2003,
+        },
+      },
+    ]]);
+  });
 });
