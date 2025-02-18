@@ -40,7 +40,7 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * period + period,
+            maxYear: (potentialNumber + 1) * period,
             minYear: potentialNumber * period + 1,
           },
         ];
@@ -50,7 +50,7 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * period + 50,
+            maxYear: (potentialNumber + 0.5) * period,
             minYear: potentialNumber * period + 1,
           },
         ];
@@ -60,8 +60,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * period + 75,
-            minYear: potentialNumber * period + 26,
+            maxYear: (potentialNumber + 0.75) * period,
+            minYear: (potentialNumber + 0.25) * period + 1,
           },
         ];
       }
@@ -70,8 +70,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * period + period,
-            minYear: potentialNumber * period + 26,
+            maxYear: (potentialNumber + 1) * period,
+            minYear: (potentialNumber + 0.25) * period + 1,
           },
         ];
       }
@@ -80,8 +80,8 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
-            maxYear: potentialNumber * period + period,
-            minYear: potentialNumber * period + 51,
+            maxYear: (potentialNumber + 1) * period,
+            minYear: (potentialNumber + 0.5) * period + 1,
           },
         ];
       }

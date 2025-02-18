@@ -848,6 +848,34 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts a millennium with "early"', () => {
+    const words = 'Many churches were constructed by craftsmen in the early 2nd millennium';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'churches',
+            min: 3,
+          },
+        ],
+        subject: [
+          'craftsmen',
+        ],
+        verb: 'construct',
+        when: {
+          groupType: 'date',
+          maxYear: 1500,
+          minYear: 1001,
+        },
+      },
+    ]]);
+  });
+
   it('converts a century with "late"', () => {
     const words = 'In the late 3rd century, there was a plague';
 
