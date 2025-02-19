@@ -5057,4 +5057,52 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "early [...] century BCE"', () => {
+    const words = 'In the early 1st century BCE, Egypt was rich';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: -51,
+          minYear: -100,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "late [...] millennium BCE"', () => {
+    const words = 'Egypt was rich in the late 3rd millennium BCE';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'Egypt',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: -2001,
+          minYear: -2500,
+        },
+      },
+    ]]);
+  });
 });
