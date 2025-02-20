@@ -31,6 +31,7 @@ const convertManyCenturies = phrase => phrase.reduce(
         'in',
         {
           groupType: 'date',
+          isFromManyCenturies: true,
           maxYear: (maxCentury - 1) * 100 + 100,
           minYear: (minCentury - 1) * 100 + 1,
         },
@@ -55,6 +56,7 @@ const convertManyCenturies = phrase => phrase.reduce(
         'in',
         {
           groupType: 'date',
+          isFromManyCenturies: true,
           maxYear: (maxCentury - 1) * 100 + 50,
           minYear: (minCentury - 1) * 100 + 51,
         },
@@ -78,6 +80,7 @@ const convertManyCenturies = phrase => phrase.reduce(
         'in',
         {
           groupType: 'date',
+          isFromManyCenturies: true,
           maxYear: (maxCentury - 1) * 100 + 100,
           minYear: (minCentury - 1) * 100 + 1,
         },
@@ -100,6 +103,7 @@ const convertManyCenturies = phrase => phrase.reduce(
         'in',
         {
           groupType: 'date',
+          isFromManyCenturies: true,
           maxYear: (maxCentury - 1) * 100 + 100,
           minYear: (minCentury - 1) * 100 + 1,
         },
