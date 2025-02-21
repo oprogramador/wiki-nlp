@@ -5153,4 +5153,71 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "estimated at", "when", "in reality", "so many"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Grande Armée was estimated at around 400,000 men in the 1800s when in reality, they conquered so many states';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'quantity',
+              isExact: false,
+              item: 'men',
+              value: 400000,
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Grande',
+                'Armée',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            maxYear: 1809,
+            minYear: 1800,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'quantity',
+              item: 'states',
+              min: 3,
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Grande',
+                'Armée',
+              ],
+            },
+          ],
+          verb: 'conquered',
+          when: {
+            groupType: 'date',
+            maxYear: 1809,
+            minYear: 1800,
+          },
+        },
+      ],
+    ]);
+  });
 });

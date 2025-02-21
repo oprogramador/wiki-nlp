@@ -5,6 +5,7 @@ const { withoutLastOne, withoutLast, getBeforeLast } = require('../utils/listUti
 
 const pluralIrregularWords = [
   'children',
+  'men',
   'people',
 ];
 
