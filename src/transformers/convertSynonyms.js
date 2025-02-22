@@ -61,6 +61,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['dozens', 'of', 'thousands', 'of'], to: ['above', '1e4'] },
   { from: ['dozens', 'of', 'trillions', 'of'], to: ['above', '1e13'] },
   { from: ['dozens', 'of'], to: ['above', '10'] },
+  { from: ['early', 'to', 'mid'], to: ['early-to-mid'] },
   { from: ['estimated', 'at'], to: [] },
   { from: ['estimated', 'to', 'be'], to: [] },
   { from: ['estimated', 'to', 'have', 'been'], to: [] },

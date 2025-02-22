@@ -4479,6 +4479,71 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
+  it('converts "early-to-mid"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the early-to-mid 19th century, the fashion was an important matter in France but in the early to mid 1880s it was not too important';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'an',
+                'important',
+                'matter',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'fashion',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            maxYear: 1875,
+            minYear: 1801,
+          },
+          where: 'France',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          isNegated: true,
+          object: [
+            'important',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'fashion',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            maxYear: 1887,
+            minYear: 1880,
+          },
+        },
+      ],
+    ]);
+  });
+
   it('converts "It is speculated that"', () => {
     const words = 'It is speculated that by 4,000 BCE, sheep were domesticated in Africa';
 
@@ -5169,7 +5234,7 @@ describe('dates (e2e)', () => {
               groupType: 'quantity',
               isExact: false,
               item: 'men',
-              value: 400000,
+              value: 4e5,
             },
           ],
           subject: [

@@ -65,6 +65,16 @@ const convertCenturies = phrase => phrase.reduce(
           },
         ];
       }
+      if (JSON.stringify(begin) === '["the","early-to-mid"]') {
+        return [
+          ...withoutLast(accumulator, toSkip),
+          {
+            groupType: 'date',
+            maxYear: (potentialNumber + 0.75) * period,
+            minYear: potentialNumber * period + 1,
+          },
+        ];
+      }
       if (JSON.stringify(begin) === '["the","mid-to-late"]') {
         return [
           ...withoutLast(accumulator, toSkip),
