@@ -124,4 +124,48 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "every once in a while"', () => {
+    const words = 'The museum in Belfast is open to the public every once in a while';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'occasionally',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'public',
+                ],
+              },
+            ],
+            subject: [
+              'open',
+            ],
+            verb: 'to',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'museum',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: 'Belfast',
+      },
+    ]]);
+  });
 });
