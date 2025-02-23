@@ -7,7 +7,11 @@ const convertBce = phrase => phrase.reduce(
 
     if (current.groupType === 'BCE') {
       const range = last.maxYear - last.minYear;
-      const offset = Math.log10(range + 1) % 1 === 0 || last.isFromManyCenturies
+      const offset = (
+        Math.log10(range + 1) % 1 === 0
+        || last.isFromManyCenturies
+        || last.isFromMid
+      )
         ? 0
         : (range + 1) * (last.maxYear % (range * 2 + 2) === 0 ? 1 : -1);
 

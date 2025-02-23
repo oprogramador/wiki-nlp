@@ -53,6 +53,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['at', 'least'], to: ['above'] },
   { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['at', 'times'], to: ['occasionally'] },
+  { from: ['at', 'the', 'same', 'time', 'at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['bc'], to: ['BCE'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },

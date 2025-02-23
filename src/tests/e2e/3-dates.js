@@ -5285,4 +5285,72 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "mid-[...] century BC" & "when at the same time"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Roman army was invading many lands in the mid-2nd century BC when at the same time they were defending their capital';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'invading',
+          {
+            groupType: 'quantity',
+            item: 'lands',
+            min: 3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Roman',
+              'army',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: -126,
+          minYear: -175,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'defending',
+              'their',
+              'capital',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Roman',
+              'army',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: -126,
+          minYear: -175,
+        },
+      },
+    ]]);
+  });
 });

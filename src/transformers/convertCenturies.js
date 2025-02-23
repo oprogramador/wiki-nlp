@@ -60,6 +60,7 @@ const convertCenturies = phrase => phrase.reduce(
           ...withoutLast(accumulator, toSkip),
           {
             groupType: 'date',
+            isFromMid: true,
             maxYear: (potentialNumber + 0.75) * period,
             minYear: (potentialNumber + 0.25) * period + 1,
           },
