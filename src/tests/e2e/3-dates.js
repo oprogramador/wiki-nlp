@@ -5353,4 +5353,65 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "early to mid [...] BC" && "mid to late [...] BC"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Roman Republic was relatively small in the mid to late 2nd century BC but it was large in the early to mid 1st century BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          adverbs: [
+            'relatively',
+          ],
+          groupType: 'verb',
+          object: [
+            'small',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Roman',
+                'Republic',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            maxYear: -101,
+            minYear: -175,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'large',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Roman',
+                'Republic',
+              ],
+            },
+          ],
+          verb: 'was',
+          when: {
+            groupType: 'date',
+            maxYear: -26,
+            minYear: -100,
+          },
+        },
+      ],
+    ]);
+  });
 });

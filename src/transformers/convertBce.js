@@ -6,7 +6,9 @@ const convertBce = phrase => phrase.reduce(
     const last = _.last(accumulator);
 
     if (current.groupType === 'BCE') {
-      const range = last.maxYear - last.minYear;
+      const range = last.isFromPartialMid
+        ? (last.maxYear - last.minYear + 1) / 3 - 1
+        : last.maxYear - last.minYear;
       const offset = (
         Math.log10(range + 1) % 1 === 0
         || last.isFromManyCenturies
