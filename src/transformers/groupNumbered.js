@@ -1,11 +1,12 @@
 const _ = require('lodash');
 const auxiliary = require('../utils/auxiliaryList');
-const prepositions = require('../utils/prepositionList');
-const { withoutLastOne } = require('../utils/listUtils');
-const pronouns = require('../utils/pronounsList');
+const createArticleIfNeeded = require('../utils/createArticleIfNeeded');
 const isAdverb = require('../utils/isAdverb');
 const isUpperCase = require('../utils/isUpperCase');
+const prepositions = require('../utils/prepositionList');
+const pronouns = require('../utils/pronounsList');
 const toLowerCase = require('../utils/toLowerCase');
+const { withoutLastOne } = require('../utils/listUtils');
 
 const isDissalowed = word => [
   ...auxiliary,
@@ -31,8 +32,7 @@ const groupNumbered = phrase => phrase
       return [
         ...withoutLastOne(accumulator),
         {
-          groupType: 'numbered',
-          item: last,
+          ...createArticleIfNeeded(last),
           number: current.value,
         },
       ];

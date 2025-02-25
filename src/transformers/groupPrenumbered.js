@@ -1,6 +1,7 @@
 const _ = require('lodash');
-const { getBeforeLast, withoutLast } = require('../utils/listUtils');
+const createArticleIfNeeded = require('../utils/createArticleIfNeeded');
 const isUpperCase = require('../utils/isUpperCase');
+const { getBeforeLast, withoutLast } = require('../utils/listUtils');
 
 const groupPrenumbered = phrase => phrase
   .reduce((accumulator, current) => {
@@ -18,9 +19,8 @@ const groupPrenumbered = phrase => phrase
       return [
         ...withoutLast(accumulator, 2),
         {
-          groupType: 'prenumbered',
-          item: current,
-          number: last.value,
+          ...createArticleIfNeeded(current),
+          prenumber: last.value,
         },
       ];
     }

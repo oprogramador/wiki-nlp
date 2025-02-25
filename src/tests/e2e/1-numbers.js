@@ -1297,9 +1297,11 @@ describe('numbers (e2e)', () => {
             ],
             subject: [
               {
-                groupType: 'numbered',
-                item: 'Article',
+                groupType: 'article',
                 number: 27,
+                words: [
+                  'Article',
+                ],
               },
             ],
             verb: 'of',
@@ -1835,15 +1837,12 @@ describe('numbers (e2e)', () => {
             groupType: 'preposition',
             object: [
               {
-                groupType: 'prenumbered',
-                item: {
-                  groupType: 'article',
-                  words: [
-                    'Paris',
-                    'Agreement',
-                  ],
-                },
-                number: 1925,
+                groupType: 'article',
+                prenumber: 1925,
+                words: [
+                  'Paris',
+                  'Agreement',
+                ],
               },
             ],
             subject: [
@@ -1866,7 +1865,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('does not convert prenumbered when the second word is lowercase', () => {
+  it('does not convert pre-numbered when the second word is lowercase', () => {
     const words = 'In 2023, the agrement was signed by leaders of the 27 EU member states';
 
     const result = flow(splitText(words));
@@ -1911,6 +1910,36 @@ describe('numbers (e2e)', () => {
           groupType: 'date',
           year: 2023,
         },
+      },
+    ]]);
+  });
+
+  it('finds an adverb with pre-numbered', () => {
+    const words = 'The 2004 Indian Ocean earthquake was unusually massive';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'unusually',
+        ],
+        groupType: 'verb',
+        object: [
+          'massive',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            prenumber: 2004,
+            words: [
+              'Indian',
+              'Ocean',
+              'earthquake',
+            ],
+          },
+        ],
+        verb: 'was',
       },
     ]]);
   });
