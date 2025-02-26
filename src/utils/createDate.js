@@ -3,7 +3,7 @@ const _ = require('lodash');
 const createDate = {
   by: (object, now) => {
     const minYear = now.getFullYear();
-    const maxYear = object.value || object.year;
+    const maxYear = object.value || object.year || object.maxYear;
 
     return {
       groupType: 'date',

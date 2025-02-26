@@ -5414,4 +5414,37 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "strictly speaking", "by the early", "in fact"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Strictly speaking, by the early 18th century, France was, in fact, a major colonial power in America';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'major',
+              'colonial',
+              'power',
+            ],
+          },
+        ],
+        subject: [
+          'France',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1750,
+        },
+        where: 'America',
+      },
+    ]]);
+  });
 });
