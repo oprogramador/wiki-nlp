@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const omitUndefined = require('../utils/omitUndefined');
 const { withoutLastOne } = require('../utils/listUtils');
 
 const convertBce = phrase => phrase.reduce(
@@ -19,14 +20,14 @@ const convertBce = phrase => phrase.reduce(
 
       return [
         ...withoutLastOne(accumulator),
-        {
+        omitUndefined({
           ...last,
           max: -last.max,
           maxYear: -last.minYear + offset,
           min: -last.min,
           minYear: -last.maxYear + offset,
           value: -last.value,
-        },
+        }),
       ];
     }
 

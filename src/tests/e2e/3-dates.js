@@ -5447,4 +5447,55 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a year with BCE', () => {
+    const words = 'In 321 BCE, the Roman Senate passed the law about the peasants';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'peasants',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'law',
+                ],
+              },
+            ],
+            verb: 'about',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Roman',
+              'Senate',
+            ],
+          },
+        ],
+        verb: 'passed',
+        when: {
+          groupType: 'date',
+          year: -321,
+        },
+      },
+    ]]);
+  });
 });
