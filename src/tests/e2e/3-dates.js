@@ -5498,4 +5498,69 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "much of" & "and then the next year"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Much of the theatre in Syracuse was devastated by a fire in 355 BC, and then the next year the damage was fixed by Greeks';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'share',
+              item: {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'theatre',
+                ],
+              },
+              min: 0.2,
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'fire',
+              ],
+            },
+          ],
+          verb: 'devastate',
+          when: {
+            groupType: 'date',
+            year: -355,
+          },
+          where: 'Syracuse',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'damage',
+              ],
+            },
+          ],
+          subject: [
+            'Greeks',
+          ],
+          verb: 'fix',
+          when: {
+            groupType: 'date',
+            year: -354,
+          },
+        },
+      ],
+    ]);
+  });
 });
