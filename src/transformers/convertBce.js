@@ -27,6 +27,7 @@ const convertBce = phrase => phrase.reduce(
           min: -last.min,
           minYear: -last.maxYear + offset,
           value: -last.value,
+          year: -last.year,
         }),
       ];
     }

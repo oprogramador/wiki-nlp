@@ -5563,4 +5563,33 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts month with year BCE', () => {
+    const words = 'The kings met in May 209 BCE in Alexandria';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'kings',
+            ],
+          },
+        ],
+        verb: 'met',
+        when: {
+          groupType: 'date',
+          month: 5,
+          year: -209,
+        },
+        where: 'Alexandria',
+      },
+    ]]);
+  });
 });
