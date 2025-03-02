@@ -1,4 +1,5 @@
 const excluded = [
+  'ally',
   'family',
 ];
 

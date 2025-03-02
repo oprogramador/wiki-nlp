@@ -5592,4 +5592,59 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a third", "a quarter of a million", "AD"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'A third of the army with their best ally have conquered as much as a quarter of a million square kilometers by 95 AD';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'conquered',
+          {
+            groupType: 'unit',
+            unit: 'm2',
+            value: 25e10,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'their',
+                  'best',
+                  'ally',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'the',
+                    'army',
+                  ],
+                },
+                value: 0.3333333333333333,
+              },
+            ],
+            verb: 'with',
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 95,
+        },
+      },
+    ]]);
+  });
 });
