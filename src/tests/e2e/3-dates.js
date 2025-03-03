@@ -5647,4 +5647,32 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a few" & "date back"', () => {
+    const words = 'A few churches in Spain date back to the early 4th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'churches',
+            max: 99,
+            min: 3,
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          maxYear: 350,
+          minYear: 301,
+        },
+        where: 'Spain',
+      },
+    ]]);
+  });
 });
