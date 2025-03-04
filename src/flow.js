@@ -61,10 +61,12 @@ const includeCause = require('./transformers/includeCause');
 const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
 const includeLocalities = require('./transformers/includeLocalities');
+const includeLocalityFromAnd = require('./transformers/includeLocalityFromAnd');
 const includeRelativeDates = require('./transformers/includeRelativeDates');
 const includeResult = require('./transformers/includeResult');
 const includeSimpleLocalities = require('./transformers/includeSimpleLocalities');
 const includeSimpleLocalitiesAtBegin = require('./transformers/includeSimpleLocalitiesAtBegin');
+const includeSubjectFromLocality = require('./transformers/includeSubjectFromLocality');
 const includeTimes = require('./transformers/includeTimes');
 const itemize = require('./transformers/itemize');
 const joinPhrases = require('./transformers/joinPhrases');
@@ -84,6 +86,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertSynonyms({ createMap: () => [{ from: ['when'], to: [';', 'at', 'the', 'same', 'time'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'while'], to: [';'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'and', 'then'], to: [';'] }] })),
+    p => p.map(convertSynonyms({ createMap: () => [{ from: [',', ';'], to: [';'] }] })),
     p => p.map(pp => splitBySemicolon(pp)).flat(),
     joinPhrases,
     p => p.map(removeMeaningless),
@@ -157,6 +160,8 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeResult),
     p => p.map(includeCause),
     p => p.map(includeLocalities),
+    p => p.map(includeLocalityFromAnd),
+    p => p.map(includeSubjectFromLocality),
     p => p.map(includeSimpleLocalities),
     p => p.map(includeSimpleLocalitiesAtBegin),
     p => p.map(includeTimes),

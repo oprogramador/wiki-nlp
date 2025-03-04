@@ -5675,4 +5675,101 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a subject after a simple locality and converts ", when"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In Europe, Germany declared a war in 1914, when Austria-Hungary also declared a war';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'war',
+              ],
+            },
+          ],
+          subject: [
+            'Germany',
+          ],
+          verb: 'declared',
+          when: {
+            groupType: 'date',
+            year: 1914,
+          },
+          where: 'Europe',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'war',
+              ],
+            },
+          ],
+          subject: [
+            'Austria-Hungary',
+          ],
+          verb: 'declared',
+          when: {
+            groupType: 'date',
+            year: 1914,
+          },
+        },
+      ],
+    ]);
+  });
+
+  it('finds a subject with AND after a simple locality', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In Europe, the Soviet Union, Germany and Italy were becoming more threatening in the early 20th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'becoming',
+              'more',
+              'threatening',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Soviet',
+              'Union',
+            ],
+          },
+          'Germany',
+          'Italy',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
+        },
+        where: 'Europe',
+      },
+    ]]);
+  });
 });
