@@ -5772,4 +5772,87 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts day, month with no year, verb with no object', () => {
+    const words = 'On 31 May, the leaders met';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'leaders',
+            ],
+          },
+        ],
+        verb: 'met',
+        when: {
+          day: 31,
+          groupType: 'date',
+          month: 5,
+        },
+      },
+    ]]);
+  });
+
+  it('converts verb with no object, ", and" & a verb', () => {
+    const words = 'On 31 May, the leaders met, and made a decent agreement';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'leaders',
+              ],
+            },
+          ],
+          verb: 'met',
+          when: {
+            day: 31,
+            groupType: 'date',
+            month: 5,
+          },
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            {
+              groupType: 'article',
+              words: [
+                'a',
+                'decent',
+                'agreement',
+              ],
+            },
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'leaders',
+              ],
+            },
+          ],
+          verb: 'made',
+        },
+      ],
+    ]);
+  });
 });

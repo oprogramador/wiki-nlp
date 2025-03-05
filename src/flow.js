@@ -78,6 +78,7 @@ const splitAndIt = require('./transformers/splitAndIt');
 const splitAndWithPast = require('./transformers/splitAndWithPast');
 const splitBut = require('./transformers/splitBut');
 const splitBySemicolon = require('./transformers/splitBySemicolon');
+const splitVerbFromArticle = require('./transformers/splitVerbFromArticle');
 const splitWhich = require('./transformers/splitWhich');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
@@ -109,6 +110,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(moveAdverbs),
     p => p.map(convertMid),
     p => p.map(groupArticles),
+    p => p.map(splitVerbFromArticle),
     p => p.map(convertSelf),
     p => p.map(convertArticlesToLowerCase),
     p => p.map(addArticleToDecade),
