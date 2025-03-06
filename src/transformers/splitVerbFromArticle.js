@@ -6,8 +6,8 @@ const irregularVerbsPast = irregularVerbsList.map(item => item.past);
 
 const splitVerbFromArticle = phrase => phrase.reduce(
   (accumulator, current) => {
-    const last = _.last(current.words);
-    if (irregularVerbsPast.includes(last)) {
+    const last = _.last(current.words) || '';
+    if (irregularVerbsPast.includes(last) || /ed$/.test(last)) {
       return [
         ...accumulator,
         {

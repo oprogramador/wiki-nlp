@@ -5855,4 +5855,46 @@ describe('dates (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts AND subject with a past regular verb', () => {
+    const words = 'In 1930, nationalists and communists started a war in East Asia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'war',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'nationalists',
+              'communists',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          year: 1930,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'East',
+            'Asia',
+          ],
+        },
+      },
+    ]]);
+  });
 });
