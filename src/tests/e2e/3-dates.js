@@ -5752,15 +5752,20 @@ describe('dates (e2e)', () => {
         ],
         subject: [
           {
-            groupType: 'article',
-            words: [
-              'the',
-              'Soviet',
-              'Union',
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'Soviet',
+                  'Union',
+                ],
+              },
+              'Germany',
+              'Italy',
             ],
           },
-          'Germany',
-          'Italy',
         ],
         verb: 'were',
         when: {
@@ -5894,6 +5899,43 @@ describe('dates (e2e)', () => {
             'Asia',
           ],
         },
+      },
+    ]]);
+  });
+
+  it('converts locality, AND subject with a past regular verb, and a date', () => {
+    const words = 'In Asia, nationalists and communists started a war in the 1930s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'war',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'nationalists',
+              'communists',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          maxYear: 1939,
+          minYear: 1930,
+        },
+        where: 'Asia',
       },
     ]]);
   });

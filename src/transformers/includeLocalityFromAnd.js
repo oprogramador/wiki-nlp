@@ -13,7 +13,10 @@ const includeLocalityFromAnd = phrase => phrase.map((p) => {
     if (isUpperCase(where)) {
       return {
         ...p,
-        subject: withoutFirstOne(subject[1].members),
+        subject: [{
+          ...subject[1],
+          members: withoutFirstOne(subject[1].members),
+        }],
         where,
       };
     }
