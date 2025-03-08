@@ -61,6 +61,37 @@ describe('times (e2e)', () => {
     ]]);
   });
 
+  it('converts "twice a year"', () => {
+    const words = 'The meeting is held twice a year in Paris';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'months',
+          value: 6,
+        },
+        groupType: 'verb',
+        object: [
+          'held',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'meeting',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: 'Paris',
+      },
+    ]]);
+  });
+
   it('converts "thrice"', () => {
     const words = 'Their constitution was amended thrice';
 
