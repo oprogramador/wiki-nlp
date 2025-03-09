@@ -1253,22 +1253,7 @@ describe('dates (e2e)', () => {
         adverbs: ['strongly'],
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'and',
-                members: [
-                  'Africa',
-                  'Oceania',
-                ],
-              },
-            ],
-            subject: [
-              'decolonisation',
-            ],
-            verb: 'in',
-          },
+          'decolonisation',
         ],
         subject: [
           'Pakistan',
@@ -1278,6 +1263,13 @@ describe('dates (e2e)', () => {
           groupType: 'date',
           maxYear: 1959,
           minYear: 1950,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Africa',
+            'Oceania',
+          ],
         },
       },
     ]]);
@@ -1293,22 +1285,7 @@ describe('dates (e2e)', () => {
         adverbs: ['strongly'],
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'and',
-                members: [
-                  'Africa',
-                  'Oceania',
-                ],
-              },
-            ],
-            subject: [
-              'decolonisation',
-            ],
-            verb: 'in',
-          },
+          'decolonisation',
         ],
         subject: [
           'Pakistan',
@@ -1318,6 +1295,13 @@ describe('dates (e2e)', () => {
           groupType: 'date',
           maxYear: 1959,
           minYear: 1950,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Africa',
+            'Oceania',
+          ],
         },
       },
     ]]);

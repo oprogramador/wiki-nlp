@@ -798,28 +798,20 @@ describe('articles & verbs (e2e)', () => {
       {
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'and',
-                members: [
-                  'France',
-                  'Spain',
-                  'Portugal',
-                ],
-              },
-            ],
-            subject: [
-              'living',
-            ],
-            verb: 'in',
-          },
+          'living',
         ],
         subject: [
           'They',
         ],
         verb: 'were',
+        where: {
+          groupType: 'and',
+          members: [
+            'France',
+            'Spain',
+            'Portugal',
+          ],
+        },
       },
     ]]);
   });
@@ -2117,27 +2109,19 @@ describe('articles & verbs (e2e)', () => {
         adverbs: ['strongly'],
         groupType: 'verb',
         object: [
-          {
-            groupType: 'preposition',
-            object: [
-              {
-                groupType: 'and',
-                members: [
-                  'Africa',
-                  'Oceania',
-                ],
-              },
-            ],
-            subject: [
-              'decolonisation',
-            ],
-            verb: 'in',
-          },
+          'decolonisation',
         ],
         subject: [
           'Pakistan',
         ],
         verb: 'supported',
+        where: {
+          groupType: 'and',
+          members: [
+            'Africa',
+            'Oceania',
+          ],
+        },
       },
     ]]);
   });

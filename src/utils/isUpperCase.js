@@ -8,6 +8,11 @@ const isUpperCase = (item) => {
       .filter(word => word !== 'the')
       .every(isUpperCase);
   }
+  if (item.members) {
+    return item
+      .members
+      .every(isUpperCase);
+  }
   if (!item.charAt) {
     return false;
   }
