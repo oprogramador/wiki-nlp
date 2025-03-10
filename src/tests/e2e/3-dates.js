@@ -5923,4 +5923,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('does not convert "between [...] and" with no numbers', () => {
+    const words = 'In July 1870, a conflict started between Prussia & the French Empire';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'between',
+          {
+            groupType: 'and',
+            members: [
+              'Prussia',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'French',
+                  'Empire',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'conflict',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          month: 7,
+          year: 1870,
+        },
+      },
+    ]]);
+  });
 });

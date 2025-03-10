@@ -17,6 +17,8 @@ const convertBetween = phrase => phrase
       toLowerCase(beforeBeforeBeforeLast) === 'between'
       && beforeLast === ','
       && last === 'and'
+      && !Number.isNaN(Number(beforeBeforeLast))
+      && !Number.isNaN(Number(current))
     ) {
       return [
         ...withoutLast(accumulator, 4),
