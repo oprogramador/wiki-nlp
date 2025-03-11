@@ -5967,4 +5967,77 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "southern" & "northern" from lowercase', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Many Turkish immigrants were living in southern Germany in 2010 but they settled in northern Germany the next year';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'living',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Turkish',
+                'immigrants',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Southern',
+            'Germany',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Turkish',
+                'immigrants',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'settled',
+        when: {
+          groupType: 'date',
+          year: 2011,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Northern',
+            'Germany',
+          ],
+        },
+      },
+    ],
+    ]);
+  });
 });
