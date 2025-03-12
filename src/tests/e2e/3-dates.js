@@ -6040,4 +6040,61 @@ describe('dates (e2e)', () => {
     ],
     ]);
   });
+
+  it('converts "two-thirds" & "a quarter"', () => {
+    const words = 'The United States produced two-thirds of all munitions and a quarter of all gas in the 1940s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'all',
+                    'munitions',
+                  ],
+                },
+                value: 0.6666666666666666,
+              },
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'all',
+                    'gas',
+                  ],
+                },
+                value: 0.25,
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'United',
+              'States',
+            ],
+          },
+        ],
+        verb: 'produced',
+        when: {
+          groupType: 'date',
+          maxYear: 1949,
+          minYear: 1940,
+        },
+      },
+    ]]);
+  });
 });

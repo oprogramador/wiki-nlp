@@ -36,6 +36,7 @@ const objectGroupTypes = [
   'currency',
   'outOf',
   'quantity',
+  'share',
   'unit',
 ];
 
