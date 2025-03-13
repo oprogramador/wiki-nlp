@@ -6097,4 +6097,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "commonly known as" & "on the night of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The German Democratic Republic (commonly known as East Germany) was created by Soviets on the night of 6–7 October 1949';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'East',
+                  'Germany',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'the',
+              'German',
+              'Democratic',
+              'Republic',
+            ],
+          },
+        ],
+        subject: [
+          'Soviets',
+        ],
+        verb: 'create',
+        when: {
+          groupType: 'date',
+          maxDay: 7,
+          minDay: 6,
+          month: 10,
+          year: 1949,
+        },
+      },
+    ]]);
+  });
 });
