@@ -66,6 +66,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['but'], to: [',', 'but'] },
+  { from: ['by', 'the', 'start', 'of'], to: ['#by-the-start-of'] },
   { from: ['commonly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['date', 'back', 'to'], to: ['started', 'in'] },
   { from: ['dates', 'back', 'to'], to: ['started', 'in'] },

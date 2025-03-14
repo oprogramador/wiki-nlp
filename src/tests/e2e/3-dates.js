@@ -6141,4 +6141,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "by the start of"', () => {
+    const words = 'By the start of the 12th century, the castle in Edinburgh was built';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'built',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'castle',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1101,
+        },
+        where: 'Edinburgh',
+      },
+    ]]);
+  });
 });
