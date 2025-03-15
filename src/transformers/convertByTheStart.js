@@ -6,14 +6,15 @@ const convertByTheStart = phrase => phrase
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
 
-    if (last === '#by-the-start-of' && _.get(current, 'groupType') === 'date') {
+    if (last === '#by-the-start-of' && ['date', 'quantity'].includes(_.get(current, 'groupType'))) {
       return [
         ...withoutLastOne(accumulator),
         'in',
         omitUndefined({
           ...current,
-          maxYear: current.minYear,
+          maxYear: current.minYear || current.value,
           minYear: undefined,
+          value: undefined,
         }),
       ];
     }

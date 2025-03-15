@@ -6142,7 +6142,7 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it('converts "by the start of"', () => {
+  it('converts "by the start of" with a century', () => {
     const words = 'By the start of the 12th century, the castle in Edinburgh was built';
 
     const result = flow(splitText(words));
@@ -6168,6 +6168,41 @@ describe('dates (e2e)', () => {
           maxYear: 1101,
         },
         where: 'Edinburgh',
+      },
+    ]]);
+  });
+
+  it('converts "by the start of" with a year', () => {
+    const words = 'The company had been created by great funders by the start of 2010';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'company',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'great',
+              'funders',
+            ],
+          },
+        ],
+        verb: 'create',
+        when: {
+          groupType: 'date',
+          maxYear: 2010,
+        },
       },
     ]]);
   });
