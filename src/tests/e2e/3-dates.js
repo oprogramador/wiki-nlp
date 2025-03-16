@@ -6206,4 +6206,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "by the start of" with a month followed by AND', () => {
+    const words = 'By the start of May 1904, UK and France signed the Entente Cordiale';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Entente',
+              'Cordiale',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'UK',
+              'France',
+            ],
+          },
+        ],
+        verb: 'signed',
+        when: {
+          groupType: 'date',
+          maxMonth: 5,
+          maxYear: 1904,
+        },
+      },
+    ]]);
+  });
 });

@@ -20,7 +20,7 @@ const createDate = {
   }),
   in: object => ({
     groupType: 'date',
-    ..._.pick(object, 'maxYear', 'minYear', 'minMonth', 'minDay', 'month', 'year', 'isExact'),
+    ..._.pick(object, 'maxYear', 'minYear', 'maxMonth', 'minMonth', 'maxDay', 'minDay', 'month', 'year', 'isExact'),
     ...(object.value ? { year: object.value } : {}),
   }),
   on: object => ({
