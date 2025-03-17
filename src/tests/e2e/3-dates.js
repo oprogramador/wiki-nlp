@@ -6243,4 +6243,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "commencing on" at the end', () => {
+    const words = 'She did her service in the South Atlantic commencing on 1920';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'her',
+              'service',
+            ],
+          },
+        ],
+        subject: [
+          'She',
+        ],
+        verb: 'did',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 1920,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'South',
+            'Atlantic',
+          ],
+        },
+      },
+    ]]);
+  });
 });
