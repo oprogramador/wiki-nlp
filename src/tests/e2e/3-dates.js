@@ -6281,4 +6281,63 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "early" & "late" with a year', () => {
+    const words = 'Nationalist forces launched an offensive in late 1930, and then they stopped in early 1931';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'offensive',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Nationalist',
+              'forces',
+            ],
+          },
+        ],
+        verb: 'launched',
+        when: {
+          groupType: 'date',
+          maxMonth: 12,
+          minMonth: 7,
+          year: 1930,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Nationalist',
+              'forces',
+            ],
+          },
+        ],
+        verb: 'stopped',
+        when: {
+          groupType: 'date',
+          maxMonth: 6,
+          minMonth: 1,
+          year: 1931,
+        },
+      },
+    ]]);
+  });
 });

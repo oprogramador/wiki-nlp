@@ -32,6 +32,7 @@ const convertNumbers = require('./transformers/convertNumbers');
 const convertOrMore = require('./transformers/convertOrMore');
 const convertOrdinals = require('./transformers/convertOrdinals');
 const convertOutOf = require('./transformers/convertOutOf');
+const convertPartialYear = require('./transformers/convertPartialYear');
 const convertPassive = require('./transformers/convertPassive');
 const convertPercent = require('./transformers/convertPercent');
 const convertPreAdverbs = require('./transformers/convertPreAdverbs');
@@ -118,6 +119,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertDecades),
     p => p.map(convertCenturies),
     p => p.map(convertManyCenturies),
+    p => p.map(convertPartialYear),
     p => p.map(convertBce),
     p => p.map(groupBrackets),
     p => p.map(convertFromTo),
