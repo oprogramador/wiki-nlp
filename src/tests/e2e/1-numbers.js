@@ -3613,4 +3613,36 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "knows as" after a number', () => {
+    const words = 'Hundreds of volunteers, known as angels, also provided an assistance';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'assistance',
+            ],
+          },
+        ],
+        subject: [
+          {
+            alternativeNames: [
+              'angels',
+            ],
+            groupType: 'quantity',
+            item: 'volunteers',
+            min: 100,
+          },
+        ],
+        verb: 'provided',
+      },
+    ]]);
+  });
 });
