@@ -3614,7 +3614,7 @@ describe('numbers (e2e)', () => {
     ]]);
   });
 
-  it('converts "knows as" after a number', () => {
+  it('converts "known as" after a number', () => {
     const words = 'Hundreds of volunteers, known as angels, also provided an assistance';
 
     const result = flow(splitText(words));

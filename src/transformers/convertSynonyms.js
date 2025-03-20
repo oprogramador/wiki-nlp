@@ -135,6 +135,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['now'], to: convertNow(now) },
   { from: ['nowadays'], to: convertNow(now) },
   { from: ['on', 'average'], to: ['typically'] },
+  { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['on', 'the', 'night', 'of'], to: ['on'] },
   { from: ['on', 'the', 'other', 'hand', ','], to: [] },
   { from: ['on', 'the', 'other', 'hand'], to: [] },
