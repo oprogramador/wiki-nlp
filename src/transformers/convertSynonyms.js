@@ -54,6 +54,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['and', 'is'], to: ['and', 'it', 'is'] },
   { from: ['and', 'was'], to: ['and', 'it', 'was'] },
   { from: ['and', 'were'], to: ['and', 'they', 'were'] },
+  { from: ['approximately', 'in'], to: ['in', 'approximately'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['as', 'much', 'as'], to: [] },
   { from: ['as', 'of'], to: ['in'] },

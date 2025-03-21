@@ -6340,4 +6340,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts dates with "approximately" in any order', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Lithuania was first settled approximately in 13000 BC but Latvia was first settled in approximately 12000 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'first',
+          'settled',
+        ],
+        subject: [
+          'Lithuania',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -13000,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'first',
+          'settled',
+        ],
+        subject: [
+          'Latvia',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -12000,
+        },
+      },
+    ]]);
+  });
 });
