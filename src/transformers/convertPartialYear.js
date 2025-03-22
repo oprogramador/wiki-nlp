@@ -1,28 +1,27 @@
 const _ = require('lodash');
 const { withoutLastOne } = require('../utils/listUtils');
 
+const map = {
+  early: {
+    maxMonth: 6,
+    minMonth: 1,
+  },
+  late: {
+    maxMonth: 12,
+    minMonth: 7,
+  },
+};
+
 const convertPartialYear = phrase => phrase.reduce(
   (accumulator, current) => {
     const last = _.last(accumulator);
 
-    if (last === 'early' && _.get(current, 'groupType') === 'quantity') {
+    if (map[last] && _.get(current, 'groupType') === 'quantity') {
       return [
         ...withoutLastOne(accumulator),
         {
+          ...map[last],
           groupType: 'date',
-          maxMonth: 6,
-          minMonth: 1,
-          year: current.value,
-        },
-      ];
-    }
-    if (last === 'late' && _.get(current, 'groupType') === 'quantity') {
-      return [
-        ...withoutLastOne(accumulator),
-        {
-          groupType: 'date',
-          maxMonth: 12,
-          minMonth: 7,
           year: current.value,
         },
       ];
