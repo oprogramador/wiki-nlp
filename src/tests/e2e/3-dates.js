@@ -6384,4 +6384,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "over the course of many centuries"', () => {
+    const words = 'The pyramids in Egypt were built over the course of many centuries';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'built',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'pyramids',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1726,
+        },
+        where: 'Egypt',
+      },
+    ]]);
+  });
 });
