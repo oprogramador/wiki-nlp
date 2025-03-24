@@ -3645,4 +3645,38 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a pre-numbered item with mixed case', () => {
+    const words = 'The 2010 Glasgow summit was a great event in Scotland';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'great',
+              'event',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            prenumber: 2010,
+            words: [
+              'Glasgow',
+              'summit',
+            ],
+          },
+        ],
+        verb: 'was',
+        where: 'Scotland',
+      },
+    ]]);
+  });
 });
