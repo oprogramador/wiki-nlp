@@ -35,6 +35,11 @@ const createDate = {
     ...(object.day ? { maxDay: now.getDate(), minDay: object.day } : { }),
     ..._.pick(object, 'isExact'),
   }),
+  undefined: object => ({
+    groupType: 'date',
+    ..._.pick(object, 'isExact'),
+    ...(object.value ? { year: object.value } : {}),
+  }),
 };
 
 module.exports = createDate;

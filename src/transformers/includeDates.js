@@ -5,7 +5,7 @@ const createDate = require('../utils/createDate');
 
 const match = list => (word, index) => ['quantity', 'date'].includes(_.get(word, 'groupType'))
   && (!word.item || _.get(word, 'item.words.0') === 'these' || word.groupType === 'and')
-  && Object.keys(createDate).includes(toLowerCase(list[index - 1]));
+  && (word.isExact === false || Object.keys(createDate).includes(toLowerCase(list[index - 1])));
 
 const convertSubject = ({ foundInSubject, foundInSubjectIndex, subject }) => {
   const isCommaInSubject = subject[foundInSubjectIndex + 1] === ',';

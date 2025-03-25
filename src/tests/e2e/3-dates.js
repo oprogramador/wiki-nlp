@@ -6414,4 +6414,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a date with "around", and no preposition before', () => {
+    const words = 'The Romans won quickly around 123 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'quickly',
+        ],
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Romans',
+            ],
+          },
+        ],
+        verb: 'won',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -123,
+        },
+      },
+    ]]);
+  });
 });
