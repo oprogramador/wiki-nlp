@@ -36,14 +36,16 @@ const includeDates = ({ now } = {}) => (phrase) => {
     return phrase;
   }
   const preposition = toLowerCase(foundInObject ? object[foundInObjectIndex - 1] : subject[foundInSubjectIndex - 1]);
-  const when = createDate[preposition](foundInObject || foundInSubject, now);
+  const when = (createDate[preposition] || createDate.undefined)(foundInObject || foundInSubject, now);
   if (Object.keys(when).length < 2) {
     return phrase;
   }
 
   return [{
     ...phrase[0],
-    object: foundInObject ? withoutRange(object, foundInObjectIndex - 1, foundInObjectIndex) : object,
+    object: foundInObject
+      ? withoutRange(object, foundInObjectIndex - (createDate[preposition] ? 1 : 2), foundInObjectIndex)
+      : object,
     subject: convertSubject({ foundInSubject, foundInSubjectIndex, subject }),
     when,
   }];

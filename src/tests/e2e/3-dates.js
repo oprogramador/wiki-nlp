@@ -6445,4 +6445,40 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an object, a date with "around" but no preposition', () => {
+    const words = 'The Romans won a battle around 123 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'battle',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Romans',
+            ],
+          },
+        ],
+        verb: 'won',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -123,
+        },
+      },
+    ]]);
+  });
 });
