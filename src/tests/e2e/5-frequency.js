@@ -168,4 +168,41 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts an abbreviation with dots', () => {
+    const words = 'The U.S. ambassador is appointed by the president every 2 years';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'years',
+          value: 2,
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'U.S.',
+              'ambassador',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'president',
+            ],
+          },
+        ],
+        verb: 'appoint',
+      },
+    ]]);
+  });
 });

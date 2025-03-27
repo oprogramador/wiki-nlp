@@ -41,7 +41,11 @@ const convertOrdinals = phrase => phrase
       ];
     }
 
-    if (_.get(current, 'groupType') === 'article' && _.get(current, 'words.0') === 'the') {
+    if (
+      _.get(current, 'groupType') === 'article'
+      && _.get(current, 'words.0') === 'the'
+      && typeof _.get(current, 'words.1') === 'string'
+    ) {
       const position = _.get(current, 'words.1', '').endsWith(postfix) ? 2 : 1;
       const multiWord = _.get(current, `words.${position}`, '');
       const split = multiWord.split('-');
