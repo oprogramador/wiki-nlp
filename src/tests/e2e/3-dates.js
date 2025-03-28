@@ -6481,4 +6481,37 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('does not break for "and from"', () => {
+    const words = 'The state appeared and from 1870';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'article',
+        words: [
+          'the',
+          'state',
+        ],
+      },
+      {
+        groupType: 'and',
+        members: [
+          'appeared',
+          {
+            groupType: 'article',
+          },
+        ],
+      },
+      {
+        currentPlace: 'from',
+        from: {
+          groupType: 'quantity',
+          value: 1870,
+        },
+        groupType: 'change',
+      },
+    ]]);
+  });
 });

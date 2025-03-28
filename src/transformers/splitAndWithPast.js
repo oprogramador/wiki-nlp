@@ -28,7 +28,7 @@ const splitAndWithPast = phrase => phrase
       _.get(current, 'groupType') === 'and'
       && current.members.length === 2
       && _.get(current.members[1], 'groupType') === 'article'
-      && irregularVerbsPast.includes(current.members[1].words[0])
+      && irregularVerbsPast.includes(_.get(current, 'members.1.words.0'))
     ) {
       return [
         ...withoutLastOne(accumulator),
