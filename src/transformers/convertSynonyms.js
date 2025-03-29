@@ -124,6 +124,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['many', 'trillions', 'of'], to: ['above', 'one', 'trillion'] },
   { from: ['meanwhile', ','], to: [] },
   { from: ['mid', 'to', 'late'], to: ['mid-to-late'] },
+  { from: ['million', 'years', 'ago', '(', 'mya', ')'], to: ['million', 'years', 'ago'] },
   { from: ['millions', 'of'], to: ['above', 'one', 'million'] },
   { from: ['more', 'than'], to: ['above'] },
   { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },

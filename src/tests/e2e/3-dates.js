@@ -6514,4 +6514,26 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('skips "Mya" in a bracket', () => {
+    const words = 'Liaoceratops lived some 125 million years ago (Mya)';
+
+    const result = flow(splitText(words), { now: new Date('2000-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'Liaoceratops',
+        ],
+        verb: 'lived',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -124998000,
+        },
+      },
+    ]]);
+  });
 });
