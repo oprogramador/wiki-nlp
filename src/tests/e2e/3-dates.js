@@ -5633,7 +5633,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "a few" & "date back"', () => {
-    const words = 'A few churches in Spain date back to the early 4th century';
+    const words = 'A few churches in Spain date back to the early 4th century CE';
 
     const result = flow(splitText(words));
 
