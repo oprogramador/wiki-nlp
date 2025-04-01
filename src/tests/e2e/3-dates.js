@@ -6536,4 +6536,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "are thought to have"', () => {
+    const words = 'The islands are thought to have been colonized by Greeks by the 7th century BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'islands',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          'Greeks',
+        ],
+        verb: 'colonize',
+        when: {
+          groupType: 'date',
+          maxYear: -601,
+        },
+      },
+    ]]);
+  });
 });
