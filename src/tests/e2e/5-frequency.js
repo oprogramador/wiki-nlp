@@ -205,4 +205,57 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "annually" & "triannually"', () => {
+    const words = 'The presidents will meet annually but the secretaries will meet triannually';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'years',
+          value: 1,
+        },
+        groupType: 'verb',
+        object: [
+          'meet',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'presidents',
+            ],
+          },
+        ],
+        verb: 'will',
+      },
+    ],
+    [
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'months',
+          value: 4,
+        },
+        groupType: 'verb',
+        object: [
+          'meet',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'secretaries',
+            ],
+          },
+        ],
+        verb: 'will',
+      },
+    ]]);
+  });
 });
