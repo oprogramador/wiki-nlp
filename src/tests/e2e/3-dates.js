@@ -6566,4 +6566,39 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "more recently" & "appears to have been"', () => {
+    const words = 'More recently, the museum in Boston appears to have been renewed nicely';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'nicely',
+        ],
+        groupType: 'verb',
+        object: [
+          'renewed',
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'museum',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: 2021,
+        },
+        where: 'Boston',
+      },
+    ]]);
+  });
 });
