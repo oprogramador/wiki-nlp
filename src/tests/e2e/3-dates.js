@@ -6601,4 +6601,36 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "perhaps"', () => {
+    const words = 'Munich is perhaps the richest city in Germany as of 2010';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'richest',
+              'city',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          'Munich',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+        where: 'Germany',
+      },
+    ]]);
+  });
 });
