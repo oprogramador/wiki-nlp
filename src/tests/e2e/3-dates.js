@@ -6633,4 +6633,13 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts AND with uppercase, no prepositions', () => {
+    const words = 'They met Adam & Bob';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
