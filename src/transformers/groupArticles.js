@@ -47,6 +47,14 @@ const groupArticles = phrase => phrase.reduce(
     const beforeLast = getBeforeLast(accumulator);
 
     if (
+      pronouns.includes(toLowerCase(beforeLast))
+      && irregularVerbsPast.includes(last)
+      && isUpperCase(current)
+    ) {
+      return [...accumulator, { groupType: 'article', words: [current] }];
+    }
+
+    if (
       beforeBeforeLast.groupType === 'article'
         && beforeLast === '('
         && isUpperCase(last)
