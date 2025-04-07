@@ -42,6 +42,7 @@ const convertPronouns = require('./transformers/convertPronouns');
 const convertPunctuation = require('./transformers/convertPunctuation');
 const convertRespectively = require('./transformers/convertRespectively');
 const convertSelf = require('./transformers/convertSelf');
+const convertSubjectWithAlterName = require('./transformers/convertSubjectWithAlterName');
 const convertSynonyms = require('./transformers/convertSynonyms');
 const findPastVerb = require('./transformers/findPastVerb');
 const flatArticles = require('./transformers/flatArticles');
@@ -171,6 +172,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeSimpleLocalities),
     p => p.map(includeSimpleLocalitiesAtBegin),
     p => p.map(includeTimes),
+    p => p.map(convertSubjectWithAlterName),
     p => p.map(includeDates({ now })),
     p => p.map(includeDatesFromAnd({ now })),
     p => p.map(groupPrepositions),
