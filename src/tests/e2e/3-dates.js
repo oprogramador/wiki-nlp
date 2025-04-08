@@ -6658,4 +6658,43 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an alternative name, at the end, with a comma', () => {
+    const words = 'They visited Mount Etna, an active stratovolcano in 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'an',
+                  'active',
+                  'stratovolcano',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'Mount',
+              'Etna',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'visited',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+      },
+    ]]);
+  });
 });
