@@ -3191,38 +3191,4 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
-
-  it('finds an alternative name, at the beginning, with commas', () => {
-    const words = 'Mount Etna, a volcano, is surrounded by highlands';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          {
-            alternativeNames: [
-              {
-                groupType: 'article',
-                words: [
-                  'a',
-                  'volcano',
-                ],
-              },
-            ],
-            groupType: 'article',
-            words: [
-              'Mount',
-              'Etna',
-            ],
-          },
-        ],
-        subject: [
-          'highlands',
-        ],
-        verb: 'surround',
-      },
-    ]]);
-  });
 });

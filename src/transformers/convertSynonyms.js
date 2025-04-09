@@ -137,6 +137,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'total', ',', 'there', 'are'], to: ['there', 'are'] },
   { from: ['in', 'total', 'there', 'are'], to: ['there', 'are'] },
   { from: ['including', ':'], to: ['including'] },
+  { from: ['is', 'believed', 'to', 'be'], to: ['likely', 'is'] },
   { from: ['is', 'known', 'to', 'have', 'been'], to: ['was'] },
   { from: ['is', 'known', 'to', 'have'], to: ['have'] },
   { from: ['it', 'is', 'speculated', 'that'], to: ['likely'] },

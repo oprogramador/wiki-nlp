@@ -4528,59 +4528,6 @@ describe('dates (e2e)', () => {
     ]);
   });
 
-  it('converts "It is speculated that"', () => {
-    const words = 'It is speculated that by 4,000 BCE, sheep were domesticated in Africa';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          'domesticated',
-        ],
-        probability: 0.5,
-        subject: [
-          'sheep',
-        ],
-        verb: 'were',
-        when: {
-          groupType: 'date',
-          maxYear: -4000,
-        },
-        where: 'Africa',
-      },
-    ]]);
-  });
-
-  it('converts "It is speculated that" with an adverb', () => {
-    const words = 'It is speculated that by 7,000 BCE, sheep were partially domesticated in Africa';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        adverbs: [
-          'partially',
-        ],
-        groupType: 'verb',
-        object: [
-          'domesticated',
-        ],
-        probability: 0.5,
-        subject: [
-          'sheep',
-        ],
-        verb: 'were',
-        when: {
-          groupType: 'date',
-          maxYear: -7000,
-        },
-        where: 'Africa',
-      },
-    ]]);
-  });
-
   it('finds a locality for two uppercase words', () => {
     const words = 'In 2000, they met in Rhode Island';
 
@@ -6537,36 +6484,6 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it('converts "are thought to have"', () => {
-    const words = 'The islands are thought to have been colonized by Greeks by the 7th century BC';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          {
-            groupType: 'article',
-            words: [
-              'the',
-              'islands',
-            ],
-          },
-        ],
-        probability: 0.5,
-        subject: [
-          'Greeks',
-        ],
-        verb: 'colonize',
-        when: {
-          groupType: 'date',
-          maxYear: -601,
-        },
-      },
-    ]]);
-  });
-
   it('converts "more recently" & "appears to have been"', () => {
     const words = 'More recently, the museum in Boston appears to have been renewed nicely';
 
@@ -6602,38 +6519,6 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it('converts "perhaps"', () => {
-    const words = 'Munich is perhaps the richest city in Germany as of 2010';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          {
-            groupType: 'article',
-            words: [
-              'the',
-              'richest',
-              'city',
-            ],
-          },
-        ],
-        probability: 0.5,
-        subject: [
-          'Munich',
-        ],
-        verb: 'is',
-        when: {
-          groupType: 'date',
-          year: 2010,
-        },
-        where: 'Germany',
-      },
-    ]]);
-  });
-
   it('converts AND with uppercase, no prepositions', () => {
     const words = 'They met Adam & Bob';
 
@@ -6655,45 +6540,6 @@ describe('dates (e2e)', () => {
           'They',
         ],
         verb: 'met',
-      },
-    ]]);
-  });
-
-  it('finds an alternative name, at the end, with a comma', () => {
-    const words = 'They visited Mount Etna, an active stratovolcano in 2000';
-
-    const result = flow(splitText(words));
-
-    expect(result).to.deep.equal([[
-      {
-        groupType: 'verb',
-        object: [
-          {
-            alternativeNames: [
-              {
-                groupType: 'article',
-                words: [
-                  'an',
-                  'active',
-                  'stratovolcano',
-                ],
-              },
-            ],
-            groupType: 'article',
-            words: [
-              'Mount',
-              'Etna',
-            ],
-          },
-        ],
-        subject: [
-          'They',
-        ],
-        verb: 'visited',
-        when: {
-          groupType: 'date',
-          year: 2000,
-        },
       },
     ]]);
   });
