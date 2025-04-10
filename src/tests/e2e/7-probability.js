@@ -158,4 +158,43 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "it is believed that"', () => {
+    const words = 'It is believed that the Red Pyramid was built by King Sneferu in the mid 3rd millennium BC in Egypt';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Red',
+              'Pyramid',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'King',
+              'Sneferu',
+            ],
+          },
+        ],
+        verb: 'build',
+        when: {
+          groupType: 'date',
+          maxYear: -2251,
+          minYear: -2750,
+        },
+        where: 'Egypt',
+      },
+    ]]);
+  });
 });

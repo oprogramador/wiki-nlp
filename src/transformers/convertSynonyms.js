@@ -140,6 +140,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['is', 'believed', 'to', 'be'], to: ['likely', 'is'] },
   { from: ['is', 'known', 'to', 'have', 'been'], to: ['was'] },
   { from: ['is', 'known', 'to', 'have'], to: ['have'] },
+  { from: ['it', 'is', 'believed', 'that'], to: ['likely'] },
   { from: ['it', 'is', 'speculated', 'that'], to: ['likely'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
   { from: ['majority', 'of'], to: ['above', '50', '%', 'of'] },
