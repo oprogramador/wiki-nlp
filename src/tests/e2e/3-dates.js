@@ -5079,7 +5079,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "late [...] millennium BCE"', () => {
-    const words = 'Egypt was rich in the late 3rd millennium BCE';
+    const words = 'Egypt was rich in the late 3rd millennium B.C.E.';
 
     const result = flow(splitText(words));
 
