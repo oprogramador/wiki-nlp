@@ -86,6 +86,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['at', 'times'], to: ['occasionally'] },
   { from: ['b.c.e'], to: ['BCE'] },
   { from: ['bc'], to: ['BCE'] },
+  { from: ['because', 'of'], to: [',', 'due', 'to'] },
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['biannually'], to: ['every', '6', 'months'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },

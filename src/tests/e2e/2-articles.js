@@ -3191,4 +3191,49 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "because of"', () => {
+    const words = 'The history of Fiji is mostly vague because of poor written sources';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'mostly',
+        ],
+        cause: {
+          groupType: 'article',
+          words: [
+            'poor',
+            'written',
+            'sources',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          'vague',
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Fiji',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'history',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
