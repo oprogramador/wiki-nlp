@@ -92,6 +92,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['but'], to: [',', 'but'] },
   { from: ['by', 'the', 'start', 'of'], to: ['#by-the-start-of'] },
+  { from: ['c.'], to: ['around'] },
   { from: ['century', 'ce'], to: ['century'] },
   { from: ['colloquially', 'known', 'as'], to: ['known', 'as'] },
   { from: ['commencing', 'on'], to: ['since'] },

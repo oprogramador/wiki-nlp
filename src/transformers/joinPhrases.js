@@ -4,7 +4,7 @@ const { withoutLastOne } = require('../utils/listUtils');
 const joinPhrases = phrases => phrases
   .reduce((accumulator, current) => {
     const last = _.last(accumulator);
-    if (last && current[0] && /^[a-z]/.test(current[0])) {
+    if (last && current[0] && /^[a-z0-9]/.test(current[0])) {
       return [
         ...withoutLastOne(accumulator),
         [

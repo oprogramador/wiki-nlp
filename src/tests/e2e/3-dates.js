@@ -6543,4 +6543,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "c."', () => {
+    const words = 'The new settlers built a town c. 7000 BC in India';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'town',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'new',
+              'settlers',
+            ],
+          },
+        ],
+        verb: 'built',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -7000,
+        },
+        where: 'India',
+      },
+    ]]);
+  });
 });
