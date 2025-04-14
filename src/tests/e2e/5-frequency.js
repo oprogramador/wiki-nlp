@@ -258,4 +258,26 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "often, but not always"', () => {
+    const words = 'Banknotes are often, but not always, used by Mexicans';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'usually',
+        ],
+        groupType: 'verb',
+        object: [
+          'banknotes',
+        ],
+        subject: [
+          'Mexicans',
+        ],
+        verb: 'use',
+      },
+    ]]);
+  });
 });

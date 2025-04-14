@@ -170,6 +170,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['now'], to: convertNow(now) },
   { from: ['nowadays'], to: convertNow(now) },
   { from: ['officially', 'known', 'as'], to: ['known', 'as'] },
+  { from: ['often', ',', 'but', 'not', 'always', ','], to: ['usually'] },
   { from: ['on', 'average'], to: ['typically'] },
   { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['on', 'the', 'night', 'of'], to: ['on'] },
