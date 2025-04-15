@@ -6581,4 +6581,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "B.C.E." followed by a locality', () => {
+    const words = 'Persians built a town around 700 B.C.E. in Pakistan';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'town',
+            ],
+          },
+        ],
+        subject: [
+          'Persians',
+        ],
+        verb: 'built',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -700,
+        },
+        where: 'Pakistan',
+      },
+    ]]);
+  });
 });
