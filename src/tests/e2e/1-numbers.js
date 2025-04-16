@@ -862,7 +862,7 @@ describe('numbers (e2e)', () => {
   });
 
   it('converts with euro, above, and trillion', () => {
-    const words = 'Alan has above €12 trillion';
+    const words = 'Alan has just above €12 trillion';
 
     const result = flow(splitText(words));
 
