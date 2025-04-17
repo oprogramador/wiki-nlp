@@ -111,6 +111,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['estimated', 'to', 'be'], to: [] },
   { from: ['estimated', 'to', 'have', 'been'], to: [] },
   { from: ['et', 'al.'], to: [',', 'and', 'others'] },
+  { from: ['even', 'as', 'early', 'as', 'the'], to: ['in', 'the'] },
+  { from: ['even', 'as', 'late', 'as', 'the'], to: ['in', 'the'] },
   { from: ['eventually', 'resulting', 'in'], to: ['resulting', 'in'] },
   { from: ['every', 'once', 'in', 'a', 'while'], to: ['occasionally'] },
   { from: ['every', 'other', 'day'], to: ['every', '2', 'days'] },

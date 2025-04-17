@@ -6612,4 +6612,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "even as early as"', () => {
+    const words = 'Even as early as the 1960s West Germany was the 3rd-largest economy';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            item: [
+              'economy',
+            ],
+            ordinal: 3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'West',
+              'Germany',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1969,
+          minYear: 1960,
+        },
+      },
+    ]]);
+  });
 });
