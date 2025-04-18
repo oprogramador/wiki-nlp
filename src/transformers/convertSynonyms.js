@@ -12,7 +12,17 @@ const convertNow = now => [
   },
 ];
 
+const generateMap = () => [
+  ..._.times(
+    20, i => ({
+      from: ['early', 'in', 'the', `${i + 4}th`, 'century'],
+      to: ['in', 'the', 'early', `${i + 4}th`, 'century'],
+    }),
+  ),
+];
+
 const createDefaultMap = ({ now }) => [
+  ...generateMap(),
   { from: ['&'], to: ['and'] },
   { from: [',', 'are'], to: ['are'] },
   { from: [',', 'colloquially', 'known', 'as'], to: ['#alternative-name'] },

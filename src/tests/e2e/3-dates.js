@@ -6649,4 +6649,59 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "early in the [...] century"', () => {
+    const words = 'Early in the 19th century, the street was the home of many Polish immigrants';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'Polish',
+                    'immigrants',
+                  ],
+                },
+                min: 3,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'home',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'street',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1850,
+          minYear: 1801,
+        },
+      },
+    ]]);
+  });
 });
