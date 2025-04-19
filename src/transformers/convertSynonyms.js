@@ -86,6 +86,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['are', 'perceived', 'to', 'have'], to: ['likely', 'have'] },
   { from: ['are', 'regarded', 'to', 'have'], to: ['likely', 'have'] },
   { from: ['are', 'thought', 'to', 'have'], to: ['likely', 'have'] },
+  { from: ['as', 'early', 'as', 'the'], to: ['in', 'the'] },
+  { from: ['as', 'late', 'as', 'the'], to: ['in', 'the'] },
   { from: ['as', 'many', 'as'], to: [] },
   { from: ['as', 'much', 'as'], to: [] },
   { from: ['as', 'of'], to: ['in'] },
