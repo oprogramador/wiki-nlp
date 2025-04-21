@@ -6704,4 +6704,39 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "over the years"', () => {
+    const words = 'Several Māori movements have been created in Auckland over the years';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'created',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Māori',
+                'movements',
+              ],
+            },
+            max: 99,
+            min: 3,
+          },
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          maxYear: 2023,
+        },
+        where: 'Auckland',
+      },
+    ]]);
+  });
 });

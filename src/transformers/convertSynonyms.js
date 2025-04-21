@@ -210,6 +210,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['over', 'the', 'last', 'decade'], to: ['over', 'the', 'last', '10', 'years'] },
   { from: ['over', 'the', 'last', 'few'], to: ['over', 'the', 'last', 'several'] },
   { from: ['over', 'the', 'last', 'half', 'a', 'century'], to: ['over', 'the', 'last', '50', 'years'] },
+  { from: ['over', 'the', 'years'], to: ['above', '3', 'years', 'ago'] },
   { from: ['perhaps'], to: ['likely'] },
   { from: ['popularly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['pretend', 'to', 'have'], to: ['likely', 'have'] },
