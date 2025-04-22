@@ -6739,4 +6739,87 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as high as" & "as low as"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In 1920, the number of Koreans in New Zealand was as high as 50,000 but 50 years later it was as low as 10,000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            value: 5e4,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Koreans',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'amount',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1920,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'New',
+            'Zealand',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            value: 1e4,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Koreans',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'amount',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1970,
+        },
+      },
+    ]]);
+  });
 });
