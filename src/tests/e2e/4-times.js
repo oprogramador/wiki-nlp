@@ -355,4 +355,28 @@ describe('times (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as many times as possible"', () => {
+    const words = 'Rabbits can jump as many times as possible in Australia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'jump',
+        ],
+        subject: [
+          'Rabbits',
+        ],
+        times: {
+          groupType: 'quantity',
+          min: 3,
+        },
+        verb: 'can',
+        where: 'Australia',
+      },
+    ]]);
+  });
 });
