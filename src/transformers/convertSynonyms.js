@@ -204,6 +204,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['one', 'half', 'of', 'the'], to: ['50', '%', 'of', 'the'] },
   { from: ['one', 'half', 'the'], to: ['50', '%', 'of', 'the'] },
   { from: ['one-third'], to: ['one', 'third'] },
+  { from: ['or', 'simply'], to: ['or'] },
   { from: ['originally', 'known', 'as'], to: ['known', 'as'] },
   { from: ['out', 'of', 'a', 'population', 'of'], to: ['out', 'of'] },
   { from: ['over', 'the', 'course', 'of', 'many', 'centuries'], to: ['above', '300', 'years', 'ago'] },

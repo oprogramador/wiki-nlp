@@ -6822,4 +6822,66 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "or simply"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Māori language (also known as te reo Māori or simply Te Reo) is an official language in New Zealand as of 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'official',
+              'language',
+            ],
+          },
+        ],
+        subject: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'te',
+                  'reo',
+                  'Māori',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'Te',
+                  'Reo',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'the',
+              'Māori',
+              'language',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'New',
+            'Zealand',
+          ],
+        },
+      },
+    ]]);
+  });
 });
