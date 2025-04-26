@@ -6822,4 +6822,13 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts "until about"', () => {
+    const words = 'Until about the 1970s below 100 people climbed the mountain';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
