@@ -6823,12 +6823,70 @@ describe('dates (e2e)', () => {
     ]]);
   });
 
-  it.skip('converts "until about"', () => {
+  it('converts "until about" with a decade', () => {
     const words = 'Until about the 1970s below 100 people climbed the mountain';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'mountain',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            max: 100,
+          },
+        ],
+        verb: 'climbed',
+        when: {
+          groupType: 'date',
+          maxYear: 1979,
+        },
+      },
+    ]]);
+  });
+
+  it('converts "until about" with a year', () => {
+    const words = 'Until about 1970 below 100 people climbed the mountain';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'mountain',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            max: 100,
+          },
+        ],
+        verb: 'climbed',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          maxYear: 1970,
+        },
+      },
     ]]);
   });
 });
