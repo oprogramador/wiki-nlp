@@ -782,7 +782,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts a century', () => {
-    const words = 'In the 19th century, Indian literature was created by great writers';
+    const words = 'Over the course of the 19th century, Indian literature was created by great writers';
 
     const result = flow(splitText(words));
 

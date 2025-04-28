@@ -210,6 +210,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['over', 'the', 'course', 'of', 'many', 'centuries'], to: ['above', '300', 'years', 'ago'] },
   { from: ['over', 'the', 'course', 'of', 'many', 'generations'], to: ['above', '100', 'years', 'ago'] },
   { from: ['over', 'the', 'course', 'of', 'many', 'years'], to: ['above', '5', 'years', 'ago'] },
+  { from: ['over', 'the', 'course', 'of', 'the'], to: ['in', 'the'] },
   { from: ['over', 'the', 'last', 'couple', 'of'], to: ['over', 'the', 'last', 'several'] },
   { from: ['over', 'the', 'last', 'decade'], to: ['over', 'the', 'last', '10', 'years'] },
   { from: ['over', 'the', 'last', 'few'], to: ['over', 'the', 'last', 'several'] },
