@@ -938,7 +938,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts a century with a number word', () => {
-    const words = 'Rome was destroyed in the fifth century';
+    const words = 'Rome was destroyed during the course of the fifth century';
 
     const result = flow(splitText(words));
 
