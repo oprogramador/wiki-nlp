@@ -84,6 +84,7 @@ const splitBut = require('./transformers/splitBut');
 const splitBySemicolon = require('./transformers/splitBySemicolon');
 const splitVerbFromArticle = require('./transformers/splitVerbFromArticle');
 const splitWhich = require('./transformers/splitWhich');
+const stripRedundantComma = require('./transformers/stripRedundantComma');
 
 const flow = (phrases, { now } = { now: new Date() }) => {
   const groups = _.flow(
@@ -180,6 +181,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertObjectWithAlterName),
     p => p.map(groupPrepositions),
     p => p.map(convertPassive),
+    p => p.map(stripRedundantComma),
     p => p.map((current, i) => convertPronouns(current, p[i - 1])),
   )(phrases);
 

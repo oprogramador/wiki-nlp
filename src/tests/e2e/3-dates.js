@@ -6889,4 +6889,52 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "including" & "in general"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the early 20th century, international cuisine, including Italian, Turkish and Indian, has become popular in general';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'generally',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'become',
+              'popular',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            including: {
+              groupType: 'and',
+              members: [
+                'Italian',
+                'Turkish',
+                'Indian',
+              ],
+            },
+            words: [
+              'international',
+              'cuisine',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
+        },
+      },
+    ]]);
+  });
 });
