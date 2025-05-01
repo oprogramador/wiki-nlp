@@ -408,4 +408,62 @@ describe('alternative names (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an alternative name, at the beginning, with one comma', () => {
+    const words = 'An indigenous language, te reo Māori is closely related to many Polynesian languages';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'closely',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'Polynesian',
+                    'languages',
+                  ],
+                },
+                min: 3,
+              },
+            ],
+            subject: [
+              'related',
+            ],
+            verb: 'to',
+          },
+        ],
+        subject: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'te',
+                  'reo',
+                  'Māori',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'an',
+              'indigenous',
+              'language',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

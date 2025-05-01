@@ -6,7 +6,11 @@ const convertSubjectWithAlterName = (phrase) => {
   if (!subject) {
     return phrase;
   }
-  if (subject.length === 4 && subject[1] === ',') {
+  if (
+    subject.length >= 3
+      && subject.length <= 4
+      && subject[1] === ','
+  ) {
     return [{
       ...phrase[0],
       subject: [
