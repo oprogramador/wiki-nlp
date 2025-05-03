@@ -6937,4 +6937,37 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "large numbers"', () => {
+    const words = 'Large numbers of Indians & Pakistanis settled in Australia in the 1980s and 1990s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'Indians',
+                'Pakistanis',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'settled',
+        when: {
+          groupType: 'date',
+          maxYear: 1999,
+          minYear: 1980,
+        },
+        where: 'Australia',
+      },
+    ]]);
+  });
 });

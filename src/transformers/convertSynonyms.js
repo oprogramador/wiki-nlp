@@ -172,6 +172,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['it', 'is', 'undetermined', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'unsure', 'if'], to: ['perhaps'] },
   { from: ['just', 'above'], to: ['above'] },
+  { from: ['large', 'numbers', 'of'], to: ['many'] },
   { from: ['little', 'more', 'than'], to: ['above'] },
   { from: ['majority', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['many', 'billions', 'of'], to: ['above', 'one', 'billion'] },
