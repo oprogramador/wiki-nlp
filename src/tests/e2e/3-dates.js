@@ -3476,7 +3476,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts a simple locality before a date', () => {
-    const words = 'Homosexuality has been legal in Kurdistan since 1858';
+    const words = 'Homosexuality has been legal in Kurdistan beginning in 1858';
 
     const result = flow(splitText(words), { now: new Date('2025-07-01') });
 
