@@ -6970,4 +6970,49 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in particular", "a variety of", "in more recent times"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In particular mountain ranges in America are formed by a variety of geological processes in more recent times';
+
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'particularly',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'mountain',
+              'ranges',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'geological',
+                'processes',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'form',
+        when: {
+          groupType: 'date',
+          maxYear: 2025,
+          minYear: 2010,
+        },
+        where: 'America',
+      },
+    ]]);
+  });
 });
