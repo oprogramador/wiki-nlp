@@ -1370,7 +1370,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts a year BCE', () => {
-    const words = 'By about 7000 BCE, a Neolithic culture started in Egypt';
+    const words = 'By about 7000 BCE, a Neolithic culture started in what is now Egypt';
 
     const result = flow(splitText(words));
 

@@ -289,6 +289,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['usually', 'synonymous', 'with'], to: ['known', 'as'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['western'], to: ['Western'] },
+  { from: ['what', 'is', 'now'], to: [] },
   { from: ['which'], to: [',', 'which'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
 ];
