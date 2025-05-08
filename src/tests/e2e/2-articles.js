@@ -3236,4 +3236,72 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as well as" but removes "as well"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Srividya occasionally was a playback singer as well as carnatic singer in South India but she was a pretty dancer as well';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'occasionally',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'playback',
+                  'singer',
+                ],
+              },
+              {
+                groupType: 'article',
+                words: [
+                  'carnatic',
+                  'singer',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          'Srividya',
+        ],
+        verb: 'was',
+        where: {
+          groupType: 'article',
+          words: [
+            'South',
+            'India',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'pretty',
+              'dancer',
+            ],
+          },
+        ],
+        subject: [
+          'Srividya',
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
 });
