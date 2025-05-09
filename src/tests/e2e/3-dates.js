@@ -4292,7 +4292,7 @@ describe('dates (e2e)', () => {
   });
 
   it('finds an adverb after a quantity', () => {
-    const words = 'Many street dogs were heavily hungry in Texas in the 1950s';
+    const words = 'Many street dogs were heavily hungry in Texas during much of the 1950s';
 
     const result = flow(splitText(words));
 
