@@ -174,6 +174,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['it', 'is', 'believed', 'that'], to: ['likely'] },
   { from: ['it', 'is', 'questionable', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'speculated', 'that'], to: ['likely'] },
+  { from: ['it', 'is', 'thought', 'that'], to: ['likely'] },
   { from: ['it', 'is', 'uncertain', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'undetermined', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'unsure', 'if'], to: ['perhaps'] },
