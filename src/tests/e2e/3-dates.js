@@ -7015,4 +7015,38 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds an epoch', () => {
+    const words = 'It is thought that the volcano erupted quickly in the Holocene';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'quickly',
+        ],
+        groupType: 'verb',
+        object: [],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'volcano',
+            ],
+          },
+        ],
+        verb: 'erupted',
+        when: {
+          epoch: [
+            'the',
+            'Holocene',
+          ],
+          groupType: 'epoch',
+        },
+      },
+    ]]);
+  });
 });
