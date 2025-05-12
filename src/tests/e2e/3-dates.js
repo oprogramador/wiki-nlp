@@ -7040,11 +7040,8 @@ describe('dates (e2e)', () => {
         ],
         verb: 'erupted',
         when: {
-          epoch: [
-            'the',
-            'Holocene',
-          ],
-          groupType: 'epoch',
+          groupType: 'date',
+          minYear: -12e3,
         },
       },
     ]]);
