@@ -1,0 +1,43 @@
+const _ = require('lodash');
+const omitUndefined = require('../utils/omitUndefined');
+
+const epochs = {
+  [JSON.stringify(['the', 'Holocene'])]: { minYear: -12e3 },
+  [JSON.stringify(['the', 'Pleistocene'])]: { maxYear: -12e3, minYear: -2.58e6 },
+  [JSON.stringify(['the', 'Pliocene'])]: { maxYear: -2.58e6, minYear: -5.333e6 },
+  [JSON.stringify(['the', 'Miocene'])]: { maxYear: -5.333e6, minYear: -23e6 },
+  [JSON.stringify(['the', 'Oligocene'])]: { maxYear: -23e6, minYear: -34e6 },
+  [JSON.stringify(['the', 'Eocene'])]: { maxYear: -34e6, minYear: -56e6 },
+  [JSON.stringify(['the', 'Paleocene'])]: { maxYear: -56e6, minYear: -66e6 },
+};
+
+const includeEpochs = (phrase) => {
+  if (!phrase[0]) {
+    return phrase;
+  }
+  const { where } = phrase[0];
+  if (!where) {
+    return phrase;
+  }
+  const stringified = JSON.stringify(_.get(where, 'words'));
+  if (stringified) {
+    return [omitUndefined({
+      ...phrase[0],
+      ...(
+        epochs[stringified]
+          ? {
+            when: {
+              groupType: 'date',
+              ...epochs[stringified],
+            },
+            where: undefined,
+          }
+          : {}
+      ),
+    })];
+  }
+
+  return phrase;
+};
+
+module.exports = includeEpochs;

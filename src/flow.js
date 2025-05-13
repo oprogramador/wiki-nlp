@@ -64,6 +64,7 @@ const includeAccordance = require('./transformers/includeAccordance');
 const includeCause = require('./transformers/includeCause');
 const includeDates = require('./transformers/includeDates');
 const includeDatesFromAnd = require('./transformers/includeDatesFromAnd');
+const includeEpochs = require('./transformers/includeEpochs');
 const includeLocalities = require('./transformers/includeLocalities');
 const includeLocalityFromAnd = require('./transformers/includeLocalityFromAnd');
 const includeRelativeDates = require('./transformers/includeRelativeDates');
@@ -174,6 +175,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeSubjectFromLocality),
     p => p.map(includeSimpleLocalities),
     p => p.map(includeSimpleLocalitiesAtBegin),
+    p => p.map(includeEpochs),
     p => p.map(includeTimes),
     p => p.map(convertSubjectWithAlterName),
     p => p.map(includeDates({ now })),
