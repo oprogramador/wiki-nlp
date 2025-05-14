@@ -31,6 +31,7 @@ const createDefaultMap = ({ now }) => [
   { from: [',', 'formerly', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'historically', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'in', 'fact', ','], to: [] },
+  { from: [',', 'in', 'turn', ','], to: [] },
   { from: [',', 'including'], to: ['including'] },
   { from: [',', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'meanwhile', ','], to: [] },

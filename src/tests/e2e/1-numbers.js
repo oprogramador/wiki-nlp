@@ -3679,4 +3679,34 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('skips "in turn"', () => {
+    const words = 'These orders, in turn, constitute about 150 families';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: 'families',
+            value: 150,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'These',
+              'orders',
+            ],
+          },
+        ],
+        verb: 'constitute',
+      },
+    ]]);
+  });
 });
