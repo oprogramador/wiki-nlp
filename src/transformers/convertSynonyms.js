@@ -111,6 +111,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['beginning', 'on'], to: ['since'] },
   { from: ['biannually'], to: ['every', '6', 'months'] },
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
+  { from: ['both', 'in'], to: ['in', 'both'] },
   { from: ['but'], to: [',', 'but'] },
   { from: ['by', 'the', 'start', 'of'], to: ['#by-the-start-of'] },
   { from: ['c.'], to: ['around'] },

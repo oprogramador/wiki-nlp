@@ -7046,4 +7046,47 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "both in"', () => {
+    const words = 'In the 18th century, Dutch culture declined both in sciences & the arts';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'in',
+          {
+            groupType: 'and',
+            members: [
+              'sciences',
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'arts',
+                ],
+              },
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Dutch',
+              'culture',
+            ],
+          },
+        ],
+        verb: 'declined',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1701,
+        },
+      },
+    ]]);
+  });
 });
