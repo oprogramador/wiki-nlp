@@ -2,6 +2,9 @@ const _ = require('lodash');
 const omitUndefined = require('../utils/omitUndefined');
 
 const epochs = {
+  [JSON.stringify(['the', 'Dutch', 'Golden', 'Age'])]: { maxYear: 1672, minYear: 1588 },
+  [JSON.stringify(['the', 'Spanish', 'Golden', 'Age'])]: { maxYear: 1681, minYear: 1492 },
+  [JSON.stringify(['the', 'Islamic', 'Golden', 'Age'])]: { maxYear: 1300, minYear: 701 },
   [JSON.stringify(['the', 'Holocene'])]: { minYear: -12e3 },
   [JSON.stringify(['the', 'Pleistocene'])]: { maxYear: -12e3, minYear: -2.58e6 },
   [JSON.stringify(['the', 'Pliocene'])]: { maxYear: -2.58e6, minYear: -5.333e6 },

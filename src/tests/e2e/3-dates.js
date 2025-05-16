@@ -7089,4 +7089,28 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during the"', () => {
+    const words = 'They became rich during the Dutch Golden Age';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'became',
+        when: {
+          groupType: 'date',
+          maxYear: 1672,
+          minYear: 1588,
+        },
+      },
+    ]]);
+  });
 });

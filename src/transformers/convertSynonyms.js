@@ -129,6 +129,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['dozens', 'of'], to: ['above', '10'] },
   { from: ['during', 'much', 'of', 'the'], to: ['in', 'the'] },
   { from: ['during', 'the', 'course', 'of', 'the'], to: ['in', 'the'] },
+  { from: ['during', 'the'], to: ['in', 'the'] },
   { from: ['early', 'to', 'mid'], to: ['early-to-mid'] },
   { from: ['eastern'], to: ['Eastern'] },
   { from: ['estimated', 'at'], to: [] },
