@@ -7113,4 +7113,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "before"', () => {
+    const words = 'Before the 11th century, Andorra had no military units';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'military',
+              'units',
+            ],
+          },
+        ],
+        subject: [
+          'Andorra',
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          maxYear: 1100,
+        },
+      },
+    ]]);
+  });
 });
