@@ -301,6 +301,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['what', 'is', 'now'], to: [] },
   { from: ['which'], to: [',', 'which'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
+  { from: ['world', 'war', 'ii'], to: ['the', 'World', 'War', 'II'] },
 ];
 
 const convertSynonyms = ({ now, createMap = createDefaultMap } = {}) => (phrase) => {

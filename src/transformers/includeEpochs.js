@@ -2,6 +2,7 @@ const _ = require('lodash');
 const omitUndefined = require('../utils/omitUndefined');
 
 const epochs = {
+  [JSON.stringify(['the', 'World', 'War', 'II'])]: { maxYear: 1945, minYear: 1939 },
   [JSON.stringify(['the', 'Dutch', 'Golden', 'Age'])]: { maxYear: 1672, minYear: 1588 },
   [JSON.stringify(['the', 'Spanish', 'Golden', 'Age'])]: { maxYear: 1681, minYear: 1492 },
   [JSON.stringify(['the', 'Islamic', 'Golden', 'Age'])]: { maxYear: 1300, minYear: 701 },

@@ -7143,4 +7143,28 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during World War II"', () => {
+    const words = 'During World War II, they remained neutral';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'neutral',
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'remained',
+        when: {
+          groupType: 'date',
+          maxYear: 1945,
+          minYear: 1939,
+        },
+      },
+    ]]);
+  });
 });
