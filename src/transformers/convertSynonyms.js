@@ -244,6 +244,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
   { from: ['recent', 'times'], to: [`${now.getFullYear() - 20}–${now.getFullYear()}`] },
   { from: ['recent', 'years'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
+  { from: ['second', 'world', 'war'], to: ['World', 'War', 'II'] },
   { from: ['seem', 'to', 'have'], to: ['likely', 'have'] },
   { from: ['seems', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['several', 'hundred'], to: ['101–1000'] },
@@ -301,6 +302,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['what', 'is', 'now'], to: [] },
   { from: ['which'], to: [',', 'which'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
+  { from: ['world', 'war', 'i'], to: ['the', 'World', 'War', 'I'] },
   { from: ['world', 'war', 'ii'], to: ['the', 'World', 'War', 'II'] },
 ];
 
