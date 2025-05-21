@@ -176,6 +176,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(includeSimpleLocalities),
     p => p.map(includeSimpleLocalitiesAtBegin),
     p => p.map(includeEpochs),
+    p => p.map(includeSimpleLocalities),
     p => p.map(includeTimes),
     p => p.map(convertSubjectWithAlterName),
     p => p.map(includeDates({ now })),

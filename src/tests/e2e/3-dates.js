@@ -7167,4 +7167,33 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a location followed by an epoch', () => {
+    const words = 'They lived in southern England during the Middle Ages';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'They',
+        ],
+        verb: 'lived',
+        when: {
+          groupType: 'date',
+          maxYear: 1492,
+          minYear: 476,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Southern',
+            'England',
+          ],
+        },
+      },
+    ]]);
+  });
 });
