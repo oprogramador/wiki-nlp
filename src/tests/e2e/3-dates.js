@@ -7196,4 +7196,38 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "after the fall of the Roman Empire" & "many of the"', () => {
+    const words = 'After the fall of the Roman Empire, many of the Greek texts have been translated by nuns';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Greek',
+                'texts',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        subject: [
+          'nuns',
+        ],
+        verb: 'translate',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+          minYear: 476,
+        },
+      },
+    ]]);
+  });
 });
