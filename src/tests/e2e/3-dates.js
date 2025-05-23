@@ -7230,4 +7230,39 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('skips "by contrast" & counts lowercase-uppercase-lowercase items', () => {
+    const words = 'By contrast, as of 2010 there were as many as 345,678 enrolled Cherokee citizens';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'enrolled',
+                'Cherokee',
+                'citizens',
+              ],
+            },
+            value: 345678,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
 });

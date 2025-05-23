@@ -16,6 +16,10 @@ const {
   withoutLastOne,
 } = require('../utils/listUtils');
 
+const neverVerbs = [
+  'citizens',
+];
+
 const allowedPrepositions = [
   'for',
   'of',
@@ -85,7 +89,7 @@ const groupArticles = phrase => phrase.reduce(
       )
       && !(
         (
-          isUpperCase(_.last(last.words))
+          (isUpperCase(_.last(last.words)) && !neverVerbs.includes(current))
           || (looksStronglyLikeVerb(current) && isUpperCase(last))
         )
         && !articles.includes(toLowerCase(_.last(last.words)))

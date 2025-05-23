@@ -115,6 +115,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['both', 'in'], to: ['in', 'both'] },
   { from: ['but'], to: [',', 'but'] },
+  { from: ['by', 'contrast'], to: [] },
   { from: ['by', 'the', 'start', 'of'], to: ['#by-the-start-of'] },
   { from: ['c.'], to: ['around'] },
   { from: ['century', 'ce'], to: ['century'] },
