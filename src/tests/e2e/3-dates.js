@@ -7265,4 +7265,13 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('joins uppercase with an article', () => {
+    const words = 'In the 440s, the area was invaded by Attila the Hun';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
