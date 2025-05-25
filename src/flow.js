@@ -74,6 +74,7 @@ const includeSimpleLocalitiesAtBegin = require('./transformers/includeSimpleLoca
 const includeSubjectFromLocality = require('./transformers/includeSubjectFromLocality');
 const includeTimes = require('./transformers/includeTimes');
 const itemize = require('./transformers/itemize');
+const joinArticles = require('./transformers/joinArticles');
 const joinPhrases = require('./transformers/joinPhrases');
 const moveAdverbGroupsBeforeQuantity = require('./transformers/moveAdverbGroupsBeforeQuantity');
 const moveAdverbs = require('./transformers/moveAdverbs');
@@ -117,6 +118,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(moveAdverbs),
     p => p.map(convertMid),
     p => p.map(groupArticles),
+    p => p.map(joinArticles),
     p => p.map(splitVerbFromArticle),
     p => p.map(convertSelf),
     p => p.map(convertArticlesToLowerCase),
