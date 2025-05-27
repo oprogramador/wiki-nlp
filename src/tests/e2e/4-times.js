@@ -379,4 +379,41 @@ describe('times (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "several times a day"', () => {
+    const words = 'The melody is played by an artist several times a day';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'hours',
+          max: 8,
+          min: 2,
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'melody',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'artist',
+            ],
+          },
+        ],
+        verb: 'play',
+      },
+    ]]);
+  });
 });

@@ -253,6 +253,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['seem', 'to', 'have'], to: ['likely', 'have'] },
   { from: ['seems', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['several', 'hundred'], to: ['101–1000'] },
+  { from: ['several', 'times', 'a', 'day'], to: ['every', '2–8', 'hours'] },
   { from: ['simply', 'known', 'as'], to: ['known', 'as'] },
   { from: ['since', 'about', 'the'], to: ['since', 'the'] },
   { from: ['since', 'approximately', 'the'], to: ['since', 'the'] },
