@@ -202,6 +202,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['mid', 'to', 'late'], to: ['mid-to-late'] },
   { from: ['million', 'years', 'ago', '(', 'mya', ')'], to: ['million', 'years', 'ago'] },
   { from: ['millions', 'of'], to: ['above', 'one', 'million'] },
+  { from: ['modern', 'times'], to: [`${now.getFullYear() - 200}–${now.getFullYear()}`] },
   { from: ['more', 'recent', 'times'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
   { from: ['more', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
   { from: ['more', 'than'], to: ['above'] },
