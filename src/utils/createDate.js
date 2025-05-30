@@ -1,6 +1,11 @@
 const _ = require('lodash');
 
 const createDate = {
+  at: object => ({
+    groupType: 'date',
+    ..._.pick(object, 'isExact'),
+    ...(object.value ? { year: object.value } : {}),
+  }),
   by: (object, now) => {
     const minYear = now.getFullYear();
     const maxYear = object.value || object.year || object.maxYear;

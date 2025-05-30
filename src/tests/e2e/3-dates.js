@@ -7302,4 +7302,33 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "at" with a year', () => {
+    const words = 'The Roman Republic began at about 510 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Roman',
+              'Republic',
+            ],
+          },
+        ],
+        verb: 'began',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -510,
+        },
+      },
+    ]]);
+  });
 });
