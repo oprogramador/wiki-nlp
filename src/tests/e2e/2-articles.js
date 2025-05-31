@@ -3304,4 +3304,13 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('finds a location with uppercase-lowercase', () => {
+    const words = 'Slaves were valuable in the Sumerian city-states';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
