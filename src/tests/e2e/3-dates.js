@@ -7331,4 +7331,36 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as early as" with a year', () => {
+    const words = 'In France, as early as 1853, artists were creating an abstract art';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'creating',
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'abstract',
+              'art',
+            ],
+          },
+        ],
+        subject: [
+          'artists',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 1853,
+        },
+        where: 'France',
+      },
+    ]]);
+  });
 });
