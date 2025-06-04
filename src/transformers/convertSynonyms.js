@@ -102,6 +102,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['as', 'well', 'as'], to: ['and'] },
   { from: ['as', 'well'], to: [] },
   { from: ['at', 'least'], to: ['above'] },
+  { from: ['at', 'the', 'beginning', 'of', 'the'], to: ['in', 'the', 'early'] },
+  { from: ['at', 'the', 'end', 'of', 'the'], to: ['in', 'the', 'late'] },
   { from: ['at', 'the', 'same', 'time', 'at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['at', 'times'], to: ['occasionally'] },
