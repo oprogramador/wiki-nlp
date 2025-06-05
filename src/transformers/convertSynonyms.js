@@ -208,6 +208,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['modern', 'times'], to: [`${now.getFullYear() - 200}–${now.getFullYear()}`] },
   { from: ['more', 'recent', 'times'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
   { from: ['more', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
+  { from: ['most', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
   { from: ['more', 'than'], to: ['above'] },
   { from: ['most', 'commonly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
