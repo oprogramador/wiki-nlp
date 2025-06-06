@@ -26,6 +26,25 @@ const joinArticles = phrase => phrase
       ];
     }
 
+    if (
+      _.get(last, 'groupType') === 'article'
+      && _.last(last.words) !== 'Nations'
+      && !prepositions.includes(toLowerCase(last))
+      && isUpperCase(last)
+      && _.get(current, 'words.0') === 'the'
+    ) {
+      return [
+        ...withoutLastOne(accumulator),
+        {
+          ...current,
+          words: [
+            ...last.words,
+            ...current.words,
+          ],
+        },
+      ];
+    }
+
     return [
       ...accumulator,
       current,

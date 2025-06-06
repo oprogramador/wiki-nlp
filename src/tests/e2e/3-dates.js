@@ -7363,4 +7363,54 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('joins two articles', () => {
+    // eslint-disable-next-line max-len
+    const words = 'According to the Book of Ezra the Persian Cyrus the Great terminated the Babylonian exile in 530s BCE';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Babylonian',
+              'exile',
+            ],
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Book',
+            'of',
+            'Ezra',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Persian',
+              'Cyrus',
+              'the',
+              'Great',
+            ],
+          },
+        ],
+        verb: 'terminated',
+        when: {
+          groupType: 'date',
+          maxYear: -530,
+          minYear: -539,
+        },
+      },
+    ]]);
+  });
 });
