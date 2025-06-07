@@ -208,10 +208,10 @@ const createDefaultMap = ({ now }) => [
   { from: ['modern', 'times'], to: [`${now.getFullYear() - 200}–${now.getFullYear()}`] },
   { from: ['more', 'recent', 'times'], to: [`${now.getFullYear() - 15}–${now.getFullYear()}`] },
   { from: ['more', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
-  { from: ['most', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
   { from: ['more', 'than'], to: ['above'] },
   { from: ['most', 'commonly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
+  { from: ['most', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
   { from: ['much', 'of'], to: ['above', '20', '%', 'of'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['northern'], to: ['Northern'] },
@@ -322,6 +322,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
   { from: ['world', 'war', 'i'], to: ['the', 'World', 'War', 'I'] },
   { from: ['world', 'war', 'ii'], to: ['the', 'World', 'War', 'II'] },
+  { from: ['worldwide'], to: ['in', 'the', 'World'] },
 ];
 
 const convertSynonyms = ({ now, createMap = createDefaultMap } = {}) => (phrase) => {
