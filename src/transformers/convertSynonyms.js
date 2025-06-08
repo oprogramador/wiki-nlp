@@ -249,6 +249,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['pretend', 'to', 'have'], to: ['likely', 'have'] },
   { from: ['pretends', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['previously', 'known', 'as'], to: ['known', 'as'] },
+  { from: ['prior', 'to'], to: ['before'] },
   { from: ['quite', 'a', 'long', 'time', 'ago'], to: ['over', '200', 'years', 'ago'] },
   { from: ['recent', 'centuries'], to: [`${now.getFullYear() - 400}–${now.getFullYear()}`] },
   { from: ['recent', 'decades'], to: [`${now.getFullYear() - 40}–${now.getFullYear()}`] },
