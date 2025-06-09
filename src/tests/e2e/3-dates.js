@@ -7413,4 +7413,51 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "again by"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Facial hair was quickly popularized again by Emperor Hadrian in the early 2nd century AD in the Mediterranean';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'quickly',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Facial',
+              'hair',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Emperor',
+              'Hadrian',
+            ],
+          },
+        ],
+        verb: 'popularize',
+        when: {
+          groupType: 'date',
+          maxYear: 150,
+          minYear: 101,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Mediterranean',
+          ],
+        },
+      },
+    ]]);
+  });
 });

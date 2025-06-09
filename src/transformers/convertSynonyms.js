@@ -67,6 +67,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['a', 'variety', 'of'], to: ['many'] },
   { from: ['a', 'vast', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
   { from: ['after', 'the', 'fall', 'of', 'the', 'roman', 'empire'], to: ['since', '476'] },
+  { from: ['again', 'by'], to: ['by'] },
   { from: ['although'], to: ['but'] },
   { from: ['american', 'dollars'], to: ['USDs'] },
   { from: ['an', 'estimated'], to: ['around'] },
