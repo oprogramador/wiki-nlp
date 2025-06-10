@@ -7460,4 +7460,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "both" after a verb, with no preposition after', () => {
+    const words = 'In the 1920s, Gym membership in Australia included both men and women';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              'men',
+              'women',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Gym',
+              'membership',
+            ],
+          },
+        ],
+        verb: 'included',
+        when: {
+          groupType: 'date',
+          maxYear: 1929,
+          minYear: 1920,
+        },
+        where: 'Australia',
+      },
+    ]]);
+  });
 });

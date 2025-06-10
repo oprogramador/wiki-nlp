@@ -1698,13 +1698,8 @@ describe('articles & verbs (e2e)', () => {
           'cool',
         ],
         subject: [
-          {
-            groupType: 'article',
-            words: [
-              'Both',
-              'cities',
-            ],
-          },
+          'Both',
+          'cities',
         ],
         verb: 'are',
       },
