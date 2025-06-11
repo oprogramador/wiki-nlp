@@ -7497,4 +7497,54 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('finds a source with "a"', () => {
+    const words = 'According to a 2020 OECD report, about 123,000 black people will live in Korea & Japan by 2050';
+
+    const result = flow(splitText(words), { now: new Date('2027-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'live',
+        ],
+        source: {
+          groupType: 'article',
+          prenumber: 2020,
+          words: [
+            'OECD',
+            'report',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'black',
+                'people',
+              ],
+            },
+            value: 123e3,
+          },
+        ],
+        verb: 'will',
+        when: {
+          groupType: 'date',
+          maxYear: 2050,
+          minYear: 2027,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Korea',
+            'Japan',
+          ],
+        },
+      },
+    ]]);
+  });
 });

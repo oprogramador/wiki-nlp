@@ -10,7 +10,7 @@ const groupPrenumbered = phrase => phrase
 
     if (
       beforeLast.groupType === 'article'
-        && JSON.stringify(beforeLast.words) === '["the"]'
+        && ['["a"]', '["the"]'].includes(JSON.stringify(beforeLast.words))
         && last.groupType === 'quantity'
         && current.groupType === 'article'
         && isUpperCase(current.words[0])
