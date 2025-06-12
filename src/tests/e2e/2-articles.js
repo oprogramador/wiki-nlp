@@ -3308,4 +3308,45 @@ describe('articles & verbs (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts "according to holy"', () => {
+    const words = 'According to holy tradition, Chaerephon was a follower of Socrates';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Socrates',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'follower',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'holy',
+            'tradition',
+          ],
+        },
+        subject: [
+          'Chaerephon',
+        ],
+        verb: 'was',
+      },
+    ]]);
+  });
 });
