@@ -3349,4 +3349,39 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('removes "either directly or indirectly"', () => {
+    const words = 'Love songs are influenced, either directly or indirectly, by many African languages';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Love',
+              'songs',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'African',
+                'languages',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'influence',
+      },
+    ]]);
+  });
 });
