@@ -3709,4 +3709,13 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts "between [...] and" at the beginning', () => {
+    const words = 'Between 10,000 and 80,000 Jews were expelled by the Spanish crown';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
