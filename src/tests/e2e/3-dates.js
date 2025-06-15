@@ -7547,4 +7547,13 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('finds a date followed by a verb + object', () => {
+    const words = 'The destruction of the city in 70 BCE caused massive migrations';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
