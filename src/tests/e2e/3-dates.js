@@ -7556,4 +7556,43 @@ describe('dates (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts "include, but are not limited to"', () => {
+    const words = 'Mixed materials include, but are not limited to, paper, paint, cloth, and wood';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'paper',
+                ],
+              },
+              'paint',
+              'cloth',
+              'wood',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Mixed',
+              'materials',
+            ],
+          },
+        ],
+        verb: 'include',
+      },
+    ]]);
+  });
 });
