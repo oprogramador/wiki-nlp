@@ -7558,7 +7558,7 @@ describe('dates (e2e)', () => {
   });
 
   it('converts "include, but are not limited to"', () => {
-    const words = 'Mixed materials include, but are not limited to, paper, paint, cloth, and wood';
+    const words = 'Mixed materials include, but are not limited to, paper, paint, cloth, and wood in the 21st century';
 
     const result = flow(splitText(words));
 
@@ -7592,6 +7592,54 @@ describe('dates (e2e)', () => {
           },
         ],
         verb: 'include',
+        when: {
+          groupType: 'date',
+          maxYear: 2100,
+          minYear: 2001,
+        },
+      },
+    ]]);
+  });
+
+  it('omits "countries such as"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Sericulture was an important cottage industry in countries such as Brazil, France, Japan, Korea, and Thailand in the 20th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'important',
+              'cottage',
+              'industry',
+            ],
+          },
+        ],
+        subject: [
+          'Sericulture',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: 1901,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Brazil',
+            'France',
+            'Japan',
+            'Korea',
+            'Thailand',
+          ],
+        },
       },
     ]]);
   });

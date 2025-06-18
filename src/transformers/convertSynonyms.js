@@ -129,6 +129,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['commencing', 'on'], to: ['since'] },
   { from: ['commonly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['countless', 'numbers', 'of'], to: ['many'] },
+  { from: ['countries', 'such', 'as'], to: [] },
   { from: ['currently', 'known', 'as'], to: ['known', 'as'] },
   { from: ['date', 'back', 'to'], to: ['started', 'in'] },
   { from: ['dates', 'back', 'to'], to: ['started', 'in'] },
