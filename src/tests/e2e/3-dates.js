@@ -7643,4 +7643,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "universally recognised as"', () => {
+    const words = 'Dublin was universally recognised as a metropolitan province in 1150s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'metropolitan',
+              'province',
+            ],
+          },
+        ],
+        subject: [
+          'Dublin',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1159,
+          minYear: 1150,
+        },
+      },
+    ]]);
+  });
 });
