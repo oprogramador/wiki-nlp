@@ -7674,4 +7674,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "third largest" & "after only"', () => {
+    const words = 'In 200 BC, Rome was the third largest city in the Mediterranean after only Alexandria & Carthage';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            adjective: 'largest',
+            groupType: 'ordinal',
+            higher: {
+              groupType: 'and',
+              members: [
+                'Alexandria',
+                'Carthage',
+              ],
+            },
+            item: [
+              'city',
+            ],
+            ordinal: 3,
+            scope: {
+              groupType: 'article',
+              words: [
+                'the',
+                'Mediterranean',
+              ],
+            },
+          },
+        ],
+        subject: [
+          'Rome',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: -200,
+        },
+      },
+    ]]);
+  });
 });
