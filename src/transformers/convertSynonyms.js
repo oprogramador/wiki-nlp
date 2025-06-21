@@ -205,6 +205,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['it', 'is', 'undetermined', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'unsure', 'if'], to: ['perhaps'] },
   { from: ['just', 'above'], to: ['above'] },
+  { from: ['just', 'under'], to: ['below'] },
   { from: ['large', 'numbers', 'of'], to: ['many'] },
   { from: ['legally', 'recognised', 'as'], to: [] },
   { from: ['little', 'more', 'than'], to: ['above'] },
