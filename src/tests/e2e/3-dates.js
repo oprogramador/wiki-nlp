@@ -7718,4 +7718,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts a number with "ancient Egyptian"', () => {
+    const words = 'There are eight ancient Egyptian obelisks in Italy';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Egyptian',
+                'ancient',
+                'obelisks',
+              ],
+            },
+            value: 8,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        where: 'Italy',
+      },
+    ]]);
+  });
 });

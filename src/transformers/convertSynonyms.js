@@ -76,6 +76,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['an', 'estimated'], to: ['around'] },
   { from: ['an', 'increasing', 'number', 'of'], to: ['many'] },
   { from: ['an', 'overwhelming', 'majority', 'of'], to: ['above', '75', '%', 'of'] },
+  { from: ['ancient', 'egyptian'], to: ['Egyptian', 'ancient'] },
   { from: ['and', 'are'], to: ['and', 'they', 'are'] },
   { from: ['and', 'had'], to: ['and', 'it', 'had'] },
   { from: ['and', 'has'], to: ['and', 'it', 'has'] },
