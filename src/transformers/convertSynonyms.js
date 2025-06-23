@@ -162,6 +162,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['excluding', ':'], to: ['excluding'] },
   { from: ['formally', 'recognised', 'as'], to: [] },
   { from: ['formerly', 'known', 'as'], to: ['known', 'as'] },
+  { from: ['from', 'the', 'beginning', 'of'], to: ['since'] },
   { from: ['from', 'time', 'to', 'time'], to: ['occasionally'] },
   { from: ['generally', 'recognised', 'as'], to: [] },
   { from: ['had', 'been'], to: ['were'] },

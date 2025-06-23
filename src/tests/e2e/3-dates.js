@@ -7749,4 +7749,28 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "from the beginning of"', () => {
+    const words = 'From the beginning of the 3rd century BC, Rome has been large';
+
+    const result = flow(splitText(words), { now: new Date('2026-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'large',
+        ],
+        subject: [
+          'Rome',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2026,
+          minYear: -300,
+        },
+      },
+    ]]);
+  });
 });
