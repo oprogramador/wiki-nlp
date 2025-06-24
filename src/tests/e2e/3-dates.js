@@ -7773,4 +7773,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "middle of the"', () => {
+    const words = 'By the middle of the 16th century, the Dutch joined the Portuguese in the Atlantic';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Portuguese',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Dutch',
+            ],
+          },
+        ],
+        verb: 'joined',
+        when: {
+          groupType: 'date',
+          maxYear: 1575,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Atlantic',
+          ],
+        },
+      },
+    ]]);
+  });
 });
