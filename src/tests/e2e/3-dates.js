@@ -7815,4 +7815,43 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts ".e.g."', () => {
+    const words = 'As of 2010, 40% of workers have benefits e.g. refreshments or vehicles';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            including: {
+              groupType: 'or',
+              members: [
+                'refreshments',
+                'vehicles',
+              ],
+            },
+            words: [
+              'benefits',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: 'workers',
+            value: 0.4,
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          year: 2010,
+        },
+      },
+    ]]);
+  });
 });

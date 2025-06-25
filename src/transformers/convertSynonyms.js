@@ -143,6 +143,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['during', 'much', 'of', 'the'], to: ['in', 'the'] },
   { from: ['during', 'the', 'course', 'of', 'the'], to: ['in', 'the'] },
   { from: ['during', 'the'], to: ['in', 'the'] },
+  { from: ['e.g.'], to: ['including'] },
   { from: ['early', 'to', 'mid'], to: ['early-to-mid'] },
   { from: ['eastern'], to: ['Eastern'] },
   { from: ['enormous', 'numbers', 'of'], to: ['many'] },
