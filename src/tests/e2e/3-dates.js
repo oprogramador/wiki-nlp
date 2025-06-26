@@ -7854,4 +7854,37 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "the latter half of"', () => {
+    const words = 'During the latter half of the 1970s, European human space flights rapidly adapted';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'rapidly',
+        ],
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'European',
+              'human',
+              'space',
+              'flights',
+            ],
+          },
+        ],
+        verb: 'adapted',
+        when: {
+          groupType: 'date',
+          maxYear: 1979,
+          minYear: 1975,
+        },
+      },
+    ]]);
+  });
 });

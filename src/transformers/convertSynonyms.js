@@ -309,6 +309,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['the', 'following', 'year'], to: ['1', 'years', 'later'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'large', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
+  { from: ['the', 'latter', 'half', 'of', 'the'], to: ['the', 'late'] },
   { from: ['the', 'majority', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['the', 'next', 'year'], to: ['1', 'years', 'later'] },
   { from: ['the', 'number', 'of'], to: ['the', 'amount', 'of'] },
