@@ -7887,4 +7887,57 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "whilst"', () => {
+    const words = 'The 2018 ESA budget reached €4.0 billion whilst the 2019 ESA budget reached €4.6 billion';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 4e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            prenumber: 2018,
+            words: [
+              'ESA',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'reached',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            currency: 'EUR',
+            groupType: 'currency',
+            value: 4.6e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            prenumber: 2019,
+            words: [
+              'ESA',
+              'budget',
+            ],
+          },
+        ],
+        verb: 'reached',
+      },
+    ]]);
+  });
 });
