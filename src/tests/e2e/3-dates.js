@@ -7940,4 +7940,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "up" with percentage', () => {
+    const words = 'As of 2018, the mandatory programmes made up 45% of total expenditures';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'total',
+                'expenditures',
+              ],
+            },
+            max: 0.45,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'mandatory',
+              'programmes',
+            ],
+          },
+        ],
+        verb: 'made',
+        when: {
+          groupType: 'date',
+          year: 2018,
+        },
+      },
+    ]]);
+  });
 });
