@@ -280,4 +280,13 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts "every" at the beginning', () => {
+    const words = 'Every 4 years, they will meet';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
