@@ -7980,4 +7980,38 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a large part of"', () => {
+    const words = 'A large part of Europe have been conquered by the Romans in the early 1st millennium AD';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: 'Europe',
+            min: 0.2,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Romans',
+            ],
+          },
+        ],
+        verb: 'conquer',
+        when: {
+          groupType: 'date',
+          maxYear: 500,
+          minYear: 1,
+        },
+      },
+    ]]);
+  });
 });
