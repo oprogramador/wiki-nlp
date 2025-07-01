@@ -302,6 +302,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['sometimes', 'known', 'as'], to: ['known', 'as'] },
   { from: ['southern'], to: ['Southern'] },
   { from: ['starting', 'from'], to: ['since'] },
+  { from: ['starting', 'in'], to: ['since'] },
   { from: ['starting'], to: ['since'] },
   { from: ['strictly', 'speaking'], to: [] },
   { from: ['such', 'as'], to: [':'] },

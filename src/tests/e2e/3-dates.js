@@ -8014,4 +8014,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "starting in"', () => {
+    const words = 'Starting in the 5th century BC, the European civilization has been advanced';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'advanced',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'European',
+              'civilization',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2025,
+          minYear: -500,
+        },
+      },
+    ]]);
+  });
 });
