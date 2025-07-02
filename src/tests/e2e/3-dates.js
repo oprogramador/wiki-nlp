@@ -8045,4 +8045,36 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "is thought to have" & "into the early"', () => {
+    const words = 'The Gaulish language is thought to have endured into the early 6th century AD in France';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'endured',
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Gaulish',
+              'language',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 550,
+        },
+        where: 'France',
+      },
+    ]]);
+  });
 });
