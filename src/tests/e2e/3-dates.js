@@ -8077,4 +8077,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "and [...] century"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the late 20th and early 21st century, shields have been frequently used by military and law enforcement';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'frequently',
+        ],
+        groupType: 'verb',
+        object: [
+          'shields',
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'military',
+              {
+                groupType: 'article',
+                words: [
+                  'law',
+                  'enforcement',
+                ],
+              },
+            ],
+          },
+        ],
+        verb: 'use',
+        when: {
+          groupType: 'date',
+          maxYear: 2050,
+          minYear: 1951,
+        },
+      },
+    ]]);
+  });
 });

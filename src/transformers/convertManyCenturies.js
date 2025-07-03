@@ -3,6 +3,8 @@ const toLowerCase = require('../utils/toLowerCase');
 const { getFirst, getLast, withoutLast } = require('../utils/listUtils');
 const { ordinalToNumber } = require('../utils/numberResources');
 
+const isCenturyWord = word => ['century', 'centuries'].includes(word);
+
 const convertManyCenturies = phrase => phrase.reduce(
   (accumulator, current) => {
     const [
@@ -18,7 +20,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       toLowerCase(beforeBeforeLast) === 'in'
       && JSON.stringify(_.get(beforeLast, 'words')) === '["the"]'
       && /[–-]/.test(last)
-      && current === 'centuries'
+      && isCenturyWord(current)
     ) {
       const [first, second] = last.split(/[–-]/);
       const [minCentury, maxCentury] = _.sortBy([
@@ -44,7 +46,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       && beforeBeforeLast === ','
       && beforeLast === 'and'
       && last === 'early'
-      && _.get(current, 'words.1') === 'centuries'
+      && isCenturyWord(_.get(current, 'words.1'))
     ) {
       const [minCentury, maxCentury] = _.sortBy([
         ordinalToNumber(_.get(beforeBeforeBeforeLast, 'words.2')),
@@ -67,7 +69,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       ['in', 'between'].includes(toLowerCase(beforeBeforeBeforeLast))
       && beforeLast === ','
       && last === 'and'
-      && _.get(current, 'words.1') === 'centuries'
+      && isCenturyWord(_.get(current, 'words.1'))
     ) {
       // Array.prototype.sort is unreliable when sorting numbers.
       const [minCentury, maxCentury] = _.sortBy([
@@ -91,7 +93,7 @@ const convertManyCenturies = phrase => phrase.reduce(
       ['in', 'between'].includes(toLowerCase(beforeBeforeBeforeLast))
       && beforeLast === ','
       && last === 'and'
-      && _.get(current, 'words.2') === 'centuries'
+      && isCenturyWord(_.get(current, 'words.2'))
     ) {
       const [minCentury, maxCentury] = _.sortBy([
         ordinalToNumber(beforeBeforeLast.words[1]),
