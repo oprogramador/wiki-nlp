@@ -238,6 +238,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['most', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['most', 'recently'], to: ['in', `${now.getFullYear() - 5}–${now.getFullYear()}`] },
   { from: ['much', 'of'], to: ['above', '20', '%', 'of'] },
+  { from: ['nearly', 'all'], to: ['above', '90', '%', 'of'] },
   { from: ['no', 'more', 'than'], to: ['almost'] },
   { from: ['northern'], to: ['Northern'] },
   { from: ['not', 'a', 'long', 'time', 'ago'], to: ['below', '100', 'years', 'ago'] },

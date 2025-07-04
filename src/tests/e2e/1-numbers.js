@@ -3718,4 +3718,34 @@ describe('numbers (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts "nearly all"', () => {
+    const words = 'Nearly all major cities in Australia are interconnected';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'interconnected',
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'major',
+                'cities',
+              ],
+            },
+            min: 0.9,
+          },
+        ],
+        verb: 'are',
+        where: 'Australia',
+      },
+    ]]);
+  });
 });
