@@ -249,6 +249,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['officially', 'known', 'as'], to: ['known', 'as'] },
   { from: ['officially', 'recognised', 'as'], to: [] },
   { from: ['often', ',', 'but', 'not', 'always', ','], to: ['usually'] },
+  { from: ['often', 'used'], to: ['used', 'frequently'] },
   { from: ['on', 'average'], to: ['typically'] },
   { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['on', 'the', 'night', 'of'], to: ['on'] },

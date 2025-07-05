@@ -3384,4 +3384,27 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "often used"', () => {
+    const words = 'Chopsticks are often used in Japan';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'frequently',
+        ],
+        groupType: 'verb',
+        object: [
+          'used',
+        ],
+        subject: [
+          'Chopsticks',
+        ],
+        verb: 'are',
+        where: 'Japan',
+      },
+    ]]);
+  });
 });
