@@ -8117,4 +8117,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during the French Revolutionary Wars"', () => {
+    const words = 'Operational observation balloons started in Europe during the French Revolutionary Wars';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Operational',
+              'observation',
+              'balloons',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          maxYear: 1802,
+          minYear: 1792,
+        },
+        where: 'Europe',
+      },
+    ]]);
+  });
 });
