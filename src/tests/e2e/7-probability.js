@@ -197,4 +197,48 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "it is likely that"', () => {
+    const words = 'According to NASA, it is likely that exoplanets with oceans are very common in the Milky Way';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'very',
+              'common',
+            ],
+          },
+        ],
+        probability: 0.5,
+        source: 'NASA',
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'oceans',
+            ],
+            subject: [
+              'exoplanets',
+            ],
+            verb: 'with',
+          },
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Milky',
+            'Way',
+          ],
+        },
+      },
+    ]]);
+  });
 });
