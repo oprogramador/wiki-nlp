@@ -3748,4 +3748,38 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "few or no"', () => {
+    const words = 'They experience usually few or no symptoms, due to their young age';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'usually',
+        ],
+        cause: {
+          groupType: 'article',
+          words: [
+            'their',
+            'young',
+            'age',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'symptoms',
+            max: 100,
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        verb: 'experience',
+      },
+    ]]);
+  });
 });

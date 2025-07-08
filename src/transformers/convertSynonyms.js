@@ -162,6 +162,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['every', 'other', 'week'], to: ['every', '2', 'weeks'] },
   { from: ['every', 'other', 'year'], to: ['every', '2', 'years'] },
   { from: ['excluding', ':'], to: ['excluding'] },
+  { from: ['few', 'or', 'no'], to: ['below', '100'] },
   { from: ['formally', 'recognised', 'as'], to: [] },
   { from: ['formerly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['from', 'the', 'beginning', 'of'], to: ['since'] },
