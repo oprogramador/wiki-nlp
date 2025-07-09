@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const _ = require('lodash');
 const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
@@ -186,6 +187,14 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'general'], to: ['generally'] },
   { from: ['in', 'particular'], to: ['particularly'] },
   { from: ['in', 'reality'], to: [] },
+  { from: ['in', 'the', 'hydra', 'constellation'], to: ['in', 'the', 'Hydra', 'Constellation'] },
+  { from: ['in', 'the', 'milky', 'way', 'galaxy'], to: ['in', 'the', 'Milky', 'Way'] },
+  { from: ['in', 'the', 'northern', 'celestial', 'hemisphere'], to: ['in', 'the', 'Northern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'northern', 'sky'], to: ['in', 'the', 'Northern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'southern', 'celestial', 'hemisphere'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'southern', 'sky'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'ursa', 'major', 'constellation'], to: ['in', 'the', 'Ursa', 'Major', 'Constellation'] },
+  { from: ['in', 'the', 'virgo', 'constellation'], to: ['in', 'the', 'Virgo', 'Constellation'] },
   { from: ['in', 'total', ',', 'there', 'are'], to: ['there', 'are'] },
   { from: ['in', 'total', 'there', 'are'], to: ['there', 'are'] },
   { from: ['include', '(', 'but', 'not', 'limited', 'to', ')'], to: ['include', 'the'] },

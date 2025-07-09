@@ -8147,4 +8147,47 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the Ursa Major constellation"', () => {
+    const words = 'In the 2010s, Indians discovered 20 new stars in the Ursa Major constellation';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'new',
+                'stars',
+              ],
+            },
+            value: 20,
+          },
+        ],
+        subject: [
+          'Indians',
+        ],
+        verb: 'discovered',
+        when: {
+          groupType: 'date',
+          maxYear: 2019,
+          minYear: 2010,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Ursa',
+            'Major',
+            'Constellation',
+          ],
+        },
+      },
+    ]]);
+  });
 });
