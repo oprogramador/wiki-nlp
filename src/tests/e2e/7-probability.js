@@ -241,4 +241,42 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "there could be"', () => {
+    const words = 'There could be as many as 15 billion Earth-like planets in the Milky Way galaxy';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Earth-like',
+                'planets',
+              ],
+            },
+            value: 15e9,
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          'there',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Milky',
+            'Way',
+          ],
+        },
+      },
+    ]]);
+  });
 });
