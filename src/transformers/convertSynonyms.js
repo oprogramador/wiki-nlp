@@ -212,6 +212,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['is', 'perceived', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['is', 'said', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['is', 'thought', 'to', 'have'], to: ['likely', 'has'] },
+  { from: ['it', 'has', 'been', 'suggested', 'that'], to: ['likely'] },
   { from: ['it', 'is', 'ambiguous', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'believed', 'that'], to: ['likely'] },
   { from: ['it', 'is', 'likely', 'that'], to: ['likely'] },

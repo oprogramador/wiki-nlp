@@ -279,4 +279,53 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "it has been suggested that"', () => {
+    const words = 'It has been suggested that the last common ancestor of all birds may have been a dinosaur';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'dinosaur',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'all',
+                  'birds',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'last',
+                  'common',
+                  'ancestor',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
