@@ -3782,4 +3782,53 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "may be"', () => {
+    const words = 'According to NASA, the distance to the nearest exoplanet may be 4.2 light-years';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            unit: 'm',
+            value: 3.97362e16,
+          },
+        ],
+        probability: 0.5,
+        source: 'NASA',
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'preposition',
+                object: [
+                  'exoplanet',
+                ],
+                subject: [
+                  'the',
+                ],
+                verb: 'nearest',
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'distance',
+                ],
+              },
+            ],
+            verb: 'to',
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });

@@ -10,6 +10,7 @@ const map = {
   [JSON.stringify('kilometres')]: { factor: 1000, unit: 'm' },
   [JSON.stringify('km')]: { factor: 1000, unit: 'm' },
   [JSON.stringify('km2')]: { factor: 1e6, unit: 'm2' },
+  [JSON.stringify('light-years')]: { factor: 9.461e15, unit: 'm' },
   [JSON.stringify('m')]: { factor: 1, unit: 'm' },
   [JSON.stringify('metres')]: { factor: 1, unit: 'm' },
   [JSON.stringify('mi')]: { factor: 1609.34, unit: 'm' },
