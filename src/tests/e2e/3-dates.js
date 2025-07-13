@@ -8190,4 +8190,37 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "northwest"', () => {
+    const words = 'They met twice in northwest Tanzania in 2010s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'They',
+        ],
+        times: {
+          groupType: 'quantity',
+          value: 2,
+        },
+        verb: 'met',
+        when: {
+          groupType: 'date',
+          maxYear: 2019,
+          minYear: 2010,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Northwest',
+            'Tanzania',
+          ],
+        },
+      },
+    ]]);
+  });
 });
