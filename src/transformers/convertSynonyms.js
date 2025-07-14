@@ -115,6 +115,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['at', 'times'], to: ['occasionally'] },
   { from: ['b.c.e'], to: ['BCE'] },
+  { from: ['back', 'in', 'the'], to: ['in', 'the'] },
   { from: ['bc'], to: ['BCE'] },
   { from: ['because', 'of'], to: [',', 'due', 'to'] },
   { from: ['before'], to: ['by'] },

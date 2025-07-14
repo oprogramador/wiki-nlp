@@ -8223,4 +8223,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "back in the [...] century"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The college was established in Senegal back in the 19th century by the French colonial administration';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'college',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'French',
+              'colonial',
+              'administration',
+            ],
+          },
+        ],
+        verb: 'establish',
+        when: {
+          groupType: 'date',
+          maxYear: 1900,
+          minYear: 1801,
+        },
+        where: 'Senegal',
+      },
+    ]]);
+  });
 });
