@@ -192,6 +192,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'the', 'milky', 'way', 'galaxy'], to: ['in', 'the', 'Milky', 'Way'] },
   { from: ['in', 'the', 'northern', 'celestial', 'hemisphere'], to: ['in', 'the', 'Northern', 'Celestial', 'Hemisphere'] },
   { from: ['in', 'the', 'northern', 'sky'], to: ['in', 'the', 'Northern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'past', '12', 'months'], to: ['below', '1', 'years', 'ago'] },
   { from: ['in', 'the', 'southern', 'celestial', 'hemisphere'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
   { from: ['in', 'the', 'southern', 'sky'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
   { from: ['in', 'the', 'ursa', 'major', 'constellation'], to: ['in', 'the', 'Ursa', 'Major', 'Constellation'] },

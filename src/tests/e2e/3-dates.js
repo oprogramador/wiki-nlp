@@ -8263,4 +8263,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the past 12 months"', () => {
+    const words = '3 million Australian passports were issued by the federal office in the past 12 months';
+
+    const result = flow(splitText(words), { now: new Date('2035-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Australian',
+                'passports',
+              ],
+            },
+            value: 3e6,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'federal',
+              'office',
+            ],
+          },
+        ],
+        verb: 'issue',
+        when: {
+          groupType: 'date',
+          minYear: 2034,
+        },
+      },
+    ]]);
+  });
 });
