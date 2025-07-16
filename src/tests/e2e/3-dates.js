@@ -8303,4 +8303,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "is proven to have"', () => {
+    const words = 'The new method is proven to have the highest success rate in France in the 2010s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'highest',
+              'success',
+              'rate',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'new',
+              'method',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2019,
+          minYear: 2010,
+        },
+        where: 'France',
+      },
+    ]]);
+  });
 });
