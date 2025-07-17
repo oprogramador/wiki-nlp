@@ -138,6 +138,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['currently', 'known', 'as'], to: ['known', 'as'] },
   { from: ['date', 'back', 'to'], to: ['started', 'in'] },
   { from: ['dates', 'back', 'to'], to: ['started', 'in'] },
+  { from: ['dates', 'to'], to: ['started', 'in'] },
+  { from: ['dates', 'to', 'perhaps'], to: ['started', 'in', 'about'] },
   { from: ['dozens', 'of', 'billions', 'of'], to: ['above', '1e10'] },
   { from: ['dozens', 'of', 'millions', 'of'], to: ['above', '1e7'] },
   { from: ['dozens', 'of', 'thousands', 'of'], to: ['above', '1e4'] },

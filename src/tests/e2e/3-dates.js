@@ -8343,4 +8343,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "dates to perhaps"', () => {
+    const words = 'The temple construction in Thebes dates to perhaps 2110 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'temple',
+              'construction',
+            ],
+          },
+        ],
+        verb: 'started',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -2110,
+        },
+        where: 'Thebes',
+      },
+    ]]);
+  });
 });
