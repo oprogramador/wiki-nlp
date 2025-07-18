@@ -8373,4 +8373,64 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "appears to show" & "through centuries"', () => {
+    const words = 'The model in Carthage appears to show five stories which made a great impression through centuries';
+
+    const result = flow(splitText(words), { now: new Date('2030-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'apparently',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'stories',
+            value: 5,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'model',
+            ],
+          },
+        ],
+        verb: 'shows',
+        where: 'Carthage',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'great',
+              'impression',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'stories',
+            value: 5,
+          },
+        ],
+        verb: 'made',
+        when: {
+          groupType: 'date',
+          maxYear: 1730,
+        },
+      },
+    ]]);
+  });
 });
