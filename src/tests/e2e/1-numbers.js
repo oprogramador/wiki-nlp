@@ -3831,4 +3831,53 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "one-fourth of"', () => {
+    const words = 'The prologue and epilogue will occupy one-fourth of the text according to the author';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'occupy',
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'texts',
+              ],
+            },
+            value: 0.25,
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'author',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'prologue',
+                ],
+              },
+              'epilogue',
+            ],
+          },
+        ],
+        verb: 'will',
+      },
+    ]]);
+  });
 });
