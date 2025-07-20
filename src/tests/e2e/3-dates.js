@@ -8433,4 +8433,57 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "area that is now"', () => {
+    const words = 'Beginning in the seventh century, the area that is now Scotland has been divided into five areas';
+
+    const result = flow(splitText(words), { now: new Date('2030-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: 'areas',
+                value: 5,
+              },
+            ],
+            subject: [
+              'divided',
+            ],
+            verb: 'into',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Scotland',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'current',
+                  'area',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2030,
+          minYear: 601,
+        },
+      },
+    ]]);
+  });
 });
