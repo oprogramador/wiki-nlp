@@ -8486,4 +8486,43 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "the whole of" & "during the Pleistocene ice ages"', () => {
+    const words = 'The ice sheets were present in the whole of Australia during the Pleistocene ice ages';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'present',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'ice',
+              'sheets',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: -12e3,
+          minYear: -258e4,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Whole',
+            'Australia',
+          ],
+        },
+      },
+    ]]);
+  });
 });
