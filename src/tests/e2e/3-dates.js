@@ -8525,4 +8525,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "dating back to"', () => {
+    const words = 'The museum in Glasgow has a vibrant history dating back to the 11th century';
+
+    const result = flow(splitText(words), { now: new Date('2027-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'vibrant',
+              'history',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'museum',
+            ],
+          },
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2027,
+          minYear: 1001,
+        },
+        where: 'Glasgow',
+      },
+    ]]);
+  });
 });

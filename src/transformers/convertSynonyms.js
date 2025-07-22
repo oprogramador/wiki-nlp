@@ -142,6 +142,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['dates', 'back', 'to'], to: ['started', 'in'] },
   { from: ['dates', 'to', 'perhaps'], to: ['started', 'in', 'about'] },
   { from: ['dates', 'to'], to: ['started', 'in'] },
+  { from: ['dating', 'back', 'to'], to: ['since'] },
   { from: ['dozens', 'of', 'billions', 'of'], to: ['above', '1e10'] },
   { from: ['dozens', 'of', 'millions', 'of'], to: ['above', '1e7'] },
   { from: ['dozens', 'of', 'thousands', 'of'], to: ['above', '1e4'] },
