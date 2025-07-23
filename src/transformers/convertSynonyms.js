@@ -237,6 +237,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['large', 'numbers', 'of'], to: ['many'] },
   { from: ['legally', 'recognised', 'as'], to: [] },
   { from: ['little', 'more', 'than'], to: ['above'] },
+  { from: ['located', 'in', 'the', 'north', 'of', 'the', 'state', 'of'], to: ['in', 'the', 'Northern'] },
+  { from: ['located', 'in', 'the', 'south', 'of', 'the', 'state', 'of'], to: ['in', 'the', 'Southern'] },
   { from: ['majority', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['many', 'billions', 'of'], to: ['above', 'one', 'billion'] },
   { from: ['many', 'dozens', 'of'], to: ['above', '10'] },

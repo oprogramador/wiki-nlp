@@ -8563,4 +8563,44 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "located in the south of the state of"', () => {
+    const words = 'San Diego is an American municipality located in the south of the state of California';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'American',
+              'municipality',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'San',
+              'Diego',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Southern',
+            'California',
+          ],
+        },
+      },
+    ]]);
+  });
 });
