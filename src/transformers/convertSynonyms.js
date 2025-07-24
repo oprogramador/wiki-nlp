@@ -215,6 +215,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['including', ':'], to: ['including'] },
   { from: ['internationally', 'recognised', 'as'], to: [] },
   { from: ['into', 'the'], to: ['until', 'the'] },
+  { from: ['is', 'able', 'to', 'hold'], to: ['holds'] },
   { from: ['is', 'believed', 'to', 'be'], to: ['likely', 'is'] },
   { from: ['is', 'known', 'to', 'have', 'been'], to: ['was'] },
   { from: ['is', 'known', 'to', 'have'], to: ['have'] },

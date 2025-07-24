@@ -8603,4 +8603,62 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "is able to hold"', () => {
+    const words = 'The stadium in Buenos Aires is able to hold 47,000 people and was built in 1918';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            value: 47e3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'stadium',
+            ],
+          },
+        ],
+        verb: 'holds',
+        where: {
+          groupType: 'article',
+          words: [
+            'Buenos',
+            'Aires',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'built',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'stadium',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 1918,
+        },
+      },
+    ]]);
+  });
 });
