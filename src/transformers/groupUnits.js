@@ -18,7 +18,9 @@ const map = {
   [JSON.stringify('t')]: { factor: 1000, unit: 'kg' },
   [JSON.stringify('tonnes')]: { factor: 1000, unit: 'kg' },
   [JSON.stringify('tons')]: { factor: 1000, unit: 'kg' },
+  [JSON.stringify({ groupType: 'article', words: ['cubic', 'feet'] })]: { factor: 0.0283168, unit: 'm3' },
   [JSON.stringify({ groupType: 'article', words: ['sq', 'mi'] })]: { factor: 2589975, unit: 'm2' },
+  [JSON.stringify({ groupType: 'article', words: ['square', 'feet'] })]: { factor: 0.092903, unit: 'm2' },
   [JSON.stringify({ groupType: 'article', words: ['square', 'kilometers'] })]: { factor: 1e6, unit: 'm2' },
   [JSON.stringify({ groupType: 'article', words: ['square', 'kilometres'] })]: { factor: 1e6, unit: 'm2' },
 };

@@ -8661,4 +8661,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "cubic feet"', () => {
+    const words = 'Natural gas production peak in Nigeria, in 2015, was about 27 trillion cubic feet';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            isExact: false,
+            unit: 'm3',
+            value: 7645536e5,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Natural',
+              'gas',
+              'production',
+              'peak',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2015,
+        },
+        where: 'Nigeria',
+      },
+    ]]);
+  });
 });
