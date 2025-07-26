@@ -345,6 +345,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['such', 'as'], to: [':'] },
   { from: ['synonymous', 'with'], to: ['known', 'as'] },
   { from: ['the', 'city', 'of'], to: [] },
+  { from: ['the', 'expectation', 'is', 'that'], to: ['likely'] },
   { from: ['the', 'following', 'year'], to: ['1', 'years', 'later'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'large', 'majority', 'of'], to: ['above', '60', '%', 'of'] },

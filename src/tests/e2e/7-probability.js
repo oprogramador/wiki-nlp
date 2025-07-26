@@ -328,4 +328,36 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "the expectation is that"', () => {
+    const words = 'The expectation is that many collisions are happening in the Andromeda Galaxy';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'happening',
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'collisions',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Andromeda',
+            'Galaxy',
+          ],
+        },
+      },
+    ]]);
+  });
 });
