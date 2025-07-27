@@ -8698,4 +8698,43 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in East Asian waters"', () => {
+    const words = 'Most of the submarines are in East Asian waters as of 2020';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'submarines',
+              ],
+            },
+            min: 0.5,
+          },
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          year: 2020,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'East',
+            'Asian',
+            'Waters',
+          ],
+        },
+      },
+    ]]);
+  });
 });
