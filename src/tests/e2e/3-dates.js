@@ -8737,4 +8737,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "gigawatt"', () => {
+    const words = 'As of 2023, the total wind power capacity in Australia was 12 gigawatt (GW)';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'unit',
+            unit: 'W',
+            value: 12e9,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'total',
+              'wind',
+              'power',
+              'capacity',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          year: 2023,
+        },
+        where: 'Australia',
+      },
+    ]]);
+  });
 });
