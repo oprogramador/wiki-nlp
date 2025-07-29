@@ -3880,4 +3880,67 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "as a general rule" & "multiple"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'As a general rule, the accessory fruit is a mix of multiple floral organs according to most scientists';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'generally',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'quantity',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'floral',
+                    'organs',
+                  ],
+                },
+                max: 99,
+                min: 3,
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'mix',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'most',
+            'scientists',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'accessory',
+              'fruit',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ]]);
+  });
 });
