@@ -8774,4 +8774,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "almost all" & "during the American Revolutionary War"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Almost all modern American Atlantic naval bases were established during the American Revolutionary War';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'established',
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'modern',
+                'American',
+                'Atlantic',
+                'naval',
+                'bases',
+              ],
+            },
+            min: 0.9,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1783,
+          minYear: 1775,
+        },
+      },
+    ]]);
+  });
 });

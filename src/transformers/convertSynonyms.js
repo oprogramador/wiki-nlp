@@ -73,6 +73,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['after', 'only'], to: ['after'] },
   { from: ['after', 'the', 'fall', 'of', 'the', 'roman', 'empire'], to: ['since', '476'] },
   { from: ['again', 'by'], to: ['by'] },
+  { from: ['almost', 'all'], to: ['above', '90', '%', 'of'] },
   { from: ['although'], to: ['but'] },
   { from: ['american', 'dollars'], to: ['USDs'] },
   { from: ['an', 'estimated'], to: ['around'] },
