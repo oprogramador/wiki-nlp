@@ -8812,4 +8812,39 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "it is said that", "much more than", "lost their lives", "during the revolutionary war"', () => {
+    const words = 'It is said that much more than 150,000 people lost their lives during the Revolutionary War';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'life',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            min: 15e4,
+          },
+        ],
+        verb: 'lost',
+        when: {
+          groupType: 'date',
+          maxYear: 1783,
+          minYear: 1775,
+        },
+      },
+    ]]);
+  });
 });

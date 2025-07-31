@@ -9,7 +9,7 @@
       {
         delimiters: ['/', '-', '.', '+'],
         maximumEntropy: 8.4,
-        minimumWordLength: 4,
+        minimumWordLength: 3,
         shouldSplitCamelCase: true,
       },
     ],
