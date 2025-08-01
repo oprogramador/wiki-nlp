@@ -8847,4 +8847,34 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a little more than a dozen"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'A little more than a dozen buildings in Paris were built by Africans in the second half of the 18th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'buildings',
+            min: 10,
+          },
+        ],
+        subject: [
+          'Africans',
+        ],
+        verb: 'build',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1751,
+        },
+        where: 'Paris',
+      },
+    ]]);
+  });
 });
