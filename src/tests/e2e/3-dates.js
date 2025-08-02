@@ -8877,4 +8877,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "U.S. Navy"', () => {
+    const words = 'The U.S. Navy had hundreds of deployed vessels in Atlantic waters in 1890s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'deployed',
+                'vessels',
+              ],
+            },
+            min: 100,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'United',
+              'States',
+              'Navy',
+            ],
+          },
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          maxYear: 1899,
+          minYear: 1890,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Atlantic',
+            'Waters',
+          ],
+        },
+      },
+    ]]);
+  });
 });
