@@ -139,6 +139,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['colloquially', 'known', 'as'], to: ['known', 'as'] },
   { from: ['commencing', 'on'], to: ['since'] },
   { from: ['commonly', 'known', 'as'], to: ['known', 'as'] },
+  { from: ['continues', 'to', 'be'], to: ['is'] },
   { from: ['countless', 'numbers', 'of'], to: ['many'] },
   { from: ['countries', 'such', 'as'], to: [] },
   { from: ['currently', 'known', 'as'], to: ['known', 'as'] },

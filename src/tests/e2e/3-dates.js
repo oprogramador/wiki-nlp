@@ -8926,4 +8926,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "continues to be"', () => {
+    const words = 'The green area in Boston continues to be inhabited by the homeless as of 2022';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'green',
+              'area',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'homeless',
+            ],
+          },
+        ],
+        verb: 'inhabit',
+        when: {
+          groupType: 'date',
+          year: 2022,
+        },
+        where: 'Boston',
+      },
+    ]]);
+  });
 });
