@@ -8963,4 +8963,45 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "did not have"', () => {
+    const words = 'German states usually did not have a strong army in the 18th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'usually',
+        ],
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'strong',
+              'army',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'German',
+              'states',
+            ],
+          },
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          maxYear: 1800,
+          minYear: 1701,
+        },
+      },
+    ]]);
+  });
 });
