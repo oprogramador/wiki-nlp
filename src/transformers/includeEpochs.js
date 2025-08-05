@@ -5,6 +5,7 @@ const epochs = {
   [JSON.stringify(['the', 'World', 'War', 'II'])]: { maxYear: 1945, minYear: 1939 },
   [JSON.stringify(['the', 'World', 'War', 'I'])]: { maxYear: 1918, minYear: 1914 },
   [JSON.stringify(['the', 'French', 'Revolutionary', 'Wars'])]: { maxYear: 1802, minYear: 1792 },
+  [JSON.stringify(['the', 'French', 'Revolution'])]: { maxYear: 1799, minYear: 1789 },
   [JSON.stringify(['the', 'American', 'Revolutionary', 'War'])]: { maxYear: 1783, minYear: 1775 },
   [JSON.stringify(['the', 'Dutch', 'Golden', 'Age'])]: { maxYear: 1672, minYear: 1588 },
   [JSON.stringify(['the', 'Spanish', 'Golden', 'Age'])]: { maxYear: 1681, minYear: 1492 },

@@ -9004,4 +9004,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "great majority", "during the era of the French revolution"', () => {
+    const words = 'The great majority of the clergy were loyal to the king during the era of the French revolution';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'king',
+                ],
+              },
+            ],
+            subject: [
+              'loyal',
+            ],
+            verb: 'to',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'clergy',
+              ],
+            },
+            min: 0.6,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1799,
+          minYear: 1789,
+        },
+      },
+    ]]);
+  });
 });
