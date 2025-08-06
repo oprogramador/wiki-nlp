@@ -9053,4 +9053,38 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "between World War I and World War II"', () => {
+    const words = 'Most of the countries were authoritarian between World War I and World War II';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'authoritarian',
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'countries',
+              ],
+            },
+            min: 0.5,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1939,
+          minYear: 1918,
+        },
+      },
+    ]]);
+  });
 });

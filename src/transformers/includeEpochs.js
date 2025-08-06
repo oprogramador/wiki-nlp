@@ -3,6 +3,7 @@ const omitUndefined = require('../utils/omitUndefined');
 
 const epochs = {
   [JSON.stringify(['the', 'World', 'War', 'II'])]: { maxYear: 1945, minYear: 1939 },
+  [JSON.stringify(['the', 'Interwar', 'Period'])]: { maxYear: 1939, minYear: 1918 },
   [JSON.stringify(['the', 'World', 'War', 'I'])]: { maxYear: 1918, minYear: 1914 },
   [JSON.stringify(['the', 'French', 'Revolutionary', 'Wars'])]: { maxYear: 1802, minYear: 1792 },
   [JSON.stringify(['the', 'French', 'Revolution'])]: { maxYear: 1799, minYear: 1789 },
