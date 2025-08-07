@@ -419,6 +419,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['us', 'dollars'], to: ['USDs'] },
   { from: ['usually', 'synonymous', 'with'], to: ['known', 'as'] },
   { from: ['vast', 'numbers', 'of'], to: ['many'] },
+  { from: ['was', 'in', 'fact', 'a'], to: ['was', 'a'] },
+  { from: ['was', 'in', 'fact', 'an'], to: ['was', 'an'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['western'], to: ['Western'] },
   { from: ['what', 'is', 'now'], to: [] },

@@ -9087,4 +9087,52 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "was in fact an"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'According to the modern scholars, Romania was in fact an independent country back in the 1970s, due to a Soviet-Chinese equilibrium';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        cause: {
+          groupType: 'article',
+          words: [
+            'a',
+            'Soviet-Chinese',
+            'equilibrium',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'independent',
+              'country',
+            ],
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'modern',
+            'scholars',
+          ],
+        },
+        subject: [
+          'Romania',
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1979,
+          minYear: 1970,
+        },
+      },
+    ]]);
+  });
 });
