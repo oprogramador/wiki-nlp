@@ -9135,4 +9135,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the world" (lowercase) & "currently"', () => {
+    const words = 'There are 70 aircraft carriers in the world currently';
+
+    const result = flow(splitText(words), { now: new Date('2015-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'aircraft',
+                'carriers',
+              ],
+            },
+            value: 70,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        when: {
+          day: 1,
+          groupType: 'date',
+          month: 7,
+          year: 2015,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'World',
+          ],
+        },
+      },
+    ]]);
+  });
 });

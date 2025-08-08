@@ -2889,15 +2889,12 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "including" with an item', () => {
-    const words = 'The university currently has about 40,000 students, including over 14,000 international students';
+    const words = 'The university has about 40,000 students, including over 14,000 international students';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
       {
-        adverbs: [
-          'currently',
-        ],
         groupType: 'verb',
         object: [
           {
@@ -2933,15 +2930,12 @@ describe('articles & verbs (e2e)', () => {
   });
 
   it('converts "including" without a comma', () => {
-    const words = 'The university currently has about 40,000 students including over 21,000 girls';
+    const words = 'The university has about 40,000 students including over 21,000 girls';
 
     const result = flow(splitText(words));
 
     expect(result).to.deep.equal([[
       {
-        adverbs: [
-          'currently',
-        ],
         groupType: 'verb',
         object: [
           {
