@@ -9177,4 +9177,13 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it.skip('converts "at the beginning of the French Revolution"', () => {
+    const words = 'At the beginning of the French Revolution, the neighboring monarchies did not show great animosity';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+    ]]);
+  });
 });
