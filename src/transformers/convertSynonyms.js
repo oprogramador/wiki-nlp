@@ -281,6 +281,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['many', 'trillions', 'of'], to: ['above', 'one', 'trillion'] },
   { from: ['may', 'be'], to: ['likely', 'is'] },
   { from: ['may', 'have', 'been'], to: ['likely', 'is'] },
+  { from: ['may', 'have'], to: ['likely', 'has'] },
   { from: ['meanwhile', ','], to: [] },
   { from: ['mid', 'to', 'late'], to: ['mid-to-late'] },
   { from: ['middle', 'of', 'the'], to: ['mid'] },

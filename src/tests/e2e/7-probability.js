@@ -360,4 +360,35 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "may have"', () => {
+    const words = 'A bank customer may have as many as five accounts';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'accounts',
+            value: 5,
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'bank',
+              'customer',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });
