@@ -391,4 +391,78 @@ describe('probability', () => {
       },
     ]]);
   });
+
+  it('converts "was supposed to have"', () => {
+    const words = 'Trajan was supposed to have won many battles in the northern England';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'won',
+          {
+            groupType: 'quantity',
+            item: 'battles',
+            min: 3,
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          'Trajan',
+        ],
+        verb: 'has',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Northern',
+            'England',
+          ],
+        },
+      },
+    ]]);
+  });
+
+  it('converts "was supposed to have been"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Trajan was supposed to have been the greatest commander in the northern England in the early 2nd century AD';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'greatest',
+              'commander',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          'Trajan',
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 150,
+          minYear: 101,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Northern',
+            'England',
+          ],
+        },
+      },
+    ]]);
+  });
 });

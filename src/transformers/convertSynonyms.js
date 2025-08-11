@@ -424,6 +424,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['vast', 'numbers', 'of'], to: ['many'] },
   { from: ['was', 'in', 'fact', 'a'], to: ['was', 'a'] },
   { from: ['was', 'in', 'fact', 'an'], to: ['was', 'an'] },
+  { from: ['was', 'supposed', 'to', 'have'], to: ['likely', 'has'] },
   { from: ['well', 'over'], to: ['above'] },
   { from: ['western'], to: ['Western'] },
   { from: ['what', 'is', 'now'], to: [] },
