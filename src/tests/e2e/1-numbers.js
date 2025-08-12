@@ -3943,4 +3943,41 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "fewer than"', () => {
+    const words = 'There are fewer than 20 major cities in Australia, due to the climate';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        cause: {
+          groupType: 'article',
+          words: [
+            'the',
+            'climate',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'major',
+                'cities',
+              ],
+            },
+            max: 20,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        where: 'Australia',
+      },
+    ]]);
+  });
 });
