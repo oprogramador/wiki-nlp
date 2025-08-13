@@ -9186,4 +9186,39 @@ describe('dates (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts a double locality"', () => {
+    const words = 'The first railways proposals in Punjab were made in Multan in 1852';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'made',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'first',
+              'railways',
+              'proposals',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 1852,
+        },
+        where: {
+          general: 'Punjab',
+          precise: 'Multan',
+        },
+      },
+    ]]);
+  });
 });

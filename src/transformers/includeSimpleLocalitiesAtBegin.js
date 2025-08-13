@@ -19,7 +19,13 @@ const includeSimpleLocalitiesAtBegin = (phrase) => {
         ...getFirst(subject, lastIndex),
         ...getLast(subject, subject.length - lastIndex - 2),
       ],
-      where: subject[lastIndex + 1],
+      where: (phrase[0].where
+        ? {
+          general: subject[lastIndex + 1],
+          precise: phrase[0].where,
+        }
+        : subject[lastIndex + 1]
+      ),
     }];
   }
 
