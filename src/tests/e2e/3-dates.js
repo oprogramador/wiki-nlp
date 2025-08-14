@@ -9221,4 +9221,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "In the United States each state" (without a comma)', () => {
+    const words = 'In the United States each state is responsible for the education laws';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'education',
+                  'laws',
+                ],
+              },
+            ],
+            subject: [
+              'responsible',
+            ],
+            verb: 'for',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'each',
+              'state',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'United',
+            'States',
+          ],
+        },
+      },
+    ]]);
+  });
 });

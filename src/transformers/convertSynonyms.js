@@ -230,6 +230,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'the', 'past', '12', 'months'], to: ['below', '1', 'years', 'ago'] },
   { from: ['in', 'the', 'southern', 'celestial', 'hemisphere'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
   { from: ['in', 'the', 'southern', 'sky'], to: ['in', 'the', 'Southern', 'Celestial', 'Hemisphere'] },
+  { from: ['in', 'the', 'united', 'states', 'each', 'state'], to: ['in', 'the', 'United', 'States', ',', 'each', 'state'] },
   { from: ['in', 'the', 'ursa', 'major', 'constellation'], to: ['in', 'the', 'Ursa', 'Major', 'Constellation'] },
   { from: ['in', 'the', 'virgo', 'constellation'], to: ['in', 'the', 'Virgo', 'Constellation'] },
   { from: ['in', 'the', 'world'], to: ['in', 'the', 'World'] },
