@@ -3,6 +3,7 @@ const omitUndefined = require('../utils/omitUndefined');
 
 const epochs = {
   [JSON.stringify(['the', 'World', 'War', 'II'])]: { maxYear: 1945, minYear: 1939 },
+  [JSON.stringify(['the', 'Great', 'Depression'])]: { maxYear: 1939, minYear: 1929 },
   [JSON.stringify(['the', 'Interwar', 'Period'])]: { maxYear: 1939, minYear: 1918 },
   [JSON.stringify(['the', 'World', 'War', 'I'])]: { maxYear: 1918, minYear: 1914 },
   [JSON.stringify(['the', 'French', 'Revolutionary', 'Wars'])]: { maxYear: 1802, minYear: 1792 },
@@ -41,6 +42,23 @@ const includeEpochs = (phrase) => {
               ...epochs[stringified],
             },
             where: undefined,
+          }
+          : {}
+      ),
+    })];
+  }
+  const stringifiedPrecise = JSON.stringify(_.get(where, 'precise.words'));
+  if (stringifiedPrecise) {
+    return [omitUndefined({
+      ...phrase[0],
+      ...(
+        epochs[stringifiedPrecise]
+          ? {
+            when: {
+              groupType: 'date',
+              ...epochs[stringifiedPrecise],
+            },
+            where: phrase[0].where.general,
           }
           : {}
       ),

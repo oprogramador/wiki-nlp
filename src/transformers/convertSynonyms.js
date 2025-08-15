@@ -119,6 +119,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['at', 'the', 'end', 'of', 'the'], to: ['in', 'the', 'late'] },
   { from: ['at', 'the', 'same', 'time', 'at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['at', 'the', 'same', 'time'], to: ['at', 'the', 'same', 'time', ','] },
+  { from: ['at', 'the', 'time', 'of', 'the'], to: ['in', 'the'] },
   { from: ['at', 'times'], to: ['occasionally'] },
   { from: ['b.c.e'], to: ['BCE'] },
   { from: ['back', 'in', 'the'], to: ['in', 'the'] },

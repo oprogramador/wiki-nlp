@@ -9270,4 +9270,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "at the time of the Great Depression", with a locality', () => {
+    const words = 'The workers in Chicago lost their jobs at the time of the Great Depression';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'their',
+              'jobs',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'workers',
+            ],
+          },
+        ],
+        verb: 'lost',
+        when: {
+          groupType: 'date',
+          maxYear: 1939,
+          minYear: 1929,
+        },
+        where: 'Chicago',
+      },
+    ]]);
+  });
 });
