@@ -9307,4 +9307,42 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the Chicago area" & "the Great Depression of the 1930s"', () => {
+    const words = 'Unemployment hit record heights in the Chicago area during the Great Depression of the 1930s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'record',
+              'heights',
+            ],
+          },
+        ],
+        subject: [
+          'Unemployment',
+        ],
+        verb: 'hit',
+        when: {
+          groupType: 'date',
+          maxYear: 1939,
+          minYear: 1929,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Chicaco',
+            'Area',
+          ],
+        },
+      },
+    ]]);
+  });
 });
