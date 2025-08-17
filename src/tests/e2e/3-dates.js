@@ -9345,4 +9345,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "After the February Revolution of 1917"', () => {
+    const words = 'After the February Revolution of 1917, a soviet was formed by Bolsheviks in Omsk';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'soviet',
+            ],
+          },
+        ],
+        subject: [
+          'Bolsheviks',
+        ],
+        verb: 'form',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+          minYear: 1917,
+        },
+        where: 'Omsk',
+      },
+    ]]);
+  });
 });

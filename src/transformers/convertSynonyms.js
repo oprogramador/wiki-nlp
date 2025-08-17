@@ -74,6 +74,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['abundant', 'numbers', 'of'], to: ['many'] },
   { from: ['after', 'only'], to: ['after'] },
   { from: ['after', 'the', 'fall', 'of', 'the', 'roman', 'empire'], to: ['since', '476'] },
+  { from: ['after', 'the', 'february', 'revolution', 'of', '1917'], to: ['since', '1917'] },
+  { from: ['after', 'the', 'february', 'revolution'], to: ['since', '1917'] },
   { from: ['again', 'by'], to: ['by'] },
   { from: ['almost', 'all'], to: ['above', '90', '%', 'of'] },
   { from: ['although'], to: ['but'] },
