@@ -9376,4 +9376,37 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "tens of thousands" & "in the final year of World War II"', () => {
+    const words = 'Tens of thousands of Canadians showed their heroism in the final year of World War II';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'their',
+              'heroism',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'Canadians',
+            min: 1e4,
+          },
+        ],
+        verb: 'showed',
+        when: {
+          groupType: 'date',
+          year: 1945,
+        },
+      },
+    ]]);
+  });
 });
