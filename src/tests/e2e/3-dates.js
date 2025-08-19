@@ -9409,4 +9409,55 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Asian mainland" & "southern half of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the final year of World War II, Japanese forces were still present on the Asian mainland and southern half of Sakhalin Island';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'present',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Japanese',
+              'forces',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          year: 1945,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Asian',
+                'Mainland',
+              ],
+            },
+            {
+              groupType: 'article',
+              words: [
+                'Southern',
+                'Sakhalin',
+                'Island',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
