@@ -9460,4 +9460,50 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Japanese city of Nagasaki" & "during the final stages of World War II"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'A powerful weapon, Fat Man was dropped on the Japanese city of Nagasaki during the final stages of World War II';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'dropped',
+        ],
+        subject: [
+          {
+            alternativeNames: [
+              {
+                groupType: 'article',
+                words: [
+                  'Fat',
+                  'Man',
+                ],
+              },
+            ],
+            groupType: 'article',
+            words: [
+              'a',
+              'powerful',
+              'weapon',
+            ],
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 1945,
+          minYear: 1944,
+        },
+        where: {
+          general: 'Japan',
+          groupType: 'locality',
+          precise: 'Nagasaki',
+        },
+      },
+    ]]);
+  });
 });
