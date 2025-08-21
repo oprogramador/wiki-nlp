@@ -327,6 +327,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['on', 'the', 'asian', 'mainland'], to: ['in', 'the', 'Asian', 'Mainland'] },
   { from: ['on', 'the', 'japanese', 'city', 'of', 'hiroshima'], to: ['in', 'Hiroshima', ',', 'Japan'] },
   { from: ['on', 'the', 'japanese', 'city', 'of', 'nagasaki'], to: ['in', 'Nagasaki', ',', 'Japan'] },
+  { from: ['on', 'the', 'japanese', 'islands', 'of'], to: ['in'] },
   { from: ['on', 'the', 'night', 'of'], to: ['on'] },
   { from: ['on', 'the', 'other', 'hand', ','], to: [] },
   { from: ['on', 'the', 'other', 'hand'], to: [] },

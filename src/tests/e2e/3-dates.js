@@ -9506,4 +9506,45 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Japanese islands of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'As of 2020, feral cat colonies appear mostly on the Japanese islands of Kyushu, Okinawa, Amami & Tsushima';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'mostly',
+        ],
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'feral',
+              'cat',
+              'colonies',
+            ],
+          },
+        ],
+        verb: 'appear',
+        when: {
+          groupType: 'date',
+          year: 2020,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Kyushu',
+            'Okinawa',
+            'Amami',
+            'Tsushima',
+          ],
+        },
+      },
+    ]]);
+  });
 });
