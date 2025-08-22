@@ -289,4 +289,39 @@ describe('frequency (e2e)', () => {
     expect(result).to.deep.equal([[
     ]]);
   });
+
+  it('converts "annually" with no auxiliary verb', () => {
+    const words = 'In Australia, free-ranging cats catch hundreds of millions of birds annually';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        frequency: {
+          groupType: 'quantity',
+          item: 'years',
+          value: 1,
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'birds',
+            min: 1e8,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'free-ranging',
+              'cats',
+            ],
+          },
+        ],
+        verb: 'catch',
+        where: 'Australia',
+      },
+    ]]);
+  });
 });

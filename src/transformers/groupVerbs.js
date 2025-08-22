@@ -83,7 +83,7 @@ const groupVerbs = (phrase, { list = auxiliary, groupType = 'verb' } = {}) => {
         && (objectGroupTypes.includes(_.get(item, 'groupType')) || [...disallowed, ...prepositions].includes(item))
         && isLettersOnly(phrase[i - 1])
         && !isUpperCase(phrase[i - 1])
-        && ![...prepositions, ...pronouns].includes(toLowerCase(phrase[i - 1]))) - 1;
+        && ![...prepositions, ...pronouns, ...disallowed].includes(toLowerCase(phrase[i - 1]))) - 1;
   const verbPlace = negations.includes(phrase[potentialVerbPlace]) ? potentialVerbPlace - 1 : potentialVerbPlace;
   if (verbPlace === 0) {
     if (
