@@ -9547,4 +9547,50 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the Atlantic and Indian oceans"', () => {
+    const words = 'These fish live in the Atlantic and Indian oceans as of 2000';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'These',
+              'fish',
+            ],
+          },
+        ],
+        verb: 'live',
+        when: {
+          groupType: 'date',
+          year: 2000,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'Atlantic',
+                'Ocean',
+              ],
+            },
+            {
+              groupType: 'article',
+              words: [
+                'Indian',
+                'Ocean',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
