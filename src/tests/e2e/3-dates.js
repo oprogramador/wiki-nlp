@@ -9593,4 +9593,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "throughout" with a place, and with a decade', () => {
+    const words = 'There were dozens of hedgehog species throughout Europe, Asia, and Africa throughout the 1980s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'hedgehog',
+                'species',
+              ],
+            },
+            min: 10,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1989,
+          minYear: 1980,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Europe',
+            'Asia',
+            'Africa',
+          ],
+        },
+      },
+    ]]);
+  });
 });

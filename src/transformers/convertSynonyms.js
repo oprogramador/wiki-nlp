@@ -425,6 +425,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['thrice', 'a', 'year'], to: ['every', '4', 'months'] },
   { from: ['thrice'], to: ['3', 'times'] },
   { from: ['through', 'centuries'], to: ['over', '300', 'years', 'ago'] },
+  { from: ['throughout'], to: ['in'] },
   { from: ['thus', 'resulting', 'in'], to: ['resulting', 'in'] },
   { from: ['today'], to: convertNow(now) },
   { from: ['triannually'], to: ['every', '4', 'months'] },
