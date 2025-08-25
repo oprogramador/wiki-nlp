@@ -42,6 +42,9 @@ const convertPastParticipleToPresent = (word) => {
   if (beforeLast === 'e' && ['l', 'n'].includes(last)) {
     return base;
   }
+  if (beforeBeforeLast === 's' && beforeLast === 'o' && last === 'n') {
+    return base;
+  }
   if (['it', 'ng', 'op'].includes(`${beforeLast}${last}`)) {
     return base;
   }

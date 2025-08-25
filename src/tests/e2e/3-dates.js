@@ -9635,4 +9635,45 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "taken prisoner by"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'During the final stages of World War II, more than 5,700,000 Japanese soldiers were taken prisoner by the Allies';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'Japanese',
+                'soldiers',
+              ],
+            },
+            min: 57e5,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Allies',
+            ],
+          },
+        ],
+        verb: 'imprison',
+        when: {
+          groupType: 'date',
+          maxYear: 1945,
+          minYear: 1944,
+        },
+      },
+    ]]);
+  });
 });

@@ -398,6 +398,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['strictly', 'speaking'], to: [] },
   { from: ['such', 'as'], to: [':'] },
   { from: ['synonymous', 'with'], to: ['known', 'as'] },
+  { from: ['taken', 'prisoner'], to: ['imprisoned'] },
   { from: ['tens', 'of', 'thousands', 'of'], to: ['above', '1e4'] },
   { from: ['the', 'city', 'of'], to: [] },
   { from: ['the', 'expectation', 'is', 'that'], to: ['likely'] },
