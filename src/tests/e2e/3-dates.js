@@ -9676,4 +9676,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during the final year of World War I" & "in protest against"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'During the final year of World War I, the Czechoslovak army occupied many villages in Subcarpathian Rus, in protest against communist actions';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        cause: {
+          groupType: 'article',
+          words: [
+            'communist',
+            'actions',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'villages',
+            min: 3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Czechoslovak',
+              'army',
+            ],
+          },
+        ],
+        verb: 'occupied',
+        when: {
+          groupType: 'date',
+          year: 1918,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Subcarpathian',
+            'Rus',
+          ],
+        },
+      },
+    ]]);
+  });
 });
