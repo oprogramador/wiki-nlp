@@ -9725,4 +9725,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "it is known that" & "on the islands of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'It is known that there were hundreds of frog species on the islands of Java and Sumatra in the early 1990s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'frog',
+                'species',
+              ],
+            },
+            min: 100,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1994,
+          minYear: 1990,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Java',
+            'Sumatra',
+          ],
+        },
+      },
+    ]]);
+  });
 });
