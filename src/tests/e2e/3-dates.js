@@ -9767,4 +9767,61 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in Eurasia" & "on every continent except Antarctica"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'By 2010, they have settled in Eurasia but by 2020, they have settled on every continent except Antarctica';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'settled',
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 2010,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Asia',
+            'Europe',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'settled',
+        ],
+        subject: [
+          'they',
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Africa',
+            'America',
+            'Asia',
+            'Australia',
+            'Europe',
+          ],
+        },
+      },
+    ]]);
+  });
 });
