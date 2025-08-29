@@ -9824,4 +9824,63 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the south of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'In the south of Mumbai, there are precious buildings which were constructed quickly in the late 19th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'precious',
+              'buildings',
+            ],
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'Southern',
+            'Mumbai',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        adverbs: [
+          'quickly',
+        ],
+        groupType: 'verb',
+        object: [
+          'constructed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'precious',
+              'buildings',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1900,
+          minYear: 1851,
+        },
+      },
+    ]]);
+  });
 });
