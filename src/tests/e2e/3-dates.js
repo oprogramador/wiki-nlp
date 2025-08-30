@@ -9883,4 +9883,60 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the earlier" & "in the later"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Dutch people were poor in the later 17th century but they became rich in the earlier 18th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'poor',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Dutch',
+              'people',
+            ],
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1700,
+          minYear: 1651,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'rich',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Dutch',
+              'people',
+            ],
+          },
+        ],
+        verb: 'became',
+        when: {
+          groupType: 'date',
+          maxYear: 1750,
+          minYear: 1701,
+        },
+      },
+    ]]);
+  });
 });
