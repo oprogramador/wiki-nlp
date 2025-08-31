@@ -9939,4 +9939,53 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "has had" & "in mainland Southeast Asia"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Since the early 1st millennium AD, Buddhism has had many followers in mainland Southeast Asia and East Asia';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'followers',
+            min: 3,
+          },
+        ],
+        subject: [
+          'Buddhism',
+        ],
+        verb: 'has',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+          minYear: 1,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'Mainland',
+                'Southeast',
+                'Asia',
+              ],
+            },
+            {
+              groupType: 'article',
+              words: [
+                'East',
+                'Asia',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
