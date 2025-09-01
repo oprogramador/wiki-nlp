@@ -9988,4 +9988,55 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "monopoly" & "in the mainland United States"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'By the early 1900s, many economy experts have noticed Standard Oil\'s monopoly in the mainland United States';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'noticed',
+              'Standard',
+              'Oil\'s',
+              'monopoly',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'economy',
+                'experts',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'have',
+        when: {
+          groupType: 'date',
+          maxYear: 1904,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Mainland',
+            'United',
+            'States',
+          ],
+        },
+      },
+    ]]);
+  });
 });
