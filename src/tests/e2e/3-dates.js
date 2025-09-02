@@ -10039,4 +10039,101 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the United States of America"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Snowshoe is a short-haired bicolour colourpoint variety of domestic cat which appeared in the United States of America in the 1960s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'domestic',
+                  'cat',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'short-haired',
+                  'bicolour',
+                  'colourpoint',
+                  'variety',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Snowshoe',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'domestic',
+                  'cat',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'a',
+                  'short-haired',
+                  'bicolour',
+                  'colourpoint',
+                  'variety',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'appeared',
+        when: {
+          groupType: 'date',
+          maxYear: 1969,
+          minYear: 1960,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'United',
+            'States',
+          ],
+        },
+      },
+    ]]);
+  });
 });
