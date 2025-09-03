@@ -10136,4 +10136,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in modern-day"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Podaraki was frequently danced by peasants in modern-day Turkey as well as the northern Thrace during the 11th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'frequently',
+        ],
+        groupType: 'verb',
+        object: [
+          'podaraki',
+        ],
+        subject: [
+          'peasants',
+        ],
+        verb: 'dance',
+        when: {
+          groupType: 'date',
+          maxYear: 1100,
+          minYear: 1001,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Turkey',
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Northern',
+                'Thrace',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });

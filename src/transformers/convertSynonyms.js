@@ -227,6 +227,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'general'], to: ['generally'] },
   { from: ['in', 'indian', 'waters'], to: ['in', 'Indian', 'Waters'] },
   { from: ['in', 'mainland'], to: ['in', 'Mainland'] },
+  { from: ['in', 'modern-day'], to: ['in'] },
   { from: ['in', 'north', 'american', 'waters'], to: ['in', 'North', 'American', 'Waters'] },
   { from: ['in', 'north', 'atlantic', 'waters'], to: ['in', 'North', 'Atlantic', 'Waters'] },
   { from: ['in', 'pacific', 'waters'], to: ['in', 'Pacific', 'Waters'] },
