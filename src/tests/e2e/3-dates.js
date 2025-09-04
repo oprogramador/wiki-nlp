@@ -10178,4 +10178,47 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "etc."', () => {
+    const words = 'Many European tourists traveled to Thailand, Vietnam, Cambodia, etc. in the 1980s';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          {
+            groupType: 'and',
+            members: [
+              'Thailand',
+              'Vietnam',
+              'Cambodia',
+              'others',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'European',
+                'tourists',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'traveled',
+        when: {
+          groupType: 'date',
+          maxYear: 1989,
+          minYear: 1980,
+        },
+      },
+    ]]);
+  });
 });

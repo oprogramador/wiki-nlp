@@ -29,6 +29,8 @@ const createDefaultMap = ({ now }) => [
   { from: [',', 'colloquially', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'currently', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'either', 'directly', 'or', 'indirectly', ','], to: [] },
+  { from: [',', 'etc'], to: ['and', 'others'] },
+  { from: [',', 'etc.'], to: ['and', 'others'] },
   { from: [',', 'excluding'], to: ['excluding'] },
   { from: [',', 'formerly', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'historically', 'known', 'as'], to: ['#alternative-name'] },
