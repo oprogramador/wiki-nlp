@@ -2,7 +2,7 @@ const flow = require('../../flow');
 const splitText = require('../../splitText');
 const expect = require('../expect');
 
-describe('probability', () => {
+describe('probability (e2e)', () => {
   it('converts "It is speculated that"', () => {
     const words = 'It is speculated that by 4,000 BCE, sheep were domesticated in Africa';
 
