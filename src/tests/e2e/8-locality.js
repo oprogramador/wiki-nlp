@@ -34,4 +34,41 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "is known to occur" & "in the northern part of"', () => {
+    const words = 'Snow leopard is known to occur in the northern part of India, Nepal and Bhutan';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Snow',
+              'leopard',
+            ],
+          },
+        ],
+        verb: 'occurs',
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'Northern',
+                'India',
+              ],
+            },
+            'Nepal',
+            'Bhutan',
+          ],
+        },
+      },
+    ]]);
+  });
 });
