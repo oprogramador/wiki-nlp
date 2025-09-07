@@ -3980,4 +3980,32 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a wide array of"', () => {
+    const words = 'A wide array of species live in Canada & Alaska';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'species',
+            min: 3,
+          },
+        ],
+        verb: 'live',
+        where: {
+          groupType: 'and',
+          members: [
+            'Canada',
+            'Alaska',
+          ],
+        },
+      },
+    ]]);
+  });
 });
