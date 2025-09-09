@@ -1201,4 +1201,56 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in present-day"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The Chinese Mongolian horse may have been domesticated by poor farmers in present-day northern China and Kazakhstan as early as 4000 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Chinese',
+              'Mongolian',
+              'horse',
+            ],
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'poor',
+              'farmers',
+            ],
+          },
+        ],
+        verb: 'domesticate',
+        when: {
+          groupType: 'date',
+          year: -4000,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'Northern',
+                'China',
+              ],
+            },
+            'Kazakhstan',
+          ],
+        },
+      },
+    ]]);
+  });
 });

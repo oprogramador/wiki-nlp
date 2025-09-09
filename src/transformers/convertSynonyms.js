@@ -239,6 +239,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'north', 'atlantic', 'waters'], to: ['in', 'North', 'Atlantic', 'Waters'] },
   { from: ['in', 'pacific', 'waters'], to: ['in', 'Pacific', 'Waters'] },
   { from: ['in', 'particular'], to: ['particularly'] },
+  { from: ['in', 'present-day'], to: ['in'] },
   { from: ['in', 'reality'], to: [] },
   { from: ['in', 'south', 'american', 'waters'], to: ['in', 'South', 'American', 'Waters'] },
   { from: ['in', 'south', 'atlantic', 'waters'], to: ['in', 'South', 'Atlantic', 'Waters'] },
