@@ -1253,4 +1253,57 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Mongolian Plateau"', () => {
+    const words = 'By 1206, Genghis Khan had united many tribes on the Mongolian Plateau and southern half of Siberia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'united',
+          {
+            groupType: 'quantity',
+            item: 'tribes',
+            min: 3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Genghis',
+              'Khan',
+            ],
+          },
+        ],
+        verb: 'had',
+        when: {
+          groupType: 'date',
+          maxYear: 1206,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            {
+              groupType: 'article',
+              words: [
+                'Mongolian',
+                'Plateau',
+              ],
+            },
+            {
+              groupType: 'article',
+              words: [
+                'Southern',
+                'Siberia',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
