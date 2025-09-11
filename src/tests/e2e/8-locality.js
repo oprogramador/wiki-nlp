@@ -1306,4 +1306,66 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on Cuba" & "and in the US states of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Florida tussock moth is mostly found on Cuba, Haiti, the Bahamas, Jamaica, and in the US states of Florida, Texas, New Mexico, Arizona and southern California';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'mostly',
+        ],
+        groupType: 'verb',
+        object: [
+          'found',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Florida',
+              'tussock',
+              'moth',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: {
+          groupType: 'and',
+          members: [
+            'Cuba',
+            'Haiti',
+            {
+              groupType: 'article',
+              words: [
+                'the',
+                'Bahamas',
+              ],
+            },
+            'Jamaica',
+            'Florida',
+            'Texas',
+            {
+              groupType: 'article',
+              words: [
+                'New',
+                'Mexico',
+              ],
+            },
+            'Arizona',
+            {
+              groupType: 'article',
+              words: [
+                'Southern',
+                'California',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
