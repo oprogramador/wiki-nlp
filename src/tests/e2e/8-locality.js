@@ -1368,4 +1368,48 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "within"', () => {
+    const words = 'Vaccines approval within the European Union is typically performed by the European Medicines Agency';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'typically',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Vaccines',
+              'approval',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'European',
+              'Medicines',
+              'Agency',
+            ],
+          },
+        ],
+        verb: 'perform',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'European',
+            'Union',
+          ],
+        },
+      },
+    ]]);
+  });
 });

@@ -496,6 +496,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['which'], to: [',', 'which'] },
   { from: ['whole', 'hundreds', 'of'], to: ['above', '100'] },
   { from: ['widely', 'recognised', 'as'], to: [] },
+  { from: ['within'], to: ['in'] },
   { from: ['world', 'war', 'i'], to: ['the', 'World', 'War', 'I'] },
   { from: ['world', 'war', 'ii'], to: ['the', 'World', 'War', 'II'] },
   { from: ['worldwide'], to: ['in', 'the', 'World'] },
