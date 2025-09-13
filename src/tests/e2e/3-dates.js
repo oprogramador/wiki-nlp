@@ -9092,4 +9092,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during World War I and World War II"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'A vast majority of the Sikh population refused to fight during World War I and World War II, due to their pacifism';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        cause: {
+          groupType: 'article',
+          words: [
+            'their',
+            'pacifism',
+          ],
+        },
+        groupType: 'verb',
+        object: [
+          'to',
+          'fight',
+        ],
+        subject: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'Sikh',
+                'population',
+              ],
+            },
+            min: 0.6,
+          },
+        ],
+        verb: 'refused',
+        when: {
+          groupType: 'date',
+          maxYear: 1945,
+          minYear: 1914,
+        },
+      },
+    ]]);
+  });
 });
