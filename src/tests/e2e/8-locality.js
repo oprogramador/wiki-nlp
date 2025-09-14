@@ -1412,4 +1412,32 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "across"', () => {
+    const words = 'They walked many times across Brooklyn and Queens';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          'They',
+        ],
+        times: {
+          groupType: 'quantity',
+          min: 3,
+        },
+        verb: 'walked',
+        where: {
+          groupType: 'and',
+          members: [
+            'Brooklyn',
+            'Queens',
+          ],
+        },
+      },
+    ]]);
+  });
 });
