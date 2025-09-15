@@ -1440,4 +1440,48 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the territorial waters of"', () => {
+    const words = 'Bakamla\'s main task is to run safety inspections in the territorial waters of Indonesia';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'to',
+          {
+            groupType: 'article',
+            words: [
+              'run',
+              'safety',
+              'inspections',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              "Bakamla's",
+              'main',
+              'task',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Territorial',
+            'Waters',
+            'Of',
+            'Indonesia',
+          ],
+        },
+      },
+    ]]);
+  });
 });

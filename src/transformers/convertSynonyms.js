@@ -441,6 +441,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['synonymous', 'with'], to: ['known', 'as'] },
   { from: ['taken', 'prisoner'], to: ['imprisoned'] },
   { from: ['tens', 'of', 'thousands', 'of'], to: ['above', '1e4'] },
+  { from: ['territorial', 'waters', 'of'], to: ['Territorial', 'Waters', 'Of'] },
   { from: ['the', 'city', 'of'], to: [] },
   { from: ['the', 'expectation', 'is', 'that'], to: ['likely'] },
   { from: ['the', 'following', 'year'], to: ['1', 'years', 'later'] },
