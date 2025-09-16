@@ -370,6 +370,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['on', 'every', 'continent', 'except', 'antarctica'], to: ['in', 'Africa', ',', 'America', ',', 'Asia', ',', 'Australia', 'and', 'Europe'] },
   { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['on', 'the', 'asian', 'mainland'], to: ['in', 'the', 'Asian', 'Mainland'] },
+  { from: ['on', 'the', 'first', 'floor', 'of'], to: ['in', 'the', 'First', 'Floor', 'Of'] },
   { from: ['on', 'the', 'islands', 'of'], to: ['in'] },
   { from: ['on', 'the', 'japanese', 'city', 'of', 'hiroshima'], to: ['in', 'Hiroshima', ',', 'Japan'] },
   { from: ['on', 'the', 'japanese', 'city', 'of', 'nagasaki'], to: ['in', 'Nagasaki', ',', 'Japan'] },

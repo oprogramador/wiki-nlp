@@ -1484,4 +1484,41 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the first floor of"', () => {
+    const words = 'The Governor occupies offices on the first floor of the Colorado\'s Capitol';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'offices',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Governor',
+            ],
+          },
+        ],
+        verb: 'occupies',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'First',
+            'Floor',
+            'Of',
+            'the',
+            'Colorado\'s',
+            'Capitol',
+          ],
+        },
+      },
+    ]]);
+  });
 });
