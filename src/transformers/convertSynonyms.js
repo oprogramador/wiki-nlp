@@ -369,6 +369,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['on', 'cuba'], to: ['in', 'Cuba'] },
   { from: ['on', 'every', 'continent', 'except', 'antarctica'], to: ['in', 'Africa', ',', 'America', ',', 'Asia', ',', 'Australia', 'and', 'Europe'] },
   { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
+  { from: ['on', 'the', 'arabian', 'peninsula'], to: ['in', 'the', 'Arabian', 'Peninsula'] },
   { from: ['on', 'the', 'asian', 'mainland'], to: ['in', 'the', 'Asian', 'Mainland'] },
   { from: ['on', 'the', 'first', 'floor', 'of'], to: ['in', 'the', 'First', 'Floor', 'Of'] },
   { from: ['on', 'the', 'islands', 'of'], to: ['in'] },

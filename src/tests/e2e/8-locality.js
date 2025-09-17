@@ -1521,4 +1521,43 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Arabian Peninsula"', () => {
+    const words = 'Hundreds of thousands of immigrants work for the largest company on the Arabian Peninsula';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'for',
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'largest',
+              'company',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'immigrants',
+            min: 1e5,
+          },
+        ],
+        verb: 'work',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Arabian',
+            'Peninsula',
+          ],
+        },
+      },
+    ]]);
+  });
 });
