@@ -479,6 +479,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['twice'], to: ['2', 'times'] },
   { from: ['two-thirds'], to: ['two', 'thirds'] },
   { from: ['u.s.', 'dollars'], to: ['USDs'] },
+  { from: ['in', 'the', 'u.s'], to: ['in', 'the', 'United', 'States'] },
   { from: ['ultimately', 'resulting', 'in'], to: ['resulting', 'in'] },
   { from: ['united', 'states', 'dollars'], to: ['USDs'] },
   { from: ['universally', 'recognised', 'as'], to: [] },

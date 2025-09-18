@@ -1464,7 +1464,7 @@ describe('locality (e2e)', () => {
           {
             groupType: 'article',
             words: [
-              "Bakamla's",
+              'Bakamla\'s',
               'main',
               'task',
             ],
@@ -1555,6 +1555,47 @@ describe('locality (e2e)', () => {
             'the',
             'Arabian',
             'Peninsula',
+          ],
+        },
+      },
+    ]]);
+  });
+
+  it('converts "in the U.S."', () => {
+    const words = 'English & Spanish are the most popular languages in the U.S.';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'most',
+              'popular',
+              'languages',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'and',
+            members: [
+              'English',
+              'Spanish',
+            ],
+          },
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'United',
+            'States',
           ],
         },
       },
