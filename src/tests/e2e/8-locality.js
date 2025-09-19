@@ -1601,4 +1601,45 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in central" & "in the first decades of"', () => {
+    const words = 'Many notable cupletistas were born in central Aragon in the first decades of the 20th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'born',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'notable',
+                'cupletistas',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1901,
+        },
+        where: {
+          groupType: 'article',
+          words: [
+            'Central',
+            'Aragon',
+          ],
+        },
+      },
+    ]]);
+  });
 });
