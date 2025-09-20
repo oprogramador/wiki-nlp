@@ -1642,4 +1642,71 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the south-east of the" & "in the north-east of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'There are many nice towns in the south-east of the United States. There are also many nice towns in the north-east of Mexico';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'nice',
+                'towns',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'Southeast',
+            'United',
+            'States',
+          ],
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'nice',
+                'towns',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'Northeast',
+            'Mexico',
+          ],
+        },
+      },
+    ]]);
+  });
 });
