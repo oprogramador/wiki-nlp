@@ -1709,4 +1709,56 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the island of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Church of Jesus Christ of Latter-day Saints has a strong presence on the island of Ireland and on the island of Jersey';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'strong',
+              'presence',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'Jesus',
+                  'Christ',
+                  'of',
+                  'Latter-day',
+                  'Saints',
+                ],
+              },
+            ],
+            subject: [
+              'Church',
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'has',
+        where: {
+          groupType: 'and',
+          members: [
+            'Ireland',
+            'Jersey',
+          ],
+        },
+      },
+    ]]);
+  });
 });
