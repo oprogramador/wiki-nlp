@@ -465,4 +465,39 @@ describe('probability (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "until probably"', () => {
+    const words = 'Many poor villages in Sicily were inhabited until probably the early 17th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'inhabited',
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'poor',
+                'villages',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: 1650,
+        },
+        where: 'Sicily',
+      },
+    ]]);
+  });
 });
