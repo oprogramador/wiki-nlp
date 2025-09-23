@@ -9136,4 +9136,36 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "during the last decades of the"', () => {
+    const words = 'Paris became a popular tourist destination during the last decades of the 17th century';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'popular',
+              'tourist',
+              'destination',
+            ],
+          },
+        ],
+        subject: [
+          'Paris',
+        ],
+        verb: 'became',
+        when: {
+          groupType: 'date',
+          maxYear: 1700,
+          minYear: 1651,
+        },
+      },
+    ]]);
+  });
 });
