@@ -9168,4 +9168,96 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in human history"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'One of the most significant events in human history was the domestication of animals, which began with wolves more than 15,000 years ago';
+
+    const result = flow(splitText(words), { now: new Date('2000-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              'animals',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'domestication',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'most',
+                  'significant',
+                  'events',
+                ],
+              },
+            ],
+            subject: [
+              {
+                groupType: 'quantity',
+                value: 1,
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'was',
+        when: {
+          groupType: 'date',
+          maxYear: 2000,
+          minYear: -3e5,
+        },
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'with',
+          'wolves',
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'animals',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'domestication',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'began',
+        when: {
+          groupType: 'date',
+          maxYear: -13e3,
+        },
+      },
+    ]]);
+  });
 });

@@ -237,6 +237,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'every'], to: ['every'] },
   { from: ['in', 'fact', ','], to: [] },
   { from: ['in', 'general'], to: ['generally'] },
+  { from: ['in', 'human', 'history'], to: ['since', '3e5', 'BC'] },
   { from: ['in', 'indian', 'waters'], to: ['in', 'Indian', 'Waters'] },
   { from: ['in', 'kantō', 'region', 'of', 'japan'], to: ['in', 'Kantō'] },
   { from: ['in', 'kantō', 'region'], to: ['in', 'Kantō'] },
