@@ -4008,4 +4008,39 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "thousands, sometimes millions"', () => {
+    const words = 'A queen ant typically produces thousands, sometimes millions, of eggs every year';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'typically',
+        ],
+        frequency: 'year',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'eggs',
+            max: 1e7,
+            min: 1e3,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'queen',
+              'ant',
+            ],
+          },
+        ],
+        verb: 'produces',
+      },
+    ]]);
+  });
 });
