@@ -1761,4 +1761,43 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the US state of Georgia"', () => {
+    const words = 'Many Cherokees have been living in the US state of Georgia since the 18th century';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'living',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'Cherokees',
+            min: 3,
+          },
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+          minYear: 1701,
+        },
+        where: {
+          general: {
+            groupType: 'article',
+            words: [
+              'United',
+              'States',
+            ],
+          },
+          groupType: 'locality',
+          precise: 'Georgia',
+        },
+      },
+    ]]);
+  });
 });
