@@ -1800,4 +1800,72 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the US states of"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Milwaukee Railway is an obsolete railroad which operated in the US states of Wisconsin & northern Michigan during the late 19th and early 20th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'obsolete',
+              'railroad',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Milwaukee',
+              'Railway',
+            ],
+          },
+        ],
+        verb: 'is',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'an',
+              'obsolete',
+              'railroad',
+            ],
+          },
+        ],
+        verb: 'operated',
+        when: {
+          groupType: 'date',
+          maxYear: 1950,
+          minYear: 1851,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Wisconsin',
+            {
+              groupType: 'article',
+              words: [
+                'Northern',
+                'Michigan',
+              ],
+            },
+          ],
+        },
+      },
+    ]]);
+  });
 });
