@@ -4043,4 +4043,46 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "less than"', () => {
+    const words = 'Super-colonialism is generally found in less than 1% of all ants in America';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'generally',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'preposition',
+            object: [
+              {
+                groupType: 'share',
+                item: {
+                  groupType: 'article',
+                  words: [
+                    'all',
+                    'ants',
+                  ],
+                },
+                max: 0.01,
+              },
+            ],
+            subject: [
+              'found',
+            ],
+            verb: 'in',
+          },
+        ],
+        subject: [
+          'Super-colonialism',
+        ],
+        verb: 'is',
+        where: 'America',
+      },
+    ]]);
+  });
 });
