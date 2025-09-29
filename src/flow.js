@@ -93,6 +93,7 @@ const flow = (phrases, { now } = { now: new Date() }) => {
     p => p.map(convertPunctuation),
     p => p.map(convertSynonyms({ createMap: () => [{ from: ['when'], to: [';', 'at', 'the', 'same', 'time'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'while'], to: [';'] }] })),
+    p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'whereas'], to: [';'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: ['whilst'], to: [';'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', 'and', 'then'], to: [';'] }] })),
     p => p.map(convertSynonyms({ createMap: () => [{ from: [',', ';'], to: [';'] }] })),

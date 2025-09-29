@@ -4085,4 +4085,49 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "whereas"', () => {
+    const words = 'Female bees are diploid, whereas male bees are haploid';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'diploid',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'Female',
+                'bees',
+              ],
+            },
+          ],
+          verb: 'are',
+        },
+      ],
+      [
+        {
+          groupType: 'verb',
+          object: [
+            'haploid',
+          ],
+          subject: [
+            {
+              groupType: 'article',
+              words: [
+                'Male',
+                'bees',
+              ],
+            },
+          ],
+          verb: 'are',
+        },
+      ],
+    ]);
+  });
 });
