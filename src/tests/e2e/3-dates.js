@@ -9260,4 +9260,41 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "for thousands of years"', () => {
+    const words = 'Humans in Eurasia have been collecting honey for thousands of years';
+
+    const result = flow(splitText(words), { now: new Date('2040-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'collecting',
+              'honey',
+            ],
+          },
+        ],
+        subject: [
+          'Humans',
+        ],
+        verb: 'are',
+        when: {
+          groupType: 'date',
+          maxYear: 2040,
+          minYear: -8000,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Asia',
+            'Europe',
+          ],
+        },
+      },
+    ]]);
+  });
 });

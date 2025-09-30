@@ -203,6 +203,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['excluding', ':'], to: ['excluding'] },
   { from: ['few', 'or', 'no'], to: ['below', '100'] },
   { from: ['fewer', 'than'], to: ['below'] },
+  { from: ['for', 'thousands', 'of', 'years'], to: ['since', '8e3', 'BC'] },
   { from: ['formally', 'recognised', 'as'], to: [] },
   { from: ['formerly', 'known', 'as'], to: ['known', 'as'] },
   { from: ['from', 'the', 'beginning', 'of'], to: ['since'] },
