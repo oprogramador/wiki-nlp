@@ -1,7 +1,14 @@
 /* eslint-disable max-len */
 const _ = require('lodash');
+const fs = require('fs');
 const toLowerCase = require('../utils/toLowerCase');
 const { getLast, withoutLast } = require('../utils/listUtils');
+
+const islands = fs
+  .readFileSync(`${__dirname}/../resources/islands.txt`)
+  .toString()
+  .split('\n')
+  .filter(x => x);
 
 const convertNow = now => [
   'on',
@@ -14,6 +21,10 @@ const convertNow = now => [
 ];
 
 const generateMap = () => [
+  ...islands.map(island => ({
+    from: ['on', ...island.toLowerCase().split(' ')],
+    to: ['in', ...island.split(' ')],
+  })),
   ..._.times(
     20, i => ({
       from: ['early', 'in', 'the', `${i + 4}th`, 'century'],
@@ -389,7 +400,6 @@ const createDefaultMap = ({ now }) => [
   { from: ['often', ',', 'but', 'not', 'always', ','], to: ['usually'] },
   { from: ['often', 'used'], to: ['used', 'frequently'] },
   { from: ['on', 'average'], to: ['typically'] },
-  { from: ['on', 'cuba'], to: ['in', 'Cuba'] },
   { from: ['on', 'every', 'continent', 'except', 'antarctica'], to: ['in', 'Africa', ',', 'America', ',', 'Asia', ',', 'Australia', 'and', 'Europe'] },
   { from: ['on', 'that', 'date', ','], to: ['at', 'the', 'same', 'time', ','] },
   { from: ['on', 'the', 'arabian', 'peninsula'], to: ['in', 'the', 'Arabian', 'Peninsula'] },

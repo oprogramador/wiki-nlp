@@ -1868,4 +1868,41 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on Victoria Island"', () => {
+    const words = 'They visited twice a polar lake on Victoria Island';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'polar',
+              'lake',
+            ],
+          },
+        ],
+        subject: [
+          'They',
+        ],
+        times: {
+          groupType: 'quantity',
+          value: 2,
+        },
+        verb: 'visited',
+        where: {
+          groupType: 'article',
+          words: [
+            'Victoria',
+            'Island',
+          ],
+        },
+      },
+    ]]);
+  });
 });
