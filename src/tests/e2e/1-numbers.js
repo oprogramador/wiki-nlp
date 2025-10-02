@@ -4130,4 +4130,39 @@ describe('numbers (e2e)', () => {
       ],
     ]);
   });
+
+  it('converts "the greater part of"', () => {
+    const words = 'The greater part of the castle in Edinburgh was rebuilt by peasants in the 15th and 16th centuries';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'share',
+            item: {
+              groupType: 'article',
+              words: [
+                'the',
+                'castle',
+              ],
+            },
+            min: 0.5,
+          },
+        ],
+        subject: [
+          'peasants',
+        ],
+        verb: 'rebuild',
+        when: {
+          groupType: 'date',
+          maxYear: 1600,
+          minYear: 1401,
+        },
+        where: 'Edinburgh',
+      },
+    ]]);
+  });
 });

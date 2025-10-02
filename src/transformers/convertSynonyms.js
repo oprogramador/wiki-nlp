@@ -484,6 +484,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['the', 'following', 'year'], to: ['1', 'years', 'later'] },
   { from: ['the', 'great', 'depression', 'of', 'the', '1930s'], to: ['the', 'Great', 'Depression'] },
   { from: ['the', 'great', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
+  { from: ['the', 'greater', 'part', 'of'], to: ['above', '50', '%', 'of'] },
   { from: ['the', 'handful', 'of'], to: ['handful'] },
   { from: ['the', 'large', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
   { from: ['the', 'latter', 'half', 'of', 'the'], to: ['the', 'late'] },
