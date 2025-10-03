@@ -500,6 +500,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['then', 'the', 'following', 'year'], to: ['1', 'years', 'later'] },
   { from: ['then', 'the', 'next', 'year'], to: ['1', 'years', 'later'] },
   { from: ['there', 'could', 'be'], to: ['there', 'are', 'likely'] },
+  { from: ['there', 'is', 'evidence', 'for'], to: ['there', 'is'] },
   { from: ['third', 'largest'], to: ['third-largest'] },
   { from: ['though'], to: ['but'] },
   { from: ['thousands', ',', 'sometimes', 'millions', ',', 'of'], to: ['1e3–1e7'] },

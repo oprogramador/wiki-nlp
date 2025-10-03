@@ -1905,4 +1905,62 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "there is also evidence for"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'There is also evidence for numerous ovens and stoves, which were used in the 7th millennium BC in modern-day Turkey';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'ovens',
+                'stoves',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'is',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'used',
+        ],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'ovens',
+                'stoves',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'were',
+        when: {
+          groupType: 'date',
+          maxYear: -6001,
+          minYear: -7000,
+        },
+        where: 'Turkey',
+      },
+    ]]);
+  });
 });
