@@ -1797,7 +1797,7 @@ describe('dates (e2e)', () => {
             groupType: 'article',
             words: [
               'the',
-              'world',
+              'World',
             ],
           },
         ],

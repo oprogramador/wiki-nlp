@@ -1963,4 +1963,43 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "across the world"', () => {
+    const words = 'According to many scientists, water is the most essential resource across the world';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'most',
+              'essential',
+              'resource',
+            ],
+          },
+        ],
+        source: {
+          groupType: 'quantity',
+          item: 'scientists',
+          min: 3,
+        },
+        subject: [
+          'water',
+        ],
+        verb: 'is',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'World',
+          ],
+        },
+      },
+    ]]);
+  });
 });

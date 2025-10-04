@@ -314,7 +314,6 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'the', 'virgo', 'constellation'], to: ['in', 'the', 'Virgo', 'Constellation'] },
   { from: ['in', 'the', 'west', 'of'], to: ['in', 'Western'] },
   { from: ['in', 'the', 'western', 'part', 'of'], to: ['in', 'Western'] },
-  { from: ['in', 'the', 'world'], to: ['in', 'the', 'World'] },
   { from: ['in', 'total', ',', 'there', 'are'], to: ['there', 'are'] },
   { from: ['in', 'total', 'there', 'are'], to: ['there', 'are'] },
   { from: ['include', '(', 'but', 'not', 'limited', 'to', ')'], to: ['include', 'the'] },
@@ -543,6 +542,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['within'], to: ['in'] },
   { from: ['world', 'war', 'i'], to: ['the', 'World', 'War', 'I'] },
   { from: ['world', 'war', 'ii'], to: ['the', 'World', 'War', 'II'] },
+  { from: ['world'], to: ['World'] },
   { from: ['worldwide'], to: ['in', 'the', 'World'] },
 ];
 
