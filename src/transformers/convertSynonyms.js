@@ -346,6 +346,8 @@ const createDefaultMap = ({ now }) => [
   { from: ['it', 'is', 'uncertain', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'undetermined', 'if'], to: ['perhaps'] },
   { from: ['it', 'is', 'unsure', 'if'], to: ['perhaps'] },
+  { from: ['it', 'was', 'long', 'speculated', 'that'], to: ['likely'] },
+  { from: ['it', 'was', 'speculated', 'that'], to: ['likely'] },
   { from: ['just', 'above'], to: ['above'] },
   { from: ['just', 'under'], to: ['below'] },
   { from: ['large', 'numbers', 'of'], to: ['many'] },

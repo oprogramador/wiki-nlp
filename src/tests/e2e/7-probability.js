@@ -500,4 +500,34 @@ describe('probability (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "it was long speculated that"', () => {
+    const words = 'It was long speculated that the earthquake in Sicily occurred around 270 BC';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'earthquake',
+            ],
+          },
+        ],
+        verb: 'occurred',
+        when: {
+          groupType: 'date',
+          isExact: false,
+          year: -270,
+        },
+        where: 'Sicily',
+      },
+    ]]);
+  });
 });
