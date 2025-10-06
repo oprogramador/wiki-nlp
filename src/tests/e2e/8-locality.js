@@ -2002,4 +2002,52 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in other galaxies"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'According to the vast majority of the astronomers, there are many supernovae and quasars in other galaxies';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'and',
+              members: [
+                'supernovae',
+                'quasars',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        source: {
+          groupType: 'share',
+          item: {
+            groupType: 'article',
+            words: [
+              'the',
+              'astronomers',
+            ],
+          },
+          min: 0.6,
+        },
+        subject: [
+          'there',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Universe',
+          ],
+        },
+      },
+    ]]);
+  });
 });
