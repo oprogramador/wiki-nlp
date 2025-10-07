@@ -244,6 +244,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'australian', 'waters'], to: ['in', 'Australian', 'Waters'] },
   { from: ['in', 'central', 'american', 'waters'], to: ['in', 'Central', 'American', 'Waters'] },
   { from: ['in', 'central'], to: ['in', 'Central'] },
+  { from: ['in', 'developing', 'countries'], to: ['in', 'Developing', 'Countries'] },
   { from: ['in', 'east', 'asian', 'waters'], to: ['in', 'East', 'Asian', 'Waters'] },
   { from: ['in', 'eurasia'], to: ['in', 'Asia', 'and', 'Europe'] },
   { from: ['in', 'european', 'waters'], to: ['in', 'European', 'Waters'] },

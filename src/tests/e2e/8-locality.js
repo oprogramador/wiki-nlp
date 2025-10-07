@@ -2050,4 +2050,42 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in developing countries"', () => {
+    const words = 'People in developing countries usually have a poor public health infrastructure';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'usually',
+        ],
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'poor',
+              'public',
+              'health',
+              'infrastructure',
+            ],
+          },
+        ],
+        subject: [
+          'People',
+        ],
+        verb: 'have',
+        where: {
+          groupType: 'article',
+          words: [
+            'Developing',
+            'Countries',
+          ],
+        },
+      },
+    ]]);
+  });
 });
