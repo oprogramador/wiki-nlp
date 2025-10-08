@@ -194,6 +194,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['during', 'the'], to: ['in', 'the'] },
   { from: ['during', 'world', 'war', 'i', 'and', 'world', 'war', 'ii'], to: ['in', '1914–1945'] },
   { from: ['e.g.'], to: ['including'] },
+  { from: ['each', 'year'], to: ['every', '1', 'years'] },
   { from: ['early', 'to', 'mid'], to: ['early-to-mid'] },
   { from: ['eastern', 'half', 'of'], to: ['Eastern'] },
   { from: ['eastern'], to: ['Eastern'] },

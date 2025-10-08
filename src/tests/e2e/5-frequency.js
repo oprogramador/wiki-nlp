@@ -324,4 +324,49 @@ describe('frequency (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "each year"', () => {
+    const words = 'On average, a macaque in Malaysia eats about 300 large spiders each year';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'typically',
+        ],
+        frequency: {
+          groupType: 'quantity',
+          item: 'years',
+          value: 1,
+        },
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            isExact: false,
+            item: {
+              groupType: 'article',
+              words: [
+                'large',
+                'spiders',
+              ],
+            },
+            value: 300,
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'macaque',
+            ],
+          },
+        ],
+        verb: 'eats',
+        where: 'Malaysia',
+      },
+    ]]);
+  });
 });
