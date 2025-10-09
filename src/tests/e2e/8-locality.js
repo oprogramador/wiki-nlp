@@ -2088,4 +2088,60 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "too" with surrounding commas', () => {
+    const words = 'Swedish opened, too, Europe\'s first yoga school which is the Goswami Yoga Institute in Stockholm';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'Europe\'s',
+              'first',
+              'yoga',
+              'school',
+            ],
+          },
+        ],
+        subject: [
+          'Swedish',
+        ],
+        verb: 'opened',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Goswami',
+              'Yoga',
+              'Institute',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'Europe\'s',
+              'first',
+              'yoga',
+              'school',
+            ],
+          },
+        ],
+        verb: 'is',
+        where: 'Stockholm',
+      },
+    ]]);
+  });
 });

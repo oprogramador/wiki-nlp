@@ -4447,7 +4447,13 @@ describe('dates (e2e)', () => {
           groupType: 'verb',
           isNegated: true,
           object: [
-            'important',
+            {
+              groupType: 'article',
+              words: [
+                'too',
+                'important',
+              ],
+            },
           ],
           subject: [
             {

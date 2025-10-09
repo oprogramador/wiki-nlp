@@ -61,6 +61,7 @@ const createDefaultMap = ({ now }) => [
   { from: [',', 'previously', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'simply', 'known', 'as'], to: ['#alternative-name'] },
   { from: [',', 'sometimes', 'known', 'as'], to: ['#alternative-name'] },
+  { from: [',', 'too', ','], to: [] },
   { from: ['1st'], to: ['first'] },
   { from: ['21st'], to: ['twenty-first'] },
   { from: ['2nd'], to: ['second'] },
