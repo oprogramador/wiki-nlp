@@ -9303,4 +9303,48 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "this hypothesis states that"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'This hypothesis states that the Moon was captured by the Earth billions of years ago, due to aerobraking';
+
+    const result = flow(splitText(words), { now: new Date('2000-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        cause: 'aerobraking',
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Moon',
+            ],
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'this',
+            'hypothesis',
+          ],
+        },
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Earth',
+            ],
+          },
+        ],
+        verb: 'capture',
+        when: {
+          groupType: 'date',
+          maxYear: -999998000,
+        },
+      },
+    ]]);
+  });
 });
