@@ -2144,4 +2144,35 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "there are plenty of" & "across the Moon\'s surface"', () => {
+    const words = 'There are plenty of craters across the Moon\'s surface';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'craters',
+            min: 3,
+          },
+        ],
+        subject: [
+          'there',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Lunar',
+            'Surface',
+          ],
+        },
+      },
+    ]]);
+  });
 });
