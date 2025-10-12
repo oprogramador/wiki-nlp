@@ -9347,4 +9347,46 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "since prehistoric times"', () => {
+    const words = 'The area of Egypt has been constantly occupied since prehistoric times';
+
+    const result = flow(splitText(words), { now: new Date('2020-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        adverbs: [
+          'constantly',
+        ],
+        groupType: 'verb',
+        object: [
+          'occupied',
+        ],
+        subject: [
+          {
+            groupType: 'preposition',
+            object: [
+              'Egypt',
+            ],
+            subject: [
+              {
+                groupType: 'article',
+                words: [
+                  'the',
+                  'area',
+                ],
+              },
+            ],
+            verb: 'of',
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2020,
+          minYear: -33e5,
+        },
+      },
+    ]]);
+  });
 });

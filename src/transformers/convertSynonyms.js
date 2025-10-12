@@ -468,6 +468,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['since', 'approximately', 'the'], to: ['since', 'the'] },
   { from: ['since', 'around', 'the'], to: ['since', 'the'] },
   { from: ['since', 'before'], to: ['since'] },
+  { from: ['since', 'prehistoric', 'times'], to: ['since', '-3.3e6'] },
   { from: ['since', 'roughly', 'the'], to: ['since', 'the'] },
   { from: ['so', 'many'], to: ['many'] },
   { from: ['sometimes', 'known', 'as'], to: ['known', 'as'] },
