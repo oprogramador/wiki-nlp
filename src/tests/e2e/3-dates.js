@@ -9389,4 +9389,60 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "that has been" & "since pre-historic times"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'Donax is a colorful marine bivalve mollusk that has been consumed since pre-historic times in Europe';
+
+    const result = flow(splitText(words), { now: new Date('2024-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'colorful',
+              'marine',
+              'bivalve',
+              'mollusk',
+            ],
+          },
+        ],
+        subject: [
+          'Donax',
+        ],
+        verb: 'is',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          'consumed',
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'colorful',
+              'marine',
+              'bivalve',
+              'mollusk',
+            ],
+          },
+        ],
+        verb: 'is',
+        when: {
+          groupType: 'date',
+          maxYear: 2024,
+          minYear: -33e5,
+        },
+        where: 'Europe',
+      },
+    ]]);
+  });
 });
