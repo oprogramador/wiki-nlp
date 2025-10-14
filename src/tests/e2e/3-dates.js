@@ -9445,4 +9445,35 @@ describe('dates (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "throughout centuries"', () => {
+    const words = 'Throughout centuries Tatars resisted assimilation in Poland, Lithuania, and Belarus';
+
+    const result = flow(splitText(words), { now: new Date('2030-07-01') });
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          'assimilation',
+        ],
+        subject: [
+          'Tatars',
+        ],
+        verb: 'resisted',
+        when: {
+          groupType: 'date',
+          maxYear: 1730,
+        },
+        where: {
+          groupType: 'and',
+          members: [
+            'Poland',
+            'Lithuania',
+            'Belarus',
+          ],
+        },
+      },
+    ]]);
+  });
 });
