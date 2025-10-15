@@ -2175,4 +2175,41 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "in the Grand Duchy of"', () => {
+    const words = 'Many rich men settled in the Grand Duchy of Tuscany';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'rich',
+                'men',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        verb: 'settled',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Grand',
+            'Duchy',
+            'Of',
+            'Tuscany',
+          ],
+        },
+      },
+    ]]);
+  });
 });

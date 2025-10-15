@@ -276,6 +276,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['in', 'the', 'eastern', 'part', 'of'], to: ['in', 'Eastern'] },
   { from: ['in', 'the', 'final', 'year', 'of', 'world', 'war', 'ii'], to: ['in', '1945'] },
   { from: ['in', 'the', 'first', 'decades', 'of', 'the'], to: ['in', 'the', 'early'] },
+  { from: ['in', 'the', 'grand', 'duchy', 'of'], to: ['in', 'the', 'Grand', 'Duchy', 'Of'] },
   { from: ['in', 'the', 'hydra', 'constellation'], to: ['in', 'the', 'Hydra', 'Constellation'] },
   { from: ['in', 'the', 'indian', 'and', 'atlantic', 'oceans'], to: ['in', 'Indian', 'Ocean', 'and', 'Atlantic', 'Ocean'] },
   { from: ['in', 'the', 'indian', 'and', 'pacific', 'oceans'], to: ['in', 'Indian', 'Ocean', 'and', 'Pacific', 'Ocean'] },
