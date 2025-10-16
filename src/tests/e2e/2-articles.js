@@ -3401,4 +3401,64 @@ describe('articles & verbs (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "does not have" & "and only has"', () => {
+    const words = 'The Moon does not have a global magnetic field and only has a weak crustal magnetization';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        isNegated: true,
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'global',
+              'magnetic',
+              'field',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Moon',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ],
+    [
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'weak',
+              'crustal',
+              'magnetization',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'Moon',
+            ],
+          },
+        ],
+        verb: 'has',
+      },
+    ]]);
+  });
 });
