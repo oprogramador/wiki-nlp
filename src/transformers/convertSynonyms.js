@@ -373,6 +373,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['many', 'of', 'the'], to: ['many'] },
   { from: ['many', 'thousands', 'of'], to: ['above', '1000'] },
   { from: ['many', 'trillions', 'of'], to: ['above', 'one', 'trillion'] },
+  { from: ['mathematician', ',', 'physicist', ',', 'and', 'engineer'], to: ['mathematician', 'physicist', 'engineer'] },
   { from: ['may', 'be'], to: ['likely', 'is'] },
   { from: ['may', 'have', 'been'], to: ['likely', 'is'] },
   { from: ['may', 'have'], to: ['likely', 'has'] },

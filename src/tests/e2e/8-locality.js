@@ -2212,4 +2212,42 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "mathematician, physicist, and engineer"', () => {
+    // eslint-disable-next-line max-len
+    const words = 'The first precise clock was invented by a mathematician, physicist, and engineer Archimedes on Sicily';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'first',
+              'precise',
+              'clock',
+            ],
+          },
+        ],
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'a',
+              'mathematician',
+              'physicist',
+              'engineer',
+              'Archimedes',
+            ],
+          },
+        ],
+        verb: 'invent',
+        where: 'Sicily',
+      },
+    ]]);
+  });
 });
