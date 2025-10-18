@@ -530,4 +530,35 @@ describe('probability (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "it is believed by some"', () => {
+    const words = 'It is believed by some that the water in Alps heals many diseases';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: 'diseases',
+            min: 3,
+          },
+        ],
+        probability: 0.5,
+        subject: [
+          {
+            groupType: 'article',
+            words: [
+              'the',
+              'water',
+            ],
+          },
+        ],
+        verb: 'heals',
+        where: 'Alps',
+      },
+    ]]);
+  });
 });
