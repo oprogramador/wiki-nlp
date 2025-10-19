@@ -90,6 +90,7 @@ const createDefaultMap = ({ now }) => [
   { from: ['a', 'vast', 'array', 'of'], to: ['many'] },
   { from: ['a', 'vast', 'majority', 'of'], to: ['above', '60', '%', 'of'] },
   { from: ['a', 'wide', 'array', 'of'], to: ['many'] },
+  { from: ['a', 'vast', 'number', 'of'], to: ['many'] },
   { from: ['abundant', 'numbers', 'of'], to: ['many'] },
   { from: ['across'], to: ['in'] },
   { from: ['after', 'only'], to: ['after'] },

@@ -4165,4 +4165,49 @@ describe('numbers (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "a vast number of"', () => {
+    const words = 'There are a vast number of super-massive objects in the Milky Way according to the recent data';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [
+          {
+            groupType: 'quantity',
+            item: {
+              groupType: 'article',
+              words: [
+                'super-massive',
+                'objects',
+              ],
+            },
+            min: 3,
+          },
+        ],
+        source: {
+          groupType: 'article',
+          words: [
+            'the',
+            'recent',
+            'data',
+          ],
+        },
+        subject: [
+          'There',
+        ],
+        verb: 'are',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Milky',
+            'Way',
+          ],
+        },
+      },
+    ]]);
+  });
 });
