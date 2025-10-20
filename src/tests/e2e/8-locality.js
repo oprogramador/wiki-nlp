@@ -2250,4 +2250,33 @@ describe('locality (e2e)', () => {
       },
     ]]);
   });
+
+  it('converts "on the Moon"', () => {
+    const words = 'A few people walked on the Moon';
+
+    const result = flow(splitText(words));
+
+    expect(result).to.deep.equal([[
+      {
+        groupType: 'verb',
+        object: [],
+        subject: [
+          {
+            groupType: 'quantity',
+            item: 'people',
+            max: 99,
+            min: 3,
+          },
+        ],
+        verb: 'walked',
+        where: {
+          groupType: 'article',
+          words: [
+            'the',
+            'Moon',
+          ],
+        },
+      },
+    ]]);
+  });
 });
