@@ -7669,7 +7669,7 @@ describe('dates (e2e)', () => {
   it('converts "starting in"', () => {
     const words = 'Starting in the 5th century BC, the European civilization has been advanced';
 
-    const result = flow(splitText(words));
+    const result = flow(splitText(words), { now: new Date('2025-07-01') });
 
     expect(result).to.deep.equal([[
       {
